@@ -14,39 +14,47 @@
         <DockPanel>
                 <StackPanel Height="50" DockPanel.Dock="Bottom"  Background="#161718" Orientation="Horizontal">
             <Border Background="SkyBlue" BorderBrush="Black" BorderThickness="1"> </Border>
-       
 
 
-            <Button Click="API_Button_Clicked" Width="60" Margin="15,10,15,10" FontStyle="Oblique" >API
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}" >
-                            <Setter Property="Background" Value="#161718"/>
-                            <Setter Property="BorderThickness" Value="2"/>
-                            <Setter Property="Foreground" Value="White"/>
+                <Button
+
+                Click="API_Button_Clicked"
+                Width ="60"
+                Background="#161718"
+                Foreground="White"
+                BorderThickness="2"
+                BorderBrush="White"
+                Margin="15,10,15,10"
+                FontStyle="Oblique"              
+                >API
+
+
+
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
                         </Style>
-                    </Button.Style>
-
-
-                    <Button.BorderBrush>
-                        <SolidColorBrush Color="White"/>
-                    </Button.BorderBrush>
-
-                    <Button.BorderThickness>
-                        <Thickness>3</Thickness>
-                    </Button.BorderThickness>
-
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
+                    </Button.Resources>
                 </Button>
 
 
 
-                <Button Click="SELECT_Button_Clicked" Width ="60" Background="#161718" Foreground="White" BorderThickness="3"  BorderBrush="White" Margin="15,10,15,10" FontStyle="Oblique" >SELECT
+
+
+                <Button
+
+                Click="Select_Button_Clicked"
+                Width ="60"
+                Background="#161718"
+                Foreground="White"
+                BorderThickness="2"
+                BorderBrush="White"
+                Margin="15,10,15,10"
+                FontStyle="Oblique"              
+                >SELECT
+
+
+
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -59,7 +67,7 @@
 
                 <Button
                 
-                Click="ADD_Button_Clicked"
+                Click="Add_Button_Clicked"
                 Width ="60"
                 Background="#161718"
                 Foreground="White"
@@ -132,3 +140,44 @@
 
     </Border>
 </Window>
+
+
+
+
+
+
+
+<!--<Button Click="SELECT_Button_Clicked" Width ="60" Background="#161718" Foreground="White" BorderThickness="3"  BorderBrush="White" Margin="15,10,15,10" FontStyle="Oblique" >SELECT
+                   <Button.Resources>
+                       <Style TargetType="Border">
+                           <Setter Property="CornerRadius" Value="5"/>
+                       </Style>
+                   </Button.Resources>
+               </Button>-->
+
+<!--<Button Click="API_Button_Clicked" Width="60" Margin="15,10,15,10" FontStyle="Oblique" >API
+        <Button.Style>
+            <Style TargetType="{x:Type Button}" >
+                <Setter Property="Background" Value="#161718"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
+        </Button.Style>
+
+
+        <Button.BorderBrush>
+            <SolidColorBrush Color="White"/>
+        </Button.BorderBrush>
+
+        <Button.BorderThickness>
+            <Thickness>3</Thickness>
+        </Button.BorderThickness>
+
+        <Button.Template>
+            <ControlTemplate TargetType="Button">
+                <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+            </ControlTemplate>
+        </Button.Template>
+    </Button>-->
