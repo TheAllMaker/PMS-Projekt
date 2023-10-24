@@ -91,14 +91,14 @@
 
                 <Button Width="60" Height="50" Margin="250,10,25,10">
                     <StackPanel>
-                        <Image Source="path_to_your_image.png" Width="24" Height="24" />
+                        <Image Source="IconsBilder/Connect_16x_24.bmp" Width="24" Height="24" />
                         <TextBlock Text="Click Me" />
                     </StackPanel>
                 </Button>
 
                 <Button Click ="POWER_Button_Clicked" Name="POWER" Width="60" Height="50" Margin="50,10,50,10">
                     <StackPanel>
-                        <Image Source="path_to_your_image.png" Width="24" Height="24" />
+                        <Image Source="IconsBilder/Connect_16x.png" Width="24" Height="24" />
                         <TextBlock Text="Click Me" />
                     </StackPanel>
                 </Button>

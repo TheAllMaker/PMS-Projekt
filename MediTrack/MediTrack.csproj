@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Model\" />
+    <Folder Include="Icons\" />
   </ItemGroup>
 
 </Project>
