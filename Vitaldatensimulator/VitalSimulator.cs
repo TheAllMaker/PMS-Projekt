@@ -22,7 +22,7 @@ namespace Vitaldatensimulator
             string hostName = "mqtt.inftech.hs-mannheim.de";
             string user = "23pms01";
             string pwd = "c3c242ff";
-            string topic = "Herzschlag/test";
+            string topic = "Vitaldaten/Herzschlag";
             int port = 8883;
             MqttPublisher publisher = new MqttPublisher(hostName, port, user, pwd);
             //Console.WriteLine("connected: " + publisher.IsConnected);
