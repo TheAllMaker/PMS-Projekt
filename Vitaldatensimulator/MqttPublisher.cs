@@ -19,12 +19,19 @@ namespace Vitaldatensimulator
             client = new MqttClient(brokerAddress, port, true, null, null, MqttSslProtocols.TLSv1_2);
             client.Connect(Guid.NewGuid().ToString(), user, pwd);
         }
+        public bool IsConnected
+        {
+            get
+            {
+                return client.IsConnected;
+            }
+        }
 
         public void Disconnect()
         {
             client.Disconnect();
         }
-        public void PublishHeartbeat(string topic, int heartbeat)
+        public void PublishVitaldata(string topic, int heartbeat)
         {
             string payload = heartbeat.ToString();
             client.Publish(topic, Encoding.UTF8.GetBytes(payload), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);

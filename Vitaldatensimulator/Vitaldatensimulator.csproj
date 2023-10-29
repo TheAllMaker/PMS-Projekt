@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="MqttPublisher.cs" />
     <Compile Include="testSub.cs" />
+    <Compile Include="VitaldatenGenerator.cs" />
     <Compile Include="VitalSimulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
