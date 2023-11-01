@@ -8,7 +8,7 @@ namespace Vitaldatensimulator
 {
     internal class VitaldatenGenerator
     {
-        private Random r = new Random();
+        private static Random r = new Random();
 
         public int GeneriereHerzschlag()
         {

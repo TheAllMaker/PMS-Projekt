@@ -20,7 +20,9 @@ namespace Vitaldatensimulator
             string topic = "Vitaldaten";
             int port = 8883;
             MqttPublisher publisher = new MqttPublisher(hostName, port, user, pwd);
+            await Task.Delay(1000);
             Console.WriteLine("connected: " + publisher.IsConnected);
+            Console.WriteLine();
 
             // Hinzufügen von Patienten mit dictionary
             //Dictionary<string, Patient> patients = new Dictionary<string, Patient>();
@@ -31,9 +33,6 @@ namespace Vitaldatensimulator
             // Hinzufügen von Patienten
             patients.Add(new Patient("Patient1"));
             patients.Add(new Patient("Patient2"));
-
-
-            await Task.Delay(5000);
 
             while (true)
             {
@@ -46,12 +45,34 @@ namespace Vitaldatensimulator
                     Console.WriteLine($"Sauerstoffsättigung: {patient.Sauerstoffsättigung}");
                     Console.WriteLine($"Systolischer Blutdruck: {patient.SystolischerBlutdruck}");
                     Console.WriteLine($"Diastolischer Blutdruck: {patient.DiastolischerBlutdruck}");
-                }
+                    Console.WriteLine();
 
-               // Warten für 1 Sekunde
-               await Task.Delay(5000);
+                    // Sende jeden Vitalwert per MQTT
+                    publisher.PublishVitaldata(topic, patient.Herzschlag.ToString());
+                    publisher.PublishVitaldata(topic, patient.Atemfrequenz.ToString());
+                    publisher.PublishVitaldata(topic, patient.Sauerstoffsättigung.ToString());
+                    publisher.PublishVitaldata(topic, patient.SystolischerBlutdruck.ToString());
+                    publisher.PublishVitaldata(topic, patient.DiastolischerBlutdruck.ToString());
+
+
+                }
+                // Warten für 1 Sekunde
+                await Task.Delay(5000);
             }
-            //publisher.Disconnect();
         }
     }
 }
+
+
+//var vitaldaten = new
+//{
+//    Name = patient.Name,
+//    Herzschlag = patient.Herzschlag,
+//    Atemfrequenz = patient.Atemfrequenz,
+//    Sauerstoffsättigung = patient.Sauerstoffsättigung,
+//    SystolischerBlutdruck = patient.SystolischerBlutdruck,
+//    DiastolischerBlutdruck = patient.DiastolischerBlutdruck
+//};
+
+//string json = Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);
+//publisher.PublishVitaldata(topic, json);
