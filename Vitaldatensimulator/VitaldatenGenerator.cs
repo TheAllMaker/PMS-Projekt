@@ -8,38 +8,40 @@ namespace Vitaldatensimulator
 {
     internal class VitaldatenGenerator
     {
-        private int Herzschlag;
-        private int Atemfrequenz;
-        private int Sauerstoffsättigung;
-        private int SystolischerBlutdruck;
-        private int DiastolischerBlutdruck;
         private Random r = new Random();
 
-        public int HerzschlagGenerator() 
+        public int GeneriereHerzschlag()
         {
-            Herzschlag = r.Next(60, 100);
-            return Herzschlag; 
-        }
-        public int AtemfrequenzGenerator()
-        {
-            Atemfrequenz = r.Next(12, 20);
-            return Atemfrequenz;
-        }
-        public int SauerstoffsättigungGenerator()
-        {
-            Sauerstoffsättigung = r.Next(95, 100);
-            return Sauerstoffsättigung;
-        }
-        public int SystolischerBlutdruckGenerator()
-        {
-            SystolischerBlutdruck = r.Next(110, 130);
-            return SystolischerBlutdruck;
-        }
-        public int DiastolischerBlutdruckGenerator()
-        {
-            DiastolischerBlutdruck = r.Next(70, 90);
-            return DiastolischerBlutdruck;
+            return r.Next(60, 100);
         }
 
+        public int GeneriereAtemfrequenz()
+        {
+            return r.Next(12, 20);
+        }
+
+        public int GeneriereSauerstoffsättigung()
+        {
+            return r.Next(95, 100);
+        }
+
+        public int GeneriereSystolischerBlutdruck()
+        {
+            return r.Next(110, 130);
+        }
+
+        public int GeneriereDiastolischerBlutdruck()
+        {
+            return r.Next(70, 90);
+        }
+
+        public void GeneriereVitaldaten(Patient patient)
+        {
+            patient.Herzschlag = GeneriereHerzschlag();
+            patient.Atemfrequenz = GeneriereAtemfrequenz();
+            patient.Sauerstoffsättigung = GeneriereSauerstoffsättigung();
+            patient.SystolischerBlutdruck = GeneriereSystolischerBlutdruck();
+            patient.DiastolischerBlutdruck = GeneriereDiastolischerBlutdruck();
+        }
     }
 }
