@@ -2,7 +2,7 @@
 
 namespace Database
 {
-    internal class Patient
+    public class Patient
     {
         public int id;
         public string prename;

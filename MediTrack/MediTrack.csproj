@@ -12,4 +12,9 @@
     <Folder Include="Icons\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Database\Database.csproj" />
+    <ProjectReference Include="..\Vitaldatensimulator\Vitaldatensimulator.csproj" />
+  </ItemGroup>
+
 </Project>
