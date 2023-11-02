@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Page Remove="SVGs\arrow-top-left-bottom-right.xaml" />
-    <Page Remove="View\RemoteView\RemotePatientWindowTemplate.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,9 +40,6 @@
 
   <ItemGroup>
     <Resource Include="SVGs\arrow-top-left-bottom-right.xaml" />
-    <Resource Include="View\RemoteView\RemotePatientWindowTemplate.xaml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
   <ItemGroup>

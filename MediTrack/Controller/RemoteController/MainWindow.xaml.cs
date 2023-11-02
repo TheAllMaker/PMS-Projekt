@@ -29,7 +29,6 @@ namespace MediTrack
 
         private void API_Button_Clicked(object sender, RoutedEventArgs e)
         {
-            // Handle Button 1 click event
         }
 
         private void Select_Button_Clicked(object sender, RoutedEventArgs e)
