@@ -3,33 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MediTrack"
-        mc:Ignorable="d"
-        Title="MediTrack" Height="450" Width="800">
-    
-    
-    <Border BorderBrush="Red" BorderThickness="3">
-        
-        
+
+        Title="MediTrack" Height="1080" Width="1920">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="PatientTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+    <Border BorderBrush="Black" BorderThickness="3">
+          
         <DockPanel>
-                <StackPanel Height="50" DockPanel.Dock="Bottom"  Background="#161718" Orientation="Horizontal">
-            <Border Background="SkyBlue" BorderBrush="Black" BorderThickness="1"> </Border>
+            <Grid Height="70" DockPanel.Dock="Bottom"  Background="Black" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Background="Black" BorderBrush="Black" > </Border>
 
 
-                <Button
-
-                Click="API_Button_Clicked"
-                Width ="60"
-                Background="#161718"
-                Foreground="White"
-                BorderThickness="2"
-                BorderBrush="White"
-                Margin="15,10,15,10"
-                FontStyle="Oblique"              
+                <Button Click="API_Button_Clicked" Width ="100" Height="50" Background="Black"
+                        Foreground="White" BorderThickness="3" BorderBrush="White" FontSize="26"
+                         Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center"   
                 >API
-
-
-
+                    
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -41,20 +47,11 @@
 
 
 
-                <Button
-
-                Click="Select_Button_Clicked"
-                Width ="60"
-                Background="#161718"
-                Foreground="White"
-                BorderThickness="2"
-                BorderBrush="White"
-                Margin="15,10,15,10"
-                FontStyle="Oblique"              
+                <Button Click="Select_Button_Clicked" Width ="100" Height="50" Background="Black" Foreground="White"
+                        BorderThickness="3" BorderBrush="White" Grid.Column="1" FontSize="26" VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
                 >SELECT
-
-
-
+                    
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -65,20 +62,11 @@
 
 
 
-                <Button
-                
-                Click="Add_Button_Clicked"
-                Width ="60"
-                Background="#161718"
-                Foreground="White"
-                BorderThickness="2"
-                BorderBrush="White"
-                Margin="15,10,15,10"
-                FontStyle="Oblique"              
+                <Button Click="Add_Button_Clicked" Width ="100" Background="Black" Foreground="White"
+                        BorderThickness="3" BorderBrush="White" Grid.Column="2" Height="50" FontSize="26" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
                 >ADD
 
-
-
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -89,45 +77,42 @@
 
 
 
-                <Button Width="60" Height="50" Margin="250,10,25,10">
-                    <StackPanel>
-                        <Image Source="IconsBilder/Connect_16x_24.bmp" Width="24" Height="24" />
+                <Button Width="100" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="4">
+                    <WrapPanel>
+                        <!--<Image Source="IconsBilder/Connect_16x_24.bmp" Width="24" Height="24" />-->
                         <TextBlock Text="Click Me" />
-                    </StackPanel>
+                    </WrapPanel>
                 </Button>
 
-                <Button Click ="POWER_Button_Clicked" Name="POWER" Width="60" Height="50" Margin="50,10,50,10">
-                    <StackPanel>
-                        <Image Source="IconsBilder/Connect_16x.png" Width="24" Height="24" />
+                <Button Click ="POWER_Button_Clicked" VerticalAlignment="Center" HorizontalAlignment="Center" Name="POWER" Width="100" Height="50"  Grid.Column="5">
+                    <WrapPanel>
+                        <!--<Image Source="IconsBilder/Connect_16x.png" Width="24" Height="24" />-->
                         <TextBlock Text="Click Me" />
-                    </StackPanel>
+                    </WrapPanel>
                 </Button>
 
 
 
-            </StackPanel>
+            </Grid>
 
 
 
 
             <UniformGrid DockPanel.Dock="Top" Background="DarkGray" Columns="4" Rows="4" >
 
-                
-                <Button Content="Button 2" Margin="2" Background="LightGray" />
-                <Button Content="Button 3" Margin="2" Background="LightGray" />
-                <Button Content="Button 4" Margin="2" Background="LightGray" />
-                <Button Content="Button 1" Margin="2" Background="LightGray" />
-                <Button Content="Button 2" Margin="2" Background="LightGray" />
-                <Button Content="Button 3" Margin="2" Background="LightGray" />
-                <Button Content="Button 4" Margin="2" Background="LightGray" />
-                <Button Content="Button 1" Margin="2" Background="LightGray" />
-                <Button Content="Button 2" Margin="2" Background="LightGray" />
-                <Button Content="Button 3" Margin="2" Background="LightGray" />
-                <Button Content="Button 4" Margin="2" Background="LightGray" />
-                <Button Content="Button 1" Margin="2" Background="LightGray" />
-                <Button Content="Button 2" Margin="2" Background="LightGray" />
-                <Button Content="Button 3" Margin="2" Background="LightGray" />
-                <Button Content="Button 4" Margin="2" Background="LightGray" />
+
+                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+
+
+
+
+
+
             </UniformGrid>
             
 
