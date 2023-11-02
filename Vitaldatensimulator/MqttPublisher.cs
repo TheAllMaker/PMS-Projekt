@@ -31,10 +31,17 @@ namespace Vitaldatensimulator
         {
             client.Disconnect();
         }
-        public void PublishVitaldata(string topic, int heartbeat)
+
+        public void PublishVitaldata(string topic, string json)
         {
-            string payload = heartbeat.ToString();
-            client.Publish(topic, Encoding.UTF8.GetBytes(payload), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+            //string payload = heartbeat.ToString();
+            client.Publish(topic, Encoding.UTF8.GetBytes(json), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+        }
+
+        public void PublishVitaldataJSON(string topic, string json)
+        {
+            //string payload = heartbeat.ToString();
+            client.Publish(topic, Encoding.UTF8.GetBytes(json), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
         }
     }
 

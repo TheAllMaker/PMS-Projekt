@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Vitaldatensimulator;
+
 
 namespace MediTrack.View.RemoteView
 {
@@ -22,6 +24,8 @@ namespace MediTrack.View.RemoteView
         public AddPatientWindow()
         {
             InitializeComponent();
+            Database.Patient p = new Database.Patient(prename:"Franz", surname:"Zufall", birthday: new DateTime(1993,12,23));
+            Database.SQLqueries.addPatient(p);
         }
     }
 }

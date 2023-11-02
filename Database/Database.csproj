@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{17A8F40C-1445-4977-8DB0-E79B9801E0A7}</ProjectGuid>
+    <ProjectGuid>{C76FB375-105D-435E-A38F-97F04B127DDC}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Database</RootNamespace>
     <AssemblyName>Database</AssemblyName>
@@ -91,7 +91,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Patient.cs" />
+    <Compile Include="SQLqueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

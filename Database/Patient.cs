@@ -1,14 +1,16 @@
 ﻿using System;
 
-namespace MediTrack
+namespace Database
 {
-    internal class Patient
+    public class Patient
     {
-       public string prename;
-       public string surname;
-       public DateTime birthday;
+        public int id;
+        public string prename;
+        public string surname;
+        public DateTime birthday;
 
-        public Patient(string prename, string surname, DateTime birthday) {
+        public Patient(string prename, string surname, DateTime birthday)
+        {
             this.prename = prename;
             this.surname = surname;
             this.birthday = birthday;
