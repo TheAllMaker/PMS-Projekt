@@ -12,8 +12,8 @@ namespace Vitaldatensimulator
         public int Sauerstoffsättigung { get;  set; }
         public int SystolischerBlutdruck { get;  set; }
         public int DiastolischerBlutdruck { get;  set; }
+        public Dictionary<string, int> Vitaldaten { get; set; }
 
-        public Dictionary<string, int> Vitaldaten { get; private set; }
         private VitaldatenGenerator generator;
 
         public Patient(string name)

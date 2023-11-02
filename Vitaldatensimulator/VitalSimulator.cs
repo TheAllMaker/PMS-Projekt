@@ -53,11 +53,9 @@ namespace Vitaldatensimulator
                     publisher.PublishVitaldata(topic, patient.Sauerstoffsättigung.ToString());
                     publisher.PublishVitaldata(topic, patient.SystolischerBlutdruck.ToString());
                     publisher.PublishVitaldata(topic, patient.DiastolischerBlutdruck.ToString());
-
-
                 }
                 // Warten für 1 Sekunde
-                await Task.Delay(5000);
+                await Task.Delay(3000);
             }
         }
     }
