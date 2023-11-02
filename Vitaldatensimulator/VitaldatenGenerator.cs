@@ -35,7 +35,7 @@ namespace Vitaldatensimulator
             return r.Next(70, 90);
         }
 
-        public void GeneriereVitaldaten(Patient patient)
+        public void GeneriereVitaldaten(PatientVitalDaten patient)
         {
             patient.Herzschlag = GeneriereHerzschlag();
             patient.Atemfrequenz = GeneriereAtemfrequenz();

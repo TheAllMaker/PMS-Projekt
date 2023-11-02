@@ -4,7 +4,7 @@ using System.Reflection.Emit;
 
 namespace Vitaldatensimulator
 {
-    public class Patient
+    public class PatientVitalDaten
     {
         public string Name { get; set; }
         public int Herzschlag { get;  set; }
@@ -16,7 +16,7 @@ namespace Vitaldatensimulator
 
         private VitaldatenGenerator generator;
 
-        public Patient(string name)
+        public PatientVitalDaten(string name)
         {
             Name = name;
             generator = new VitaldatenGenerator();

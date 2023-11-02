@@ -70,7 +70,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MqttPublisher.cs" />
-    <Compile Include="Patient.cs" />
+    <Compile Include="PatientVitalDaten.cs" />
     <Compile Include="testSub.cs" />
     <Compile Include="VitaldatenGenerator.cs" />
     <Compile Include="VitalSimulator.cs" />

@@ -28,11 +28,11 @@ namespace Vitaldatensimulator
             //Dictionary<string, Patient> patients = new Dictionary<string, Patient>();
             //patients["Patient1"] = new Patient("Patient1");
 
-            List<Patient> patients = new List<Patient>();
+            List<PatientVitalDaten> patients = new List<PatientVitalDaten>();
 
             // Hinzufügen von Patienten
-            patients.Add(new Patient("Patient1"));
-            patients.Add(new Patient("Patient2"));
+            patients.Add(new PatientVitalDaten("Patient1"));
+            patients.Add(new PatientVitalDaten("Patient2"));
 
             while (true)
             {
