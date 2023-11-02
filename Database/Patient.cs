@@ -4,6 +4,7 @@ namespace Database
 {
     internal class Patient
     {
+        public int id;
         public string prename;
         public string surname;
         public DateTime birthday;
