@@ -25,6 +25,7 @@ namespace MediTrack.View.RemoteView
         {
             InitializeComponent();
             Database.Patient p = new Database.Patient(prename:"Franz", surname:"Zufall", birthday: new DateTime(1993,12,23));
+            Database.SQLqueries.addPatient(p);
         }
     }
 }
