@@ -80,9 +80,10 @@
                 <Run Text=" °C" FontSize="20" />
             </TextBlock>
             
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="T" Foreground="White" 
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="T" Foreground="White" 
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
                  />
+            
 
             <!-- HR -->
 

@@ -14,7 +14,6 @@
         </ResourceDictionary>
     </Window.Resources>
 
-
     <Border BorderBrush="Black" BorderThickness="3">
           
         <DockPanel>
@@ -100,13 +99,15 @@
 
             <UniformGrid DockPanel.Dock="Top" Background="DarkGray" Columns="4" Rows="4" >
 
+        
+                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+                <!--<ContentControl ContentTemplate="{DynamicResource PatientTemplate[PatientTemplate1]}" Margin="5"> </ContentControl>-->
+                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+                <ContentControl ContentTemplate="{StaticResource PatientTemplate}" Content="{DynamicResource TestPatient1}" Margin="5"/>
 
-                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
-                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
-                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
-                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
-                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
-                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
 
 
 

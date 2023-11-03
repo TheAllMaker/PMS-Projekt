@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediTrack.Model.RemoteModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace MediTrack
         public MainWindow()
         {
             InitializeComponent();
+            PatientTest patientTest = new PatientTest();
+            patientTest.TestPatientCall1();
+            patientTest.TestPatientCall2();
+
+
         }
 
 
