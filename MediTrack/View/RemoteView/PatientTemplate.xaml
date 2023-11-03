@@ -23,19 +23,22 @@
 
             <!-- Name und Co. I -->
             <Border BorderBrush="Black" Grid.Column="1">
-                <TextBlock Background="Black"  FontSize="20" Grid.Column="1" HorizontalAlignment="Left" Name ="m_PatientNameI"
-                 VerticalAlignment="Center" Text="TextHolder" Foreground="White" Grid.ColumnSpan="2"> 
+                <TextBlock Background="Black"  FontSize="20" Grid.Column="1" HorizontalAlignment="Left" 
+                 VerticalAlignment="Center"  Foreground="White" Grid.ColumnSpan="2"
+                  Name ="PatientNameI" Text="{Binding PatientNameI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> 
+                    <Run Text=": " />
                 </TextBlock>
             </Border>
 
             <!-- Name und Co. II -->
-            <TextBlock Background="Black"  FontSize="20" Grid.Column="2" HorizontalAlignment="Left" Name ="m_PatientNameII"
-          VerticalAlignment="Center" Text="TextHolder" Foreground="White" Grid.ColumnSpan="2">
+            <TextBlock Background="Black"  FontSize="20" Grid.Column="2" HorizontalAlignment="Left" 
+                VerticalAlignment="Center"  Foreground="White" Grid.ColumnSpan="2"
+                Name ="PatientNameII" Text="{Binding PatientNameII, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
             </TextBlock>
 
             <!-- Icons -->
             <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"
-                Background="Black" Foreground="White" Name ="m_PatientIconI"  >
+                Background="Black" Foreground="White" Name ="m_PatientIconI" >
                 Left
             </Button>
 
@@ -53,17 +56,163 @@
 
             <!-- Nummer -->
             <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Grid.Row="0" Text="Nr: 5" Foreground="White" Name ="m_PatientNumber">
+                   Grid.Row="0"  Foreground="White"
+                Name ="PatientNumber" Text="{Binding PatientNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
             </TextBlock>
 
             <!-- RR -->
+
+            <TextBlock Grid.Row="1" Grid.Column="1" Foreground="LimeGreen" Name="PatientRespirationRate"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" >
+            <Run Text="{Binding PatientRespirationRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Run Text=" /min" FontSize="20" />
+            </TextBlock>
+                        
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="RR" Foreground="White"
+                  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                  />
+            
+            <!-- T -->
+
+            <TextBlock Grid.Row="2" Grid.Column="1"  Foreground="Orange"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Name="PatientTemperature">
+                <Run Text="{Binding PatientTemperature, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Run Text=" °C" FontSize="20" />
+            </TextBlock>
+            
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="T" Foreground="White" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                 />
+
+            <!-- HR -->
+
+            <TextBlock Grid.Row="2" Grid.Column="2"  Foreground="Yellow" Name="PatientHeartRate"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" >
+            <Run Text="{Binding PatientHeartRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Run Text=" bpm" FontSize="20"/>
+            </TextBlock>
+        
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="HR" Foreground="White"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                   />
+            
+            <!-- OS -->
+
+            <TextBlock Grid.Row="1" Grid.Column="2"  Foreground="RoyalBlue" Name="PatientOxygen"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
+                    <Run Text="{Binding PatientOxygen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Run Text=" %" FontSize="20"/>
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="OS" Foreground="White"
+                  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                  />
+            
+            <!-- S BP -->
+
+            <TextBlock Grid.Row="3" Grid.Column="1"  Foreground="Tomato" Name="PatientPressure"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
+                     <Run Text="{Binding PatientPressure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     <Run Text=" mmHG" FontSize="20" />
+            </TextBlock>
+            
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="S BP" Foreground="White"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                    />
+
+            <!-- AVRP / EWS -->
+
+            
+            <TextBlock Grid.Row="3" Grid.Column="2"  Foreground="White" Name="m_PatientScore"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
+            <Run Text="/" />
+            </TextBlock>
+            
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="AVRP / EWS" Foreground="White"
+                HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                  />
+
+
+
+
+
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>
+
+
+
+
+
+<!--<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate x:Key="PatientTemplate">
+
+        <Grid  ShowGridLines="True"  Background="Black">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition  Height="3*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+
+            --><!--<Grid Grid.Row="0" Grid.Column="0" Background="Red">
+                -->
+            <!-- Inhalt der Zelle -->
+            <!--
+            </Grid>-->
+
+            <!-- Name und Co. I --><!--
+            <Border BorderBrush="Black" Grid.Column="1">
+                <TextBlock Background="Black"  FontSize="20" Grid.Column="1" HorizontalAlignment="Left" Name ="m_PatientNameI"
+                 VerticalAlignment="Center" Text="TextHolder" Foreground="White" Grid.ColumnSpan="2">
+                </TextBlock>
+            </Border>
+
+            --><!-- Name und Co. II --><!--
+            <TextBlock Background="Black"  FontSize="20" Grid.Column="2" HorizontalAlignment="Left" Name ="m_PatientNameII"
+          VerticalAlignment="Center" Text="TextHolder" Foreground="White" Grid.ColumnSpan="2">
+            </TextBlock>
+
+            --><!-- Icons --><!--
+            <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"
+                Background="Black" Foreground="White" Name ="m_PatientIconI"  >
+                Left
+            </Button>
+
+            --><!-- Icons II --><!--
+            <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2"
+                Background="Black" Foreground="White" Name ="m_PatientIconII"  >
+                Left
+            </Button>
+
+            --><!-- ZoomButton --><!--
+            <Button FontSize="20" Grid.Row="3" Background="Black" Name ="m_PatientZoomButton"
+                 VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center">
+                Right
+            </Button>
+
+            --><!-- Nummer --><!--
+            <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Grid.Row="0" Text="Nr: 5" Foreground="White" Name ="m_PatientNumber">
+            </TextBlock>
+
+            --><!-- RR --><!--
             <TextBlock Grid.Row="1" Grid.Column="1" Text="RR" Foreground="White"
                    HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
                    />
             <TextBlock Grid.Row="1" Grid.Column="1" Text="18 /min" Foreground="LimeGreen" Name="m_PatientRespirationRate"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" />
 
-            <!-- T -->
+            --><!-- T --><!--
             <TextBlock Grid.Row="2" Grid.Column="1" Text="T" Foreground="White" 
                    HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
                    />
@@ -71,14 +220,14 @@
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Name="m_PatientTemperature"
                    />
 
-            <!-- HR -->
+            --><!-- HR --><!--
             <TextBlock Grid.Row="2" Grid.Column="2" Text="HR" Foreground="White"
                    HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
                    />
             <TextBlock Grid.Row="2" Grid.Column="2" Text="75 bpm" Foreground="Yellow" Name="m_PatientHeartRate"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"/>
 
-            <!-- OS -->
+            --><!-- OS --><!--
 
             <TextBlock Grid.Row="1" Grid.Column="2" Text="OS" Foreground="White"
                    HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
@@ -86,7 +235,7 @@
             <TextBlock Grid.Row="1" Grid.Column="2" Text="92 %" Foreground="RoyalBlue" Name="m_PatientOxygen"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" />
 
-            <!-- S BP -->
+            --><!-- S BP --><!--
 
             <TextBlock Grid.Row="3" Grid.Column="1" Text="S BP" Foreground="White"
                    HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
@@ -95,7 +244,7 @@
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"/>
 
 
-            <!-- AVRP / EWS -->
+            --><!-- AVRP / EWS --><!--
 
             <TextBlock Grid.Row="3" Grid.Column="2" Text="AVRP / EWS" Foreground="White"
                    HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
@@ -109,4 +258,4 @@
         </Grid>
     </DataTemplate>
 
-</ResourceDictionary>
+</ResourceDictionary>-->
