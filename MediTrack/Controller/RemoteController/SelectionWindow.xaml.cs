@@ -22,6 +22,25 @@ namespace MediTrack.View.RemoteView
         public SelectionWindow()
         {
             InitializeComponent();
+            // Anfrage an Database -> alle Einträge auslesen 
+            // Dann per :
+            //ContentControl contentControl = new ContentControl
+            //{
+            //    ContentTemplate = (DataTemplate)Resources[""],
+            //    Content = Application.Current.Resources["TestPatient2"],
+            //    Margin = new Thickness(5)
+            //};
+            // als Block einbinden und alle Einträge ausgeben
+            // beim ersten Start alle Blöcke grau 
+            // beim zweiten Betätigen grün 
+            // :
+            //PatientenMonitorDynGrid.Children.Add(contentControl);
+            // wenn nochmal Block auf rot stellen und folgende Aktion ausführen:
+            //PatientenMonitorDynGrid.Children.Remove(contentControl);
         }
+
+
+
+   
     }
 }

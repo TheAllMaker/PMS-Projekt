@@ -97,7 +97,7 @@
 
 
 
-            <UniformGrid DockPanel.Dock="Top" Background="DarkGray" Columns="4" Rows="4" >
+            <UniformGrid Name="PatientenMonitorDynGrid" DockPanel.Dock="Top" Background="DarkGray" Columns="4" Rows="4" >
 
         
                 <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>

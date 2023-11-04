@@ -28,7 +28,16 @@ namespace MediTrack
             patientTest.TestPatientCall1();
             patientTest.TestPatientCall2();
 
+            ContentControl contentControl = new ContentControl
+            {
+                ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+                Content = Application.Current.Resources["TestPatient2"],
+                Margin = new Thickness(5)
+            };
 
+
+            PatientenMonitorDynGrid.Children.Add(contentControl);
+            //PatientenMonitorDynGrid.Children.Remove(contentControl);
         }
 
 
@@ -36,6 +45,9 @@ namespace MediTrack
         private void API_Button_Clicked(object sender, RoutedEventArgs e)
         {
         }
+
+
+
 
         private void Select_Button_Clicked(object sender, RoutedEventArgs e)
         {
@@ -53,6 +65,11 @@ namespace MediTrack
 
 
         }
+
+
+
+
+
 
         private void Add_Button_Clicked(object sender, RoutedEventArgs e)
         {
