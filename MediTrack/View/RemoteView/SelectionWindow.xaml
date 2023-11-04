@@ -5,8 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediTrack.View.RemoteView"
         mc:Ignorable="d"
-        Title="SelectionWindow" Height="450" Width="800">
-    <Grid>
+        Name="SelectionWindowStyle"
         
-    </Grid>
+        Title="SelectionWindow" Height="450" Width="800"
+        Background="Black">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="SelectionWindowPatientBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <DockPanel>
+        <Grid Height="50" DockPanel.Dock="Bottom"  Background="Black" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+
+            <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1"
+                Background="Black" Foreground="White" Name ="SelectionConfirmedButton" 
+                    
+                    >
+                Confirm
+            </Button>
+
+            <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2"
+                Background="Black" Foreground="White" Name ="SelectionClosedButton" 
+                   >
+                Closed
+            </Button>
+
+
+        </Grid>
+        
+        <UniformGrid Name ="SelectionPatientDatabaseInput" Margin="5" Rows="5" Columns="5">
+        <Button>
+            Test1
+        </Button>
+
+        <Button>
+            Test2
+        </Button>
+
+        <Button>
+            Test3
+        </Button>
+
+        <Button x:Name="toggleButton" Width="100" Height="30" Content="Click me">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Gray" />
+                    <Style.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="Green" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="Red" />
+                        </MultiTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+
+    </UniformGrid>
+    </DockPanel>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using MediTrack.Model.RemoteModel;
+using MediTrack.View.RemoteView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +53,7 @@ namespace MediTrack
         private void Select_Button_Clicked(object sender, RoutedEventArgs e)
         {
             // Instanziert ein neues Fenster
-            Window SelectWindow = new Window
+            Window SelectWindow = new SelectionWindow
             {
                 Title = "Select Patient", // Name des neuen Fenster's
                 Width = SystemParameters.PrimaryScreenWidth * 0.75, 
@@ -73,7 +74,7 @@ namespace MediTrack
 
         private void Add_Button_Clicked(object sender, RoutedEventArgs e)
         {
-            Window AddNewPatient = new Window
+            Window AddNewPatient = new AddPatientWindow
             {
                 Title = "Add a new Patient",
                 Width = SystemParameters.PrimaryScreenWidth * 0.75,
