@@ -16,16 +16,16 @@ namespace MediTrack.Model.RemoteModel
 
             Patient TestPatient1 = new Patient()
             {
-                PatientNameI = "Max",
-                PatientNameII = "MusterMann",
+                FirstName = "Max",
+                LastName = "MusterMann",
                 PatientNumber = 1,
                 PatientMonitor = 1,
-                PatientHeartRate = 20,
-                PatientOxygen = 20,
-                PatientPressure = 20,
-                PatientRespirationRate = 20,
+                HeartRate = 20,
+                OxygenLevel = 20,
+                BloodPressure = 20,
+                RespirationRate = 20,
                 PatientScore = 3,
-                PatientTemperature = 20,
+                Temperature = 20,
 
             };
 
@@ -38,16 +38,16 @@ namespace MediTrack.Model.RemoteModel
 
             Patient TestPatient2 = new Patient ()
             {
-                PatientNameI = "TestMax",
-                PatientNameII = "TextMusterMann",
+                FirstName = "TestMax",
+                LastName = "TextMusterMann",
                 PatientNumber = 2,
                 PatientMonitor = 2,
-                PatientHeartRate = 20,
-                PatientOxygen = 20,
-                PatientPressure = 20,
-                PatientRespirationRate = 20,
+                HeartRate = 20,
+                OxygenLevel = 20,
+                BloodPressure = 20,
+                RespirationRate = 20,
                 PatientScore = 3,
-                PatientTemperature = 20,
+                Temperature = 20,
 
             };
 

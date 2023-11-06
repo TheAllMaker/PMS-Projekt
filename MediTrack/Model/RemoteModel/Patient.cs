@@ -8,16 +8,17 @@ namespace MediTrack.Model.RemoteModel
 {
     public class Patient
     {
-        public string? PatientNameI { get; set; }
-        public string? PatientNameII { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         public int? PatientNumber { get; set; }
-        public float? PatientMonitor { get;set; }
-        public float PatientRespirationRate { get; set; }
-        public float PatientTemperature { get; set; }
-        public float PatientHeartRate { get; set; }
-        public float PatientOxygen { get; set; }
-        public float PatientPressure { get; set;}
-        public float PatientScore { get; set;}
+        public int? PatientMonitor { get; set; }
+        public float RespirationRate { get; set; }
+        public float Temperature { get; set; }
+        public float HeartRate { get; set; }
+        public float OxygenLevel { get; set; }
+        public float BloodPressure { get; set; }
+        public float PatientScore { get; set; }
+        public float? EWSScore { get; set; }
     }
     
 }

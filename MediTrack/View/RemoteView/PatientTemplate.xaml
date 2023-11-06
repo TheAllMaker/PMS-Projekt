@@ -25,7 +25,7 @@
             <Border BorderBrush="Black" Grid.Column="1">
                 <TextBlock Background="Black"  FontSize="20" Grid.Column="1" HorizontalAlignment="Left" 
                  VerticalAlignment="Center"  Foreground="White" Grid.ColumnSpan="2"
-                  Name ="PatientNameI" Text="{Binding PatientNameI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> 
+                  Name ="FirstNameTextBlock" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> 
                     <Run Text=": " />
                 </TextBlock>
             </Border>
@@ -33,23 +33,23 @@
             <!-- Name und Co. II -->
             <TextBlock Background="Black"  FontSize="20" Grid.Column="2" HorizontalAlignment="Left" 
                 VerticalAlignment="Center"  Foreground="White" Grid.ColumnSpan="2"
-                Name ="PatientNameII" Text="{Binding PatientNameII, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                Name ="LastNameTextBlock" Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
             </TextBlock>
 
             <!-- Icons -->
             <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"
-                Background="Black" Foreground="White" Name ="m_PatientIconI" >
+                Background="Black" Foreground="White" Name ="PatientHealthIcon" >
                 Left
             </Button>
 
             <!-- Icons II -->
             <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2"
-                Background="Black" Foreground="White" Name ="m_PatientIconII"  >
+                Background="Black" Foreground="White" Name ="PatientNetworkIcon"  >
                 Left
             </Button>
 
             <!-- ZoomButton -->
-            <Button FontSize="20" Grid.Row="3" Background="Black" Name ="m_PatientZoomButton"
+            <Button FontSize="20" Grid.Row="3" Background="Black" Name ="PatientZoomButton"
                  VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center">
                 Right
             </Button>
@@ -57,14 +57,14 @@
             <!-- Nummer -->
             <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Grid.Row="0"  Foreground="White"
-                Name ="PatientNumber" Text="{Binding PatientNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                Name ="PatientNumberTextBlock" Text="{Binding PatientNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
             </TextBlock>
 
             <!-- RR -->
 
-            <TextBlock Grid.Row="1" Grid.Column="1" Foreground="LimeGreen" Name="PatientRespirationRate"
+            <TextBlock Grid.Row="1" Grid.Column="1" Foreground="LimeGreen" Name="RespirationRateTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" >
-            <Run Text="{Binding PatientRespirationRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Run Text="{Binding RespirationRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Run Text=" /min" FontSize="20" />
             </TextBlock>
                         
@@ -75,8 +75,8 @@
             <!-- T -->
 
             <TextBlock Grid.Row="2" Grid.Column="1"  Foreground="Orange"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Name="PatientTemperature">
-                <Run Text="{Binding PatientTemperature, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Name="TemperatureTextBlock">
+                <Run Text="{Binding Temperature, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Run Text=" °C" FontSize="20" />
             </TextBlock>
             
@@ -87,9 +87,9 @@
 
             <!-- HR -->
 
-            <TextBlock Grid.Row="2" Grid.Column="2"  Foreground="Yellow" Name="PatientHeartRate"
+            <TextBlock Grid.Row="2" Grid.Column="2"  Foreground="Yellow" Name="HeartRateTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" >
-            <Run Text="{Binding PatientHeartRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Run Text="{Binding HeartRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Run Text=" bpm" FontSize="20"/>
             </TextBlock>
         
@@ -99,9 +99,9 @@
             
             <!-- OS -->
 
-            <TextBlock Grid.Row="1" Grid.Column="2"  Foreground="RoyalBlue" Name="PatientOxygen"
+            <TextBlock Grid.Row="1" Grid.Column="2"  Foreground="RoyalBlue" Name="OxygenLevelTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
-                    <Run Text="{Binding PatientOxygen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Run Text="{Binding OxygenLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Run Text=" %" FontSize="20"/>
             </TextBlock>
 
@@ -111,9 +111,9 @@
             
             <!-- S BP -->
 
-            <TextBlock Grid.Row="3" Grid.Column="1"  Foreground="Tomato" Name="PatientPressure"
+            <TextBlock Grid.Row="3" Grid.Column="1"  Foreground="Tomato" Name="BloodPressureTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
-                     <Run Text="{Binding PatientPressure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     <Run Text="{Binding BloodPressure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                      <Run Text=" mmHG" FontSize="20" />
             </TextBlock>
             
@@ -124,7 +124,7 @@
             <!-- AVRP / EWS -->
 
             
-            <TextBlock Grid.Row="3" Grid.Column="2"  Foreground="White" Name="m_PatientScore"
+            <TextBlock Grid.Row="3" Grid.Column="2"  Foreground="White" Name="PatientScoreTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
             <Run Text="/" />
             </TextBlock>
