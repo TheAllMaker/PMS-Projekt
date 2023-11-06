@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 // mqtt
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
+//JSON
+using Newtonsoft.Json;
 
 namespace Vitaldatensimulator
 {
@@ -47,12 +49,28 @@ namespace Vitaldatensimulator
                     Console.WriteLine($"Diastolischer Blutdruck: {patient.DiastolischerBlutdruck}");
                     Console.WriteLine();
 
+                    // Maybe als komplettes Paket auf einen Schlag statt einzeln
+                    // Alles auf englisch
+
                     // Sende jeden Vitalwert per MQTT
-                    publisher.PublishVitaldata(topic, patient.Herzschlag.ToString());
-                    publisher.PublishVitaldata(topic, patient.Atemfrequenz.ToString());
-                    publisher.PublishVitaldata(topic, patient.Sauerstoffsättigung.ToString());
-                    publisher.PublishVitaldata(topic, patient.SystolischerBlutdruck.ToString());
-                    publisher.PublishVitaldata(topic, patient.DiastolischerBlutdruck.ToString());
+                    //publisher.PublishVitaldata(topic, patient.Herzschlag.ToString());
+                    //publisher.PublishVitaldata(topic, patient.Atemfrequenz.ToString());
+                    //publisher.PublishVitaldata(topic, patient.Sauerstoffsättigung.ToString());
+                    //publisher.PublishVitaldata(topic, patient.SystolischerBlutdruck.ToString());
+                    //publisher.PublishVitaldata(topic, patient.DiastolischerBlutdruck.ToString());
+
+                    var vitaldaten = new
+                    {
+                        Name = patient.Name,
+                        Herzschlag = patient.Herzschlag,
+                        Atemfrequenz = patient.Atemfrequenz,
+                        Sauerstoffsättigung = patient.Sauerstoffsättigung,
+                        SystolischerBlutdruck = patient.SystolischerBlutdruck,
+                        DiastolischerBlutdruck = patient.DiastolischerBlutdruck
+                    };
+
+                    string json = Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);
+                    publisher.PublishVitaldata(topic, json);
                 }
                 // Warten für 1 Sekunde
                 await Task.Delay(3000);
@@ -62,15 +80,3 @@ namespace Vitaldatensimulator
 }
 
 
-//var vitaldaten = new
-//{
-//    Name = patient.Name,
-//    Herzschlag = patient.Herzschlag,
-//    Atemfrequenz = patient.Atemfrequenz,
-//    Sauerstoffsättigung = patient.Sauerstoffsättigung,
-//    SystolischerBlutdruck = patient.SystolischerBlutdruck,
-//    DiastolischerBlutdruck = patient.DiastolischerBlutdruck
-//};
-
-//string json = Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);
-//publisher.PublishVitaldata(topic, json);
