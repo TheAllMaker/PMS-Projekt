@@ -42,15 +42,12 @@ namespace Vitaldatensimulator
                 {
                     patient.GeneriereAlleVitaldaten();
                     Console.WriteLine($"{patient.Name} - Vitaldaten:");
-                    Console.WriteLine($"Herzschlag: {patient.Herzschlag}");
-                    Console.WriteLine($"Atemfrequenz: {patient.Atemfrequenz}");
-                    Console.WriteLine($"Sauerstoffsättigung: {patient.Sauerstoffsättigung}");
-                    Console.WriteLine($"Systolischer Blutdruck: {patient.SystolischerBlutdruck}");
-                    Console.WriteLine($"Diastolischer Blutdruck: {patient.DiastolischerBlutdruck}");
+                    Console.WriteLine($"Herzschlag: {patient.HeartRate}");
+                    Console.WriteLine($"Atemfrequenz: {patient.RespirationRate}");
+                    Console.WriteLine($"Sauerstoffsättigung: {patient.OxygenLevel}");
+                    Console.WriteLine($"Systolischer Blutdruck: {patient.BloodPressureSystolic}");
+                    Console.WriteLine($"Diastolischer Blutdruck: {patient.BloodPressureDiastolic}");
                     Console.WriteLine();
-
-                    // Maybe als komplettes Paket auf einen Schlag statt einzeln
-                    // Alles auf englisch
 
                     // Sende jeden Vitalwert per MQTT
                     //publisher.PublishVitaldata(topic, patient.Herzschlag.ToString());
@@ -62,11 +59,11 @@ namespace Vitaldatensimulator
                     var vitaldaten = new
                     {
                         Name = patient.Name,
-                        Herzschlag = patient.Herzschlag,
-                        Atemfrequenz = patient.Atemfrequenz,
-                        Sauerstoffsättigung = patient.Sauerstoffsättigung,
-                        SystolischerBlutdruck = patient.SystolischerBlutdruck,
-                        DiastolischerBlutdruck = patient.DiastolischerBlutdruck
+                        Herzschlag = patient.HeartRate,
+                        Atemfrequenz = patient.RespirationRate,
+                        Sauerstoffsättigung = patient.OxygenLevel,
+                        SystolischerBlutdruck = patient.BloodPressureSystolic,
+                        DiastolischerBlutdruck = patient.BloodPressureDiastolic
                     };
 
                     string json = Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);
@@ -78,5 +75,3 @@ namespace Vitaldatensimulator
         }
     }
 }
-
-

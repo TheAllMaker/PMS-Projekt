@@ -66,11 +66,11 @@ namespace Vitaldatensimulator
 
         public void GeneriereVitaldaten(PatientVitalDaten patient)
         {
-            patient.Herzschlag = GeneriereHerzschlag();
-            patient.Atemfrequenz = GeneriereAtemfrequenz();
-            patient.Sauerstoffsättigung = GeneriereSauerstoffsättigung();
-            patient.SystolischerBlutdruck = GeneriereSystolischerBlutdruck();
-            patient.DiastolischerBlutdruck = GeneriereDiastolischerBlutdruck();
+            patient.HeartRate = GeneriereHerzschlag();
+            patient.RespirationRate = GeneriereAtemfrequenz();
+            patient.OxygenLevel = GeneriereSauerstoffsättigung();
+            patient.BloodPressureSystolic = GeneriereSystolischerBlutdruck();
+            patient.BloodPressureDiastolic = GeneriereDiastolischerBlutdruck();
         }
     }
 }

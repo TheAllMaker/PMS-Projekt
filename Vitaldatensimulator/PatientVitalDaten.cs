@@ -7,11 +7,11 @@ namespace Vitaldatensimulator
     public class PatientVitalDaten
     {
         public string Name { get; set; }
-        public int Herzschlag { get;  set; }
-        public int Atemfrequenz { get;  set; }
-        public int Sauerstoffsättigung { get;  set; }
-        public int SystolischerBlutdruck { get;  set; }
-        public int DiastolischerBlutdruck { get;  set; }
+        public int HeartRate { get;  set; }
+        public int RespirationRate { get;  set; }
+        public int OxygenLevel { get;  set; }
+        public int BloodPressureSystolic { get;  set; }
+        public int BloodPressureDiastolic { get;  set; }
         public Dictionary<string, int> Vitaldaten { get; set; }
 
         private VitaldatenGenerator generator;
@@ -26,11 +26,11 @@ namespace Vitaldatensimulator
         public void GeneriereAlleVitaldaten()
         {
             generator.GeneriereVitaldaten(this);
-            Vitaldaten["Herzschlag"] = Herzschlag;
-            Vitaldaten["Atemfrequenz"] = Atemfrequenz;
-            Vitaldaten["Sauerstoffsättigung"] = Sauerstoffsättigung;
-            Vitaldaten["SystolischerBlutdruck"] = SystolischerBlutdruck;
-            Vitaldaten["DiastolischerBlutdruck"] = DiastolischerBlutdruck;
+            Vitaldaten["Herzschlag"] = HeartRate;
+            Vitaldaten["Atemfrequenz"] = RespirationRate;
+            Vitaldaten["Sauerstoffsättigung"] = OxygenLevel;
+            Vitaldaten["SystolischerBlutdruck"] = BloodPressureSystolic;
+            Vitaldaten["DiastolischerBlutdruck"] = BloodPressureDiastolic;
         }
     }
 }
