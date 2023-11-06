@@ -113,7 +113,8 @@
 
             <TextBlock Grid.Row="3" Grid.Column="1"  Foreground="Tomato" Name="BloodPressureTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
-                     <Run Text="{Binding BloodPressure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     <Run Text="{Binding BloodPressureSystolic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     <Run Text="{Binding BloodPressureDiastolic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                      <Run Text=" mmHG" FontSize="20" />
             </TextBlock>
             

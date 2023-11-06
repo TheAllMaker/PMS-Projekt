@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
@@ -62,9 +64,29 @@ namespace MediTrack.Model.DataBaseModelConnection
         }
 
 
-        void CallForPatientID()
+        void CallForPatientThroughID()
         {
+            int test = 5;
             var DataBaseConnector = DataBaseConnectionCall();
+            string SelectPatientThroughPIDString = $"SELECT * FROM patients WHERE PID = {test}";
+            NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand("SelectPatientThroughPIDString", DataBaseConnector);
+
+            //object result = SelectPatientThroughPIDCommand.ExecuteScalar();
+
+            NpgsqlDataReader PIDReader = SelectPatientThroughPIDCommand.ExecuteReader();
+
+             if (PIDReader.Read())
+                {
+                    string? name = PIDReader["Name"].ToString();
+                    string? vorname = PIDReader["Vorname"].ToString();
+                    Console.WriteLine($"Name: {name}, Vorname: {vorname}");
+                }
+
+            else
+            {
+                Console.WriteLine($"No DataBase Entry found for PID {test}");
+                Debug.WriteLine($"No DataBase Entry found for PID {test}");
+            }
 
 
             DataBaseConnector.Close();

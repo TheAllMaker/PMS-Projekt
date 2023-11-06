@@ -16,7 +16,8 @@ namespace MediTrack.Model.RemoteModel
         public float Temperature { get; set; }
         public float HeartRate { get; set; }
         public float OxygenLevel { get; set; }
-        public float BloodPressure { get; set; }
+        public float BloodPressureDiastolic { get; set; }
+        public float BloodPressureSystolic { get; set; }
         public float PatientScore { get; set; }
         public float? EWSScore { get; set; }
     }

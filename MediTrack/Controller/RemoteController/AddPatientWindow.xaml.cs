@@ -24,8 +24,16 @@ namespace MediTrack.View.RemoteView
         public AddPatientWindow()
         {
             InitializeComponent();
-            Database.Patient p = new Database.Patient(prename:"Franz", surname:"Zufall", birthday: new DateTime(1993,12,23));
-            Database.SQLqueries.addPatient(p);
+            //string FirstNameString = txtFirstName.Text;
+            //string LastNameString = txtLastName.Text;
+            //string PatientNumberIDString =  txtPatientNumber.Text;
+            //int PatientNumberID = int.Parse(PatientNumberIDString);
+            //Database.Patient p = new Database.Patient(FirstName:FirstNameString, LastName:LastNameString,PatientNumber:PatientNumberID );
+            //Database.SQLqueries.addPatient(p);
         }
+
+
+
+       
     }
 }
