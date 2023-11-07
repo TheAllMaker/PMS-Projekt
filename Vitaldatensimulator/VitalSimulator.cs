@@ -9,9 +9,9 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 //JSON
 using Newtonsoft.Json;
 
-namespace VitaldataSimulator
+namespace Vitaldatensimulator
 {
-    class VitaldataSimulator
+    class VitaldatenSimulator
     {
         static async Task Main()
         {
@@ -30,17 +30,17 @@ namespace VitaldataSimulator
             //Dictionary<string, Patient> patients = new Dictionary<string, Patient>();
             //patients["Patient1"] = new Patient("Patient1");
 
-            List<VitaldataPatient> patients = new List<VitaldataPatient>();
+            List<PatientVitalDaten> patients = new List<PatientVitalDaten>();
 
             // Hinzufügen von Patienten
-            patients.Add(new VitaldataPatient("Patient1"));
-            patients.Add(new VitaldataPatient("Patient2"));
+            patients.Add(new PatientVitalDaten("Patient1"));
+            patients.Add(new PatientVitalDaten("Patient2"));
 
             while (true)
             {
                 foreach (var patient in patients)
                 {
-                    patient.GenerateAllVitaldata();
+                    patient.GeneriereAlleVitaldaten();
                     Console.WriteLine($"{patient.Name} - Vitaldaten:");
                     Console.WriteLine($"Herzschlag: {patient.HeartRate}");
                     Console.WriteLine($"Atemfrequenz: {patient.RespirationRate}");
@@ -48,6 +48,13 @@ namespace VitaldataSimulator
                     Console.WriteLine($"Systolischer Blutdruck: {patient.BloodPressureSystolic}");
                     Console.WriteLine($"Diastolischer Blutdruck: {patient.BloodPressureDiastolic}");
                     Console.WriteLine();
+
+                    // Sende jeden Vitalwert per MQTT
+                    //publisher.PublishVitaldata(topic, patient.Herzschlag.ToString());
+                    //publisher.PublishVitaldata(topic, patient.Atemfrequenz.ToString());
+                    //publisher.PublishVitaldata(topic, patient.Sauerstoffsättigung.ToString());
+                    //publisher.PublishVitaldata(topic, patient.SystolischerBlutdruck.ToString());
+                    //publisher.PublishVitaldata(topic, patient.DiastolischerBlutdruck.ToString());
 
                     var vitaldaten = new
                     {

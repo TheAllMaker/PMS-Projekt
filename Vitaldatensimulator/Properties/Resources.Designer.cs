@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VitaldataSimulator.Properties
+namespace Vitaldatensimulator.Properties
 {
 
 

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VitaldataSimulator
+namespace Vitaldatensimulator
 {
     public partial class MainWindow : Window
     {
