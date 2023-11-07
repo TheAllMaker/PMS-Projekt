@@ -73,10 +73,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MqttPublisher.cs" />
-    <Compile Include="PatientVitalDaten.cs" />
-    <Compile Include="testSub.cs" />
-    <Compile Include="VitaldatenGenerator.cs" />
-    <Compile Include="VitalSimulator.cs" />
+    <Compile Include="VitaldataPatient.cs" />
+    <Compile Include="VitaldataGenerator.cs" />
+    <Compile Include="VitaldataSimulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
