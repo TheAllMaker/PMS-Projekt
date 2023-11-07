@@ -44,19 +44,21 @@ namespace MediTrack
             //PatientenMonitorDynGrid.Children.Remove(contentControl);
 
 
-            MqttHandler handler = new MqttHandler();
-            handler.ConnectToServer();
-            handler.SubScribeToTopic();
-            
             DateTime startTime = DateTime.Now;
             TimeSpan duration = TimeSpan.FromSeconds(20);
 
             while (DateTime.Now - startTime < duration)
             {
-                
+
                 Thread.Sleep(100);
             }
+
+            MqttHandler handler = new MqttHandler();
+            handler.ConnectToServer();
+            handler.SubScribeToTopic();
             
+            //Console.WriteLine("Ich warte ...");
+            //Console.ReadKey();
             Debug.WriteLine("Done");
 
 
