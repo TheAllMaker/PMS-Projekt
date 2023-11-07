@@ -2,8 +2,10 @@
 using MediTrack.View.RemoteView;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,7 +41,26 @@ namespace MediTrack
 
             PatientenMonitorDynGrid.Children.Add(contentControl);
             //PatientenMonitorDynGrid.Children.Remove(contentControl);
+
+
+            MQTTHandler handler = new MQTTHandler();
+            handler.ConnectToServer();
+            handler.SubScribeToTopic();
+            DateTime startTime = DateTime.Now;
+            TimeSpan duration = TimeSpan.FromSeconds(20);
+
+            while (DateTime.Now - startTime < duration)
+            {
+
+                Thread.Sleep(100);
+            }
+            Debug.WriteLine("Done");
+
+
+
+
         }
+
 
 
 
@@ -56,11 +77,11 @@ namespace MediTrack
             Window SelectWindow = new SelectionWindow
             {
                 Title = "Select Patient", // Name des neuen Fenster's
-                Width = SystemParameters.PrimaryScreenWidth * 0.75, 
+                Width = SystemParameters.PrimaryScreenWidth * 0.75,
                 Height = SystemParameters.PrimaryScreenHeight * 0.75,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen 
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
-            SelectWindow.Show();    
+            SelectWindow.Show();
             SelectWindow.Owner = this;
             //SelectWindow.ShowDialog();
 
@@ -79,10 +100,10 @@ namespace MediTrack
                 Title = "Add a new Patient",
                 Width = SystemParameters.PrimaryScreenWidth * 0.75,
                 Height = SystemParameters.PrimaryScreenHeight * 0.75,
-                WindowStartupLocation= WindowStartupLocation.CenterScreen 
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
-            AddNewPatient.Show();   
-            AddNewPatient.Owner = this; 
+            AddNewPatient.Show();
+            AddNewPatient.Owner = this;
 
         }
 
@@ -94,3 +115,4 @@ namespace MediTrack
 
     }
 }
+
