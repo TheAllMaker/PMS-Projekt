@@ -15,8 +15,8 @@
         <TextBox x:Name="txtLastName" />
         <Label Content="txtPatientNumber:" />
         <TextBox x:Name="txtPatientNumber" />
-        <Button Content="Speichern" Click="SaveButton_Click" />
+        <!--<Button Content="Speichern" Click="SaveButton_Click" />
         <Button Content="Abbrechen" Click="CancelButton_Click" />
-        <Button Content="Abbrechen" Click="CancelButton_Click" />
+        <Button Content="Abbrechen" Click="CancelButton_Click" />-->
     </Grid>
 </Window>
