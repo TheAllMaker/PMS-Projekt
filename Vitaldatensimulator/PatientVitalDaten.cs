@@ -23,14 +23,14 @@ namespace Vitaldatensimulator
             Vitaldaten = new Dictionary<string, int>();
         }
 
-        public void GeneriereAlleVitaldaten()
+        public void GenerateAllVitaldata()
         {
-            generator.GeneriereVitaldaten(this);
-            Vitaldaten["Herzschlag"] = HeartRate;
-            Vitaldaten["Atemfrequenz"] = RespirationRate;
-            Vitaldaten["Sauerstoffsättigung"] = OxygenLevel;
-            Vitaldaten["SystolischerBlutdruck"] = BloodPressureSystolic;
-            Vitaldaten["DiastolischerBlutdruck"] = BloodPressureDiastolic;
+            generator.GenerateVitaldata(this);
+            Vitaldaten["HeartRate"] = HeartRate;
+            Vitaldaten["RespirationRate"] = RespirationRate;
+            Vitaldaten["OxygenLevel"] = OxygenLevel;
+            Vitaldaten["BloodPressureSystolic"] = BloodPressureSystolic;
+            Vitaldaten["BloodPressureDiastolic"] = BloodPressureDiastolic;
         }
     }
 }

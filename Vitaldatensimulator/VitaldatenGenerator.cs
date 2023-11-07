@@ -3,74 +3,68 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vitaldatensimulator;
 
 namespace Vitaldatensimulator
 {
     internal class VitaldatenGenerator
     {
         private static Random r = new Random();
-        private int aktuellerHerzschlag = 80; // Startwert
-        private int aktuelleAtemfrequenz = 16; // Startwert
-        private int aktuelleSauerstoffsättigung = 98; // Startwert
-        private int aktuellerSystolischerBlutdruck = 120; // Startwert
-        private int aktuellerDiastolischerBlutdruck = 80; // Startwert
+        private int currentHeartRate = 80; // Initial value
+        private int currentRespirationRate = 16; // Initial value
+        private int currentOxygenSaturation = 98; // Initial value
+        private int currentSystolicBloodPressure = 120; // Initial value
+        private int currentDiastolicBloodPressure = 80; // Initial value
 
-        //public int GeneriereHerzschlag()
-        //{
-          //  return r.Next(60, 100);
-        //}
-
-        public int GeneriereHerzschlag()
+        public int GenerateHeartRate()
         {
-            return GeneriereRealistischenWert(ref aktuellerHerzschlag, 60, 100, -2, 2);
+            return GenerateRealisticValue(ref currentHeartRate, 60, 100, -2, 2);
         }
 
-        public int GeneriereAtemfrequenz()
+        public int GenerateRespirationRate()
         {
-            return GeneriereRealistischenWert(ref aktuelleAtemfrequenz, 12, 20, -2, 2);
+            return GenerateRealisticValue(ref currentRespirationRate, 12, 20, -2, 2);
         }
 
-        public int GeneriereSauerstoffsättigung()
+        public int GenerateOxygenSaturation()
         {
-            return GeneriereRealistischenWert(ref aktuelleSauerstoffsättigung, 95, 100, -1, 1);
+            return GenerateRealisticValue(ref currentOxygenSaturation, 95, 100, -1, 1);
         }
 
-        public int GeneriereSystolischerBlutdruck()
+        public int GenerateSystolicBloodPressure()
         {
-            return GeneriereRealistischenWert(ref aktuellerSystolischerBlutdruck, 110, 130, -3, 3);
+            return GenerateRealisticValue(ref currentSystolicBloodPressure, 110, 130, -3, 3);
         }
 
-        public int GeneriereDiastolischerBlutdruck()
+        public int GenerateDiastolicBloodPressure()
         {
-            return GeneriereRealistischenWert(ref aktuellerDiastolischerBlutdruck, 70, 90, -3, 3);
+            return GenerateRealisticValue(ref currentDiastolicBloodPressure, 70, 90, -3, 3);
         }
 
-        public int GeneriereRealistischenWert(ref int aktuellerWert, int minWert, int maxWert, int minÄnderung, int maxÄnderung)
+        public int GenerateRealisticValue(ref int currentValue, int minValue, int maxValue, int minChange, int maxChange)
         {
-            int aenderung = r.Next(minÄnderung, maxÄnderung + 1);
-            aktuellerWert += aenderung;
+            int change = r.Next(minChange, maxChange + 1);
+            currentValue += change;
 
-            // Überprüfen, ob der neue Wert im Bereich liegt
-            if (aktuellerWert < minWert)
+            if (currentValue < minValue)
             {
-                aktuellerWert = minWert;
+                currentValue = minValue;
             }
-            else if (aktuellerWert > maxWert)
+            else if (currentValue > maxValue)
             {
-                aktuellerWert = maxWert;
+                currentValue = maxValue;
             }
 
-            return aktuellerWert;
+            return currentValue;
         }
 
-
-        public void GeneriereVitaldaten(PatientVitalDaten patient)
+        public void GenerateVitaldata(PatientVitalDaten patient)
         {
-            patient.HeartRate = GeneriereHerzschlag();
-            patient.RespirationRate = GeneriereAtemfrequenz();
-            patient.OxygenLevel = GeneriereSauerstoffsättigung();
-            patient.BloodPressureSystolic = GeneriereSystolischerBlutdruck();
-            patient.BloodPressureDiastolic = GeneriereDiastolischerBlutdruck();
+            patient.HeartRate = GenerateHeartRate();
+            patient.RespirationRate = GenerateRespirationRate();
+            patient.OxygenLevel = GenerateOxygenSaturation();
+            patient.BloodPressureSystolic = GenerateSystolicBloodPressure();
+            patient.BloodPressureDiastolic = GenerateDiastolicBloodPressure();
         }
     }
 }

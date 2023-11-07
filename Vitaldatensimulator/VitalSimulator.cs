@@ -40,7 +40,7 @@ namespace Vitaldatensimulator
             {
                 foreach (var patient in patients)
                 {
-                    patient.GeneriereAlleVitaldaten();
+                    patient.GenerateAllVitaldata();
                     Console.WriteLine($"{patient.Name} - Vitaldaten:");
                     Console.WriteLine($"Herzschlag: {patient.HeartRate}");
                     Console.WriteLine($"Atemfrequenz: {patient.RespirationRate}");
@@ -49,21 +49,14 @@ namespace Vitaldatensimulator
                     Console.WriteLine($"Diastolischer Blutdruck: {patient.BloodPressureDiastolic}");
                     Console.WriteLine();
 
-                    // Sende jeden Vitalwert per MQTT
-                    //publisher.PublishVitaldata(topic, patient.Herzschlag.ToString());
-                    //publisher.PublishVitaldata(topic, patient.Atemfrequenz.ToString());
-                    //publisher.PublishVitaldata(topic, patient.Sauerstoffsättigung.ToString());
-                    //publisher.PublishVitaldata(topic, patient.SystolischerBlutdruck.ToString());
-                    //publisher.PublishVitaldata(topic, patient.DiastolischerBlutdruck.ToString());
-
                     var vitaldaten = new
                     {
                         Name = patient.Name,
-                        Herzschlag = patient.HeartRate,
-                        Atemfrequenz = patient.RespirationRate,
-                        Sauerstoffsättigung = patient.OxygenLevel,
-                        SystolischerBlutdruck = patient.BloodPressureSystolic,
-                        DiastolischerBlutdruck = patient.BloodPressureDiastolic
+                        HeartRate = patient.HeartRate,
+                        RespirationRate = patient.RespirationRate,
+                        OxygenLevel = patient.OxygenLevel,
+                        BloodPressureSystolic = patient.BloodPressureSystolic,
+                        BloodPressureDiastolic = patient.BloodPressureDiastolic
                     };
 
                     string json = Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);
