@@ -8,7 +8,7 @@ using uPLibrary.Networking.M2Mqtt;
 
 namespace MediTrack.Model.RemoteModel
 {
-    public class MQTTHandler
+    public class MqttHandler
     {
         private MqttClient client;
 
@@ -31,17 +31,22 @@ namespace MediTrack.Model.RemoteModel
         public void SubScribeToTopic()
         {
             const string topic = "Vitaldaten";
-            ushort msgId = client.Subscribe(new string[] { topic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+            ushort msgId = client.Subscribe(new string[] { topic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
             Console.WriteLine("Subscribed to topic: " + topic);
             Console.WriteLine("Subscription succ, msgId:" + msgId);
+            
         }
-        void Client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
+       public void Client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
         {
             Console.WriteLine("MediTrack Subscribed for id = " + e.MessageId);
         }
-        void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        public void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            Console.WriteLine(Encoding.UTF8.GetString(e.Message) + " (MediTrackon topic " + e.Topic + ")");
+            Console.WriteLine(Encoding.UTF8.GetString(e.Message) + " (MediTrackon on topic " + e.Topic + ")");
+            string topic = e.Topic;
+            string message = System.Text.Encoding.UTF8.GetString(e.Message);
+
+            Console.WriteLine($"Received message on topic '{topic}': {message}");
         }
         public void Disconnect()
         {

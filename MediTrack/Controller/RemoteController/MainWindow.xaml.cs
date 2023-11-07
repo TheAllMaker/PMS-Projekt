@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace MediTrack
 {
@@ -43,17 +44,19 @@ namespace MediTrack
             //PatientenMonitorDynGrid.Children.Remove(contentControl);
 
 
-            MQTTHandler handler = new MQTTHandler();
+            MqttHandler handler = new MqttHandler();
             handler.ConnectToServer();
             handler.SubScribeToTopic();
+            
             DateTime startTime = DateTime.Now;
             TimeSpan duration = TimeSpan.FromSeconds(20);
 
             while (DateTime.Now - startTime < duration)
             {
-
+                
                 Thread.Sleep(100);
             }
+            
             Debug.WriteLine("Done");
 
 
