@@ -33,15 +33,15 @@ namespace Vitaldatensimulator
             List<PatientVitalDaten> patients = new List<PatientVitalDaten>();
 
             // Hinzufügen von Patienten
-            patients.Add(new PatientVitalDaten("Patient1"));
-            patients.Add(new PatientVitalDaten("Patient2"));
+            patients.Add(new PatientVitalDaten("Monitor ID: 1"));
+            patients.Add(new PatientVitalDaten("Monitor ID: 2"));
 
             while (true)
             {
                 foreach (var patient in patients)
                 {
                     patient.GenerateAllVitaldata();
-                    Console.WriteLine($"{patient.Name} - Vitaldaten:");
+                    Console.WriteLine($"{patient.MonitorID} - Vitaldaten:");
                     Console.WriteLine($"Herzschlag: {patient.HeartRate}");
                     Console.WriteLine($"Atemfrequenz: {patient.RespirationRate}");
                     Console.WriteLine($"Sauerstoffsättigung: {patient.OxygenLevel}");
@@ -51,7 +51,7 @@ namespace Vitaldatensimulator
 
                     var vitaldaten = new
                     {
-                        Name = patient.Name,
+                        MonitorID = patient.MonitorID,
                         HeartRate = patient.HeartRate,
                         RespirationRate = patient.RespirationRate,
                         OxygenLevel = patient.OxygenLevel,

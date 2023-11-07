@@ -6,7 +6,7 @@ namespace Vitaldatensimulator
 {
     public class PatientVitalDaten
     {
-        public string Name { get; set; }
+        public string MonitorID { get; set; }
         public int HeartRate { get;  set; }
         public int RespirationRate { get;  set; }
         public int OxygenLevel { get;  set; }
