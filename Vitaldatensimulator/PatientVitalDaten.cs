@@ -16,9 +16,9 @@ namespace Vitaldatensimulator
 
         private VitaldatenGenerator generator;
 
-        public PatientVitalDaten(string name)
+        public PatientVitalDaten(string monitorID)
         {
-            Name = name;
+            MonitorID = monitorID;
             generator = new VitaldatenGenerator();
             Vitaldaten = new Dictionary<string, int>();
         }
