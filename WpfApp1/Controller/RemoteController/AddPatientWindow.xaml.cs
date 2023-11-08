@@ -43,5 +43,17 @@ namespace MediTrack.View.RemoteView
         }
 
 
+        private void TextBoxPatientId_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PlaceholderTextPatientID.Visibility = Visibility.Collapsed; // Platzhaltertext ausblenden
+        }
+
+        private void TextBoxPatientId_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TextBoxPatientId.Text))
+            {
+                PlaceholderTextPatientID.Visibility = Visibility.Visible; // Platzhaltertext anzeigen, wenn die TextBox leer ist
+            }
+        }
     }
 }
