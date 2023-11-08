@@ -32,7 +32,7 @@
 
 
                 <Button Click="API_Button_Clicked" Width ="100" Height="50" Background="Black"
-                        Foreground="White" BorderThickness="3" BorderBrush="White" FontSize="26"
+                        Foreground="White" BorderThickness="3" BorderBrush="White" FontSize="24"
                          Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center"   
                 >SEARCH
                     
@@ -48,7 +48,7 @@
 
 
                 <Button Click="Select_Button_Clicked" Width ="100" Height="50" Background="Black" Foreground="White"
-                        BorderThickness="3" BorderBrush="White" Grid.Column="1" FontSize="26" VerticalAlignment="Center"
+                        BorderThickness="3" BorderBrush="White" Grid.Column="1" FontSize="24" VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                 >SELECT
                     
@@ -63,7 +63,7 @@
 
 
                 <Button Click="Add_Button_Clicked" Width ="100" Background="Black" Foreground="White"
-                        BorderThickness="3" BorderBrush="White" Grid.Column="2" Height="50" FontSize="26" 
+                        BorderThickness="3" BorderBrush="White" Grid.Column="2" Height="50" FontSize="24" 
                         VerticalAlignment="Center" HorizontalAlignment="Center"
                 >ADD
 
