@@ -10,7 +10,7 @@ using System.Windows.Navigation;
 using Database;
 using Npgsql;
 
-
+// hier ist noch der Rückgabe Typ offen !
 namespace MediTrack.Model.DataBaseModelConnection
 {
     class DataBaseRemoteConnection
@@ -34,14 +34,15 @@ namespace MediTrack.Model.DataBaseModelConnection
                 return null;
             }
         }
-
+        //NpgsqlCommand SelectCountCommand = new NpgsqlCommand("SELECT COUNT(*) FROM patients ", DataBaseConnector);
+        //Int64 EntryCount = (Int64)SelectCountCommand.ExecuteScalar();
         void DataBaseEntryCall(List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries)
         {
             var DataBaseConnector = DataBaseConnectionCall();
 
-            //NpgsqlCommand SelectCountCommand = new NpgsqlCommand("SELECT COUNT(*) FROM patients ", DataBaseConnector);
+           
             NpgsqlCommand SelectEntriesCommand = new NpgsqlCommand("SELECT * FROM  ", DataBaseConnector);
-            //Int64 EntryCount = (Int64)SelectCountCommand.ExecuteScalar();
+            
 
             NpgsqlDataReader EntryReader = SelectEntriesCommand.ExecuteReader();
             while (EntryReader.Read())
@@ -62,8 +63,8 @@ namespace MediTrack.Model.DataBaseModelConnection
 
 
         }
-
-
+        //object result = SelectPatientThroughPIDCommand.ExecuteScalar();
+        // 
         void CallForPatientThroughID()
         {
             int test = 5;
@@ -71,7 +72,6 @@ namespace MediTrack.Model.DataBaseModelConnection
             string SelectPatientThroughPIDString = $"SELECT * FROM patients WHERE PID = {test}";
             NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand("SelectPatientThroughPIDString", DataBaseConnector);
 
-            //object result = SelectPatientThroughPIDCommand.ExecuteScalar();
 
             NpgsqlDataReader PIDReader = SelectPatientThroughPIDCommand.ExecuteReader();
 

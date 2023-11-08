@@ -9,9 +9,11 @@ namespace MediTrack.Controller.RemoteController
 {
     public partial class PatientTemplate : Window
     {
+
+        
         public void OpenDetailed()
         {
-            Window DetailedWindow = new Window
+            Window DetailedWindow = new Vitaldatensimulator.MainWindow
             {
                 Title = "DetailWindow",
                 Width = SystemParameters.PrimaryScreenWidth * 0.75,

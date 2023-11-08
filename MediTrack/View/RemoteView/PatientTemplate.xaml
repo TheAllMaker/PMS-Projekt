@@ -1,4 +1,8 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="MediTrack.Controller.RemoteController.PatientenTemplate" 
+    >
     <DataTemplate x:Key="PatientTemplate">
 
         <Grid  ShowGridLines="True"  Background="Black">
@@ -23,7 +27,7 @@
 
             <!-- Name und Co. I -->
             <Border BorderBrush="Black" Grid.Column="1">
-                <TextBlock Background="Black"  FontSize="20" Grid.Column="1" HorizontalAlignment="Left" 
+                <TextBlock Background="Black"  FontSize="20" Grid.Column="1" HorizontalAlignment="Center" 
                  VerticalAlignment="Center"  Foreground="White" Grid.ColumnSpan="2"
                   Name ="FirstNameTextBlock" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> 
                     <Run Text=": " />
@@ -31,16 +35,16 @@
             </Border>
 
             <!-- Name und Co. II -->
-            <TextBlock Background="Black"  FontSize="20" Grid.Column="2" HorizontalAlignment="Left" 
+            <TextBlock Background="Black"  FontSize="20" Grid.Column="2" HorizontalAlignment="Center" 
                 VerticalAlignment="Center"  Foreground="White" Grid.ColumnSpan="2"
                 Name ="LastNameTextBlock" Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
             </TextBlock>
 
             <!-- Icons -->
-            <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"
-                Background="Black" Foreground="White" Name ="PatientHealthIcon" >
-                Left
-            </Button>
+            <Image  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" 
+                 x:Name ="PatientHealthIcon"  Width="20" Height="20" Source="D:\Daten\Code\CodePMS\MediTrack\SVGs\access-point.png">
+ 
+            </Image>
 
             <!-- Icons II -->
             <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2"
@@ -49,7 +53,7 @@
             </Button>
 
             <!-- ZoomButton -->
-            <Button FontSize="20" Grid.Row="3" Background="Black" Name ="PatientZoomButton"
+            <Button FontSize="20" Grid.Row="3" Background="Black" Name ="PatientZoomButton" Click="MediTrack.Controller.RemoteController.OpenDetailed"
                  VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center">
                 Right
             </Button>
