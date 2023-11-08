@@ -65,11 +65,11 @@
             <TextBlock Grid.Row="1" Grid.Column="1" Foreground="LimeGreen" Name="RespirationRateTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" >
             <Run Text="{Binding RespirationRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Run Text=" /min" FontSize="20" />
+            <Run Text=" /min" FontSize="16" />
             </TextBlock>
                         
             <TextBlock Grid.Row="1" Grid.Column="1" Text="RR" Foreground="White"
-                  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"
                   />
             
             <!-- T -->
@@ -77,11 +77,11 @@
             <TextBlock Grid.Row="2" Grid.Column="1"  Foreground="Orange"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Name="TemperatureTextBlock">
                 <Run Text="{Binding Temperature, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <Run Text=" °C" FontSize="20" />
+                <Run Text=" °C" FontSize="16" />
             </TextBlock>
             
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="T" Foreground="White" 
-                HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"
                  />
             
 
@@ -90,11 +90,11 @@
             <TextBlock Grid.Row="2" Grid.Column="2"  Foreground="Yellow" Name="HeartRateTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" >
             <Run Text="{Binding HeartRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <Run Text=" bpm" FontSize="20"/>
+            <Run Text=" bpm" FontSize="16"/>
             </TextBlock>
         
             <TextBlock Grid.Row="2" Grid.Column="2" Text="HR" Foreground="White"
-                   HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"
                    />
             
             <!-- OS -->
@@ -102,11 +102,11 @@
             <TextBlock Grid.Row="1" Grid.Column="2"  Foreground="RoyalBlue" Name="OxygenLevelTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
                     <Run Text="{Binding OxygenLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <Run Text=" %" FontSize="20"/>
+                <Run Text=" %" FontSize="16"/>
             </TextBlock>
 
             <TextBlock Grid.Row="1" Grid.Column="2" Text="OS" Foreground="White"
-                  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"
                   />
             
             <!-- S BP -->
@@ -114,12 +114,13 @@
             <TextBlock Grid.Row="3" Grid.Column="1"  Foreground="Tomato" Name="BloodPressureTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
                      <Run Text="{Binding BloodPressureSystolic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     <Run Text=" / " FontSize="16" />
                      <Run Text="{Binding BloodPressureDiastolic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                     <Run Text=" mmHG" FontSize="20" />
+                     <Run Text=" mmHG" FontSize="16" />
             </TextBlock>
             
             <TextBlock Grid.Row="3" Grid.Column="1" Text="S BP" Foreground="White"
-                   HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"
                     />
 
             <!-- AVRP / EWS -->
@@ -127,11 +128,11 @@
             
             <TextBlock Grid.Row="3" Grid.Column="2"  Foreground="White" Name="PatientScoreTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
-            <Run Text="/" />
+            <Run Text="/" FontSize="16"/>
             </TextBlock>
             
             <TextBlock Grid.Row="3" Grid.Column="2" Text="AVRP / EWS" Foreground="White"
-                HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"
+                HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"
                   />
 
 

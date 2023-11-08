@@ -34,7 +34,7 @@
                 <Button Click="API_Button_Clicked" Width ="100" Height="50" Background="Black"
                         Foreground="White" BorderThickness="3" BorderBrush="White" FontSize="26"
                          Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center"   
-                >API
+                >SEARCH
                     
                     <Button.Resources>
                         <Style TargetType="Border">

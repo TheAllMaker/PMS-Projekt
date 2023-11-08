@@ -8,7 +8,7 @@
         Name="SelectionWindowStyle"
         
         Title="SelectionWindow" Height="450" Width="800"
-        Background="Black">
+        Background="DarkGray">
 
     <Window.Resources>
         <ResourceDictionary>

@@ -9,14 +9,6 @@
         Name="Test"
         Title="AddPatientWindow" Height="450" Width="800">
     <Grid>
-        <Label Content="Vorname:" />
-        <TextBox x:Name="txtFirstName" />
-        <Label Content="Nachname:" />
-        <TextBox x:Name="txtLastName" />
-        <Label Content="txtPatientNumber:" />
-        <TextBox x:Name="txtPatientNumber" />
-        <!--<Button Content="Speichern" Click="SaveButton_Click" />
-        <Button Content="Abbrechen" Click="CancelButton_Click" />
-        <Button Content="Abbrechen" Click="CancelButton_Click" />-->
+
     </Grid>
 </Window>
