@@ -53,11 +53,12 @@ namespace MediTrack.View.RemoteView
 
         private void SelectionWindowClosing(object sender, CancelEventArgs e)
         {
-
+            Close();
         }
 
         private void SelectionWindowConfirmed(object sender, CancelEventArgs e)
         {
+            Close();
         }
 
         // simpler ToggleButton: Dadurch das wir oben den Grünzustand bei der Initialisierung auf false stellen,

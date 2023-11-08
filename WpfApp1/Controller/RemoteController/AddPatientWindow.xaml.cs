@@ -32,8 +32,16 @@ namespace MediTrack.View.RemoteView
             //Database.SQLqueries.addPatient(p);
         }
 
+        private void ConfirmButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void AbortButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
 
-       
     }
 }
