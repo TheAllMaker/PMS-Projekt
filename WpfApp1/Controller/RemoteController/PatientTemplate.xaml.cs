@@ -7,11 +7,11 @@ using System.Windows;
 
 namespace MediTrack.Controller.RemoteController
 {
-    public partial class PatientTemplate : Window
+    public partial class PatientTemplate 
     {
 
         
-        public void OpenDetailed()
+        public void OpenDetailed(object sender, RoutedEventArgs e)
         {
             Window DetailedWindow = new Vitaldatensimulator.MainWindow
             {
@@ -21,7 +21,7 @@ namespace MediTrack.Controller.RemoteController
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
             DetailedWindow.Show();
-            DetailedWindow.Owner = this;
+            //DetailedWindow.Owner = this;
         }
     }
 }

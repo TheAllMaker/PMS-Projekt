@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection.PortableExecutable;
+
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
@@ -77,8 +77,8 @@ namespace MediTrack.Model.DataBaseModelConnection
 
              if (PIDReader.Read())
                 {
-                    string? name = PIDReader["Name"].ToString();
-                    string? vorname = PIDReader["Vorname"].ToString();
+                    string name = PIDReader["Name"].ToString();
+                    string vorname = PIDReader["Vorname"].ToString();
                     Console.WriteLine($"Name: {name}, Vorname: {vorname}");
                 }
 

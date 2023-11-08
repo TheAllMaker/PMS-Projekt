@@ -1,7 +1,7 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    x:Class="MediTrack.Controller.RemoteController.PatientenTemplate" 
+    x:Class="MediTrack.Controller.RemoteController.PatientTemplate"
     >
     <DataTemplate x:Key="PatientTemplate">
 
@@ -53,7 +53,7 @@
             </Button>
 
             <!-- ZoomButton -->
-            <Button FontSize="20" Grid.Row="3" Background="Black" Name ="PatientZoomButton" Click="MediTrack.Controller.RemoteController.OpenDetailed"
+            <Button FontSize="20" Grid.Row="3" Background="Black" Name ="PatientZoomButton" Click="OpenDetailed" 
                  VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center">
                 Right
             </Button>
