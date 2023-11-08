@@ -77,8 +77,50 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
+          
+                <TextBlock Text="Vitaldaten Monitor" FontSize="18" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Foreground="White" Margin="0 0 0 10"/>
+                <!-- Max Mustermann und Geburtsdatum -->
+            <StackPanel Orientation="Vertical" Margin="0 0 0 10"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
+                    <TextBlock Text="Max Mustermann" FontSize="14" FontWeight="Bold" Foreground="White"/>
+                    
+                </StackPanel>
 
 
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="0 0 0 10">
+                <!--<Button Content="-" Width="30" Click="OxygenSaturationsDecrease_Click"/>
+                <Button Content="+" Width="30" Click="OxygenSaturationsIncrease_Click"/>-->
+                <TextBlock Text="Oxygen Saturations: 98%" FontSize="14" FontWeight="Bold" Foreground="DeepSkyBlue"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0"  Margin="0 0 0 10">
+                <!--<Button Content="-" Width="30" Click="TemperatureDecrease_Click"/>
+                <Button Content="+" Width="30" Click="TemperatureIncrease_Click"/>-->
+                <TextBlock Text="Temperature: 37.5 °C" FontSize="14" FontWeight="Bold" Foreground="OrangeRed"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Margin="0 0 0 10">
+                <!--<Button Content="-" Width="30" Click="SystolicBPDecrease_Click"/>
+                <Button Content="+" Width="30" Click="SystolicBPIncrease_Click"/>-->
+                <TextBlock Text="Systolic BP: 120 mmHg" FontSize="14" FontWeight="Bold" Foreground="Red"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Margin="0 0 0 10">
+                <!--<Button Content="-" Width="30" Click="HeartRateDecrease_Click"/>
+                <Button Content="+" Width="30" Click="HeartRateIncrease_Click"/>-->
+                <TextBlock Text="Heart Rate: 75 bpm" FontSize="14" FontWeight="Bold" Foreground="Gold"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="2" Margin="0 0 0 10">
+                <!--<Button Content="Decrease" Width="70" Click="ConsciousnessDecrease_Click"/>
+                <Button Content="Increase" Width="70" Click="ConsciousnessIncrease_Click"/>-->
+                <TextBlock Text="Level of Consciousness: Awake" FontSize="14" FontWeight="Bold" Foreground="White"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="0 0 0 10">
+                <!--<Button Content="-" Width="30" Click="RespirationRateDecrease_Click"/>
+                <Button Content="+" Width="30" Click="RespirationRateIncrease_Click"/>-->
+                <TextBlock Text="Respiration Rate: 18 /min" FontSize="14" FontWeight="Bold" Foreground="LimeGreen"/>
+            </StackPanel>
         </Grid>
     </DockPanel>
 

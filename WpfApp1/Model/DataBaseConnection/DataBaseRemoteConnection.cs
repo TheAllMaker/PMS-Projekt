@@ -65,11 +65,11 @@ namespace MediTrack.Model.DataBaseModelConnection
         }
         //object result = SelectPatientThroughPIDCommand.ExecuteScalar();
         // 
-        void CallForPatientThroughID()
+        public void  CallForPatientThroughID( int patientIdentifier)
         {
-            int test = 5;
+            
             var DataBaseConnector = DataBaseConnectionCall();
-            string SelectPatientThroughPIDString = $"SELECT * FROM patients WHERE PID = {test}";
+            string SelectPatientThroughPIDString = $"SELECT * FROM patients WHERE PID = {patientIdentifier}";
             NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand("SelectPatientThroughPIDString", DataBaseConnector);
 
 
@@ -80,12 +80,15 @@ namespace MediTrack.Model.DataBaseModelConnection
                     string name = PIDReader["Name"].ToString();
                     string vorname = PIDReader["Vorname"].ToString();
                     Console.WriteLine($"Name: {name}, Vorname: {vorname}");
+                   
+                
                 }
 
             else
             {
-                Console.WriteLine($"No DataBase Entry found for PID {test}");
-                Debug.WriteLine($"No DataBase Entry found for PID {test}");
+                Console.WriteLine($"No DataBase Entry found for PID {patientIdentifier}");
+                Debug.WriteLine($"No DataBase Entry found for PID {patientIdentifier}");
+                
             }
 
 
@@ -93,7 +96,12 @@ namespace MediTrack.Model.DataBaseModelConnection
         }
 
 
-
+        //public void AddPatientIntoDataBase(int pid, string FirstName, string LastName)
+        //{
+        //    var DataBaseConnector = DataBaseConnectionCall();
+        //    string InsertPatientCommandString = $"INSERT INTO patients VALUES ({pid},'{FirstName}','{LastName}')";
+        //    NpgsqlCommand InsertPatientCommand = new NpgsqlCommand("InsertPatientCommandString", DataBaseConnector);
+        //}
     }
 
 } 

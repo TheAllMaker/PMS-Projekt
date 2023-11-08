@@ -108,8 +108,8 @@
                                 <DrawingBrush.Drawing>
                                     <DrawingGroup>
                                         <DrawingGroup x:Name="canvas2">
-                                            <GeometryDrawing Brush="{DynamicResource canvas}" Geometry="F1M16,16H0V0H16Z" />
-                                            <GeometryDrawing Brush="{DynamicResource canvas}" Geometry="F1M16,16H0V0H16Z" />
+                                            <!--<GeometryDrawing Brush="{DynamicResource canvas}" Geometry="F1M16,16H0V0H16Z" />
+                                            <GeometryDrawing Brush="{DynamicResource canvas}" Geometry="F1M16,16H0V0H16Z" />-->
                                         </DrawingGroup>
                                         <DrawingGroup x:Name="level_2">
                                             <GeometryDrawing Brush="{DynamicResource light-blue}" Geometry="F1M13.854,5.146v.708l-3.5,3.5-.708-.708L12.293,6H5.5a3.5,3.5,0,0,0,0,7v1a4.5,4.5,0,0,1,0-9h6.793L9.646,2.354l.708-.708Z" />
