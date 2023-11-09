@@ -20,8 +20,8 @@ namespace Database
 
             var conn = new NpgsqlConnection(connString);
 
-            Patient p = new Patient(prename: "Hans", surname: "Müller", birthday: new DateTime(1994, 06, 14));
-            addPatient(p);
+            Patient p1 = new Patient(firstName: "Hans", lastName: "Müller", birthday: new DateTime(1994, 06, 14));
+            addPatient(p1);
 
 
         }
@@ -31,12 +31,12 @@ namespace Database
             try
             {
             conn.Open();
-            var sql = "INSERT INTO patients(prename, surname, birthday) VALUES(@prename,@surname,@birthday) RETURNING patienten_id";
+            var sql = "INSERT INTO patients(lastName, firstName, birthday) VALUES(@firstName,@lastName,@birthday) RETURNING patienten_id";
 
             using (var cmd = new NpgsqlCommand(sql, conn))
             {
-                cmd.Parameters.AddWithValue("prename", p.prename);
-                cmd.Parameters.AddWithValue("surname", p.surname);
+                cmd.Parameters.AddWithValue("firstName", p.firstName);
+                cmd.Parameters.AddWithValue("lastName", p.lastName);
                 cmd.Parameters.AddWithValue("birthday", p.birthday);
                 cmd.Prepare();
                 int id = (int)cmd.ExecuteScalar();

@@ -5,14 +5,14 @@ namespace Database
     public class Patient
     {
         public int id;
-        public string prename;
-        public string surname;
+        public string firstName;
+        public string lastName;
         public DateTime birthday;
 
-        public Patient(string prename, string surname, DateTime birthday)
+        public Patient(string firstName, string lastName, DateTime birthday)
         {
-            this.prename = prename;
-            this.surname = surname;
+            this.firstName = firstName;
+            this.lastName = lastName;
             this.birthday = birthday;
         }
     }
