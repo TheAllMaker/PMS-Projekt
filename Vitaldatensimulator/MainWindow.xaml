@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Vitaldaten-Monitor" Height="400" Width="600">
     <!--<Grid Background="Black">-->
-
+    <!--<Grid Background="Black">-->
 
         <DockPanel>
             <Grid Height="50" DockPanel.Dock="Bottom"  Background="Black" >
@@ -89,6 +89,7 @@
                     <!--<Button Content="-" Width="30" Click="OxygenSaturationsDecrease_Click"/>
                     <Button Content="+" Width="30" Click="OxygenSaturationsIncrease_Click"/>-->
                     <TextBlock Text="Oxygen Saturations: 98%" FontSize="14" FontWeight="Bold" Foreground="DeepSkyBlue"/>
+                    
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0"  Margin="0 0 0 10">
