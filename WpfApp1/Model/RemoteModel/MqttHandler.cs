@@ -27,11 +27,10 @@ namespace MediTrack.Model.RemoteModel
             client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
 
         }
-
         
         public void SubScribeToTopic()
         {
-            const string topic = "Vitaldaten";
+            const string topic = "23pms01/test";
             ushort msgId = client.Subscribe(new string[] { topic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
             Debug.WriteLine("Subscribed to topic: " + topic);
             Debug.WriteLine("Subscription succ, msgId:" + msgId);

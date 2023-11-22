@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,24 +50,21 @@ namespace MediTrack
 
             while (DateTime.Now - startTime < duration)
             {
-
-                Thread.Sleep(100);
+                // IST DAS HIER NOTWENDIG? - SELCUK
+                //Thread.Sleep(100);
             }
 
             MqttHandler handler = new MqttHandler();
             handler.ConnectToServer();
             handler.SubScribeToTopic();
-            
-            //Console.WriteLine("Ich warte ...");
-            //Console.ReadKey();
+
+           //myMqtt.Disconnect();
+
+
             Debug.WriteLine("Done");
 
 
-
-
         }
-
-
 
 
         private void API_Button_Clicked(object sender, RoutedEventArgs e)

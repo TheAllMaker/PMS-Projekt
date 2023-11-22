@@ -14,7 +14,7 @@ namespace Vitaldatensimulator
     {
         private MqttClient client;
 
-        public MqttPublisher(string brokerAddress,int port, string user, string pwd)
+        public MqttPublisher(string brokerAddress, int port, string user, string pwd)
         {
             client = new MqttClient(brokerAddress, port, true, null, null, MqttSslProtocols.TLSv1_2);
             client.Connect(Guid.NewGuid().ToString(), user, pwd);
@@ -32,10 +32,10 @@ namespace Vitaldatensimulator
             client.Disconnect();
         }
 
-        public void PublishVitaldata(string topic, string json)
+        public void PublishVitaldata(string topic, int data)
         {
-            //string payload = heartbeat.ToString();
-            client.Publish(topic, Encoding.UTF8.GetBytes(json), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+            string payload = data.ToString();
+            client.Publish(topic, Encoding.UTF8.GetBytes(payload), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
         }
 
         public void PublishVitaldataJSON(string topic, string json)
