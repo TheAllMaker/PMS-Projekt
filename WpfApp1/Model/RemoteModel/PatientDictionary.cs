@@ -11,6 +11,7 @@ namespace MediTrack.Model.RemoteModel
     // Das Dictionary nimmt von MQTT die MonitorId bzw. PatientenId auf, und lässt durch eine Abfrage die PatientenInstanz ermittlen.
     // Ist die Abfrage erfolglos, wird null zurückgegeben um im Weiteren eine Databank Abfrage zu starten welche dann zum Binden der 
     // PatientenInstanz genutzt wird
+    // Welcher Patient gehört zu Welche
 
     public class PatientDictionary
     {

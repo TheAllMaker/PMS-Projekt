@@ -126,6 +126,7 @@
     <Compile Include="Controller\RemoteController\MainWindow.xaml.cs" />
     <Compile Include="Controller\RemoteController\PatientTemplate.xaml.cs" />
     <Compile Include="Controller\RemoteController\SelectionWindow.xaml.cs" />
+    <Compile Include="Model\RemoteModel\MonitorPatientDictionary.cs" />
     <Compile Include="View\RemoteView\DetailedWindow.xaml.cs">
       <DependentUpon>DetailedWindow.xaml</DependentUpon>
     </Compile>
