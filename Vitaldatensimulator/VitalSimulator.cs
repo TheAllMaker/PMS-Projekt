@@ -45,15 +45,13 @@ namespace Vitaldatensimulator
             List<PatientVitalDaten> patients = new List<PatientVitalDaten>();
 
             // Hinzufügen von Patienten
-            //patients.Add(new PatientVitalDaten("Monitor ID: 1"));
-            //patients.Add(new PatientVitalDaten("Monitor ID: 2"));
-            // ID muss per UI auswählbar sein
+            patients.Add(new PatientVitalDaten(MonitorID));
 
             while (true)
             {
                 foreach (var patient in patients)
                 {
-                    patient.GenerateAllVitaldata();
+                    //patient.GenerateAllVitaldata();
 
                     var vitaldaten = new
                     {
