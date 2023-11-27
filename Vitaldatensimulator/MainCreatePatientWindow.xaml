@@ -1,0 +1,77 @@
+﻿<Window x:Class="Vitaldatensimulator.MainCreatePatientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Vitaldatensimulator"
+        Title="Vitaldaten-Monitor" Height="400" Width="568"
+        Background="Black">
+
+
+
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Labels für Text über den Slidern -->
+
+        <!-- Eingabefelder und Slider -->
+
+        <StackPanel Margin="1,0,10,0" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,5">
+                <TextBlock Text="Monitor ID" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox Width="41" Margin="0,0,5,0" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,5">
+                <TextBlock Text="Herzrate" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox Width="50" Margin="0,0,5,0"/>
+                <Slider Width="200" HorizontalAlignment="Left" Minimum="70" Maximum="100" Margin="5,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,5">
+                <TextBlock Text="Atemfrequenz" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox Width="50" Margin="0,0,5,0"/>
+                <Slider Width="200" HorizontalAlignment="Left" Minimum="70" Maximum="100" Margin="5,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,5">
+                <TextBlock Text="Sauerstoffsättigung" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox Width="50" Margin="0,0,5,0"/>
+                <Slider Width="200" HorizontalAlignment="Left" Minimum="70" Maximum="100" Margin="5,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,5">
+                <TextBlock Text="Systolischer Blutdruck" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox Width="50" Margin="0,0,5,0"/>
+                <Slider Width="200" HorizontalAlignment="Left" Minimum="100" Maximum="160" Margin="5,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,5">
+                <TextBlock Text="Diastolischer Blutdruck" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox Width="50" Margin="0,0,5,0"/>
+                <Slider Width="200" HorizontalAlignment="Left" Minimum="60" Maximum="100" Margin="5,0"/>
+            </StackPanel>
+        </StackPanel>
+        <TextBlock HorizontalAlignment="Center" Margin="0,-74,0,0" TextWrapping="Wrap" Text="Vitaldaten Simulator" Foreground="White" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button Content="Bestätigen" Grid.ColumnSpan="2" Margin="305,210,14,-103" RenderTransformOrigin="0.5,0.5" Click="Button_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.096"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="Abbrechen" Grid.ColumnSpan="2" Margin="388,210,-69,-103" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.096"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+    </Grid>
+</Window>
