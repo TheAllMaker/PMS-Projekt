@@ -20,40 +20,40 @@
         <StackPanel Margin="1,0,10,0" Grid.Column="1">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,5">
                 <TextBlock Text="Monitor ID" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox Width="41" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <TextBox x:Name="MonitorIDBox"  Width="41" Margin="0,0,5,0" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,5">
                 <TextBlock Text="Herzrate" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox Width="50" Margin="0,0,5,0"/>
-                <Slider Width="200" HorizontalAlignment="Left" Minimum="70" Maximum="100" Margin="5,0"/>
+                <TextBox x:Name="HeartRateBox" Width="50" Margin="0,0,5,0"/>
+                <Slider x:Name="HeartRateSlider" Width="200" HorizontalAlignment="Left" Minimum="70" Maximum="100" Margin="5,0"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,5">
-                <TextBlock Text="Atemfrequenz" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox Width="50" Margin="0,0,5,0"/>
-                <Slider Width="200" HorizontalAlignment="Left" Minimum="70" Maximum="100" Margin="5,0"/>
+                <TextBlock Text="Respiration Rate" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="RespirationRateBox" Width="50" Margin="0,0,5,0"/>
+                <Slider x:Name="RespirationRateSlider" Width="200" HorizontalAlignment="Left" Minimum="70" Maximum="100" Margin="5,0"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,5">
-                <TextBlock Text="Sauerstoffsättigung" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox Width="50" Margin="0,0,5,0"/>
-                <Slider Width="200" HorizontalAlignment="Left" Minimum="70" Maximum="100" Margin="5,0"/>
+                <TextBlock Text="Oxygen Level" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="OxygenLevelBox" Width="50" Margin="0,0,5,0"/>
+                <Slider x:Name="OxygenLevelSlider" Width="200" HorizontalAlignment="Left" Minimum="70" Maximum="100" Margin="5,0"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,5">
-                <TextBlock Text="Systolischer Blutdruck" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox Width="50" Margin="0,0,5,0"/>
-                <Slider Width="200" HorizontalAlignment="Left" Minimum="100" Maximum="160" Margin="5,0"/>
+                <TextBlock Text="Systolic BloodPressure" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="SystolicBloodPressureBox" Width="50" Margin="0,0,5,0"/>
+                <Slider x:Name="BloodPressureSystolicSlider" Width="200" HorizontalAlignment="Left" Minimum="100" Maximum="160" Margin="5,0"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,5">
                 <TextBlock Text="Diastolischer Blutdruck" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox Width="50" Margin="0,0,5,0"/>
-                <Slider Width="200" HorizontalAlignment="Left" Minimum="60" Maximum="100" Margin="5,0"/>
+                <TextBox x:Name="DiastolicBloodPressureBox" Width="50" Margin="0,0,5,0"/>
+                <Slider x:Name="BloodPressureDiastolicSlider" Width="200" HorizontalAlignment="Left" Minimum="60" Maximum="100" Margin="5,0"/>
             </StackPanel>
         </StackPanel>
         <TextBlock HorizontalAlignment="Center" Margin="0,-74,0,0" TextWrapping="Wrap" Text="Vitaldaten Simulator" Foreground="White" VerticalAlignment="Top" Grid.Column="1"/>
-        <Button Content="Bestätigen" Grid.ColumnSpan="2" Margin="305,210,14,-103" RenderTransformOrigin="0.5,0.5" Click="Button_Click">
+        <Button Content="Bestätigen" Grid.ColumnSpan="2" Margin="305,210,14,-103" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Confirm " Background="#FF16FF06">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -63,7 +63,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button Content="Abbrechen" Grid.ColumnSpan="2" Margin="388,210,-69,-103" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Abbrechen" Grid.ColumnSpan="2" Margin="388,210,-69,-103" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Cancel" Background="Red">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

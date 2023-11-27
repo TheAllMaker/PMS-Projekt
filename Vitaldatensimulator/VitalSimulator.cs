@@ -23,10 +23,10 @@ namespace Vitaldatensimulator
             app.Run(mainWindow);
 
             // Andere Funktionen wie MQTT-Verbindung und Datenaktualisierung
-            DoMqttAndDataOperations();
+            //DoMqttAndDataOperations();
         }
 
-        static void DoMqttAndDataOperations()
+        public static void DoMqttAndDataOperations(string MonitorID, double HeartRate, double RespirationRate, double OxygenLevel, double BloodPressureSystolic, double BloodPressureDiastolic)
         {
             //MQTT Verbindung
             string hostName = "mqtt.inftech.hs-mannheim.de";
@@ -45,8 +45,8 @@ namespace Vitaldatensimulator
             List<PatientVitalDaten> patients = new List<PatientVitalDaten>();
 
             // Hinzufügen von Patienten
-            patients.Add(new PatientVitalDaten("Monitor ID: 1"));
-            patients.Add(new PatientVitalDaten("Monitor ID: 2"));
+            //patients.Add(new PatientVitalDaten("Monitor ID: 1"));
+            //patients.Add(new PatientVitalDaten("Monitor ID: 2"));
             // ID muss per UI auswählbar sein
 
             while (true)
@@ -54,13 +54,6 @@ namespace Vitaldatensimulator
                 foreach (var patient in patients)
                 {
                     patient.GenerateAllVitaldata();
-                    //Console.WriteLine($"{patient.MonitorID} - Vitaldaten:");
-                    //Console.WriteLine($"Herzschlag: {patient.HeartRate}");
-                    //Console.WriteLine($"Atemfrequenz: {patient.RespirationRate}");
-                    //Console.WriteLine($"Sauerstoffsättigung: {patient.OxygenLevel}");
-                    //Console.WriteLine($"Systolischer Blutdruck: {patient.BloodPressureSystolic}");
-                    //Console.WriteLine($"Diastolischer Blutdruck: {patient.BloodPressureDiastolic}");
-                    //Console.WriteLine();
 
                     var vitaldaten = new
                     {
@@ -72,7 +65,6 @@ namespace Vitaldatensimulator
                         BloodPressureDiastolic = patient.BloodPressureDiastolic
                     };
                     string json = Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);
-                    //publisher.PublishVitaldata(topic, patient.HeartRate);
                     publisher.PublishVitaldataJSON(topic, json);
                 }
                 // Warten für 3 Sekunde
@@ -82,3 +74,12 @@ namespace Vitaldatensimulator
 
     }
 }
+
+
+//Console.WriteLine($"{patient.MonitorID} - Vitaldaten:");
+//Console.WriteLine($"Herzschlag: {patient.HeartRate}");
+//Console.WriteLine($"Atemfrequenz: {patient.RespirationRate}");
+//Console.WriteLine($"Sauerstoffsättigung: {patient.OxygenLevel}");
+//Console.WriteLine($"Systolischer Blutdruck: {patient.BloodPressureSystolic}");
+//Console.WriteLine($"Diastolischer Blutdruck: {patient.BloodPressureDiastolic}");
+//Console.WriteLine();

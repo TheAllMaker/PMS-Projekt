@@ -10,11 +10,11 @@ namespace Vitaldatensimulator
     internal class VitaldatenGenerator
     {
         private static Random r = new Random();
-        private int currentHeartRate = 80; // Initial value
-        private int currentRespirationRate = 16; // Initial value
-        private int currentOxygenSaturation = 98; // Initial value
-        private int currentSystolicBloodPressure = 120; // Initial value
-        private int currentDiastolicBloodPressure = 80; // Initial value
+        private int currentHeartRate;
+        private int currentRespirationRate;
+        private int currentOxygenSaturation;
+        private int currentSystolicBloodPressure;
+        private int currentDiastolicBloodPressure;
 
         public int GenerateHeartRate()
         {
