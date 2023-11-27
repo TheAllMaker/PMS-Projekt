@@ -20,8 +20,70 @@ namespace Vitaldatensimulator
         public MainCreatePatientWindow()
         {
             InitializeComponent();
+            Loaded += MainCreatePatientWindow_Loaded;
         }
 
+        private void MainCreatePatientWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Setze den Initialwert der Slider in die Mitte
+            HeartRateSlider.Value = (HeartRateSlider.Minimum + HeartRateSlider.Maximum) / 2;
+            RespirationRateSlider.Value = (RespirationRateSlider.Minimum + RespirationRateSlider.Maximum) / 2;
+            OxygenLevelSlider.Value = (OxygenLevelSlider.Minimum + OxygenLevelSlider.Maximum) / 2;
+            BloodPressureSystolicSlider.Value = (BloodPressureSystolicSlider.Minimum + BloodPressureSystolicSlider.Maximum) / 2;
+            BloodPressureDiastolicSlider.Value = (BloodPressureDiastolicSlider.Minimum + BloodPressureDiastolicSlider.Maximum) / 2;
+
+            // Eventhandler für die Änderungen der Slider-Werte
+//            HeartRateSlider.ValueChanged += Slider_ValueChanged;
+//            RespirationRateSlider.ValueChanged += Slider_ValueChanged;
+//            OxygenLevelSlider.ValueChanged += Slider_ValueChanged;
+//            BloodPressureSystolicSlider.ValueChanged += Slider_ValueChanged;
+//            BloodPressureDiastolicSlider.ValueChanged += Slider_ValueChanged;
+        }
+
+        // Methode zum Aktualisieren der Textboxen mit dem Slider-Wert
+        //       private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        //       {
+        //           var slider = sender as Slider;
+        //           if (slider != null)
+        //           {
+        // Finde die zugehörige TextBox
+        //               TextBox textBox = FindName($"{slider.Name}Box") as TextBox;
+        //               if (textBox != null)
+        //                {
+        //                    // Aktualisiere den Wert der TextBox mit dem Slider-Wert
+        //                    textBox.Text = slider.Value.ToString();
+        //                }
+        //            }
+        //        }
+
+        private void HeartRateSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            HeartRateBox.Text = HeartRateSlider.Value.ToString();
+        }
+
+        // Ereignisbehandlungsroutine für die Atemfrequenz
+        private void RespirationRateSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            RespirationRateBox.Text = RespirationRateSlider.Value.ToString();
+        }
+
+        // Ereignisbehandlungsroutine für den Sauerstoffgehalt
+        private void OxygenLevelSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            OxygenLevelBox.Text = OxygenLevelSlider.Value.ToString();
+        }
+
+        // Ereignisbehandlungsroutine für den systolischen Blutdruck
+        private void BloodPressureSystolicSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            SystolicBloodPressureBox.Text = BloodPressureSystolicSlider.Value.ToString();
+        }
+
+        // Ereignisbehandlungsroutine für den diastolischen Blutdruck
+        private void BloodPressureDiastolicSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            DiastolicBloodPressureBox.Text = BloodPressureDiastolicSlider.Value.ToString();
+        }
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {
             // Beispiel: Beim Bestätigen alle aktuellen Werte der Steuerelemente abrufen
