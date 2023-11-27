@@ -19,7 +19,10 @@ namespace MediTrack.Model.DataBaseModelConnection
         private static string ConnectionDatabaseInformation = "Host=db.inftech.hs-mannheim.de;Username=n1921233;Password=123456;Database=n1921233_meditrack";
         public static List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries = new List<MediTrack.Model.RemoteModel.Patient>();
 
-        NpgsqlConnection DataBaseConnectionCall()
+
+
+
+      private NpgsqlConnection DataBaseConnectionCall()
         {
             try
             {
@@ -30,18 +33,25 @@ namespace MediTrack.Model.DataBaseModelConnection
 
             catch (Exception ex)
             {
-                Console.WriteLine("Fehler beim Verbinden mit der Database: " + ex.Message);
+                Console.WriteLine("Error when connecting to the database:  " + ex.Message);
                 return null;
             }
         }
+
+
+
+
+
+
+
         //NpgsqlCommand SelectCountCommand = new NpgsqlCommand("SELECT COUNT(*) FROM patients ", DataBaseConnector);
         //Int64 EntryCount = (Int64)SelectCountCommand.ExecuteScalar();
-        void DataBaseEntryCall(List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries)
+
+
+        void DataBaseEntireEntryCall(List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries)
         {
             var DataBaseConnector = DataBaseConnectionCall();
-
-           
-            NpgsqlCommand SelectEntriesCommand = new NpgsqlCommand("SELECT * FROM  ", DataBaseConnector);
+            NpgsqlCommand SelectEntriesCommand = new NpgsqlCommand("SELECT * FROM ", DataBaseConnector);
             
 
             NpgsqlDataReader EntryReader = SelectEntriesCommand.ExecuteReader();
@@ -60,39 +70,54 @@ namespace MediTrack.Model.DataBaseModelConnection
             DataBaseConnector.Close();
 
 
-
-
         }
-        //object result = SelectPatientThroughPIDCommand.ExecuteScalar();
-        // 
-        public void  CallForPatientThroughID( int patientIdentifier)
+
+
+        public int CallMonitorIDtoPatientID(string MonitorIDSearchKey)
+        {
+            var DataBaseConnector = DataBaseConnectionCall();
+            NpgsqlCommand SelectPatientIDThroughMonitorID = new NpgsqlCommand($"SELECT * FROM public.belegung WHERE moid = {MonitorIDSearchKey}", DataBaseConnector);
+            NpgsqlDataReader PIDSearcher = SelectPatientIDThroughMonitorID.ExecuteReader();
+
+            if (PIDSearcher.Read())
+            {
+                return (int) PIDSearcher["pid"];
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public string[] CallForPatientThroughID( int patientIdentifier)
         {
             
             var DataBaseConnector = DataBaseConnectionCall();
-            string SelectPatientThroughPIDString = $"SELECT * FROM patients WHERE PID = {patientIdentifier}";
-            NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand("SelectPatientThroughPIDString", DataBaseConnector);
-
-
+            string SelectPatientThroughPIDString = $"SELECT * FROM public.patients WHERE pid = {patientIdentifier}";
+            NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand(SelectPatientThroughPIDString, DataBaseConnector);
             NpgsqlDataReader PIDReader = SelectPatientThroughPIDCommand.ExecuteReader();
 
              if (PIDReader.Read())
                 {
-                    string name = PIDReader["Name"].ToString();
-                    string vorname = PIDReader["Vorname"].ToString();
-                    Console.WriteLine($"Name: {name}, Vorname: {vorname}");
-                   
+                        string[] sresult = new string[2];
+                        sresult[0] = PIDReader["Name"].ToString();
+                        sresult[1] = PIDReader["Vorname"].ToString();
                 
+                    Console.WriteLine($"Name: {sresult[0]}, Vorname: {sresult[1]}");
+                DataBaseConnector.Close();
+                return sresult;
                 }
 
             else
             {
                 Console.WriteLine($"No DataBase Entry found for PID {patientIdentifier}");
-                Debug.WriteLine($"No DataBase Entry found for PID {patientIdentifier}");
+                DataBaseConnector.Close();
+                return null;
                 
             }
 
 
-            DataBaseConnector.Close();
+
         }
 
 

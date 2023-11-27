@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt;
 using System.Diagnostics;
+
 namespace MediTrack.Model.RemoteModel
 {
     public class MqttHandler
@@ -38,16 +39,22 @@ namespace MediTrack.Model.RemoteModel
         }
        public void Client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
         {
-            Console.WriteLine("MediTrack Subscribed for id = " + e.MessageId);
+            //Console.WriteLine("MediTrack Subscribed for id = " + e.MessageId);
         }
         public void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            Console.WriteLine("Aufruf");
-            Debug.WriteLine(Encoding.UTF8.GetString(e.Message) + " (MediTrackon on topic " + e.Topic + ")");
-            Console.WriteLine(Encoding.UTF8.GetString(e.Message) + " (MediTrackon on topic " + e.Topic + ")");
+            //Console.WriteLine("Aufruf");
+            //Debug.WriteLine(Encoding.UTF8.GetString(e.Message) + " (MediTrackon on topic " + e.Topic + ")");
+            //Console.WriteLine(Encoding.UTF8.GetString(e.Message) + " (MediTrackon on topic " + e.Topic + ")");
             string topic = e.Topic;
             string message = System.Text.Encoding.UTF8.GetString(e.Message);
-            Console.WriteLine($"Received message on topic '{topic}': {message}");
+            //Console.WriteLine($"Received message on topic '{topic}': {message}");
+            Console.WriteLine($"{topic}");
+            Console.WriteLine($"{message}");
+
+
+
+            MqttMessageQueue.Enqueue(message);
         }
         public void Disconnect()
         {
