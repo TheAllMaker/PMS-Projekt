@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 // mqtt
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
@@ -13,7 +14,19 @@ namespace Vitaldatensimulator
 {
     class VitaldatenSimulator
     {
-        static async Task Main()
+
+        [STAThread]
+        static void Main()
+        {
+            Application app = new Application();
+            MainCreatePatientWindow mainWindow = new MainCreatePatientWindow(); // Erstelle die Instanz des MainWindow
+            app.Run(mainWindow);
+
+            // Andere Funktionen wie MQTT-Verbindung und Datenaktualisierung
+            DoMqttAndDataOperations();
+        }
+
+        static void DoMqttAndDataOperations()
         {
             //MQTT Verbindung
             string hostName = "mqtt.inftech.hs-mannheim.de";
@@ -63,8 +76,9 @@ namespace Vitaldatensimulator
                     publisher.PublishVitaldataJSON(topic, json);
                 }
                 // Warten für 3 Sekunde
-                await Task.Delay(3000);
+                //await Task.Delay(3000);
             }
         }
+
     }
 }
