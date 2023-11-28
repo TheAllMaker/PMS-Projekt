@@ -31,7 +31,7 @@
                 <Border Background="Black" BorderBrush="Black" > </Border>
 
 
-                <Button Click="API_Button_Clicked" Width ="100" Height="50" Background="Black"
+                <!--<Button Click="API_Button_Clicked" Width ="100" Height="50" Background="Black"
                         Foreground="White" BorderThickness="3" BorderBrush="White" FontSize="24"
                          Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center"   
                 >SEARCH
@@ -41,14 +41,14 @@
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </Button.Resources>
-                </Button>
+                </Button>-->
 
 
 
 
 
                 <Button Click="Select_Button_Clicked" Width ="100" Height="50" Background="Black" Foreground="White"
-                        BorderThickness="3" BorderBrush="White" Grid.Column="1" FontSize="24" VerticalAlignment="Center"
+                        BorderThickness="3" BorderBrush="White" Grid.Column="0" FontSize="24" VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                 >SELECT
                     
@@ -62,7 +62,7 @@
 
 
 
-                <Button Click="Add_Button_Clicked" Width ="100" Background="Black" Foreground="White"
+                <!--<Button Click="Add_Button_Clicked" Width ="100" Background="Black" Foreground="White"
                         BorderThickness="3" BorderBrush="White" Grid.Column="2" Height="50" FontSize="24" 
                         VerticalAlignment="Center" HorizontalAlignment="Center"
                 >ADD
@@ -72,7 +72,7 @@
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </Button.Resources>
-                </Button>
+                </Button>-->
 
 
 
@@ -138,11 +138,12 @@
 
         
                 <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
-                <!--<ContentControl ContentTemplate="{DynamicResource PatientTemplate[PatientTemplate1]}" Margin="5"> </ContentControl>-->
+                <!--<ContentControl ContentTemplate="{DynamicResource PatientTemplate[PatientenInstanz]}" Margin="5"> </ContentControl>-->
                 <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
                 <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
                 <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
                 <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
+                <!--<ContentControl ContentTemplate="{StaticResource PatientTemplate}" Content="{DynamicResource PatientenInstanz}" Margin="5"/>-->
                 <ContentControl ContentTemplate="{StaticResource PatientTemplate}" Content="{DynamicResource TestPatient1}" Margin="5"/>
 
 

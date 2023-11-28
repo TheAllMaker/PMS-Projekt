@@ -77,7 +77,9 @@
         </Grid>
         
         <UniformGrid Name ="SelectionPatientDatabaseInput" Margin="5" Rows="5" Columns="5">
-        <Button>
+        
+            
+<Button>
             Test1
         </Button>
 

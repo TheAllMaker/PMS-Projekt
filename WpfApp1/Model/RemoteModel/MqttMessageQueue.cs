@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
+using Database;
+using Newtonsoft.Json;
+
 
 namespace MediTrack.Model.RemoteModel
 {
@@ -15,18 +20,40 @@ namespace MediTrack.Model.RemoteModel
             MQTTQueue.Enqueue(message);
         }
 
-        public static string Dequeue(string message)
+        public static int?[] Dequeue()
         {
             if (MQTTQueue.Count > 0)
             {
-                return MQTTQueue.Dequeue();
+                dynamic parsedObject = JsonConvert.DeserializeObject(MQTTQueue.Dequeue());
+                int?[] array =
+            {
+            GetIntValue(parsedObject.MonitorID),
+            GetIntValue(parsedObject.HeartRate),
+            GetIntValue(parsedObject.RespirationRate),
+            GetIntValue(parsedObject.OxygenLevel),
+            GetIntValue(parsedObject.BloodPressureSystolic),
+            GetIntValue(parsedObject.BloodPressureDiastolic)
+            };
+                return array;
             }
-            else
+            else 
             {
                 return null;
             }
             
         }
+
+        private static int? GetIntValue(dynamic value)
+        {
+            if (value == null)
+            {
+                return null;
+            }
+
+            int result;
+            return int.TryParse(value.ToString(), out result) ? result : (int?)null;
+        }
+
 
         public static int Count 
         {

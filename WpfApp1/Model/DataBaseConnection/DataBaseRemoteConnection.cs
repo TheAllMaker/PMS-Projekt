@@ -13,16 +13,17 @@ using Npgsql;
 // hier ist noch der Rückgabe Typ offen !
 namespace MediTrack.Model.DataBaseModelConnection
 {
-    class DataBaseRemoteConnection
+    static class DataBaseRemoteConnection
     {
 
-        private static string ConnectionDatabaseInformation = "Host=db.inftech.hs-mannheim.de;Username=n1921233;Password=123456;Database=n1921233_meditrack";
+        //private static string ConnectionDatabaseInformation = "Host=db.inftech.hs-mannheim.de;Username=n1921233;Password=123456;Database=n1921233_meditrack";
+        private static string ConnectionDatabaseInformation = "Host=db.inftech.hs-mannheim.de;Username=pms1;Password=pms1;Database=pms1";
         public static List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries = new List<MediTrack.Model.RemoteModel.Patient>();
 
 
 
 
-      private NpgsqlConnection DataBaseConnectionCall()
+      private static NpgsqlConnection DataBaseConnectionCall()
         {
             try
             {
@@ -48,7 +49,7 @@ namespace MediTrack.Model.DataBaseModelConnection
         //Int64 EntryCount = (Int64)SelectCountCommand.ExecuteScalar();
 
 
-        void DataBaseEntireEntryCall(List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries)
+        static void  DataBaseEntireEntryCall(List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries)
         {
             var DataBaseConnector = DataBaseConnectionCall();
             NpgsqlCommand SelectEntriesCommand = new NpgsqlCommand("SELECT * FROM ", DataBaseConnector);
@@ -73,23 +74,26 @@ namespace MediTrack.Model.DataBaseModelConnection
         }
 
 
-        public int CallMonitorIDtoPatientID(string MonitorIDSearchKey)
+        public static int? CallMonitorIDtoPatientID(int? MonitorIDSearchKey)
         {
             var DataBaseConnector = DataBaseConnectionCall();
-            NpgsqlCommand SelectPatientIDThroughMonitorID = new NpgsqlCommand($"SELECT * FROM public.belegung WHERE moid = {MonitorIDSearchKey}", DataBaseConnector);
+            string SelectString = $"SELECT * FROM public.belegung WHERE moid = {MonitorIDSearchKey}";
+            Console.WriteLine(SelectString);
+            NpgsqlCommand SelectPatientIDThroughMonitorID = new NpgsqlCommand(SelectString, DataBaseConnector);
             NpgsqlDataReader PIDSearcher = SelectPatientIDThroughMonitorID.ExecuteReader();
 
             if (PIDSearcher.Read())
             {
-                return (int) PIDSearcher["pid"];
+                Console.WriteLine("PidNummer " + PIDSearcher["pid"]);
+                return (int?) PIDSearcher["pid"];
             }
             else
             {
-                return 0;
+                return null;
             }
         }
 
-        public string[] CallForPatientThroughID( int patientIdentifier)
+        public static string[] CallForPatientThroughID( int? patientIdentifier)
         {
             
             var DataBaseConnector = DataBaseConnectionCall();

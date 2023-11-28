@@ -40,24 +40,25 @@ namespace MediTrack
                 Margin = new Thickness(5)
             };
 
+          
 
             PatientenMonitorDynGrid.Children.Add(contentControl);
+            
             //PatientenMonitorDynGrid.Children.Remove(contentControl);
 
+            BackendManager.MQTTStart();
+            Patient PatientenInstanz = BackendManager.mainLogic();
 
-            DateTime startTime = DateTime.Now;
-            TimeSpan duration = TimeSpan.FromSeconds(20);
-
-            while (DateTime.Now - startTime < duration)
+            ContentControl contentControl2 = new ContentControl
             {
-                // IST DAS HIER NOTWENDIG? - SELCUK
-                //Thread.Sleep(100);
-            }
+                ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+                Content = Application.Current.Resources["PatientenInstanz"],
+                Margin = new Thickness(5)
+            };
+            PatientenMonitorDynGrid.Children.Add(contentControl2);
 
-            MqttHandler handler = new MqttHandler();
-            handler.ConnectToServer();
-            handler.SubScribeToTopic();
 
+            Console.WriteLine("Stack Count" + MqttMessageQueue.Count);
            //myMqtt.Disconnect();
 
 

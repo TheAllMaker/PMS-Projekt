@@ -49,8 +49,8 @@ namespace MediTrack.Model.RemoteModel
             string topic = e.Topic;
             string message = System.Text.Encoding.UTF8.GetString(e.Message);
             //Console.WriteLine($"Received message on topic '{topic}': {message}");
-            Console.WriteLine($"{topic}");
-            Console.WriteLine($"{message}");
+            //Console.WriteLine($"{topic}");
+            //Console.WriteLine($"{message}");
 
 
 

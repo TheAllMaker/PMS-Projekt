@@ -13,52 +13,67 @@ namespace MediTrack.Model.RemoteModel
     // PatientenInstanz genutzt wird
     // Welcher Patient gehört zu Welche
 
-    public class PatientDictionary
+    public static class PatientDictionary
     {
 
 
-        static Dictionary<string, string> MonitorIDToPatientIDDictionary = new Dictionary<string, string>();
+        static Dictionary<int?, int?> MonitorIDToPatientIDDictionary = new Dictionary<int?, int?>();
 
 
-        public string DictionaryCaller(string MonitorIDKeyString)
+        public static int? DictionaryCaller(int? MonitorIDKey)
         {
 
-            if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKeyString))
+            if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKey))
             {
-                string PatientIDKeyString = MonitorIDToPatientIDDictionary[MonitorIDKeyString];
-                Console.WriteLine($"Ausgewählter Patient: {PatientIDKeyString}");
-                return PatientIDKeyString;
+                int? PatientIDKey = MonitorIDToPatientIDDictionary[MonitorIDKey];
+                Console.WriteLine($"Ausgewählter Patient: {PatientIDKey}");
+                return PatientIDKey;
             }
 
             else
             {
                 Console.WriteLine("Ausgewählter Patient nicht gefunden.");
                 Console.WriteLine("DataBase wird nach Patienten mit der DatenMonitorID angefragt:");
-                return null;
+                return 0;
             }
 
         }
 
-        public void DictionaryRemover(string MonitorIDKeyString)
+        public static void DictionaryRemover(int? MonitorIDKey)
         {
-            MonitorIDToPatientIDDictionary.Remove(MonitorIDKeyString);
-            Console.WriteLine($"Dictionary Key Entry {MonitorIDKeyString} deleted");
+            MonitorIDToPatientIDDictionary.Remove(MonitorIDKey);
+            Console.WriteLine($"Dictionary Key Entry {MonitorIDKey} deleted");
         }
 
-        public void DictionaryInput(string MonitorIDKeyString, string PatientIDKeyString)
+        public static void DictionaryInput(int? MonitorIDKey, int? PatientIDKey)
         {
             
             try
             {
-                MonitorIDToPatientIDDictionary.Add(MonitorIDKeyString, PatientIDKeyString);
-                Console.WriteLine($"Dictionary Entry successful for {MonitorIDKeyString} with the patient id {PatientIDKeyString}");
+                MonitorIDToPatientIDDictionary.Add(MonitorIDKey, PatientIDKey);
+                Console.WriteLine($"Dictionary Entry successful for {MonitorIDKey} with the patient id {PatientIDKey}");
             }
             catch (ArgumentException)
             {
-                Console.WriteLine($"An element with Key {MonitorIDKeyString} already exists.");
+                Console.WriteLine($"An element with Key {MonitorIDKey} already exists.");
             }
         }
 
+        public static bool DictionaryContainer(int? MonitorIDKey)
+        {
+            if (MonitorIDKey == null) return false;
+            if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKey))
+            {
+                Console.WriteLine("Selected patient found.");
+                return true;
+            }
 
+            else
+            {
+                Console.WriteLine("Selected patient not found.");
+                return false;
+            }
+
+        }
     }
 }
