@@ -93,7 +93,6 @@ namespace Vitaldatensimulator
             double OxygenLevel = OxygenLevelSlider.Value;
             double BloodPressureSystolic = BloodPressureSystolicSlider.Value;
             double BloodPressureDiastolic = BloodPressureDiastolicSlider.Value;
-            // Weitere Werte von anderen Steuerelementen hier abrufen
 
             // Funktion aufrufen, um alle aktuellen Werte zu verwenden
             VitaldatenSimulator.DoMqttAndDataOperations(MonitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic);

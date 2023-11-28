@@ -7,30 +7,35 @@ namespace Vitaldatensimulator
     public class PatientVitalDaten
     {
         public string MonitorID { get; set; }
-        public int HeartRate { get;  set; }
-        public int RespirationRate { get;  set; }
-        public int OxygenLevel { get;  set; }
-        public int BloodPressureSystolic { get;  set; }
-        public int BloodPressureDiastolic { get;  set; }
-        public Dictionary<string, int> Vitaldaten { get; set; }
+        public double HeartRate { get;  set; }
+        public double RespirationRate { get;  set; }
+        public double OxygenLevel { get;  set; }
+        public double BloodPressureSystolic { get;  set; }
+        public double _BloodPressureDiastolic { get;  set; }
+        public Dictionary<string, double> Vitaldaten { get; set; }
 
         private VitaldatenGenerator generator;
 
-        public PatientVitalDaten(string monitorID)
+        public PatientVitalDaten(string MonitorID, double HeartRate, double RespirationRate, double OxygenLevel, double BloodPressureSystolic, double BloodPressureDiastolic)
         {
-            MonitorID = monitorID;
+            this.MonitorID = MonitorID;
+            this.HeartRate = HeartRate;
+            this.RespirationRate = RespirationRate;
+            this.OxygenLevel = OxygenLevel;
+            this.BloodPressureSystolic = BloodPressureSystolic;
+            _BloodPressureDiastolic = BloodPressureDiastolic;
             generator = new VitaldatenGenerator();
-            Vitaldaten = new Dictionary<string, int>();
+            Vitaldaten = new Dictionary<string, double>();
         }
 
         public void GenerateAllVitaldata()
         {
-            generator.GenerateVitaldata(this);
-            Vitaldaten["HeartRate"] = HeartRate;
-            Vitaldaten["RespirationRate"] = RespirationRate;
-            Vitaldaten["OxygenLevel"] = OxygenLevel;
-            Vitaldaten["BloodPressureSystolic"] = BloodPressureSystolic;
-            Vitaldaten["BloodPressureDiastolic"] = BloodPressureDiastolic;
+            //generator.GenerateVitaldata(this);
+            Vitaldaten["Heart Rate"] = generator.GenerateHeartRate(HeartRate);
+            Vitaldaten["Respiration Rate"] = generator.GenerateRespirationRate(RespirationRate);
+            Vitaldaten["Oxygen Level"] = generator.GenerateOxygenSaturation(OxygenLevel);
+            Vitaldaten["Blood Pressure Systolic"] = generator.GenerateSystolicBloodPressure(BloodPressureSystolic);
+            Vitaldaten["Blood Pressure Diastolic"] = generator.GenerateDiastolicBloodPressure(_BloodPressureDiastolic);
         }
     }
 }

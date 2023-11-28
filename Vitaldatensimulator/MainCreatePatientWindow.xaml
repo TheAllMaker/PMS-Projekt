@@ -57,7 +57,7 @@
             </StackPanel>
         </StackPanel>
         <TextBlock HorizontalAlignment="Center" Margin="0,-74,0,0" TextWrapping="Wrap" Text="Vitaldaten Simulator" Foreground="White" VerticalAlignment="Top" Grid.Column="1" Height="16" Width="108"/>
-        <Button Content="Bestätigen" Grid.ColumnSpan="2" Margin="305,133,14,-103" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Confirm " Background="#FF16FF06" Grid.Row="1">
+        <Button Content="Bestätigen" Grid.ColumnSpan="2" Margin="342,133,26,-103" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Confirm " Background="#FF16FF06" Grid.Row="1">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -67,7 +67,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button Content="Abbrechen" Grid.ColumnSpan="2" Margin="388,133,-69,-103" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Cancel" Background="Red" Grid.Row="1">
+        <Button Content="Abbrechen" Grid.ColumnSpan="2" Margin="425,133,-50,-103" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Cancel" Background="Red" Grid.Row="1">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

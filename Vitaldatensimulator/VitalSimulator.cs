@@ -19,7 +19,7 @@ namespace Vitaldatensimulator
         static void Main()
         {
             Application app = new Application();
-            MainCreatePatientWindow mainWindow = new MainCreatePatientWindow(); // Erstelle die Instanz des MainWindow
+            MainCreatePatientWindow mainWindow = new MainCreatePatientWindow();
             app.Run(mainWindow);
 
             // Andere Funktionen wie MQTT-Verbindung und Datenaktualisierung
@@ -45,7 +45,7 @@ namespace Vitaldatensimulator
             List<PatientVitalDaten> patients = new List<PatientVitalDaten>();
 
             // Hinzufügen von Patienten
-            patients.Add(new PatientVitalDaten(MonitorID));
+            patients.Add(new PatientVitalDaten(MonitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic));
 
             while (true)
             {
