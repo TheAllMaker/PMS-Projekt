@@ -12,11 +12,11 @@ namespace Vitaldatensimulator
         public double OxygenLevel { get;  set; }
         public double BloodPressureSystolic { get;  set; }
         public double BloodPressureDiastolic { get;  set; }
-        public Dictionary<string, double> Vitaldaten { get; set; }
+        public double Temperature { get; set; }
 
         private VitaldatenGenerator generator;
 
-        public PatientVitalDaten(string MonitorID, double HeartRate, double RespirationRate, double OxygenLevel, double BloodPressureSystolic, double BloodPressureDiastolic)
+        public PatientVitalDaten(string MonitorID, double HeartRate, double RespirationRate, double OxygenLevel, double BloodPressureSystolic, double BloodPressureDiastolic, double Temperature)
         {
             this.MonitorID = MonitorID;
             this.HeartRate = HeartRate;
@@ -24,23 +24,19 @@ namespace Vitaldatensimulator
             this.OxygenLevel = OxygenLevel;
             this.BloodPressureSystolic = BloodPressureSystolic;
             this.BloodPressureDiastolic = BloodPressureDiastolic;
+            this.Temperature = Temperature;
+
             generator = new VitaldatenGenerator();
-            Vitaldaten = new Dictionary<string, double>();
         }
 
         public void GenerateAllVitaldata()
         {
             this.HeartRate = generator.GenerateHeartRate(HeartRate); ;
             this.RespirationRate = generator.GenerateRespirationRate(RespirationRate); ;
-            this.OxygenLevel = generator.GenerateOxygenSaturation(OxygenLevel); ;
+            this.OxygenLevel = generator.GenerateOxygenLevel(OxygenLevel); ;
             this.BloodPressureSystolic = generator.GenerateSystolicBloodPressure(BloodPressureSystolic); ;
-            this.BloodPressureDiastolic = generator.GenerateDiastolicBloodPressure(BloodPressureDiastolic); ;
-
-            Vitaldaten["Heart Rate"] = this.HeartRate;
-            Vitaldaten["Respiration Rate"] = this.RespirationRate;
-            Vitaldaten["Oxygen Level"] = this.OxygenLevel;
-            Vitaldaten["Blood Pressure Systolic"] = this.BloodPressureSystolic;
-            Vitaldaten["Blood Pressure Diastolic"] = this.BloodPressureDiastolic;
+            this.BloodPressureDiastolic = generator.GenerateDiastolicBloodPressure(BloodPressureDiastolic);
+            this.Temperature = generator.GenerateTemperature(Temperature);
         }
     }
 }

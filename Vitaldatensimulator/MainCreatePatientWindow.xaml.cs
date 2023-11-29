@@ -35,6 +35,7 @@ namespace Vitaldatensimulator
             SetSliderToMiddleValue(OxygenLevelSlider);
             SetSliderToMiddleValue(BloodPressureSystolicSlider);
             SetSliderToMiddleValue(BloodPressureDiastolicSlider);
+            SetSliderToMiddleValue(TemperatureSlider);
         }
 
         private void SetSliderToMiddleValue(Slider slider)
@@ -58,13 +59,15 @@ namespace Vitaldatensimulator
         {
             if (textBox != null && slider != null)
             {
-                double value;
-                if (double.TryParse(textBox.Text, out value))
+                if (slider.Name == "TemperatureSlider") // Überprüfung für den Temperatur-Slider
                 {
-                    if (value >= slider.Minimum && value <= slider.Maximum)
-                    {
-                        slider.Value = value;
-                    }
+                    double value = Math.Round(slider.Value, 1);
+                    textBox.Text = value.ToString("0.0"); // Formatierung auf eine Dezimalstelle
+                }
+                else // Für andere Slider
+                {
+                    int value = Convert.ToInt32(slider.Value);
+                    textBox.Text = value.ToString(); // Standardmäßige Anzeige als Ganzzahl
                 }
             }
         }
@@ -119,16 +122,28 @@ namespace Vitaldatensimulator
             UpdateSliderFromTextBox(BloodPressureDiastolicBox, BloodPressureDiastolicSlider);
         }
 
+        private void TemperatureSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            UpdateTextBoxFromSlider(TemperatureBox, TemperatureSlider);
+        }
+
+        private void TemperatureBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateSliderFromTextBox(TemperatureBox, TemperatureSlider);
+        }
+
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {
-            string monitorID = MonitorIDBox.Text;
-            double heartRate = HeartRateSlider.Value;
-            double respirationRate = RespirationRateSlider.Value;
-            double oxygenLevel = OxygenLevelSlider.Value;
-            double bloodPressureSystolic = BloodPressureSystolicSlider.Value;
-            double bloodPressureDiastolic = BloodPressureDiastolicSlider.Value;
+            //Zu int ändern?
+            string MonitorID = MonitorIDBox.Text;
+            double HeartRate = HeartRateSlider.Value;
+            double RespirationRate = RespirationRateSlider.Value;
+            double OxygenLevel = OxygenLevelSlider.Value;
+            double BloodPressureSystolic = BloodPressureSystolicSlider.Value;
+            double BloodPressureDiastolic = BloodPressureDiastolicSlider.Value;
+            double Temperature = TemperatureSlider.Value;
 
-            VitaldatenSimulator.DoMqttAndDataOperations(monitorID, heartRate, respirationRate, oxygenLevel, bloodPressureSystolic, bloodPressureDiastolic);
+            VitaldatenSimulator.DoMqttAndDataOperations(MonitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)

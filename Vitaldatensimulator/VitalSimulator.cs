@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Timers;
-// mqtt
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
-//JSON
 using Newtonsoft.Json;
 
 namespace Vitaldatensimulator
@@ -26,16 +24,11 @@ namespace Vitaldatensimulator
             app.Run(mainWindow);
         }
 
-        public static void DoMqttAndDataOperations(string MonitorID, double HeartRate, double RespirationRate, double OxygenLevel, double BloodPressureSystolic, double BloodPressureDiastolic)
+        public static void DoMqttAndDataOperations(string MonitorID, double HeartRate, double RespirationRate, double OxygenLevel, double BloodPressureSystolic, double BloodPressureDiastolic, double Temperature)
         {
-            PatientVitalDaten newPatient = new PatientVitalDaten(MonitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic);
+            PatientVitalDaten newPatient = new PatientVitalDaten(MonitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
             newPatient.GenerateAllVitaldata();
             patients.Add(newPatient);
-            Console.WriteLine("HeartRate: " + newPatient.HeartRate);
-            Console.WriteLine("RespirationRate: " + newPatient.RespirationRate);
-            Console.WriteLine("OxygenLevel: " + newPatient.OxygenLevel);
-            Console.WriteLine("BloodPressureSystolic: " + newPatient.BloodPressureSystolic);
-            Console.WriteLine("BloodPressureDiastolic: " + newPatient.BloodPressureDiastolic);
             SendVitalData(newPatient);
 
             timer = new Timer(1000);
@@ -47,17 +40,10 @@ namespace Vitaldatensimulator
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             timer.Stop();
-
             var patientsCopy = new List<PatientVitalDaten>(patients);
-            foreach (var patient in patients)
+            foreach (var patient in patientsCopy)
             {
                 patient.GenerateAllVitaldata();
-                Console.WriteLine("Patient - MonitorID: " + patient.MonitorID);
-                Console.WriteLine("HeartRate: " + patient.HeartRate);
-                Console.WriteLine("RespirationRate: " + patient.RespirationRate);
-                Console.WriteLine("OxygenLevel: " + patient.OxygenLevel);
-                Console.WriteLine("BloodPressureSystolic: " + patient.BloodPressureSystolic);
-                Console.WriteLine("BloodPressureDiastolic: " + patient.BloodPressureDiastolic);
                 SendVitalData(patient);
             }
             timer.Start();
