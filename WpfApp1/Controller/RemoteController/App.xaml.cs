@@ -20,16 +20,5 @@ namespace MediTrack
             MainWindow mainWindow = new MainWindow();
             app.Run(mainWindow);
         }
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-
-            // Create an instance of the MainWindow
-            MainWindow mainWindow = new MainWindow();
-
-            // Show the MainWindow
-            mainWindow.Show();
-        }
     }
 }
