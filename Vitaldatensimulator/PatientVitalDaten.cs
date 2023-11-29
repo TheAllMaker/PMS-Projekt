@@ -12,11 +12,11 @@ namespace Vitaldatensimulator
         public int OxygenLevel { get;  set; }
         public int BloodPressureSystolic { get;  set; }
         public int BloodPressureDiastolic { get;  set; }
-        public int Temperature { get; set; }
+        public double Temperature { get; set; }
 
         private VitaldatenGenerator generator;
 
-        public PatientVitalDaten(string MonitorID, int HeartRate, int RespirationRate, int OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, int Temperature)
+        public PatientVitalDaten(string MonitorID, int HeartRate, int RespirationRate, int OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, double Temperature)
         {
             this.MonitorID = MonitorID;
             this.HeartRate = HeartRate;

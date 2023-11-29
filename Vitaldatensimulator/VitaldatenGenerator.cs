@@ -35,11 +35,30 @@ internal class VitaldatenGenerator
         return GenerateRealisticValue(BloodPressureDiastolic, 60, 80, -3, 3);
     }
 
-    // Generiert eine realistische Temperatur basierend auf dem aktuellen Wert im Bereich von 35 bis 39.1 mit einer Änderung von -3 bis +3
-    public int GenerateTemperature(int Temperature)
+    // Generiert eine realistische Temperatur basierend auf dem aktuellen Wert im Bereich von 35 bis 39.1 mit einer Änderung von -0.1 bis 0.1
+    public double GenerateTemperature(double Temperature)
     {
-        return GenerateRealisticValue(Temperature, 35, 39, -3, 3);
+        return GenerateRealisticTemperature(Temperature, 35, 39, -0.1, 0.1);
     }
+
+    private double GenerateRealisticTemperature(double currentValue, double minValue, double maxValue, double minChange, double maxChange)
+    {
+        double change = r.NextDouble() * (maxChange - minChange) + minChange;
+        currentValue += change;
+
+        // Wertebereich überprüfen und auf Mindest- oder Höchstwert setzen, falls überschritten
+        if (currentValue < minValue)
+        {
+            currentValue = minValue;
+        }
+        else if (currentValue > maxValue)
+        {
+            currentValue = maxValue;
+        }
+
+        return currentValue;
+    }
+
 
     // Hilfsfunktion zur Generierung realistischer Werte innerhalb eines bestimmten Bereichs mit einer zufälligen Änderung
     public int GenerateRealisticValue(int currentValue, int minValue, int maxValue, int minChange, int maxChange)

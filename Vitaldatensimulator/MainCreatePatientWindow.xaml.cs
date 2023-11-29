@@ -144,7 +144,7 @@ namespace Vitaldatensimulator
                     int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
                     int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
                     int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
-                    int Temperature = Convert.ToInt32(TemperatureSlider.Value);
+                    double Temperature = TemperatureSlider.Value;
 
                     VitaldatenSimulator.DoMqttAndDataOperations(monitorID.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
