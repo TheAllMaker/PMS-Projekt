@@ -40,7 +40,6 @@ namespace Vitaldatensimulator
 
         public void PublishVitaldataJSON(string topic, string json)
         {
-            //string payload = heartbeat.ToString();
             client.Publish(topic, Encoding.UTF8.GetBytes(json), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
         }
     }

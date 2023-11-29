@@ -11,7 +11,7 @@ namespace Vitaldatensimulator
         public double RespirationRate { get;  set; }
         public double OxygenLevel { get;  set; }
         public double BloodPressureSystolic { get;  set; }
-        public double _BloodPressureDiastolic { get;  set; }
+        public double BloodPressureDiastolic { get;  set; }
         public Dictionary<string, double> Vitaldaten { get; set; }
 
         private VitaldatenGenerator generator;
@@ -23,7 +23,7 @@ namespace Vitaldatensimulator
             this.RespirationRate = RespirationRate;
             this.OxygenLevel = OxygenLevel;
             this.BloodPressureSystolic = BloodPressureSystolic;
-            _BloodPressureDiastolic = BloodPressureDiastolic;
+            this.BloodPressureDiastolic = BloodPressureDiastolic;
             generator = new VitaldatenGenerator();
             Vitaldaten = new Dictionary<string, double>();
         }
@@ -31,11 +31,11 @@ namespace Vitaldatensimulator
         public void GenerateAllVitaldata()
         {
             //generator.GenerateVitaldata(this);
-            Vitaldaten["Heart Rate"] = generator.GenerateHeartRate(HeartRate);
-            Vitaldaten["Respiration Rate"] = generator.GenerateRespirationRate(RespirationRate);
-            Vitaldaten["Oxygen Level"] = generator.GenerateOxygenSaturation(OxygenLevel);
-            Vitaldaten["Blood Pressure Systolic"] = generator.GenerateSystolicBloodPressure(BloodPressureSystolic);
-            Vitaldaten["Blood Pressure Diastolic"] = generator.GenerateDiastolicBloodPressure(_BloodPressureDiastolic);
+            Vitaldaten["Heart Rate"] = generator.GenerateHeartRate(this.HeartRate);
+            Vitaldaten["Respiration Rate"] = generator.GenerateRespirationRate(this.RespirationRate);
+            Vitaldaten["Oxygen Level"] = generator.GenerateOxygenSaturation(this.OxygenLevel);
+            Vitaldaten["Blood Pressure Systolic"] = generator.GenerateSystolicBloodPressure(this.BloodPressureSystolic);
+            Vitaldaten["Blood Pressure Diastolic"] = generator.GenerateDiastolicBloodPressure(this.BloodPressureDiastolic);
         }
     }
 }

@@ -11,39 +11,32 @@ namespace Vitaldatensimulator
     internal class VitaldatenGenerator
     {
         private static Random r = new Random();
-        //private double currentHeartRate;
-        private double currentRespirationRate;
-        private double currentOxygenLevel;
-        private double currentSystolicBloodPressure;
-        private double currentDiastolicBloodPressure;
-
-        public int GenerateHeartRate(double HeartRate)
+        public double GenerateHeartRate(double HeartRate)
         {
-            //currentHeartRate = HeartRate;
-            return GenerateRealisticValue(ref HeartRate, 60, 100, -2, 2);
+            return GenerateRealisticValue(ref HeartRate, 50, 120, -2, 2);
         }
 
-        public int GenerateRespirationRate(double RespirationRate)
+        public double GenerateRespirationRate(double RespirationRate)
         {
-            return GenerateRealisticValue(ref currentRespirationRate, 12, 20, -2, 2);
+            return GenerateRealisticValue(ref RespirationRate, 12, 20, -2, 2);
         }
 
-        public int GenerateOxygenSaturation(double OxygenLevel) // NOCH NAME ÄNDERN!
+        public double GenerateOxygenSaturation(double OxygenLevel) // NOCH NAME ÄNDERN!
         {
-            return GenerateRealisticValue(ref currentOxygenSaturation, 95, 100, -1, 1);
+            return GenerateRealisticValue(ref OxygenLevel, 95, 100, -1, 1);
         }
 
-        public int GenerateSystolicBloodPressure(double BloodPressureSystolic)
+        public double GenerateSystolicBloodPressure(double BloodPressureSystolic)
         {
-            return GenerateRealisticValue(ref currentSystolicBloodPressure, 110, 130, -3, 3);
+            return GenerateRealisticValue(ref BloodPressureSystolic, 110, 130, -3, 3);
         }
 
-        public int GenerateDiastolicBloodPressure(double BloodPressureDiastolic)
+        public double GenerateDiastolicBloodPressure(double BloodPressureDiastolic)
         {
-            return GenerateRealisticValue(ref currentDiastolicBloodPressure, 70, 90, -3, 3);
+            return GenerateRealisticValue(ref BloodPressureDiastolic, 70, 90, -3, 3);
         }
 
-        public int GenerateRealisticValue(ref double currentValue, int minValue, int maxValue, int minChange, int maxChange)
+        public double GenerateRealisticValue(ref double currentValue, int minValue, int maxValue, int minChange, int maxChange)
         {
             int change = r.Next(minChange, maxChange + 1);
             currentValue += change;
