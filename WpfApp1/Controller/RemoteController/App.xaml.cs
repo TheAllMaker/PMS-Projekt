@@ -13,12 +13,22 @@ namespace MediTrack
     /// </summary>
     public partial class App : Application
     {
-        [STAThread]
-        public static void Main()
+        //[STAThread]
+        //public static void Main()
+        //{
+        //    App app = new App();
+        //    MainWindow mainWindow = new MainWindow();
+        //    app.Run(mainWindow);
+        //}
+        protected override void OnStartup(StartupEventArgs e)
         {
-            App app = new App();
+            base.OnStartup(e);
+
+            // Create an instance of the MainWindow
             MainWindow mainWindow = new MainWindow();
-            app.Run(mainWindow);
+
+            // Show the MainWindow
+            mainWindow.Show();
         }
     }
 
