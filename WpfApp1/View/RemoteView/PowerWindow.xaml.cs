@@ -1,25 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-
 using System.Windows;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MediTrack.View.RemoteView
 {
-    /// <summary>
-    /// Interaktionslogik für PowerWindow.xaml
-    /// </summary>
     public partial class PowerWindow : Window
     {
         public PowerWindow()
@@ -31,20 +17,33 @@ namespace MediTrack.View.RemoteView
         private void PowerWindowClosing(object sender, CancelEventArgs e)
         {
             var confirmationDialog = new ConfirmationDialog();
-            confirmationDialog.Owner = this; // Set the owner to center the dialog on the main window
+            confirmationDialog.Owner = this;
 
             confirmationDialog.ShowDialog();
 
             if (!confirmationDialog.UserConfirmed)
             {
-                e.Cancel = true; // Cancel the closing event if the user clicked "No"
+                e.Cancel = true;
             }
+        }
+
+        private void Button_Click_Confirm(object sender, RoutedEventArgs e)
+        {
+            // Implementierung für den Confirm-Button
+            var button = sender as Button; // Wenn nötig
+            // ... Weitere Aktionen beim Bestätigen
+        }
+
+        private void Button_Click_Cancel(object sender, RoutedEventArgs e)
+        {
+            // Implementierung für den Cancel-Button
+            var button = sender as Button; // Wenn nötig
+            // ... Weitere Aktionen beim Abbrechen
         }
 
         public partial class ConfirmationDialog : Window
         {
             public bool UserConfirmed { get; private set; }
-
 
             private void Button_Click_Confirm(object sender, RoutedEventArgs e)
             {
@@ -60,4 +59,3 @@ namespace MediTrack.View.RemoteView
         }
     }
 }
-
