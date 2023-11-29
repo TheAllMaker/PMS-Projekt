@@ -30,12 +30,17 @@ namespace Vitaldatensimulator
 
         public void GenerateAllVitaldata()
         {
-            //generator.GenerateVitaldata(this);
-            Vitaldaten["Heart Rate"] = generator.GenerateHeartRate(this.HeartRate);
-            Vitaldaten["Respiration Rate"] = generator.GenerateRespirationRate(this.RespirationRate);
-            Vitaldaten["Oxygen Level"] = generator.GenerateOxygenSaturation(this.OxygenLevel);
-            Vitaldaten["Blood Pressure Systolic"] = generator.GenerateSystolicBloodPressure(this.BloodPressureSystolic);
-            Vitaldaten["Blood Pressure Diastolic"] = generator.GenerateDiastolicBloodPressure(this.BloodPressureDiastolic);
+            this.HeartRate = generator.GenerateHeartRate(HeartRate); ;
+            this.RespirationRate = generator.GenerateRespirationRate(RespirationRate); ;
+            this.OxygenLevel = generator.GenerateOxygenSaturation(OxygenLevel); ;
+            this.BloodPressureSystolic = generator.GenerateSystolicBloodPressure(BloodPressureSystolic); ;
+            this.BloodPressureDiastolic = generator.GenerateDiastolicBloodPressure(BloodPressureDiastolic); ;
+
+            Vitaldaten["Heart Rate"] = this.HeartRate;
+            Vitaldaten["Respiration Rate"] = this.RespirationRate;
+            Vitaldaten["Oxygen Level"] = this.OxygenLevel;
+            Vitaldaten["Blood Pressure Systolic"] = this.BloodPressureSystolic;
+            Vitaldaten["Blood Pressure Diastolic"] = this.BloodPressureDiastolic;
         }
     }
 }

@@ -13,30 +13,31 @@ namespace Vitaldatensimulator
         private static Random r = new Random();
         public double GenerateHeartRate(double HeartRate)
         {
-            return GenerateRealisticValue(ref HeartRate, 50, 120, -2, 2);
+            HeartRate = GenerateRealisticValue(HeartRate, 50, 120, -2, 2);
+            return HeartRate;
         }
 
         public double GenerateRespirationRate(double RespirationRate)
         {
-            return GenerateRealisticValue(ref RespirationRate, 12, 20, -2, 2);
+            return GenerateRealisticValue(RespirationRate, 12, 20, -2, 2);
         }
 
         public double GenerateOxygenSaturation(double OxygenLevel) // NOCH NAME ÄNDERN!
         {
-            return GenerateRealisticValue(ref OxygenLevel, 95, 100, -1, 1);
+            return GenerateRealisticValue(OxygenLevel, 95, 100, -1, 1);
         }
 
         public double GenerateSystolicBloodPressure(double BloodPressureSystolic)
         {
-            return GenerateRealisticValue(ref BloodPressureSystolic, 110, 130, -3, 3);
+            return GenerateRealisticValue(BloodPressureSystolic, 110, 130, -3, 3);
         }
 
         public double GenerateDiastolicBloodPressure(double BloodPressureDiastolic)
         {
-            return GenerateRealisticValue(ref BloodPressureDiastolic, 70, 90, -3, 3);
+            return GenerateRealisticValue(BloodPressureDiastolic, 70, 90, -3, 3);
         }
 
-        public double GenerateRealisticValue(ref double currentValue, int minValue, int maxValue, int minChange, int maxChange)
+        public double GenerateRealisticValue(double currentValue, int minValue, int maxValue, int minChange, int maxChange)
         {
             int change = r.Next(minChange, maxChange + 1);
             currentValue += change;
