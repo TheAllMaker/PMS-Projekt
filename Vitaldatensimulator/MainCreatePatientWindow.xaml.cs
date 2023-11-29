@@ -134,19 +134,33 @@ namespace Vitaldatensimulator
 
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {
-            //Zu int ändern?
-            string MonitorID = MonitorIDBox.Text;
-            double HeartRate = HeartRateSlider.Value;
-            double RespirationRate = RespirationRateSlider.Value;
-            double OxygenLevel = OxygenLevelSlider.Value;
-            double BloodPressureSystolic = BloodPressureSystolicSlider.Value;
-            double BloodPressureDiastolic = BloodPressureDiastolicSlider.Value;
-            double Temperature = TemperatureSlider.Value;
+            if (int.TryParse(MonitorIDBox.Text, out int monitorID))
+            {
+                // Überprüfung, ob MonitorID eine positive Zahl ist
+                if (monitorID > 0)
+                {
+                    double HeartRate = HeartRateSlider.Value;
+                    double RespirationRate = RespirationRateSlider.Value;
+                    double OxygenLevel = OxygenLevelSlider.Value;
+                    double BloodPressureSystolic = BloodPressureSystolicSlider.Value;
+                    double BloodPressureDiastolic = BloodPressureDiastolicSlider.Value;
+                    double Temperature = TemperatureSlider.Value;
 
-            VitaldatenSimulator.DoMqttAndDataOperations(MonitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+                    VitaldatenSimulator.DoMqttAndDataOperations(monitorID.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
-            MessageBox.Show("Erfolgreich einen Patienten erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Erfolgreich einen Patienten erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
