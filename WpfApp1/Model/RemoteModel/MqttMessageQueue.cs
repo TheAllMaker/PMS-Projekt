@@ -34,7 +34,7 @@ namespace MediTrack.Model.RemoteModel
             GetIntValue(parsedObject.OxygenLevel),
             GetIntValue(parsedObject.BloodPressureSystolic),
             GetIntValue(parsedObject.BloodPressureDiastolic),
-            GetDoubleValue(parsedObject.Temperature)
+            GetIntValue(parsedObject.Temperature)
             };
                 return array;
             }
@@ -54,18 +54,6 @@ namespace MediTrack.Model.RemoteModel
 
             int result;
             return int.TryParse(value.ToString(), out result) ? result : (int?)null;
-        }
-
-
-        private static double? GetDoubleValue(dynamic value)
-        {
-            if (value == null)
-            {
-                return null;
-            }
-
-            double result;
-            return double.TryParse(value.ToString(), out result) ? result : (double?)null;
         }
 
 
