@@ -58,7 +58,8 @@ namespace Vitaldatensimulator
                 patient.RespirationRate,
                 patient.OxygenLevel,
                 patient.BloodPressureSystolic,
-                patient.BloodPressureDiastolic
+                patient.BloodPressureDiastolic,
+                patient.Temperature
             };
             Mqtt(vitaldaten);
         }
