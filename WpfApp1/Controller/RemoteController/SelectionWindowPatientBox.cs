@@ -24,16 +24,14 @@ namespace MediTrack.Controller.RemoteController
 
         private void WireEvents()
         {
-            
-            Button clickButton = (Button)FindName("clickButton");
+            clickButton = (Button)FindName("clickButton");
 
-            
             if (clickButton != null)
             {
-                
                 clickButton.Click += ClickButton_Click;
             }
         }
+
 
 
 
