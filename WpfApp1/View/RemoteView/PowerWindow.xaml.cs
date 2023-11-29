@@ -46,23 +46,18 @@ namespace MediTrack.View.RemoteView
             public bool UserConfirmed { get; private set; }
 
 
-            private void YesButton_Click(object sender, RoutedEventArgs e)
+            private void Button_Click_Confirm(object sender, RoutedEventArgs e)
             {
                 UserConfirmed = true;
                 Close();
             }
 
-            private void NoButton_Click(object sender, RoutedEventArgs e)
+            private void Button_Click_Cancel(object sender, RoutedEventArgs e)
             {
                 UserConfirmed = false;
                 Close();
             }
         }
     }
-
-
-
-    
-    
-    }
+}
 
