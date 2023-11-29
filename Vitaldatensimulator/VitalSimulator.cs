@@ -16,7 +16,7 @@ namespace Vitaldatensimulator
     class VitaldatenSimulator
     {
         private static Timer timer;
-        public static PatientVitalDaten patient { get; set; }
+        public static List<PatientVitalDaten> patients = new List<PatientVitalDaten>();
 
         [STAThread]
         static void Main()
@@ -28,14 +28,15 @@ namespace Vitaldatensimulator
 
         public static void DoMqttAndDataOperations(string MonitorID, double HeartRate, double RespirationRate, double OxygenLevel, double BloodPressureSystolic, double BloodPressureDiastolic)
         {
-            patient = new PatientVitalDaten(MonitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic);
-            patient.GenerateAllVitaldata();
-            Console.WriteLine("HeartRate: " + patient.HeartRate);
-            Console.WriteLine("RespirationRate: " + patient.RespirationRate);
-            Console.WriteLine("OxygenLevel: " + patient.OxygenLevel);
-            Console.WriteLine("BloodPressureSystolic: " + patient.BloodPressureSystolic);
-            Console.WriteLine("BloodPressureDiastolic: " + patient.BloodPressureDiastolic);
-            SendVitalData();
+            PatientVitalDaten newPatient = new PatientVitalDaten(MonitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic);
+            newPatient.GenerateAllVitaldata();
+            patients.Add(newPatient);
+            Console.WriteLine("HeartRate: " + newPatient.HeartRate);
+            Console.WriteLine("RespirationRate: " + newPatient.RespirationRate);
+            Console.WriteLine("OxygenLevel: " + newPatient.OxygenLevel);
+            Console.WriteLine("BloodPressureSystolic: " + newPatient.BloodPressureSystolic);
+            Console.WriteLine("BloodPressureDiastolic: " + newPatient.BloodPressureDiastolic);
+            SendVitalData(newPatient);
 
             timer = new Timer(1000);
             timer.Elapsed += OnTimedEvent; 
@@ -45,16 +46,24 @@ namespace Vitaldatensimulator
 
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            patient.GenerateAllVitaldata();
-            Console.WriteLine("HeartRate: " + patient.HeartRate);
-            Console.WriteLine("RespirationRate: " + patient.RespirationRate);
-            Console.WriteLine("OxygenLevel: " + patient.OxygenLevel);
-            Console.WriteLine("BloodPressureSystolic: " + patient.BloodPressureSystolic);
-            Console.WriteLine("BloodPressureDiastolic: " + patient.BloodPressureDiastolic);
-            SendVitalData();
+            timer.Stop();
+
+            var patientsCopy = new List<PatientVitalDaten>(patients);
+            foreach (var patient in patients)
+            {
+                patient.GenerateAllVitaldata();
+                Console.WriteLine("Patient - MonitorID: " + patient.MonitorID);
+                Console.WriteLine("HeartRate: " + patient.HeartRate);
+                Console.WriteLine("RespirationRate: " + patient.RespirationRate);
+                Console.WriteLine("OxygenLevel: " + patient.OxygenLevel);
+                Console.WriteLine("BloodPressureSystolic: " + patient.BloodPressureSystolic);
+                Console.WriteLine("BloodPressureDiastolic: " + patient.BloodPressureDiastolic);
+                SendVitalData(patient);
+            }
+            timer.Start();
         }
 
-        public static void SendVitalData()
+        public static void SendVitalData(PatientVitalDaten patient)
         {
             var vitaldaten = new
             {
