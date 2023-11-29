@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,6 +31,7 @@ namespace MediTrack.View.RemoteView
             // Implementierung für den Confirm-Button
             var button = sender as Button; // Wenn nötig
             // ... Weitere Aktionen beim Bestätigen
+            this.Close(); // Schließt das Fenster
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
@@ -40,22 +40,22 @@ namespace MediTrack.View.RemoteView
             var button = sender as Button; // Wenn nötig
             // ... Weitere Aktionen beim Abbrechen
         }
+    }
 
-        public partial class ConfirmationDialog : Window
+    public partial class ConfirmationDialog : Window
+    {
+        public bool UserConfirmed { get; private set; }
+
+        private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {
-            public bool UserConfirmed { get; private set; }
+            UserConfirmed = true;
+            Close();
+        }
 
-            private void Button_Click_Confirm(object sender, RoutedEventArgs e)
-            {
-                UserConfirmed = true;
-                Close();
-            }
-
-            private void Button_Click_Cancel(object sender, RoutedEventArgs e)
-            {
-                UserConfirmed = false;
-                Close();
-            }
+        private void Button_Click_Cancel(object sender, RoutedEventArgs e)
+        {
+            UserConfirmed = false;
+            Close();
         }
     }
 }
