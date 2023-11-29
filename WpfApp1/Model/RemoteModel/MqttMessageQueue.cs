@@ -25,6 +25,7 @@ namespace MediTrack.Model.RemoteModel
             if (MQTTQueue.Count > 0)
             {
                 dynamic parsedObject = JsonConvert.DeserializeObject(MQTTQueue.Dequeue());
+                Console.WriteLine(parsedObject.ToString());
                 int?[] array =
             {
             GetIntValue(parsedObject.MonitorID),

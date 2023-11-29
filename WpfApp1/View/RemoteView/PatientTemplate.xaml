@@ -30,7 +30,7 @@
                 <TextBlock Background="Black"  FontSize="20" Grid.Column="1" HorizontalAlignment="Center" 
                  VerticalAlignment="Center"  Foreground="White" Grid.ColumnSpan="2"
                   Name ="FirstNameTextBlock" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> 
-                    <Run Text=": " />
+                    <Run Text=" " />
                 </TextBlock>
             </Border>
 
