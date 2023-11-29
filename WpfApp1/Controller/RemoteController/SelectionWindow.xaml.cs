@@ -15,12 +15,11 @@ using System.Windows.Shapes;
 
 namespace MediTrack.View.RemoteView
 {
-    /// <summary>
-    /// Interaktionslogik für SelectionWindow.xaml
-    /// </summary>
+    
     public partial class SelectionWindow : Window
     {
-
+        //private bool buttonClicked = false;
+        //private bool isGreenState = true;
         // boolean Var für Toogle Button
         //private bool isGreen = false;
 
@@ -53,13 +52,18 @@ namespace MediTrack.View.RemoteView
 
         private void SelectionWindowClosing(object sender, CancelEventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void SelectionWindowConfirmed(object sender, CancelEventArgs e)
         {
-            Close();
+            this.Close();
         }
+
+        
+
+
+
 
         // simpler ToggleButton: Dadurch das wir oben den Grünzustand bei der Initialisierung auf false stellen,
         // wird beim ersten Durchlaufen dieser auf grün geschaltet, unsere isGreen ToggleVariable wird

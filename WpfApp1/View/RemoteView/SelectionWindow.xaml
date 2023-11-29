@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:MediTrack.View.RemoteView"
         mc:Ignorable="d"
         Name="SelectionWindowStyle"
-        
         Title="SelectionWindow" Height="450" Width="800"
         Background="DarkGray">
 
@@ -77,21 +76,13 @@
         </Grid>
         
         <UniformGrid Name ="SelectionPatientDatabaseInput" Margin="5" Rows="5" Columns="5">
-        
-            
-<Button>
-            Test1
-        </Button>
 
-        <Button>
-            Test2
-        </Button>
 
-        <Button>
-            Test3
-        </Button>
 
-        <Button x:Name="toggleButton" Width="100" Height="30" Content="Click me">
+
+            <ContentControl ContentTemplate="{StaticResource SelectionWindowPatientBox}" />
+            <!--<ContentControl ContentTemplate="{DynamicResource SelectionWindowPatientBox}" Margin="5"></ContentControl>-->
+            <!--<Button x:Name="toggleButton" Width="100" Height="30" Content="Click me">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="Gray" />
@@ -109,7 +100,7 @@
                     </Style.Triggers>
                 </Style>
             </Button.Style>
-        </Button>
+        </Button>-->
 
 
     </UniformGrid>
