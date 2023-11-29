@@ -139,12 +139,12 @@ namespace Vitaldatensimulator
                 // Überprüfung, ob MonitorID eine positive Zahl ist
                 if (monitorID > 0)
                 {
-                    double HeartRate = HeartRateSlider.Value;
-                    double RespirationRate = RespirationRateSlider.Value;
-                    double OxygenLevel = OxygenLevelSlider.Value;
-                    double BloodPressureSystolic = BloodPressureSystolicSlider.Value;
-                    double BloodPressureDiastolic = BloodPressureDiastolicSlider.Value;
-                    double Temperature = TemperatureSlider.Value;
+                    int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
+                    int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
+                    int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
+                    int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
+                    int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
+                    int Temperature = Convert.ToInt32(TemperatureSlider.Value);
 
                     VitaldatenSimulator.DoMqttAndDataOperations(monitorID.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 

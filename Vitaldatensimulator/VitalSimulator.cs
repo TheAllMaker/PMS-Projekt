@@ -24,7 +24,7 @@ namespace Vitaldatensimulator
             app.Run(mainWindow);
         }
 
-        public static void DoMqttAndDataOperations(string MonitorID, double HeartRate, double RespirationRate, double OxygenLevel, double BloodPressureSystolic, double BloodPressureDiastolic, double Temperature)
+        public static void DoMqttAndDataOperations(string MonitorID, int HeartRate, int RespirationRate, int OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, int Temperature)
         {
             PatientVitalDaten newPatient = new PatientVitalDaten(MonitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
             newPatient.GenerateAllVitaldata();
