@@ -144,6 +144,8 @@ namespace Vitaldatensimulator
             double Temperature = TemperatureSlider.Value;
 
             VitaldatenSimulator.DoMqttAndDataOperations(MonitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+
+            MessageBox.Show("Erfolgreich einen Patienten erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
