@@ -29,30 +29,31 @@ namespace MediTrack
         public MainWindow()
         {
             InitializeComponent();
-            PatientTest patientTest = new PatientTest();
-            patientTest.TestPatientCall1();
-            patientTest.TestPatientCall2();
+            //PatientTest patientTest = new PatientTest();
+            //patientTest.TestPatientCall1();
+            //patientTest.TestPatientCall2();
 
-            ContentControl contentControl = new ContentControl
-            {
-                ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
-                Content = Application.Current.Resources["TestPatient2"],
-                Margin = new Thickness(5)
-            };
+            //ContentControl contentControl = new ContentControl
+            //{
+            //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+            //    Content = Application.Current.Resources["TestPatient2"],
+            //    Margin = new Thickness(5)
+            //};
 
           
 
-            PatientenMonitorDynGrid.Children.Add(contentControl);
-            
+            //PatientenMonitorDynGrid.Children.Add(contentControl);
+
             //PatientenMonitorDynGrid.Children.Remove(contentControl);
 
-            //BackendManager.MQTTStart();
-            //Patient PatientenInstanz = BackendManager.mainLogic();
+            BackendManager.MQTTStart();
+            Patient PatientenInstanz = BackendManager.mainLogic();
 
             ContentControl contentControl2 = new ContentControl
             {
                 ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
-                Content = Application.Current.Resources["PatientenInstanz"],
+                //Content = Application.Current.Resources[PatientenInstanz],
+                Content = PatientenInstanz,
                 Margin = new Thickness(5)
             };
             PatientenMonitorDynGrid.Children.Add(contentControl2);

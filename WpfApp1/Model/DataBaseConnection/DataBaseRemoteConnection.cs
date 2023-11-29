@@ -80,6 +80,7 @@ namespace MediTrack.Model.DataBaseModelConnection
             string SelectString = $"SELECT * FROM public.belegung WHERE moid = {MonitorIDSearchKey}";
             Console.WriteLine(SelectString);
             NpgsqlCommand SelectPatientIDThroughMonitorID = new NpgsqlCommand(SelectString, DataBaseConnector);
+            
             NpgsqlDataReader PIDSearcher = SelectPatientIDThroughMonitorID.ExecuteReader();
 
             if (PIDSearcher.Read())

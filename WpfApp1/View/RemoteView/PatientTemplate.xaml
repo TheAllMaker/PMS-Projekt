@@ -182,9 +182,9 @@
 
             <TextBlock Grid.Row="3" Grid.Column="1"  Foreground="Tomato" Name="BloodPressureTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
-                     <Run Text="{Binding BloodPressureSystolic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                     <Run Text=" / " FontSize="16" />
                      <Run Text="{Binding BloodPressureDiastolic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     <Run Text=" / " FontSize="16" />
+                     <Run Text="{Binding BloodPressureSystolic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                      <Run Text=" mmHG" FontSize="16" />
             </TextBlock>
 
@@ -197,7 +197,7 @@
             
             <TextBlock Grid.Row="3" Grid.Column="2"  Foreground="White" Name="PatientScoreTextBlock"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
-            <Run Text="/" FontSize="16"/>
+            <Run Text=" -/- " FontSize="16"/>
             </TextBlock>
 
             <TextBlock Grid.Row="3" Grid.Column="2" Text="AVRP / EWS" Foreground="White" Margin="5,0,5,5"

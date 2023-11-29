@@ -67,7 +67,7 @@ namespace Vitaldatensimulator
         public static void Mqtt(object vitaldaten)
         {
             MqttPublisher publisher = new MqttPublisher();
-            Console.WriteLine("connected: " + publisher.IsConnected);
+           // Console.WriteLine("connected: " + publisher.IsConnected);
             Console.WriteLine();
 
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);

@@ -58,8 +58,8 @@ namespace MediTrack.Model.RemoteModel
                         BloodPressureDiastolic = queuearray[4],
                         RespirationRate = queuearray[2],
                         BloodPressureSystolic = queuearray[5],
-                        PatientScore = 3,
-                        Temperature = 20,
+                        PatientScore = 1,
+                        Temperature = queuearray[6],
                     };
                     return PatientenInstanz;
 
