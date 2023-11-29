@@ -46,8 +46,8 @@ namespace MediTrack
             
             //PatientenMonitorDynGrid.Children.Remove(contentControl);
 
-            BackendManager.MQTTStart();
-            Patient PatientenInstanz = BackendManager.mainLogic();
+            //BackendManager.MQTTStart();
+            //Patient PatientenInstanz = BackendManager.mainLogic();
 
             ContentControl contentControl2 = new ContentControl
             {
@@ -113,7 +113,15 @@ namespace MediTrack
 
         private void POWER_Button_Clicked(object sender, RoutedEventArgs e)
         {
-
+            Window PowerWindow = new PowerWindow
+            {
+                Title = "Power Window",
+                Width = SystemParameters.PrimaryScreenWidth * 0.75,
+                Height = SystemParameters.PrimaryScreenHeight * 0.75,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+            PowerWindow.Show();
+            PowerWindow.Owner = this;
         }
 
 
