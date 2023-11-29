@@ -50,12 +50,12 @@ namespace MediTrack.View.RemoteView
             // Fenster nicht schließen da sonst neu instanziert werden muss
         }
 
-        private void SelectionWindowClosing(object sender, CancelEventArgs e)
+        private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void SelectionWindowConfirmed(object sender, CancelEventArgs e)
+        private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
