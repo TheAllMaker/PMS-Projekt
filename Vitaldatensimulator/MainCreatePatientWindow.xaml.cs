@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,23 @@ namespace Vitaldatensimulator
         {
             InitializeComponent();
             Loaded += MainCreatePatientWindow_Loaded;
+            VitaldatenSimulator.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
+        }
+
+        private void VitaldatenSimulator_VitalDataUpdated(object sender, VitalDataEventArgs e)
+        {
+            // Hier kannst du die Werte aus e.* verwenden, um die Slider-Werte in der UI zu aktualisieren
+            Dispatcher.Invoke(() =>
+            {
+                HeartRateValueTextBlock.Text = e.HeartRate.ToString();
+                RespirationRateValueTextBlock.Text = e.RespirationRate.ToString();
+                OxygenLevelValueTextBlock.Text = e.OxygenLevel.ToString();
+                BloodPressureSystolicValueTextBlock.Text = e.BloodPressureSystolic.ToString();
+                BloodPressureDiastolicValueTextBlock.Text = e.BloodPressureDiastolic.ToString();
+                double value = Math.Round(e.Temperature, 1);
+                TemperatureValueTextBlock.Text = value.ToString("0.0");
+
+            });
         }
 
         private void MainCreatePatientWindow_Loaded(object sender, RoutedEventArgs e)
@@ -146,9 +164,11 @@ namespace Vitaldatensimulator
                     int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
                     double Temperature = TemperatureSlider.Value;
 
-                    VitaldatenSimulator.DoMqttAndDataOperations(monitorID.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+                    MonitorVitalDaten newPatient = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
-                    MessageBox.Show("Erfolgreich einen Patienten erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+                    VitaldatenSimulator.DoMqttAndDataOperations(newPatient);
+
+                    MessageBox.Show("Erfolgreich einen Monitor erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {

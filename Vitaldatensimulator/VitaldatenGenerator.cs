@@ -7,7 +7,7 @@ internal class VitaldatenGenerator
     // Generiert eine realistische Herzfrequenz basierend auf der aktuellen Herzfrequenz im Bereich von 40 bis 131 mit einer Änderung von -2 bis +2
     public int GenerateHeartRate(int HeartRate)
     {
-        HeartRate = GenerateRealisticValue(HeartRate, 50, 120, -2, 2);
+        HeartRate = GenerateRealisticValue(HeartRate, 40, 200, -2, 2);
         return HeartRate;
     }
 
