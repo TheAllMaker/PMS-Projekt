@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -100,6 +101,11 @@ namespace Vitaldatensimulator
             UpdateSliderFromTextBox(HeartRateBox, HeartRateSlider);
         }
 
+        private void HeartRateBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
         private void RespirationRateSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             UpdateTextBoxFromSlider(RespirationRateBox, RespirationRateSlider);
@@ -108,6 +114,11 @@ namespace Vitaldatensimulator
         private void RespirationRateBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateSliderFromTextBox(RespirationRateBox, RespirationRateSlider);
+        }
+
+        private void RespirationRateBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
         }
 
         private void OxygenLevelSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -120,6 +131,11 @@ namespace Vitaldatensimulator
             UpdateSliderFromTextBox(OxygenLevelBox, OxygenLevelSlider);
         }
 
+        private void OxygenLevelBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
         private void BloodPressureSystolicSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             UpdateTextBoxFromSlider(BloodPressureSystolicBox, BloodPressureSystolicSlider);
@@ -128,6 +144,11 @@ namespace Vitaldatensimulator
         private void BloodPressureSystolicBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateSliderFromTextBox(BloodPressureSystolicBox, BloodPressureSystolicSlider);
+        }
+
+        private void BloodPressureSystolicBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
         }
 
         private void BloodPressureDiastolicSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -140,6 +161,11 @@ namespace Vitaldatensimulator
             UpdateSliderFromTextBox(BloodPressureDiastolicBox, BloodPressureDiastolicSlider);
         }
 
+        private void BloodPressureDiastolicBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
         private void TemperatureSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             UpdateTextBoxFromSlider(TemperatureBox, TemperatureSlider);
@@ -148,6 +174,17 @@ namespace Vitaldatensimulator
         private void TemperatureBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateSliderFromTextBox(TemperatureBox, TemperatureSlider);
+        }
+
+        private void TemperatureBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private static bool IsTextAllowed(string text)
+        {
+            Regex regex = new Regex("[^0-9]+"); // Erlaubt nur Zahlen
+            return !regex.IsMatch(text);
         }
 
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
@@ -184,7 +221,7 @@ namespace Vitaldatensimulator
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
-            // Hier kannst du den Code für das Abbrechen implementieren
+            VitaldatenSimulator.isSendingData = false;
         }
     }
 }

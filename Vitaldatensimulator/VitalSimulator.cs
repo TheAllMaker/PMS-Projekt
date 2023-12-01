@@ -11,30 +11,11 @@ using Newtonsoft.Json;
 
 namespace Vitaldatensimulator
 {
-    public class VitalDataEventArgs : EventArgs
-    {
-        public int HeartRate { get; }
-        public int RespirationRate { get; }
-        public int OxygenLevel { get; }
-        public int BloodPressureSystolic { get; }
-        public int BloodPressureDiastolic { get; }
-        public double Temperature { get; }
-
-        public VitalDataEventArgs(int HeartRate, int RespirationRate, int OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, double Temperature)
-        {
-            this.HeartRate = HeartRate;
-            this.RespirationRate = RespirationRate;
-            this.OxygenLevel = OxygenLevel;
-            this.BloodPressureSystolic = BloodPressureSystolic;
-            this.BloodPressureDiastolic = BloodPressureDiastolic;
-            this.Temperature = Temperature;
-        }
-    }
-
     class VitaldatenSimulator
     {
         private static Timer timer;
-        public static List<MonitorVitalDaten> patients = new List<MonitorVitalDaten>();
+        public static List<MonitorVitalDaten> Monitor = new List<MonitorVitalDaten>();
+        public static bool isSendingData = true;
 
         [STAThread]
         static void Main()
@@ -46,9 +27,7 @@ namespace Vitaldatensimulator
 
         public static void DoMqttAndDataOperations(MonitorVitalDaten newMonitor)
         {
-            newMonitor.GenerateAllVitaldata();
-            patients.Add(newMonitor);
-            SendVitalData(newMonitor);
+            Monitor.Add(newMonitor);
 
             timer = new Timer(1000);
             timer.Elapsed += OnTimedEvent; 
@@ -58,31 +37,37 @@ namespace Vitaldatensimulator
 
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            timer.Stop();
-            var patientsCopy = new List<MonitorVitalDaten>(patients);
-            foreach (var patient in patientsCopy)
+            if (isSendingData)
             {
-                patient.GenerateAllVitaldata();
-                SendVitalData(patient);
+                var MonitorCopy = new List<MonitorVitalDaten>(Monitor);
+                foreach (var monitor in MonitorCopy)
+                {
+                    monitor.GenerateAllVitaldata();
+                    SendVitalData(monitor);
+                }
             }
-            timer.Start();
+            else
+            {
+                timer.Stop();
+            }
         }
 
         public static event EventHandler<VitalDataEventArgs> VitalDataUpdated;
 
-        public static void SendVitalData(MonitorVitalDaten patient)
+        // Anstatt var vitaldaten direkt monitor per MQTT versenden
+        public static void SendVitalData(MonitorVitalDaten monitor)
         {
             var vitaldaten = new
             {
-                patient.MonitorID,
-                patient.HeartRate,
-                patient.RespirationRate,
-                patient.OxygenLevel,
-                patient.BloodPressureSystolic,
-                patient.BloodPressureDiastolic,
-                patient.Temperature
+                monitor.MonitorID,
+                monitor.HeartRate,
+                monitor.RespirationRate,
+                monitor.OxygenLevel,
+                monitor.BloodPressureSystolic,
+                monitor.BloodPressureDiastolic,
+                monitor.Temperature
             };
-            VitalDataUpdated?.Invoke(null, new VitalDataEventArgs(patient.HeartRate, patient.RespirationRate, patient.OxygenLevel, patient.BloodPressureSystolic, patient.BloodPressureDiastolic, patient.Temperature));
+            VitalDataUpdated?.Invoke(null, new VitalDataEventArgs(monitor.HeartRate, monitor.RespirationRate, monitor.OxygenLevel, monitor.BloodPressureSystolic, monitor.BloodPressureDiastolic, monitor.Temperature));
             Mqtt(vitaldaten);
         }
 
