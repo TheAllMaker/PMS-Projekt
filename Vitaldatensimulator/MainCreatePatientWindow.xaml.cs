@@ -189,32 +189,44 @@ namespace Vitaldatensimulator
 
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(MonitorIDBox.Text, out int monitorID))
+            Button confirmButton = sender as Button;
+            if (confirmButton != null)
             {
-                // Überprüfung, ob MonitorID eine positive Zahl ist
-                if (monitorID > 0)
+                if (confirmButton.Content.ToString() == "Start")
                 {
-                    int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
-                    int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
-                    int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
-                    int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
-                    int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
-                    double Temperature = TemperatureSlider.Value;
+                    if (MonitorIDBox != null && int.TryParse(MonitorIDBox.Text, out int monitorID))
+                    {
+                        // Überprüfung, ob MonitorID eine positive Zahl ist
+                        if (monitorID > 0)
+                        {
+                            confirmButton.Content = "Continue";
+                            int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
+                            int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
+                            int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
+                            int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
+                            int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
+                            double Temperature = TemperatureSlider.Value;
 
-                    MonitorVitalDaten newPatient = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+                            MonitorVitalDaten newPatient = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
-                    VitaldatenSimulator.DoMqttAndDataOperations(newPatient);
+                            VitaldatenSimulator.DoMqttAndDataOperations(newPatient);
 
-                    MessageBox.Show("Erfolgreich einen Monitor erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("Erfolgreich einen Monitor erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                    VitaldatenSimulator.isSendingData = true;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -222,6 +234,8 @@ namespace Vitaldatensimulator
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
             VitaldatenSimulator.isSendingData = false;
+            MessageBox.Show("Erfolgreich Generierung der Daten gestoppt", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
+

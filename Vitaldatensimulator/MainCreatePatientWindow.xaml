@@ -26,8 +26,8 @@
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Monitor ID" FontSize="20" Foreground="White" VerticalAlignment="Bottom" Margin="92,0,5,0"/>
-                <TextBox Grid.Column="1" x:Name="MonitorIDBox" Margin="-5,0,10,0" Width="50"/>
+                <TextBlock Grid.Column="0" Text="Monitor ID" FontSize="20" Foreground="White" VerticalAlignment="Bottom" Margin="70,0,5,0"/>
+                <TextBox Grid.Column="1" x:Name="MonitorIDBox" Margin="-65,0,0,0" Width="46"/>
             </Grid>
 
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
@@ -128,7 +128,7 @@
             
         </StackPanel>
 
-        <Button Content="Bestätigen" Margin="629,0,-156,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Confirm " Background="#FF16FF06" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
-        <Button Content="Abbrechen" Margin="767,388,-290,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Cancel" Background="Red" Grid.Column="1"/>
+        <Button Content="Start" Margin="629,0,-156,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Confirm " Background="#FF16FF06" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
+        <Button Content="Stop" Margin="767,388,-290,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Cancel" Background="Red" Grid.Column="1"/>
     </Grid>
 </Window>

@@ -14,8 +14,9 @@ namespace Vitaldatensimulator
     class VitaldatenSimulator
     {
         private static Timer timer;
-        public static List<MonitorVitalDaten> Monitor = new List<MonitorVitalDaten>();
+        private static MonitorVitalDaten singleMonitor;
         public static bool isSendingData = true;
+        public static event EventHandler<VitalDataEventArgs> VitalDataUpdated;
 
         [STAThread]
         static void Main()
@@ -27,8 +28,7 @@ namespace Vitaldatensimulator
 
         public static void DoMqttAndDataOperations(MonitorVitalDaten newMonitor)
         {
-            Monitor.Add(newMonitor);
-
+            singleMonitor = newMonitor;
             timer = new Timer(1000);
             timer.Elapsed += OnTimedEvent; 
             timer.AutoReset = true;
@@ -39,12 +39,8 @@ namespace Vitaldatensimulator
         {
             if (isSendingData)
             {
-                var MonitorCopy = new List<MonitorVitalDaten>(Monitor);
-                foreach (var monitor in MonitorCopy)
-                {
-                    monitor.GenerateAllVitaldata();
-                    SendVitalData(monitor);
-                }
+                singleMonitor.GenerateAllVitaldata();
+                SendVitalData(singleMonitor);
             }
             else
             {
@@ -52,9 +48,8 @@ namespace Vitaldatensimulator
             }
         }
 
-        public static event EventHandler<VitalDataEventArgs> VitalDataUpdated;
-
         // Anstatt var vitaldaten direkt monitor per MQTT versenden
+        // DATENBANK ABFRAGE OB ID SCHON VORHANDEN IST
         public static void SendVitalData(MonitorVitalDaten monitor)
         {
             var vitaldaten = new
