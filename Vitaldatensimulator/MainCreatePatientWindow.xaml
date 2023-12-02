@@ -128,7 +128,7 @@
             
         </StackPanel>
 
-        <Button Content="Start" Margin="629,0,-156,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Confirm " Background="#FF16FF06" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
-        <Button Content="Stop" Margin="767,388,-290,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Cancel" Background="Red" Grid.Column="1"/>
+        <Button x:Name="StartStopButton" Content="Start" FontSize="20" Margin="629,0,-156,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_StartStop" Background="#FF16FF06" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
+        <Button x:Name="CloseButton" Content="Close" FontSize="20" Margin="790,0,-317,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Close" Background="Red" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
