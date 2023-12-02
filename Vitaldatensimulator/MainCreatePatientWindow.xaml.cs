@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,7 +29,6 @@ namespace Vitaldatensimulator
 
         private void VitaldatenSimulator_VitalDataUpdated(object sender, VitalDataEventArgs e)
         {
-            // Hier kannst du die Werte aus e.* verwenden, um die Slider-Werte in der UI zu aktualisieren
             Dispatcher.Invoke(() =>
             {
                 HeartRateValueTextBlock.Text = e.HeartRate.ToString();
@@ -190,45 +190,37 @@ namespace Vitaldatensimulator
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {
             Button confirmButton = sender as Button;
-            if (confirmButton != null)
+            if (confirmButton == null) return;
+
+            if (confirmButton.Content.ToString() != "Start") // Überprüft, ob der Button-Inhalt nicht "Start" ist
             {
-                if (confirmButton.Content.ToString() == "Start")
-                {
-                    if (MonitorIDBox != null && int.TryParse(MonitorIDBox.Text, out int monitorID))
-                    {
-                        // Überprüfung, ob MonitorID eine positive Zahl ist
-                        if (monitorID > 0)
-                        {
-                            confirmButton.Content = "Continue";
-                            int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
-                            int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
-                            int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
-                            int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
-                            int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
-                            double Temperature = TemperatureSlider.Value;
-
-                            MonitorVitalDaten newPatient = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
-
-                            VitaldatenSimulator.DoMqttAndDataOperations(newPatient);
-
-                            MessageBox.Show("Erfolgreich einen Monitor erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-                else
-                {
-                    VitaldatenSimulator.isSendingData = true;
-                }
+                VitaldatenSimulator.isSendingData = true;
+                MessageBox.Show("Generierung der Daten wird fortgesetzt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+                //timer.Start();
+                return;
             }
+
+            if (!(MonitorIDBox != null && int.TryParse(MonitorIDBox.Text, out int monitorID) && monitorID > 0))
+            {
+                MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            confirmButton.Content = "Continue";
+            int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
+            int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
+            int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
+            int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
+            int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
+            double Temperature = TemperatureSlider.Value;
+
+            MonitorVitalDaten newMonitor = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+
+            VitaldatenSimulator.DoMqttAndDataOperations(newMonitor);
+
+            MessageBox.Show("Erfolgreich einen Monitor erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
 
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)

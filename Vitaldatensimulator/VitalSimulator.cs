@@ -42,10 +42,10 @@ namespace Vitaldatensimulator
                 singleMonitor.GenerateAllVitaldata();
                 SendVitalData(singleMonitor);
             }
-            else
-            {
-                timer.Stop();
-            }
+            //else
+            //{
+                //timer.Stop();
+            //}
         }
 
         // Anstatt var vitaldaten direkt monitor per MQTT versenden
