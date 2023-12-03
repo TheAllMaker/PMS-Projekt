@@ -54,5 +54,13 @@ namespace Vitaldatensimulator
             VitalDataUpdated?.Invoke(null, monitor);
             mqttPublisher.PublishVitaldataJSON(vitaldaten);
         }
+        public static void ResetTimer()
+        {
+            if (timer != null)
+            {
+                timer.Stop();
+                timer.Dispose();
+            }
+        }
     }
 }

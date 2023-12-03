@@ -35,12 +35,13 @@ namespace Vitaldatensimulator
             InitializeComponent();
             Loaded += MainCreatePatientWindow_Loaded;
             VitaldatenSimulator.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
-            InitializeSliderOriginalValues();
+            
         }
 
         private void MainCreatePatientWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InitializeSliderValues();
+            InitializeSliderOriginalValues();
         }
 
         private void VitaldatenSimulator_VitalDataUpdated(object sender, MonitorVitalDaten MonitorVitalDaten)
@@ -54,7 +55,6 @@ namespace Vitaldatensimulator
                 BloodPressureDiastolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureDiastolic.ToString();
                 double value = Math.Round(MonitorVitalDaten.Temperature, 1);
                 TemperatureValueTextBlock.Text = value.ToString("0.0");
-
             });
         }
 
@@ -83,8 +83,8 @@ namespace Vitaldatensimulator
             BloodPressureSystolicSlider.ValueChanged += Slider_ValueChanged;
             BloodPressureDiastolicSlider.ValueChanged += Slider_ValueChanged;
             TemperatureSlider.ValueChanged += Slider_ValueChanged;
-
         }
+
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Slider slider = sender as Slider;
@@ -304,38 +304,43 @@ namespace Vitaldatensimulator
                 // Nichts unternehmen, da der Benutzer "Nein" geklickt hat
             }
         }
+
         private void ConfirmChangesButton_Click(object sender, RoutedEventArgs e)
         {
             // Logik zur Bestätigung der Änderungen
             // Übernehme die geänderten Slider-Werte und setze sie als aktuelle Werte für die Übertragung oder Simulation
-
-            
             if (isValueChanged)
             {
+                VitaldatenSimulator.ResetTimer();
+
                 HeartRateSlider.Value = Convert.ToDouble(HeartRateBox.Text);
-                // Übernehme die Werte der anderen Slider entsprechend
-                // ...
+                RespirationRateSlider.Value = Convert.ToDouble(RespirationRateBox.Text);
+                OxygenLevelSlider.Value = Convert.ToDouble(OxygenLevelBox.Text);
+                BloodPressureSystolicSlider.Value = Convert.ToDouble(BloodPressureSystolicBox.Text);
+                BloodPressureDiastolicSlider.Value = Convert.ToDouble(BloodPressureDiastolicBox.Text);
+                TemperatureSlider.Value = Convert.ToDouble(TemperatureBox.Text);
 
                 isValueChanged = false; // Setze isValueChanged zurück
                 ConfirmChangesButton.IsEnabled = false; // Deaktiviere den Bestätigen-Button wieder
                 UpdateVitalData();
             }
+        }
 
-            private void UpdateVitalData()
-            {
-                // Erstelle ein neues MonitorVitalDaten-Objekt mit den aktualisierten Werten
-                int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
-                int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
-                int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
-                int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
-                int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
-                double Temperature = TemperatureSlider.Value;
+        private void UpdateVitalData()
+        {
+            // Erstelle ein neues MonitorVitalDaten-Objekt mit den aktualisierten Werten
+            int monitorID = Convert.ToInt32(MonitorIDBox.Text);
+            int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
+            int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
+            int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
+            int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
+            int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
+            double Temperature = TemperatureSlider.Value;
 
-                MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+            MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
-                // Rufe die Methode in der anderen Datei auf, um die aktualisierten Werte zu übergeben
-                VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
-            }
+            // Rufe die Methode in der anderen Datei auf, um die aktualisierten Werte zu übergeben
+            VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
         }
     }
 }
