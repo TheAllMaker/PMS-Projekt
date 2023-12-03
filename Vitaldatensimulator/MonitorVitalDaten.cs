@@ -29,6 +29,22 @@ namespace Vitaldatensimulator
             generator = new VitaldatenGenerator();
         }
 
+        public string GetVitalData()
+        {
+            var vitaldaten = new
+            {
+                MonitorID,
+                HeartRate,
+                RespirationRate,
+                OxygenLevel,
+                BloodPressureSystolic,
+                BloodPressureDiastolic,
+                Temperature
+            };
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);
+        }
+
         public void GenerateAllVitaldata()
         {
             this.HeartRate = generator.GenerateHeartRate(HeartRate); ;

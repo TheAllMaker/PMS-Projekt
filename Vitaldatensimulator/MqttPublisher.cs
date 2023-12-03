@@ -17,7 +17,7 @@ namespace Vitaldatensimulator
         private const string Pwd = "c3c242ff";
         private const string Topic = "23pms01/test";
         private const int Port = 8883;
-        private MqttClient client;
+        private static MqttClient client;
 
         public MqttPublisher()
         {
@@ -43,8 +43,9 @@ namespace Vitaldatensimulator
             client.Publish(Topic, Encoding.UTF8.GetBytes(payload), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
         }
 
-        public void PublishVitaldataJSON(string json)
+        public void PublishVitaldataJSON(object vitaldaten)
         {
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);
             client.Publish(Topic, Encoding.UTF8.GetBytes(json), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
         }
     }

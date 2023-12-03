@@ -20,6 +20,13 @@ namespace Vitaldatensimulator
 {
     public partial class MainCreatePatientWindow : Window
     {
+        private enum SimulationState
+        {
+            Stopped,
+            Running,
+            Paused
+        }
+        private SimulationState currentState = SimulationState.Stopped;
         public MainCreatePatientWindow()
         {
             InitializeComponent();
@@ -27,24 +34,24 @@ namespace Vitaldatensimulator
             VitaldatenSimulator.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
         }
 
-        private void VitaldatenSimulator_VitalDataUpdated(object sender, VitalDataEventArgs e)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                HeartRateValueTextBlock.Text = e.HeartRate.ToString();
-                RespirationRateValueTextBlock.Text = e.RespirationRate.ToString();
-                OxygenLevelValueTextBlock.Text = e.OxygenLevel.ToString();
-                BloodPressureSystolicValueTextBlock.Text = e.BloodPressureSystolic.ToString();
-                BloodPressureDiastolicValueTextBlock.Text = e.BloodPressureDiastolic.ToString();
-                double value = Math.Round(e.Temperature, 1);
-                TemperatureValueTextBlock.Text = value.ToString("0.0");
-
-            });
-        }
-
         private void MainCreatePatientWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InitializeSliderValues();
+        }
+
+        private void VitaldatenSimulator_VitalDataUpdated(object sender, MonitorVitalDaten MonitorVitalDaten)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                HeartRateValueTextBlock.Text = MonitorVitalDaten.HeartRate.ToString();
+                RespirationRateValueTextBlock.Text = MonitorVitalDaten.RespirationRate.ToString();
+                OxygenLevelValueTextBlock.Text = MonitorVitalDaten.OxygenLevel.ToString();
+                BloodPressureSystolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureSystolic.ToString();
+                BloodPressureDiastolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureDiastolic.ToString();
+                double value = Math.Round(MonitorVitalDaten.Temperature, 1);
+                TemperatureValueTextBlock.Text = value.ToString("0.0");
+
+            });
         }
 
         private void InitializeSliderValues()
@@ -187,26 +194,36 @@ namespace Vitaldatensimulator
             return !regex.IsMatch(text);
         }
 
-        private void Button_Click_Confirm(object sender, RoutedEventArgs e)
+        private void Button_Click_StartStop(object sender, RoutedEventArgs e)
         {
-            Button confirmButton = sender as Button;
-            if (confirmButton == null) return;
-
-            if (confirmButton.Content.ToString() != "Start") // Überprüft, ob der Button-Inhalt nicht "Start" ist
+            switch (currentState)
             {
-                VitaldatenSimulator.isSendingData = true;
-                MessageBox.Show("Generierung der Daten wird fortgesetzt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
-                //timer.Start();
-                return;
+                case SimulationState.Stopped:
+                    StartSimulation();
+                    break;
+                case SimulationState.Running:
+                    StopSimulation();
+                    StartStopButton.Content = "Continue"; // Änderung des Button-Texts auf "Continue"
+                    currentState = SimulationState.Paused; // Zustand auf "Paused" setzen
+                    StartStopButton.Background = (Brush)new BrushConverter().ConvertFromString("#FF16FF06");
+                    break;
+                case SimulationState.Paused:
+                    ContinueSimulation();
+                    StartStopButton.Content = "Stop"; // Änderung des Button-Texts auf "Stop"
+                    currentState = SimulationState.Running; // Zustand auf "Running" setzen
+                    StartStopButton.Background = new SolidColorBrush(Colors.Yellow);
+                    break;
             }
+        }
 
+        private void StartSimulation()
+        {
             if (!(MonitorIDBox != null && int.TryParse(MonitorIDBox.Text, out int monitorID) && monitorID > 0))
             {
                 MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            confirmButton.Content = "Continue";
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
             int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
             int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
@@ -216,17 +233,42 @@ namespace Vitaldatensimulator
 
             MonitorVitalDaten newMonitor = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
+            // Überprüfung der gültigen Monitor-ID vor der Änderung des Button-Texts
             VitaldatenSimulator.DoMqttAndDataOperations(newMonitor);
 
+            if (currentState != SimulationState.Running) // Nur wenn der Zustand nicht bereits "Running" ist
+            {
+                currentState = SimulationState.Running; // Zustand auf "Running" setzen, wenn die Simulation gestartet wird
+                StartStopButton.Content = "Stop"; // Änderung des Button-Texts auf "Stop"
+                StartStopButton.Background = new SolidColorBrush(Colors.Yellow);
+            }
             MessageBox.Show("Erfolgreich einen Monitor erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+            MonitorIDBox.IsEnabled = false;
         }
 
-
-
-        private void Button_Click_Cancel(object sender, RoutedEventArgs e)
+        private void StopSimulation()
         {
             VitaldatenSimulator.isSendingData = false;
             MessageBox.Show("Erfolgreich Generierung der Daten gestoppt", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void ContinueSimulation()
+        {
+            VitaldatenSimulator.isSendingData = true;
+            MessageBox.Show("Generierung der Daten wird fortgesetzt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void Button_Click_Close(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                // Schließe das Programm
+                Application.Current.Shutdown();
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                // Nichts unternehmen, da der Benutzer "Nein" geklickt hat
+            }
         }
     }
 }

@@ -27,7 +27,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Monitor ID" FontSize="20" Foreground="White" VerticalAlignment="Bottom" Margin="70,0,5,0"/>
-                <TextBox Grid.Column="1" x:Name="MonitorIDBox" Margin="-65,0,0,0" Width="46"/>
+                <TextBox Grid.Column="1" x:Name="MonitorIDBox" Margin="-65,0,0,0" Width="46" HorizontalContentAlignment="Center" 
+                         VerticalContentAlignment="Center" FontSize="20" />
             </Grid>
 
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
@@ -38,7 +39,8 @@
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Heart Rate" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="100,0,5,0"/>
-                <TextBox Grid.Column="1" x:Name="HeartRateBox" Width="50" Margin="0,0,5,0" TextChanged="HeartRateBox_TextChanged"/>
+                <TextBox Grid.Column="1" x:Name="HeartRateBox" Width="50" Margin="0,0,5,0" TextChanged="HeartRateBox_TextChanged" HorizontalContentAlignment="Center" 
+                         VerticalContentAlignment="Center" FontSize="20"/>
                 <Slider Grid.Column="2" x:Name="HeartRateSlider" Width="200" HorizontalAlignment="Left" Margin="5,0" 
                         Minimum="40" Maximum="200" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"
                         ValueChanged="HeartRateSlider_ValueChanged"/>
@@ -54,7 +56,8 @@
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Respiration Rate" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="50,0,5,0"/>
-                <TextBox Grid.Column="1" x:Name="RespirationRateBox" Width="50" Margin="0,0,5,0" TextChanged="RespirationRateBox_TextChanged"/>
+                <TextBox Grid.Column="1" x:Name="RespirationRateBox" Width="50" Margin="0,0,5,0" TextChanged="RespirationRateBox_TextChanged" HorizontalContentAlignment="Center" 
+                         VerticalContentAlignment="Center" FontSize="20"/>
                 <Slider Grid.Column="2" x:Name="RespirationRateSlider" Width="200" HorizontalAlignment="Left" Margin="5,0" 
                         Minimum="8" Maximum="25" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"
                         ValueChanged="RespirationRateSlider_ValueChanged"/>
@@ -69,8 +72,9 @@
                     <ColumnDefinition Width="210"/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Oxygen Level" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="75,0,0,0"/>
-                <TextBox Grid.Column="1" x:Name="OxygenLevelBox" Width="50" Margin="0,0,5,0" TextChanged="OxygenLevelBox_TextChanged"/>
+                <TextBlock Grid.Column="0" Text="Oxygen Level" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="75,0,0,0" />
+                <TextBox Grid.Column="1" x:Name="OxygenLevelBox" Width="50" Margin="0,0,5,0" TextChanged="OxygenLevelBox_TextChanged" HorizontalContentAlignment="Center" 
+                         VerticalContentAlignment="Center" FontSize="20"/>
                 <Slider Grid.Column="2" x:Name="OxygenLevelSlider" Width="200" HorizontalAlignment="Left" Margin="5,0" 
                         Minimum="91" Maximum="96" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"
                         ValueChanged="OxygenLevelSlider_ValueChanged"/>
@@ -86,7 +90,8 @@
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Systolic Blood Pressure" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="-10,0,0,0"/>
-                <TextBox Grid.Column="1" x:Name="BloodPressureSystolicBox" Width="50" Margin="0,0,5,0" TextChanged="BloodPressureSystolicBox_TextChanged"/>
+                <TextBox Grid.Column="1" x:Name="BloodPressureSystolicBox" Width="50" Margin="0,0,5,0" TextChanged="BloodPressureSystolicBox_TextChanged" HorizontalContentAlignment="Center" 
+                         VerticalContentAlignment="Center" FontSize="20"/>
                 <Slider Grid.Column="2" x:Name="BloodPressureSystolicSlider" Width="200" HorizontalAlignment="Left" Margin="5,0" 
                         Minimum="90" Maximum="220" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"
                         ValueChanged="BloodPressureSystolicSlider_ValueChanged"/>
@@ -102,7 +107,8 @@
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Diastolic Blood Pressure" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="-20,0,0,0"/>
-                <TextBox Grid.Column="1" x:Name="BloodPressureDiastolicBox" Width="50" Margin="0,0,5,0" TextChanged="BloodPressureDiastolicBox_TextChanged"/>
+                <TextBox Grid.Column="1" x:Name="BloodPressureDiastolicBox" Width="50" Margin="0,0,5,0" TextChanged="BloodPressureDiastolicBox_TextChanged" HorizontalContentAlignment="Center" 
+                         VerticalContentAlignment="Center" FontSize="20"/>
                 <Slider Grid.Column="2" x:Name="BloodPressureDiastolicSlider" Width="200" HorizontalAlignment="Left" Margin="5,0" 
                         Minimum="60" Maximum="80" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"
                         ValueChanged="BloodPressureDiastolicSlider_ValueChanged"/>
@@ -118,7 +124,8 @@
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Temperature" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="80,0,0,0"/>
-                <TextBox Grid.Column="1" x:Name="TemperatureBox" Width="50" Margin="0,0,5,0" TextChanged="TemperatureBox_TextChanged"/>
+                <TextBox Grid.Column="1" x:Name="TemperatureBox" Width="50" Margin="0,0,5,0" TextChanged="TemperatureBox_TextChanged" HorizontalContentAlignment="Center" 
+                         VerticalContentAlignment="Center" FontSize="20"/>
                 <Slider Grid.Column="2" x:Name="TemperatureSlider" Width="200" HorizontalAlignment="Left" Margin="5,0" 
                         Minimum="35" Maximum="39" TickPlacement="None" TickFrequency="0.1" IsSnapToTickEnabled="True"
                         ValueChanged="TemperatureSlider_ValueChanged"/>
@@ -128,7 +135,7 @@
             
         </StackPanel>
 
-        <Button Content="Start" Margin="629,0,-156,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Confirm " Background="#FF16FF06" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
-        <Button Content="Stop" Margin="767,388,-290,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Cancel" Background="Red" Grid.Column="1"/>
+        <Button x:Name="StartStopButton" Content="Start" FontSize="20" Margin="629,0,-156,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_StartStop" Background="#FF16FF06" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
+        <Button x:Name="CloseButton" Content="Close Program" FontSize="20" Margin="790,0,-317,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Close" Background="Red" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
