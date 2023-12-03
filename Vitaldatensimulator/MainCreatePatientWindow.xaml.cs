@@ -318,6 +318,23 @@ namespace Vitaldatensimulator
 
                 isValueChanged = false; // Setze isValueChanged zurück
                 ConfirmChangesButton.IsEnabled = false; // Deaktiviere den Bestätigen-Button wieder
+                UpdateVitalData();
+            }
+
+            private void UpdateVitalData()
+            {
+                // Erstelle ein neues MonitorVitalDaten-Objekt mit den aktualisierten Werten
+                int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
+                int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
+                int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
+                int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
+                int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
+                double Temperature = TemperatureSlider.Value;
+
+                MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+
+                // Rufe die Methode in der anderen Datei auf, um die aktualisierten Werte zu übergeben
+                VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
             }
         }
     }
