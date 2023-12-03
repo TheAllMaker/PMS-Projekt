@@ -13,7 +13,7 @@ using Npgsql;
 // hier ist noch der Rückgabe Typ offen !
 namespace MediTrack.Model.DataBaseModelConnection
 {
-    static class DataBaseRemoteConnection
+    public static class DataBaseRemoteConnection
     {
 
         //private static string ConnectionDatabaseInformation = "Host=db.inftech.hs-mannheim.de;Username=n1921233;Password=123456;Database=n1921233_meditrack";
@@ -23,7 +23,7 @@ namespace MediTrack.Model.DataBaseModelConnection
 
 
 
-      private static NpgsqlConnection DataBaseConnectionCall()
+        private static NpgsqlConnection DataBaseConnectionCall()
         {
             try
             {
@@ -49,11 +49,11 @@ namespace MediTrack.Model.DataBaseModelConnection
         //Int64 EntryCount = (Int64)SelectCountCommand.ExecuteScalar();
 
 
-        static void  DataBaseEntireEntryCall(List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries)
+        static void DataBaseEntireEntryCall(List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries)
         {
             var DataBaseConnector = DataBaseConnectionCall();
             NpgsqlCommand SelectEntriesCommand = new NpgsqlCommand("SELECT * FROM ", DataBaseConnector);
-            
+
 
             NpgsqlDataReader EntryReader = SelectEntriesCommand.ExecuteReader();
             while (EntryReader.Read())
@@ -80,13 +80,13 @@ namespace MediTrack.Model.DataBaseModelConnection
             string SelectString = $"SELECT * FROM public.belegung WHERE moid = {MonitorIDSearchKey}";
             Console.WriteLine(SelectString);
             NpgsqlCommand SelectPatientIDThroughMonitorID = new NpgsqlCommand(SelectString, DataBaseConnector);
-            
+
             NpgsqlDataReader PIDSearcher = SelectPatientIDThroughMonitorID.ExecuteReader();
 
             if (PIDSearcher.Read())
             {
                 Console.WriteLine("PidNummer " + PIDSearcher["pid"]);
-                return (int?) PIDSearcher["pid"];
+                return (int?)PIDSearcher["pid"];
             }
             else
             {
@@ -94,31 +94,31 @@ namespace MediTrack.Model.DataBaseModelConnection
             }
         }
 
-        public static string[] CallForPatientThroughID( int? patientIdentifier)
+        public static string[] CallForPatientThroughID(int? patientIdentifier)
         {
-            
+
             var DataBaseConnector = DataBaseConnectionCall();
             string SelectPatientThroughPIDString = $"SELECT * FROM public.patients WHERE pid = {patientIdentifier}";
             NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand(SelectPatientThroughPIDString, DataBaseConnector);
             NpgsqlDataReader PIDReader = SelectPatientThroughPIDCommand.ExecuteReader();
 
-             if (PIDReader.Read())
-                {
-                        string[] sresult = new string[2];
-                        sresult[0] = PIDReader["Name"].ToString();
-                        sresult[1] = PIDReader["Vorname"].ToString();
-                
-                    Console.WriteLine($"Name: {sresult[0]}, Vorname: {sresult[1]}");
+            if (PIDReader.Read())
+            {
+                string[] sresult = new string[2];
+                sresult[0] = PIDReader["Name"].ToString();
+                sresult[1] = PIDReader["Vorname"].ToString();
+
+                Console.WriteLine($"Name: {sresult[0]}, Vorname: {sresult[1]}");
                 DataBaseConnector.Close();
                 return sresult;
-                }
+            }
 
             else
             {
                 Console.WriteLine($"No DataBase Entry found for PID {patientIdentifier}");
                 DataBaseConnector.Close();
                 return null;
-                
+
             }
 
 
@@ -126,15 +126,23 @@ namespace MediTrack.Model.DataBaseModelConnection
         }
 
 
-        //public void AddPatientIntoDataBase(int pid, string FirstName, string LastName)
-        //{
-        //    var DataBaseConnector = DataBaseConnectionCall();
-        //    string InsertPatientCommandString = $"INSERT INTO patients VALUES ({pid},'{FirstName}','{LastName}')";
-        //    NpgsqlCommand InsertPatientCommand = new NpgsqlCommand("InsertPatientCommandString", DataBaseConnector);
-        //}
-    }
+        public static void SelcukSQL()
+        {
+            var DataBaseConnector = DataBaseConnectionCall();
+            //string = $"";
+            // NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand(SelectPatientThroughPIDString, DataBaseConnector);
 
-} 
+
+            //public void AddPatientIntoDataBase(int pid, string FirstName, string LastName)
+            //{
+            //    var DataBaseConnector = DataBaseConnectionCall();
+            //    string InsertPatientCommandString = $"INSERT INTO patients VALUES ({pid},'{FirstName}','{LastName}')";
+            //    NpgsqlCommand InsertPatientCommand = new NpgsqlCommand("InsertPatientCommandString", DataBaseConnector);
+            //}
+        }
+
+    }
+}
 
 
 

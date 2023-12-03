@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace MediTrack.Model.RemoteModel
 {
@@ -32,3 +33,11 @@ namespace MediTrack.Model.RemoteModel
         // NICHT VERGESSEN: die Zugriffe geben Bools zurück so dass du sehen kannst was schief gelaufen ist und dich daran orientieren kannst !
     }
 }
+
+//Button{
+
+//     If( HashSet.ContainsHashMonitorKey( MonitorKey) == true)
+//    {
+
+//    }
+//}

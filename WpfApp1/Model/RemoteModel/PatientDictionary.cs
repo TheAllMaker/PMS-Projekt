@@ -17,15 +17,15 @@ namespace MediTrack.Model.RemoteModel
     {
 
 
-        static Dictionary<int?, int?> MonitorIDToPatientIDDictionary = new Dictionary<int?, int?>();
+        static Dictionary<int?, Patient> MonitorIDToPatientIDDictionary = new Dictionary<int?, Patient>();
 
 
-        public static int? DictionaryCaller(int? MonitorIDKey)
+        public static Patient DictionaryCaller(int? MonitorIDKey)
         {
 
             if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKey))
             {
-                int? PatientIDKey = MonitorIDToPatientIDDictionary[MonitorIDKey];
+                Patient PatientIDKey = MonitorIDToPatientIDDictionary[MonitorIDKey];
                 Console.WriteLine($"Ausgewählter Patient: {PatientIDKey}");
                 return PatientIDKey;
             }
@@ -34,7 +34,7 @@ namespace MediTrack.Model.RemoteModel
             {
                 Console.WriteLine("Ausgewählter Patient nicht gefunden.");
                 Console.WriteLine("DataBase wird nach Patienten mit der DatenMonitorID angefragt:");
-                return 0;
+                return null;
             }
 
         }
@@ -45,7 +45,7 @@ namespace MediTrack.Model.RemoteModel
             Console.WriteLine($"Dictionary Key Entry {MonitorIDKey} deleted");
         }
 
-        public static void DictionaryInput(int? MonitorIDKey, int? PatientIDKey)
+        public static void DictionaryInput(int? MonitorIDKey, Patient PatientIDKey)
         {
             
             try
