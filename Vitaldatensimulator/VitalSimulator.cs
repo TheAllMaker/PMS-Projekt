@@ -17,6 +17,7 @@ namespace Vitaldatensimulator
         private static MonitorVitalDaten singleMonitor;
         public static bool isSendingData = true;
         public static event EventHandler<VitalDataEventArgs> VitalDataUpdated;
+        private static MqttPublisher mqttPublisher = new MqttPublisher();
 
         [STAThread]
         static void Main()
@@ -42,38 +43,15 @@ namespace Vitaldatensimulator
                 singleMonitor.GenerateAllVitaldata();
                 SendVitalData(singleMonitor);
             }
-            //else
-            //{
-                //timer.Stop();
-            //}
         }
 
         // Anstatt var vitaldaten direkt monitor per MQTT versenden
         // DATENBANK ABFRAGE OB ID SCHON VORHANDEN IST
         public static void SendVitalData(MonitorVitalDaten monitor)
         {
-            var vitaldaten = new
-            {
-                monitor.MonitorID,
-                monitor.HeartRate,
-                monitor.RespirationRate,
-                monitor.OxygenLevel,
-                monitor.BloodPressureSystolic,
-                monitor.BloodPressureDiastolic,
-                monitor.Temperature
-            };
+            var vitaldaten = monitor.GetVitalData();
             VitalDataUpdated?.Invoke(null, new VitalDataEventArgs(monitor.HeartRate, monitor.RespirationRate, monitor.OxygenLevel, monitor.BloodPressureSystolic, monitor.BloodPressureDiastolic, monitor.Temperature));
-            Mqtt(vitaldaten);
-        }
-
-        public static void Mqtt(object vitaldaten)
-        {
-            MqttPublisher publisher = new MqttPublisher();
-           // Console.WriteLine("connected: " + publisher.IsConnected);
-            Console.WriteLine();
-
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);
-            publisher.PublishVitaldataJSON(json);
+            mqttPublisher.PublishVitaldataJSON(vitaldaten);
         }
     }
 }
