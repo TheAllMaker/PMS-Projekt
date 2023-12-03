@@ -27,11 +27,15 @@ namespace Vitaldatensimulator
             Paused
         }
         private SimulationState currentState = SimulationState.Stopped;
+        private Dictionary<Slider, double> originalSliderValues = new Dictionary<Slider, double>();
+        private bool isValueChanged = false;
+
         public MainCreatePatientWindow()
         {
             InitializeComponent();
             Loaded += MainCreatePatientWindow_Loaded;
             VitaldatenSimulator.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
+            InitializeSliderOriginalValues();
         }
 
         private void MainCreatePatientWindow_Loaded(object sender, RoutedEventArgs e)
@@ -62,6 +66,34 @@ namespace Vitaldatensimulator
             SetSliderToMiddleValue(BloodPressureSystolicSlider);
             SetSliderToMiddleValue(BloodPressureDiastolicSlider);
             SetSliderToMiddleValue(TemperatureSlider);
+        }
+
+        private void InitializeSliderOriginalValues()
+        {
+            originalSliderValues.Add(HeartRateSlider, HeartRateSlider.Value);
+            originalSliderValues.Add(RespirationRateSlider, RespirationRateSlider.Value);
+            originalSliderValues.Add(OxygenLevelSlider, OxygenLevelSlider.Value);
+            originalSliderValues.Add(BloodPressureSystolicSlider, BloodPressureSystolicSlider.Value);
+            originalSliderValues.Add(BloodPressureDiastolicSlider, BloodPressureDiastolicSlider.Value);
+            originalSliderValues.Add(TemperatureSlider, TemperatureSlider.Value);
+
+            HeartRateSlider.ValueChanged += Slider_ValueChanged;
+            RespirationRateSlider.ValueChanged += Slider_ValueChanged;
+            OxygenLevelSlider.ValueChanged += Slider_ValueChanged;
+            BloodPressureSystolicSlider.ValueChanged += Slider_ValueChanged;
+            BloodPressureDiastolicSlider.ValueChanged += Slider_ValueChanged;
+            TemperatureSlider.ValueChanged += Slider_ValueChanged;
+
+        }
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Slider slider = sender as Slider;
+            if (originalSliderValues.ContainsKey(slider) && slider.Value != originalSliderValues[slider])
+            {
+                isValueChanged = true;
+                // Aktiviere den Bestätigen-Button
+                ConfirmChangesButton.IsEnabled = true;
+            }
         }
 
         private void SetSliderToMiddleValue(Slider slider)
@@ -251,11 +283,13 @@ namespace Vitaldatensimulator
             VitaldatenSimulator.isSendingData = false;
             MessageBox.Show("Erfolgreich Generierung der Daten gestoppt", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
         private void ContinueSimulation()
         {
             VitaldatenSimulator.isSendingData = true;
             MessageBox.Show("Generierung der Daten wird fortgesetzt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -268,6 +302,22 @@ namespace Vitaldatensimulator
             else if (result == MessageBoxResult.No)
             {
                 // Nichts unternehmen, da der Benutzer "Nein" geklickt hat
+            }
+        }
+        private void ConfirmChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Logik zur Bestätigung der Änderungen
+            // Übernehme die geänderten Slider-Werte und setze sie als aktuelle Werte für die Übertragung oder Simulation
+
+            
+            if (isValueChanged)
+            {
+                HeartRateSlider.Value = Convert.ToDouble(HeartRateBox.Text);
+                // Übernehme die Werte der anderen Slider entsprechend
+                // ...
+
+                isValueChanged = false; // Setze isValueChanged zurück
+                ConfirmChangesButton.IsEnabled = false; // Deaktiviere den Bestätigen-Button wieder
             }
         }
     }
