@@ -35,7 +35,7 @@ namespace Vitaldatensimulator
             InitializeComponent();
             Loaded += MainCreatePatientWindow_Loaded;
             VitaldatenSimulator.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
-            
+
         }
 
         private void MainCreatePatientWindow_Loaded(object sender, RoutedEventArgs e)
@@ -307,22 +307,30 @@ namespace Vitaldatensimulator
 
         private void ConfirmChangesButton_Click(object sender, RoutedEventArgs e)
         {
-            // Logik zur Bestätigung der Änderungen
-            // Übernehme die geänderten Slider-Werte und setze sie als aktuelle Werte für die Übertragung oder Simulation
-            if (isValueChanged)
+            if (currentState != SimulationState.Stopped) // Überprüfung, ob die Simulation gestartet wurde
             {
-                VitaldatenSimulator.ResetTimer();
+                // Logik zur Bestätigung der Änderungen
+                // Übernehme die geänderten Slider-Werte und setze sie als aktuelle Werte für die Übertragung oder Simulation
+                if (isValueChanged)
+                {
+                    VitaldatenSimulator.ResetTimer();
 
-                HeartRateSlider.Value = Convert.ToDouble(HeartRateBox.Text);
-                RespirationRateSlider.Value = Convert.ToDouble(RespirationRateBox.Text);
-                OxygenLevelSlider.Value = Convert.ToDouble(OxygenLevelBox.Text);
-                BloodPressureSystolicSlider.Value = Convert.ToDouble(BloodPressureSystolicBox.Text);
-                BloodPressureDiastolicSlider.Value = Convert.ToDouble(BloodPressureDiastolicBox.Text);
-                TemperatureSlider.Value = Convert.ToDouble(TemperatureBox.Text);
+                    HeartRateSlider.Value = Convert.ToDouble(HeartRateBox.Text);
+                    RespirationRateSlider.Value = Convert.ToDouble(RespirationRateBox.Text);
+                    OxygenLevelSlider.Value = Convert.ToDouble(OxygenLevelBox.Text);
+                    BloodPressureSystolicSlider.Value = Convert.ToDouble(BloodPressureSystolicBox.Text);
+                    BloodPressureDiastolicSlider.Value = Convert.ToDouble(BloodPressureDiastolicBox.Text);
+                    TemperatureSlider.Value = Convert.ToDouble(TemperatureBox.Text);
 
-                isValueChanged = false; // Setze isValueChanged zurück
-                ConfirmChangesButton.IsEnabled = false; // Deaktiviere den Bestätigen-Button wieder
-                UpdateVitalData();
+                    isValueChanged = false; // Setze isValueChanged zurück
+                    ConfirmChangesButton.IsEnabled = false; // Deaktiviere den Bestätigen-Button wieder
+                    UpdateVitalData();
+                }
+            }
+            else
+            {
+                // Gib eine Meldung aus, dass die Simulation gestartet werden muss, um Änderungen zu bestätigen
+                MessageBox.Show("Die Simulation muss gestartet werden, um Änderungen zu bestätigen.", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
