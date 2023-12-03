@@ -16,7 +16,7 @@ namespace Vitaldatensimulator
         private static Timer timer;
         private static MonitorVitalDaten singleMonitor;
         public static bool isSendingData = true;
-        public static event EventHandler<VitalDataEventArgs> VitalDataUpdated;
+        public static event EventHandler<MonitorVitalDaten> VitalDataUpdated;
         private static MqttPublisher mqttPublisher = new MqttPublisher();
 
         [STAThread]
@@ -50,7 +50,8 @@ namespace Vitaldatensimulator
         public static void SendVitalData(MonitorVitalDaten monitor)
         {
             var vitaldaten = monitor.GetVitalData();
-            VitalDataUpdated?.Invoke(null, new VitalDataEventArgs(monitor.HeartRate, monitor.RespirationRate, monitor.OxygenLevel, monitor.BloodPressureSystolic, monitor.BloodPressureDiastolic, monitor.Temperature));
+            //VitalDataUpdated?.Invoke(null, new VitalDataEventArgs(monitor.HeartRate, monitor.RespirationRate, monitor.OxygenLevel, monitor.BloodPressureSystolic, monitor.BloodPressureDiastolic, monitor.Temperature));
+            VitalDataUpdated?.Invoke(null, monitor);
             mqttPublisher.PublishVitaldataJSON(vitaldaten);
         }
     }

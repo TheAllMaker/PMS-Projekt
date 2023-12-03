@@ -34,24 +34,24 @@ namespace Vitaldatensimulator
             VitaldatenSimulator.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
         }
 
-        private void VitaldatenSimulator_VitalDataUpdated(object sender, VitalDataEventArgs e)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                HeartRateValueTextBlock.Text = e.HeartRate.ToString();
-                RespirationRateValueTextBlock.Text = e.RespirationRate.ToString();
-                OxygenLevelValueTextBlock.Text = e.OxygenLevel.ToString();
-                BloodPressureSystolicValueTextBlock.Text = e.BloodPressureSystolic.ToString();
-                BloodPressureDiastolicValueTextBlock.Text = e.BloodPressureDiastolic.ToString();
-                double value = Math.Round(e.Temperature, 1);
-                TemperatureValueTextBlock.Text = value.ToString("0.0");
-
-            });
-        }
-
         private void MainCreatePatientWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InitializeSliderValues();
+        }
+
+        private void VitaldatenSimulator_VitalDataUpdated(object sender, MonitorVitalDaten MonitorVitalDaten)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                HeartRateValueTextBlock.Text = MonitorVitalDaten.HeartRate.ToString();
+                RespirationRateValueTextBlock.Text = MonitorVitalDaten.RespirationRate.ToString();
+                OxygenLevelValueTextBlock.Text = MonitorVitalDaten.OxygenLevel.ToString();
+                BloodPressureSystolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureSystolic.ToString();
+                BloodPressureDiastolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureDiastolic.ToString();
+                double value = Math.Round(MonitorVitalDaten.Temperature, 1);
+                TemperatureValueTextBlock.Text = value.ToString("0.0");
+
+            });
         }
 
         private void InitializeSliderValues()
@@ -242,9 +242,8 @@ namespace Vitaldatensimulator
                 StartStopButton.Content = "Stop"; // Änderung des Button-Texts auf "Stop"
                 StartStopButton.Background = new SolidColorBrush(Colors.Yellow);
             }
-
-
             MessageBox.Show("Erfolgreich einen Monitor erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+            MonitorIDBox.IsEnabled = false;
         }
 
         private void StopSimulation()
