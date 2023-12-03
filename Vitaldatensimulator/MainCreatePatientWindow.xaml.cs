@@ -100,7 +100,7 @@ namespace Vitaldatensimulator
         {
             if (slider != null)
             {
-                slider.Value = (slider.Minimum + slider.Maximum) / 2;
+                slider.Value = Math.Round((slider.Minimum + slider.Maximum) / 2);
             }
         }
 
