@@ -105,40 +105,31 @@ namespace Vitaldatensimulator
             }
         }
 
-        private void UpdateTextBoxFromSlider(TextBox textBox, Slider slider)
+        private void UpdateSliderAndTextBox(TextBox textBox, Slider slider)
         {
             if (textBox != null && slider != null)
             {
-                int value = Convert.ToInt32(slider.Value);
-                textBox.Text = value.ToString();
-            }
-        }
-
-        private void UpdateSliderFromTextBox(TextBox textBox, Slider slider)
-        {
-            if (textBox != null && slider != null)
-            {
-                if (slider.Name == "TemperatureSlider") // Überprüfung für den Temperatur-Slider
+                if (slider.Name == "TemperatureSlider")
                 {
                     double value = Math.Round(slider.Value, 1);
-                    textBox.Text = value.ToString("0.0"); // Formatierung auf eine Dezimalstelle
+                    textBox.Text = value.ToString("0.0");
                 }
-                else // Für andere Slider
+                else
                 {
                     int value = Convert.ToInt32(slider.Value);
-                    textBox.Text = value.ToString(); // Standardmäßige Anzeige als Ganzzahl
+                    textBox.Text = value.ToString();
                 }
             }
         }
 
         private void HeartRateSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            UpdateTextBoxFromSlider(HeartRateBox, HeartRateSlider);
+            UpdateSliderAndTextBox(HeartRateBox, HeartRateSlider);
         }
 
         private void HeartRateBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateSliderFromTextBox(HeartRateBox, HeartRateSlider);
+            UpdateSliderAndTextBox(HeartRateBox, HeartRateSlider);
         }
 
         private void HeartRateBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -148,12 +139,12 @@ namespace Vitaldatensimulator
 
         private void RespirationRateSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            UpdateTextBoxFromSlider(RespirationRateBox, RespirationRateSlider);
+            UpdateSliderAndTextBox(RespirationRateBox, RespirationRateSlider);
         }
 
         private void RespirationRateBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateSliderFromTextBox(RespirationRateBox, RespirationRateSlider);
+            UpdateSliderAndTextBox(RespirationRateBox, RespirationRateSlider);
         }
 
         private void RespirationRateBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -163,12 +154,12 @@ namespace Vitaldatensimulator
 
         private void OxygenLevelSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            UpdateTextBoxFromSlider(OxygenLevelBox, OxygenLevelSlider);
+            UpdateSliderAndTextBox(OxygenLevelBox, OxygenLevelSlider);
         }
 
         private void OxygenLevelBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateSliderFromTextBox(OxygenLevelBox, OxygenLevelSlider);
+            UpdateSliderAndTextBox(OxygenLevelBox, OxygenLevelSlider);
         }
 
         private void OxygenLevelBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -178,12 +169,12 @@ namespace Vitaldatensimulator
 
         private void BloodPressureSystolicSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            UpdateTextBoxFromSlider(BloodPressureSystolicBox, BloodPressureSystolicSlider);
+            UpdateSliderAndTextBox(BloodPressureSystolicBox, BloodPressureSystolicSlider);
         }
 
         private void BloodPressureSystolicBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateSliderFromTextBox(BloodPressureSystolicBox, BloodPressureSystolicSlider);
+            UpdateSliderAndTextBox(BloodPressureSystolicBox, BloodPressureSystolicSlider);
         }
 
         private void BloodPressureSystolicBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -193,12 +184,12 @@ namespace Vitaldatensimulator
 
         private void BloodPressureDiastolicSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            UpdateTextBoxFromSlider(BloodPressureDiastolicBox, BloodPressureDiastolicSlider);
+            UpdateSliderAndTextBox(BloodPressureDiastolicBox, BloodPressureDiastolicSlider);
         }
 
         private void BloodPressureDiastolicBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateSliderFromTextBox(BloodPressureDiastolicBox, BloodPressureDiastolicSlider);
+            UpdateSliderAndTextBox(BloodPressureDiastolicBox, BloodPressureDiastolicSlider);
         }
 
         private void BloodPressureDiastolicBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -208,12 +199,12 @@ namespace Vitaldatensimulator
 
         private void TemperatureSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            UpdateTextBoxFromSlider(TemperatureBox, TemperatureSlider);
+            UpdateSliderAndTextBox(TemperatureBox, TemperatureSlider);
         }
 
         private void TemperatureBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateSliderFromTextBox(TemperatureBox, TemperatureSlider);
+            UpdateSliderAndTextBox(TemperatureBox, TemperatureSlider);
         }
 
         private void TemperatureBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -353,4 +344,3 @@ namespace Vitaldatensimulator
         }
     }
 }
-
