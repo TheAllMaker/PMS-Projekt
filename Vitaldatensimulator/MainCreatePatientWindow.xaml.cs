@@ -42,6 +42,7 @@ namespace Vitaldatensimulator
         {
             InitializeSliderValues();
             InitializeSliderOriginalValues();
+            ConfirmChangesButton.IsEnabled = false;
         }
 
         private void VitaldatenSimulator_VitalDataUpdated(object sender, MonitorVitalDaten MonitorVitalDaten)
@@ -88,7 +89,7 @@ namespace Vitaldatensimulator
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Slider slider = sender as Slider;
-            if (originalSliderValues.ContainsKey(slider) && slider.Value != originalSliderValues[slider])
+            if (currentState != SimulationState.Stopped && originalSliderValues.ContainsKey(slider) && slider.Value != originalSliderValues[slider])
             {
                 isValueChanged = true;
                 // Aktiviere den Bestätigen-Button
