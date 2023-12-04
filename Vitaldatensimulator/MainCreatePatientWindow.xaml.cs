@@ -330,7 +330,7 @@ namespace Vitaldatensimulator
         private void UpdateVitalData()
         {
             // Erstelle ein neues MonitorVitalDaten-Objekt mit den aktualisierten Werten
-            int monitorID = Convert.ToInt32(MonitorIDBox.Text);
+            string monitorID = MonitorIDBox.Text;
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
             int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
             int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
