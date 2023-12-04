@@ -76,30 +76,45 @@ namespace MediTrack.Model.DataBaseModelConnection
 
         public static int? CallMonitorIDtoPatientID(int? MonitorIDSearchKey)
         {
-            var DataBaseConnector = DataBaseConnectionCall();
-            string SelectString = $"SELECT * FROM public.belegung WHERE moid = {MonitorIDSearchKey}";
-            Console.WriteLine(SelectString);
-            NpgsqlCommand SelectPatientIDThroughMonitorID = new NpgsqlCommand(SelectString, DataBaseConnector);
-
-            NpgsqlDataReader PIDSearcher = SelectPatientIDThroughMonitorID.ExecuteReader();
-
-            if (PIDSearcher.Read())
-            {
-                Console.WriteLine("PidNummer " + PIDSearcher["pid"]);
-                return (int?)PIDSearcher["pid"];
-            }
-            else
+            if (MonitorIDSearchKey == null)
             {
                 return null;
+            }
+
+            var DataBaseConnector = DataBaseConnectionCall();
+            string SelectString = "SELECT pid FROM public.belegung WHERE moid = @MonitorIDSearchKey";
+            Console.WriteLine(SelectString);
+
+            using (NpgsqlCommand SelectPatientIDThroughMonitorID = new NpgsqlCommand(SelectString, DataBaseConnector))
+            {
+                SelectPatientIDThroughMonitorID.Parameters.AddWithValue("MonitorIDSearchKey", MonitorIDSearchKey);
+
+                NpgsqlDataReader PIDSearcher = SelectPatientIDThroughMonitorID.ExecuteReader();
+
+                if (PIDSearcher.Read())
+                {
+                    Console.WriteLine("PidNummer " + PIDSearcher["pid"]);
+                    return (int?)PIDSearcher["pid"];
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
         public static string[] CallForPatientThroughID(int? patientIdentifier)
         {
+            if (patientIdentifier == null)
+            {
+                return null;
+            }
 
             var DataBaseConnector = DataBaseConnectionCall();
-            string SelectPatientThroughPIDString = $"SELECT * FROM public.patients WHERE pid = {patientIdentifier}";
+            string SelectPatientThroughPIDString = "SELECT Name, Vorname FROM public.patients WHERE pid = @PatientID";
             NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand(SelectPatientThroughPIDString, DataBaseConnector);
+            SelectPatientThroughPIDCommand.Parameters.AddWithValue("@PatientID", patientIdentifier);
+
             NpgsqlDataReader PIDReader = SelectPatientThroughPIDCommand.ExecuteReader();
 
             if (PIDReader.Read())
@@ -112,17 +127,12 @@ namespace MediTrack.Model.DataBaseModelConnection
                 DataBaseConnector.Close();
                 return sresult;
             }
-
             else
             {
                 Console.WriteLine($"No DataBase Entry found for PID {patientIdentifier}");
                 DataBaseConnector.Close();
                 return null;
-
             }
-
-
-
         }
 
 
