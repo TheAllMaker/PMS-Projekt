@@ -242,12 +242,13 @@ namespace Vitaldatensimulator
 
         private void StartSimulation()
         {
-            if (!(MonitorIDBox != null && int.TryParse(MonitorIDBox.Text, out int monitorID) && monitorID > 0))
+            string monitorIDString = MonitorIDBox.Text;
+
+            if (string.IsNullOrEmpty(monitorIDString) || !int.TryParse(monitorIDString, out int monitorID) || monitorID <= 0)
             {
                 MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
             int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
             int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
@@ -255,7 +256,7 @@ namespace Vitaldatensimulator
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
             double Temperature = TemperatureSlider.Value;
 
-            MonitorVitalDaten newMonitor = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+            MonitorVitalDaten newMonitor = new MonitorVitalDaten(monitorIDString, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
             // Überprüfung der gültigen Monitor-ID vor der Änderung des Button-Texts
             VitaldatenSimulator.DoMqttAndDataOperations(newMonitor);

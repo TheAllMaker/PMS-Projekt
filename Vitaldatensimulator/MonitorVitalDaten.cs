@@ -6,7 +6,7 @@ namespace Vitaldatensimulator
 {
     public class MonitorVitalDaten
     {
-        public int MonitorID { get; set; }
+        public string MonitorID { get; set; }
         public int HeartRate { get;  set; }
         public int RespirationRate { get;  set; }
         public int OxygenLevel { get;  set; }
@@ -16,7 +16,7 @@ namespace Vitaldatensimulator
 
         private VitaldatenGenerator generator;
 
-        public MonitorVitalDaten(int MonitorID, int HeartRate, int RespirationRate, int OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, double Temperature)
+        public MonitorVitalDaten(string MonitorID, int HeartRate, int RespirationRate, int OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, double Temperature)
         {
             this.MonitorID = MonitorID;
             this.HeartRate = HeartRate;
