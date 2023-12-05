@@ -244,7 +244,7 @@ namespace Vitaldatensimulator
         {
             string monitorIDString = MonitorIDBox.Text;
 
-            if (string.IsNullOrEmpty(monitorIDString) || !int.TryParse(monitorIDString, out int monitorID) || monitorID <= 0)
+            if (string.IsNullOrEmpty(monitorIDString) || !int.TryParse(MonitorIDBox.Text, out int monitorID) || monitorID <= 0)
             {
                 MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
