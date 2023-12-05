@@ -43,10 +43,9 @@ namespace Vitaldatensimulator
             client.Publish(Topic, Encoding.UTF8.GetBytes(payload), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
         }
 
-        public void PublishVitaldataJSON(object vitaldaten)
+        public void PublishVitaldataJSON(string jsonVitaldata)
         {
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);
-            client.Publish(Topic, Encoding.UTF8.GetBytes(json), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+            client.Publish(Topic, Encoding.UTF8.GetBytes(jsonVitaldata), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
         }
     }
 
