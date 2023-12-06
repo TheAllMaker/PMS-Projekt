@@ -9,23 +9,23 @@ namespace MediTrack.Model.RemoteModel
 {
     public class Patient : INotifyPropertyChanged
     {
-        public int _instanceId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int? PatientNumber { get; set; }
-        public int? PatientMonitor { get; set; }
-        public int? RespirationRate { get; set; }
-        public int? Temperature { get; set; }
-        public int? _heartRate;
-        public int? OxygenLevel { get; set; }
-        public int? BloodPressureDiastolic { get; set; }
-        public int? BloodPressureSystolic { get; set; }
-        public int PatientScore { get; set; }
-        public int EWSScore { get; set; }
+        public object _instanceId { get; set; }
+        public object FirstName { get; set; }
+        public object LastName { get; set; }
+        public object PatientNumber { get; set; }
+        public object PatientMonitor { get; set; }
+        public object RespirationRate { get; set; }
+        public object Temperature { get; set; }
+        public object _heartRate;
+        public object OxygenLevel { get; set; }
+        public object BloodPressureDiastolic { get; set; }
+        public object BloodPressureSystolic { get; set; }
+        public object PatientScore { get; set; }
+        public object EWSScore { get; set; }
 
 
 
-        public int InstanceId
+        public object InstanceId
         {
             get { return _instanceId; }
             set
@@ -38,7 +38,7 @@ namespace MediTrack.Model.RemoteModel
             }
         }
 
-        public int? HeartRate
+        public object HeartRate
         {
             get { return _heartRate; }
             set

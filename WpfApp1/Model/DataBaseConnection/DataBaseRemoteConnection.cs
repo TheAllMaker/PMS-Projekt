@@ -74,7 +74,7 @@ namespace MediTrack.Model.DataBaseModelConnection
         }
 
 
-        public static int? CallMonitorIDtoPatientID(int? MonitorIDSearchKey)
+        public static int? CallMonitorIDtoPatientID(object MonitorIDSearchKey)
         {
             if (MonitorIDSearchKey == null)
             {
@@ -103,7 +103,7 @@ namespace MediTrack.Model.DataBaseModelConnection
             }
         }
 
-        public static string[] CallForPatientThroughID(int? patientIdentifier)
+        public static string[] CallForPatientThroughID(object patientIdentifier)
         {
             if (patientIdentifier == null)
             {

@@ -17,10 +17,10 @@ namespace MediTrack.Model.RemoteModel
     {
 
 
-        static Dictionary<int?, Patient> MonitorIDToPatientIDDictionary = new Dictionary<int?, Patient>();
+        static Dictionary<object, Patient> MonitorIDToPatientIDDictionary = new Dictionary<object, Patient>();
 
 
-        public static Patient DictionaryCaller(int? MonitorIDKey)
+        public static Patient DictionaryCaller(object MonitorIDKey)
         {
 
             if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKey))
@@ -39,13 +39,13 @@ namespace MediTrack.Model.RemoteModel
 
         }
 
-        public static void DictionaryRemover(int? MonitorIDKey)
+        public static void DictionaryRemover(object MonitorIDKey)
         {
             MonitorIDToPatientIDDictionary.Remove(MonitorIDKey);
             Console.WriteLine($"Dictionary Key Entry {MonitorIDKey} deleted");
         }
 
-        public static void DictionaryInput(int? MonitorIDKey, Patient PatientIDKey)
+        public static void DictionaryInput(object MonitorIDKey, Patient PatientIDKey)
         {
             
             try
@@ -59,7 +59,7 @@ namespace MediTrack.Model.RemoteModel
             }
         }
 
-        public static bool DictionaryContainer(int? MonitorIDKey)
+        public static bool DictionaryContainer(object MonitorIDKey)
         {
             if (MonitorIDKey == null) return false;
             if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKey))

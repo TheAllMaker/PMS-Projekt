@@ -68,7 +68,7 @@ namespace MediTrack
             {
                 await Task.Delay(100);
 
-                int?[] queuearray = MqttMessageQueue.Dequeue();
+                object[] queuearray = MqttMessageQueue.Dequeue();
 
                 if (queuearray == null)
                 {
@@ -99,8 +99,8 @@ namespace MediTrack
                 }
                 else
                 {
-                    int? puffer = DataBaseRemoteConnection.CallMonitorIDtoPatientID(queuearray[0]);
-                    string[] sstring = DataBaseRemoteConnection.CallForPatientThroughID(puffer);
+                    object puffer = DataBaseRemoteConnection.CallMonitorIDtoPatientID(queuearray[0]);
+                    object[] sstring = DataBaseRemoteConnection.CallForPatientThroughID(puffer);
 
                     Patient PatientenInstanz = new Patient()
                     {
