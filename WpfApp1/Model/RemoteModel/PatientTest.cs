@@ -24,7 +24,7 @@ namespace MediTrack.Model.RemoteModel
                 OxygenLevel = 20,
                 BloodPressureDiastolic = 20,
                 RespirationRate = 20,
-                PatientScore = 3,
+               
                 Temperature = 20,
 
             };
@@ -46,7 +46,7 @@ namespace MediTrack.Model.RemoteModel
                 OxygenLevel = 20,
                 BloodPressureDiastolic = 20,
                 RespirationRate = 20,
-                PatientScore = 3,
+               
                 Temperature = 20,
 
             };

@@ -113,7 +113,7 @@ namespace MediTrack
                         BloodPressureDiastolic = queuearray[5],
                         RespirationRate = queuearray[2],
                         BloodPressureSystolic = queuearray[4],
-                        PatientScore = 1,
+                        
                         Temperature = queuearray[6],
                     };
 

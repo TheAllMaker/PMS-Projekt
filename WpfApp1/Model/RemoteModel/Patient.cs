@@ -1,33 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace MediTrack.Model.RemoteModel
 {
     public class Patient : INotifyPropertyChanged
     {
-        public object _instanceId { get; set; }
-        public object FirstName { get; set; }
-        public object LastName { get; set; }
-        public object PatientNumber { get; set; }
-        public object PatientMonitor { get; set; }
-        public object RespirationRate { get; set; }
-        public object Temperature { get; set; }
-        public object _heartRate;
-        public object OxygenLevel { get; set; }
-        public object BloodPressureDiastolic { get; set; }
-        public object BloodPressureSystolic { get; set; }
-        public object PatientScore { get; set; }
-        public object EWSScore { get; set; }
+
+        // Patient is the main data structure class 
+        // for all further remote window operations
+
+        private object _instanceId;
+        private object _firstName;
+        private object _lastName;
+        private object _patientNumber;
+        private object _patientMonitor; 
+        private object _respirationRate;
+        private object _temperature;
+        private object _heartRate;
+        private object _oxygenLevel;
+        private object _bloodPressureDiastolic;
+        private object _bloodPressureSystolic;
 
 
+        // INotifyPropertyChanged is a .NET interface and notfiy subscribers ( the Patient member access in mainwindow.cs)
+        // when properties are changed. _classvariable declares a private field -> if the customer get&set are 
+        // accessed we are invoking the function OnPropertyChanged which reports the changes to them 
+        // -> which results in updates of our RW patient windows.
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+        // from now: Custom Get/Set functions
 
         public object InstanceId
         {
-            get { return _instanceId; }
+            get
+            { 
+                return _instanceId;
+            }
+
             set
             {
                 if (_instanceId != value)
@@ -40,7 +55,11 @@ namespace MediTrack.Model.RemoteModel
 
         public object HeartRate
         {
-            get { return _heartRate; }
+            get
+            { 
+                return _heartRate;
+            }
+
             set
             {
                 if (_heartRate != value)
@@ -51,14 +70,159 @@ namespace MediTrack.Model.RemoteModel
             }
         }
 
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
+        public object RespirationRate
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get
+            { 
+                return _respirationRate;
+            }
+
+            set
+            {
+                if (_respirationRate != value)
+                {
+                    _respirationRate = value;
+                    OnPropertyChanged(nameof(RespirationRate));
+                }
+            }
         }
+
+        public object OxygenLevel
+        {
+            get 
+            {
+                return _oxygenLevel; 
+            }
+
+            set
+            {
+                if (_oxygenLevel != value)
+                {
+                    _oxygenLevel = value;
+                    OnPropertyChanged(nameof(OxygenLevel));
+                }
+            }
+        }
+
+        public object Temperature
+        {
+            get 
+            { 
+                return _temperature;
+            }
+
+            set
+            {
+                if (_temperature != value)
+                {
+                    _temperature = value;
+                    OnPropertyChanged(nameof(Temperature));
+                }
+            }
+        }
+
+        public object BloodPressureDiastolic
+        {
+            get 
+            { 
+                return _bloodPressureDiastolic;
+            }
+
+            set
+            {
+                if (_bloodPressureDiastolic != value)
+                {
+                    _bloodPressureDiastolic = value;
+                    OnPropertyChanged(nameof(BloodPressureDiastolic));
+                }
+            }
+        }
+
+        public object BloodPressureSystolic
+        {
+            get
+            { 
+                return _bloodPressureSystolic;
+            }
+
+            set
+            {
+                if (_bloodPressureSystolic != value)
+                {
+                    _bloodPressureSystolic = value;
+                    OnPropertyChanged(nameof(BloodPressureSystolic));
+                }
+            }
+        }
+
+        public object FirstName
+        {
+            get 
+            { 
+                return _firstName;
+            }
+
+            set
+            {
+                if (_firstName != value)
+                {
+                    _firstName = value;
+                    OnPropertyChanged(nameof(FirstName));
+                }
+            }
+        }
+
+        public object LastName
+        {
+            get 
+            { 
+                return _lastName; 
+            }
+
+            set
+            {
+                if (_lastName != value)
+                {
+                    _lastName = value;
+                    OnPropertyChanged(nameof(LastName));
+                }
+            }
+        }
+
+        public object PatientNumber
+        {
+            get 
+            {
+                return _patientNumber;
+            }
+
+            set
+            {
+                if (_patientNumber != value)
+                {
+                    _patientNumber = value;
+                    OnPropertyChanged(nameof(PatientNumber));
+                }
+            }
+        }
+
+        public object PatientMonitor
+        {
+            get 
+            { 
+                return _patientMonitor; 
+            }
+
+            set
+            {
+                if (_patientMonitor != value)
+                {
+                    _patientMonitor = value;
+                    OnPropertyChanged(nameof(PatientMonitor));
+                }
+            }
+        }
+
     }
     
 }
