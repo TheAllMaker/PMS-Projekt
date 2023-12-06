@@ -28,7 +28,7 @@ namespace MediTrack.View.RemoteView
         public SelectionWindow()
         {
             InitializeComponent();
-            InputCollector();
+            Loaded += SelectionWindow_Loaded;
             // Anfrage an Database -> alle Einträge auslesen 
             // Dann per :
             //ContentControl contentControl = new ContentControl
@@ -51,11 +51,34 @@ namespace MediTrack.View.RemoteView
             // Fenster nicht schließen da sonst neu instanziert werden muss
         }
 
+
+        private void SelectionWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            InputCollector();
+        }
+
         private void InputCollector()
         {
             DataBaseRemoteConnection.DataBaseEntireEntryCall();
-           int counterstrike = DataBaseRemoteConnection.DataBaseEntries.Count();
+            int counterstrike = DataBaseRemoteConnection.DataBaseEntries.Count();
+            List<int> ListInput = new List<int>();
+            ListInput.AddRange(DataBaseRemoteConnection.DataBaseEntries);
             Console.WriteLine(counterstrike);
+
+
+            foreach(object varI in ListInput )
+            {
+
+                ContentControl SelectionUI = new ContentControl
+                {
+                    ContentTemplate = (DataTemplate)Resources["SelectionWindowPatientBox"],
+                    Content = varI,
+                    Margin = new Thickness(5)
+                };
+                BoxInputGrid.Children.Add(SelectionUI);
+            }
+
+
         }
 
 

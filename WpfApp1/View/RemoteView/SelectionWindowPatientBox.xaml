@@ -6,14 +6,15 @@
 
     <DataTemplate x:Key="SelectionWindowPatientBox">
 
-        <Button   Content="FirstName + SurName" Width="100" Height="45" Margin="5"
-            Background="Gray" BorderBrush="ForestGreen" BorderThickness="1" Opacity="1"
-            Click="OnToggleButtonClicked">
+        <Button    Width="100" Height="45" Margin="5"
+            Background="Gray" BorderBrush="ForestGreen" BorderThickness="1" 
+            Opacity="1" Click="OnToggleButtonClicked"
+               Content="{Binding varI, Mode=OneWay}"  >
 
 
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                    <Border  CornerRadius="5">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
