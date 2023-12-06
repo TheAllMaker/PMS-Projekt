@@ -6,8 +6,10 @@ using System.Linq;
 
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using System.Windows.Navigation;
 using Database;
+using MediTrack.Model.RemoteModel;
 using Npgsql;
 
 // hier ist noch der Rückgabe Typ offen !
@@ -39,39 +41,40 @@ namespace MediTrack.Model.DataBaseModelConnection
             }
         }
 
-
-
-
-
-
-
-        //NpgsqlCommand SelectCountCommand = new NpgsqlCommand("SELECT COUNT(*) FROM patients ", DataBaseConnector);
-        //Int64 EntryCount = (Int64)SelectCountCommand.ExecuteScalar();
-
-
+        // SQL Call for the Selection Window
         static void DataBaseEntireEntryCall(List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries)
         {
             var DataBaseConnector = DataBaseConnectionCall();
-            NpgsqlCommand SelectEntriesCommand = new NpgsqlCommand("SELECT * FROM ", DataBaseConnector);
+            string SelectEntireTable = "SELECT * FROM public.patients";
 
-
-            NpgsqlDataReader EntryReader = SelectEntriesCommand.ExecuteReader();
-            while (EntryReader.Read())
+            using (NpgsqlCommand SelectAllTableEntries = new NpgsqlCommand(SelectEntireTable, DataBaseConnector))
             {
-                MediTrack.Model.RemoteModel.Patient PatientSingleEntry = new RemoteModel.Patient
-                {
+                //SelectAllTableEntries.Parameters.AddWithValue();
 
-                    PatientNumber = EntryReader.GetInt32(0),
-                    LastName = EntryReader.GetString(1),
-                    FirstName = EntryReader.GetString(2),
-                };
+                NpgsqlDataReader EntryReader = SelectAllTableEntries.ExecuteReader();
 
-                DataBaseEntries.Add(PatientSingleEntry);
-            }
-            DataBaseConnector.Close();
+            //while (EntryReader.Read())
+            //{
+            //    MediTrack.Model.RemoteModel.Patient PatientSingleEntry = new RemoteModel.Patient
+            //    {
+
+            //        PatientNumber = EntryReader.GetInt32(0),
+            //        LastName = EntryReader.GetString(1),
+            //        FirstName = EntryReader.GetString(2),
+            //    };
+
+            //    DataBaseEntries.Add(PatientSingleEntry);
+            //}
+            //DataBaseConnector.Close();
 
 
         }
+
+
+
+              
+        }
+
 
 
         public static int? CallMonitorIDtoPatientID(object MonitorIDSearchKey)
@@ -136,6 +139,10 @@ namespace MediTrack.Model.DataBaseModelConnection
         }
 
 
+
+
+
+
         public static void SelcukSQL()
         {
             var DataBaseConnector = DataBaseConnectionCall();
@@ -149,6 +156,22 @@ namespace MediTrack.Model.DataBaseModelConnection
             //    string InsertPatientCommandString = $"INSERT INTO patients VALUES ({pid},'{FirstName}','{LastName}')";
             //    NpgsqlCommand InsertPatientCommand = new NpgsqlCommand("InsertPatientCommandString", DataBaseConnector);
             //}
+
+
+
+
+
+
+
+
+
+
+
+            // Code Deponie
+            //NpgsqlCommand SelectCountCommand = new NpgsqlCommand("SELECT COUNT(*) FROM patients ", DataBaseConnector);
+            //Int64 EntryCount = (Int64)SelectCountCommand.ExecuteScalar();
+
+
         }
 
     }
