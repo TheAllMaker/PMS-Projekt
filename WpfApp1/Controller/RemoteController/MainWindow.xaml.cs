@@ -66,7 +66,7 @@ namespace MediTrack
         {
             while (true)
             {
-                await Task.Delay(1000);
+                await Task.Delay(100);
 
                 int?[] queuearray = MqttMessageQueue.Dequeue();
 
