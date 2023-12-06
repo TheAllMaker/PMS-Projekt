@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediTrack.Model.DataBaseModelConnection;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace MediTrack.View.RemoteView
         public SelectionWindow()
         {
             InitializeComponent();
-
+            InputCollector();
             // Anfrage an Database -> alle Einträge auslesen 
             // Dann per :
             //ContentControl contentControl = new ContentControl
@@ -49,6 +50,14 @@ namespace MediTrack.View.RemoteView
             // Bei Abbruch und ohne Änderung sollen sie wie gehidet werden.
             // Fenster nicht schließen da sonst neu instanziert werden muss
         }
+
+        private void InputCollector()
+        {
+            DataBaseRemoteConnection.DataBaseEntireEntryCall();
+           int counterstrike = DataBaseRemoteConnection.DataBaseEntries.Count();
+            Console.WriteLine(counterstrike);
+        }
+
 
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {

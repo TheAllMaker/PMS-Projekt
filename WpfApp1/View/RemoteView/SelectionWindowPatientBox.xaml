@@ -6,8 +6,8 @@
 
     <DataTemplate x:Key="SelectionWindowPatientBox">
 
-        <Button   Content="Test" Width="100" Height="45" Margin="5"
-            Background="Gray" BorderBrush="Gray" BorderThickness="1" Opacity="0.8"
+        <Button   Content="FirstName + SurName" Width="100" Height="45" Margin="5"
+            Background="Gray" BorderBrush="ForestGreen" BorderThickness="1" Opacity="1"
             Click="OnToggleButtonClicked">
 
 

@@ -20,7 +20,7 @@ namespace MediTrack.Model.DataBaseModelConnection
 
         //private static string ConnectionDatabaseInformation = "Host=db.inftech.hs-mannheim.de;Username=n1921233;Password=123456;Database=n1921233_meditrack";
         private static string ConnectionDatabaseInformation = "Host=db.inftech.hs-mannheim.de;Username=pms1;Password=pms1;Database=pms1";
-        public static List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries = new List<MediTrack.Model.RemoteModel.Patient>();
+        public static List<int> DataBaseEntries = new List<int>();
 
 
 
@@ -42,37 +42,38 @@ namespace MediTrack.Model.DataBaseModelConnection
         }
 
         // SQL Call for the Selection Window
-        static void DataBaseEntireEntryCall(List<MediTrack.Model.RemoteModel.Patient> DataBaseEntries)
+
+       public static void DataBaseEntireEntryCall()
         {
             var DataBaseConnector = DataBaseConnectionCall();
-            string SelectEntireTable = "SELECT * FROM public.patients";
-
+            string SelectEntireTable = "SELECT pid FROM public.patients";
+            
             using (NpgsqlCommand SelectAllTableEntries = new NpgsqlCommand(SelectEntireTable, DataBaseConnector))
             {
                 //SelectAllTableEntries.Parameters.AddWithValue();
 
                 NpgsqlDataReader EntryReader = SelectAllTableEntries.ExecuteReader();
 
-            //while (EntryReader.Read())
+                while (EntryReader.Read())
+                {
+                    int pid = EntryReader.GetInt32(0);
+                    DataBaseEntries.Add(pid);
+                }
+
+                DataBaseConnector.Close();
+            }
+
+
+
+            //MediTrack.Model.RemoteModel.Patient PatientSingleEntry = new RemoteModel.Patient
             //{
-            //    MediTrack.Model.RemoteModel.Patient PatientSingleEntry = new RemoteModel.Patient
-            //    {
 
-            //        PatientNumber = EntryReader.GetInt32(0),
-            //        LastName = EntryReader.GetString(1),
-            //        FirstName = EntryReader.GetString(2),
-            //    };
+            //    PatientNumber = EntryReader.GetInt32(0),
+            //    LastName = EntryReader.GetString(1),
+            //    FirstName = EntryReader.GetString(2),
+            //};
 
-            //    DataBaseEntries.Add(PatientSingleEntry);
-            //}
-            //DataBaseConnector.Close();
-
-
-        }
-
-
-
-              
+            //DataBaseEntries.Add(PatientSingleEntry);
         }
 
 

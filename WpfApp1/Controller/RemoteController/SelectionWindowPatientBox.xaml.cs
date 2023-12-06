@@ -13,8 +13,12 @@ namespace MediTrack.Controller.RemoteController
         {
             InitializeComponent();
             
+            
         }
-
+        
+    
+        
+        
         private void OnToggleButtonClicked(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
