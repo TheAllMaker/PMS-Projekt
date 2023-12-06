@@ -24,38 +24,37 @@ namespace MediTrack.Model.RemoteModel
         {
             if (MQTTQueue.Count > 0)
             {
-                string message = MQTTQueue.Dequeue();
-                dynamic parsedObject = JsonConvert.DeserializeObject(message);
-
-                if (parsedObject != null)
-                {
-                    int?[] array =
-                    {
-                GetValue(parsedObject, "MonitorID"),
-                GetValue(parsedObject, "HeartRate"),
-                GetValue(parsedObject, "RespirationRate"),
-                GetValue(parsedObject, "OxygenLevel"),
-                GetValue(parsedObject, "BloodPressureSystolic"),
-                GetValue(parsedObject, "BloodPressureDiastolic"),
-                GetValue(parsedObject, "Temperature")
+                dynamic parsedObject = JsonConvert.DeserializeObject(MQTTQueue.Dequeue());
+                Console.WriteLine(parsedObject.ToString());
+                int?[] array =
+            {
+            GetIntValue(parsedObject.MonitorID),
+            GetIntValue(parsedObject.HeartRate),
+            GetIntValue(parsedObject.RespirationRate),
+            GetIntValue(parsedObject.OxygenLevel),
+            GetIntValue(parsedObject.BloodPressureSystolic),
+            GetIntValue(parsedObject.BloodPressureDiastolic),
+            GetIntValue(parsedObject.Temperature)
             };
-                    return array;
-                }
+                return array;
             }
-            return null;
+            else
+            {
+                return null;
+            }
+
         }
 
-        private static int? GetValue(dynamic obj, string propertyName)
+        private static int? GetIntValue(dynamic value)
         {
-            if (obj == null || obj.GetType().GetProperty(propertyName) == null)
+            if (value == null)
             {
                 return null;
             }
 
             int result;
-            return int.TryParse(obj[propertyName].ToString(), out result) ? result : (int?)null;
+            return int.TryParse(value.ToString(), out result) ? result : (int?)null;
         }
-
 
         public static int Count 
         {

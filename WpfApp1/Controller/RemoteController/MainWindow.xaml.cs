@@ -76,7 +76,7 @@ namespace MediTrack
                     continue;
                 }
 
-                if (PatientDictionary.DictionaryContainer(queuearray[0]))
+                else if (PatientDictionary.DictionaryContainer(queuearray[0]))
                 {
                     Console.WriteLine("Selected MonitorID found.");
                     Patient existingPatient = PatientDictionary.DictionaryCaller(queuearray[0]);
