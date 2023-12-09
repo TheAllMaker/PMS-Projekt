@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace MediTrack.Model.RemoteModel
 {
-    public class PatientInstances
+    public class PatientViewModel
     {
-       
-
-
+        public string VarI { get; set; }
     }
 }

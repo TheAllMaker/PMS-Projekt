@@ -7,12 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace MediTrack.View.RemoteView
 {
@@ -63,20 +58,35 @@ namespace MediTrack.View.RemoteView
             int counterstrike = DataBaseRemoteConnection.DataBaseEntries.Count();
             List<int> ListInput = new List<int>();
             ListInput.AddRange(DataBaseRemoteConnection.DataBaseEntries);
+            ListInput.Sort();
             Console.WriteLine(counterstrike);
-
-
-            foreach(object varI in ListInput )
+            foreach (int varI in ListInput)
             {
+                var viewModel = new MediTrack.Model.RemoteModel.PatientViewModel
+                {
+                    VarI = varI.ToString()
+                };
 
                 ContentControl SelectionUI = new ContentControl
                 {
                     ContentTemplate = (DataTemplate)Resources["SelectionWindowPatientBox"],
-                    Content = varI,
+                    Content = viewModel,
                     Margin = new Thickness(5)
                 };
                 BoxInputGrid.Children.Add(SelectionUI);
             }
+
+            //foreach(int varI in ListInput )
+            //{
+
+            //    ContentControl SelectionUI = new ContentControl
+            //    {
+            //        ContentTemplate = (DataTemplate)Resources["SelectionWindowPatientBox"],
+            //        Content = varI.ToString(),
+            //        Margin = new Thickness(5)
+            //    };
+            //    BoxInputGrid.Children.Add(SelectionUI);
+            //}
 
 
         }

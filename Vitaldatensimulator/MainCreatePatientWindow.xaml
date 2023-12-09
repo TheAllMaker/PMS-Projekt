@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Vitaldatensimulator"
         Title="Patienten Generator" Height="720" Width="1280"
-        Background="Black">
+        Background="#08080F">
 
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.RowDefinitions>

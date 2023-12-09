@@ -177,7 +177,7 @@
     <Compile Include="Model\RemoteModel\MqttHandler.cs" />
     <Compile Include="Model\RemoteModel\Patient.cs" />
     <Compile Include="Model\RemoteModel\PatientDictionary.cs" />
-    <Compile Include="Model\RemoteModel\PatientInstances.cs" />
+    <Compile Include="Model\RemoteModel\PatientViewModel.cs" />
     <Compile Include="Model\RemoteModel\PatientTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

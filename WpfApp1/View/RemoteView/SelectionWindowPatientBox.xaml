@@ -5,22 +5,26 @@
 
 
     <DataTemplate x:Key="SelectionWindowPatientBox">
-
-        <Button    Width="100" Height="45" Margin="5"
-            Background="Gray" BorderBrush="ForestGreen" BorderThickness="1" 
-            Opacity="1" Click="OnToggleButtonClicked"
-               Content="{Binding varI, Mode=OneWay}"  >
-
-
+        <Button Width="100" Height="45" Margin="5" Name="Knopfche"
+            Background="Gray" BorderBrush="Black" BorderThickness="1"
+            Opacity="1" Click="OnToggleButtonClicked">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border  CornerRadius="5">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Button.Template>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock TextAlignment="Left">
+                <Run Text=" PID:" FontSize="12"/>
+                <Run Text="{Binding VarI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </TextBlock>
+            </StackPanel>
         </Button>
-
     </DataTemplate>
-    
+
 </ResourceDictionary>
