@@ -72,7 +72,7 @@ namespace MediTrack
 
                 if (queuearray == null)
                 {
-                    Console.WriteLine("still null");
+                    
                     continue;
                 }
 

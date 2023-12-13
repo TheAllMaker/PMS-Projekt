@@ -49,16 +49,29 @@
 
         <!-- Button 3 - Unterer Bereich -->
         <Button Grid.Row="3" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" 
-                BorderBrush="Black" BorderThickness="2" Background="Transparent" Foreground="Black" 
-                Name ="ConnectPM" Click="Button_Click_ConnectPM" Content="Connect Patient with Monitor" Padding="10" Width="308" Height="38" Margin="0,18,0,0">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
-                            BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
+        BorderBrush="Black" BorderThickness="2" Background="Transparent" Foreground="Black" 
+        Name="ConnectPM" Click="Button_Click_ConnectPM" Content="Connect Patient with Monitor" Padding="10" Width="308" Height="38" Margin="0,18,0,0">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <!-- Hover-Effekt -->
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <!-- Ändern Sie diese Farbe nach Ihren Wünschen -->
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
 
         <!-- Power-Off Button - Unten rechts -->
