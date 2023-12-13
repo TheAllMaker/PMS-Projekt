@@ -28,7 +28,7 @@
         <ComboBox x:Name="cmbMonitor" Grid.Row="2" Margin="153,5,10,5" />
 
         <!-- Button zum Connecten oder Abbrechen -->
-        <Button Content="connect Patient with Monitor" Grid.Row="3" Margin="10,10,10,10" Click="Verbinden_Click"/>
-        <Button Content="abort" Grid.Row="4" Margin="10,5,10,10" Click="Abbruch_Click"/>
+        <Button Content="Connect Patient with Monitor" Grid.Row="3" Margin="10,10,10,10" Click="Verbinden_Click"/>
+        <Button Content="Abort" Grid.Row="4" Margin="10,5,10,10" Click="Abbruch_Click"/>
     </Grid>
 </Window>

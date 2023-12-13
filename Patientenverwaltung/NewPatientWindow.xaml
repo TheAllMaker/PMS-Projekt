@@ -32,9 +32,9 @@
         <Label Content="Birth Date:" Grid.Row="3" Margin="10,5,10,5"/>
         <DatePicker x:Name="dpGeburtstag" Grid.Row="3" Margin="153,5,10,5" Language="en-US"/>
 
-        <Button Content="add Patient to System" Grid.Row="4" Margin="10" Click="PatientAnlegen_Click"/>
+        <Button Content="Add Patient to System" Grid.Row="4" Margin="10" Click="PatientAnlegen_Click"/>
 
-        <Button Content="abort" Grid.Row="5" Margin="10" Click="Abbruch_Click"/>
+        <Button Content="Abort" Grid.Row="5" Margin="10" Click="Abbruch_Click"/>
 
     </Grid>
 </Window>
