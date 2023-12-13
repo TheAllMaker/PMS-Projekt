@@ -70,7 +70,8 @@ namespace Patientenverwaltung
 
         private void Abbruch_Click(object sender, RoutedEventArgs e)
         {
-            // Anwendung schließen
+            // Anwendung schließen 
+
             this.Close();
             
         }
