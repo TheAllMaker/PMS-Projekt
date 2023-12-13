@@ -9,7 +9,7 @@ namespace Database
 {
     public class SQLqueries
     {
-        private static String connString = "Host=db.inftech.hs-mannheim.de;Username=n1921233;Password=123456;Database=n1921233_meditrack";
+        private static string connString = "Host=db.inftech.hs-mannheim.de;Username=pms1;Password=pms1;Database=pms1";
 
 
 
@@ -19,6 +19,8 @@ namespace Database
 
 
             var conn = new NpgsqlConnection(connString);
+            conn.Open();
+
 
             Patient p1 = new Patient(firstName: "Hans", lastName: "Müller", birthday: new DateTime(1994, 06, 14));
             addPatient(p1);
