@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Npgsql;
 
 namespace Patientenverwaltung
 {
@@ -32,11 +33,11 @@ namespace Patientenverwaltung
         private void PatientAnlegen_Click(object sender, RoutedEventArgs e)
         {
             // Verbindungszeichenfolge zur Datenbank
-            string connectionString = "DeineConnectionString";
+            string connectionString = connString;
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
 
@@ -46,14 +47,15 @@ namespace Patientenverwaltung
                     DateTime geburtsdatum = dpGeburtstag.SelectedDate ?? DateTime.MinValue;
 
                     // SQL-Abfrage zum Einfügen von Daten
-                    string insertQuery = "INSERT INTO Patienten (Vorname, Nachname, Geburtsdatum) VALUES (@Vorname, @Nachname, @Geburtsdatum)";
+                    string insertQuery = "INSERT INTO patients (pid, name, vorname) VALUES (@PID, @Vorname, @Nachname)";
 
-                    using (SqlCommand command = new SqlCommand(insertQuery, connection))
+                    using (NpgsqlCommand command = new NpgsqlCommand(insertQuery, connection))
                     {
                         // Parameter setzen, um SQL Injection zu vermeiden
+                        command.Parameters.AddWithValue("@PID", 250);
                         command.Parameters.AddWithValue("@Vorname", vorname);
                         command.Parameters.AddWithValue("@Nachname", nachname);
-                        command.Parameters.AddWithValue("@Geburtsdatum", geburtsdatum);
+                        // command.Parameters.AddWithValue("@Geburtsdatum", geburtsdatum);
 
                         // Ausführen der SQL-Abfrage
                         command.ExecuteNonQuery();
@@ -67,6 +69,7 @@ namespace Patientenverwaltung
                 MessageBox.Show($"Fehler beim Einfügen der Daten: {ex.Message}");
             }
         }
+
 
         private void Abbruch_Click(object sender, RoutedEventArgs e)
         {

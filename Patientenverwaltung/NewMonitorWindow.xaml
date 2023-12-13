@@ -18,28 +18,28 @@
         </Grid.RowDefinitions>
 
         <!-- Überschrift -->
-        <TextBlock Text="Monitor anlegen" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="20"/>
+        <TextBlock Text="Monitor Information" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="20"/>
 
         <!-- Hersteller -->
-        <Label Content="Hersteller:" Grid.Row="1" Margin="10,10,10,5"/>
+        <Label Content="Manufacturer:" Grid.Row="1" Margin="10,10,10,5"/>
         <TextBox x:Name="txtHersteller" Grid.Row="1" Margin="153,10,10,5" />
 
         <!-- Seriennummer -->
-        <Label Content="Seriennummer:" Grid.Row="2" Margin="10,5,10,5"/>
+        <Label Content="Serial number:" Grid.Row="2" Margin="10,5,10,5"/>
         <TextBox x:Name="txtSeriennummer" Grid.Row="2" Margin="153,5,10,5" />
 
         <!-- Raumnummer -->
-        <Label Content="Raumnummer:" Grid.Row="3" Margin="10,5,10,5"/>
+        <Label Content="Room:" Grid.Row="3" Margin="10,5,10,5"/>
         <TextBox x:Name="txtRaumnummer" Grid.Row="3" Margin="153,5,10,5" />
 
         <!-- Bettnummer -->
-        <Label Content="Bettnummer:" Grid.Row="4" Margin="10,5,10,5"/>
+        <Label Content="Bed:" Grid.Row="4" Margin="10,5,10,5"/>
         <TextBox x:Name="txtBettnummer" Grid.Row="4" Margin="153,5,10,5" />
 
         <!-- Weitere UI-Elemente hier -->
 
         <!-- Button zum Anlegen oder Abbrechen -->
-        <Button Content="anlegen" Grid.Row="5" Margin="10,10,10,10" Click="MonitorAnlegen_Click"/>
-        <Button Content="abbrechen" Grid.Row="6" Margin="10,5,10,10" Click="Abbruch_Click"/>
+        <Button Content="add Monitor to System" Grid.Row="5" Margin="10,10,10,10" Click="MonitorAnlegen_Click"/>
+        <Button Content="abort" Grid.Row="6" Margin="10,5,10,10" Click="Abbruch_Click"/>
     </Grid>
 </Window>
