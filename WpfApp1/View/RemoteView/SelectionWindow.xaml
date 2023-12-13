@@ -91,7 +91,7 @@
 
 
 
-            <ContentControl ContentTemplate="{DynamicResource SelectionWindowPatientBox}" />
+           
             <!--<ContentControl ContentTemplate="{DynamicResource SelectionWindowPatientBox}" Margin="5"></ContentControl>-->
    
 
