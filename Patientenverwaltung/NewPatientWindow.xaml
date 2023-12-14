@@ -29,12 +29,25 @@
         <Label Content="Last Name:" Grid.Row="2" Margin="10,5,10,5"/>
         <TextBox x:Name="txtNachname" Grid.Row="2" Margin="153,5,10,5" />
 
-        <Label Content="Birth Date:" Grid.Row="3" Margin="10,5,10,5"/>
-        <DatePicker x:Name="dpGeburtstag" Grid.Row="3" Margin="153,5,10,5" Language="en-US"/>
+        <Label Content="Sex:" Grid.Row="3" Margin="10,5,10,5"/>
+        <ComboBox x:Name="cmbSex" Grid.Row="3" Margin="153,5,10,5">
+            <ComboBoxItem Content="Male"/>
+            <ComboBoxItem Content="Female"/>
+        </ComboBox>
 
-        <Button Content="add Patient to System" Grid.Row="4" Margin="10" Click="PatientAnlegen_Click"/>
 
-        <Button Content="abort" Grid.Row="5" Margin="10" Click="Abbruch_Click"/>
+        <Label Content="Birth Date:" Grid.Row="4" Margin="10,5,10,5"/>
+        <DatePicker x:Name="dpGeburtstag" Grid.Row="4" Margin="153,5,10,5" Language="en-US"/>
+
+        <Label Content="Room:" Grid.Row="5" Margin="10,5,10,5"/>
+        <TextBox x:Name="txtRoom" Grid.Row="5" Margin="153,5,10,5" />
+
+        <Label Content="Bed:" Grid.Row="6" Margin="10,5,10,5"/>
+        <TextBox x:Name="txtBed" Grid.Row="6" Margin="153,5,10,5" />
+
+        <Button Content="Add Patient to System" Grid.Row="7" Margin="10" Click="PatientAnlegen_Click"/>
+
+        <Button Content="Abort" Grid.Row="8" Margin="10" Click="Abbruch_Click"/>
 
     </Grid>
 </Window>

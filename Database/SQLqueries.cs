@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Npgsql;
 
 namespace Database
@@ -11,48 +7,89 @@ namespace Database
     {
         private static string connString = "Host=db.inftech.hs-mannheim.de;Username=pms1;Password=pms1;Database=pms1";
 
-
-
         static void Main(string[] args)
         {
-
-
-
-            var conn = new NpgsqlConnection(connString);
-            conn.Open();
-
-
-            Patient p1 = new Patient(firstName: "Hans", lastName: "Müller", birthday: new DateTime(1994, 06, 14));
-            addPatient(p1);
-
-
+            //DeleteTable();
+            CreateTable();
+            
         }
-       public static void addPatient(Patient p) {
 
+        public static void CreateTable()
+        {
             var conn = new NpgsqlConnection(connString);
+
             try
             {
-            conn.Open();
-            var sql = "INSERT INTO patients(lastName, firstName, birthday) VALUES(@firstName,@lastName,@birthday) RETURNING patienten_id";
+                conn.Open();
 
-            using (var cmd = new NpgsqlCommand(sql, conn))
-            {
-                cmd.Parameters.AddWithValue("firstName", p.firstName);
-                cmd.Parameters.AddWithValue("lastName", p.lastName);
-                cmd.Parameters.AddWithValue("birthday", p.birthday);
-                cmd.Prepare();
-                int id = (int)cmd.ExecuteScalar();
-                p.id = id;
-                Console.WriteLine(p.id);
+                var sql = $@"
+                    CREATE TABLE IF NOT EXISTS patients (
+                        pid SERIAL PRIMARY KEY,
+                        name VARCHAR(80) NOT NULL,
+                        vorname VARCHAR(80) NOT NULL,
+                        sex CHAR(6),
+                        bd DATE,
+                        rn INT,
+                        bn INT
+                    );
+
+                    CREATE TABLE IF NOT EXISTS monitors (
+                        moid SERIAL PRIMARY KEY,
+                        mf VARCHAR(80) NOT NULL,
+                        sn VARCHAR(80) NOT NULL
+                    );
+
+                    CREATE TABLE IF NOT EXISTS belegung (
+                        moid INT REFERENCES monitors(moid),
+                        pid INT REFERENCES patients(pid)
+                    );";
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+
+                Console.WriteLine("Alle Tabellen erstellt.");
             }
-            Console.WriteLine("row inserted");
-        }
             catch (NpgsqlException ex)
             {
-                Console.WriteLine("Fehler beim Einfügen des Patienten: " + ex.Message);
+                Console.WriteLine($"Fehler beim Erstellen der Tabellen: {ex.Message}");
             }
-            conn.Close();
+            finally
+            {
+                conn.Close();
             }
+        }
+        public static void DeleteTable()
+        {
+            var conn = new NpgsqlConnection(connString);
 
+            try
+            {
+                conn.Open();
+
+                var sql = $@"DROP TABLE patients, monitors, belegung";
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+
+                Console.WriteLine($"Alle Tabellen gelöscht.");
+            }
+            catch (NpgsqlException ex)
+            {
+                Console.WriteLine($"Fehler beim Löschen der Tabellen: {ex.Message}");
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }
+
+
+
+
+

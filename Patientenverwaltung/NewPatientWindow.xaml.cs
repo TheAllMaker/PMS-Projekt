@@ -1,82 +1,115 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Npgsql;
 
 namespace Patientenverwaltung
 {
-    /// <summary>
-    /// Interaktionslogik für NewPatientWindow.xaml
-    /// </summary>
+    public class Patient
+    {
+        public string Vorname { get; set; }
+        public string Nachname { get; set; }
+        public string Geschlecht { get; set; }
+        public DateTime Geburtsdatum { get; set; }
+        public int Room { get; set; }
+        public int Bed { get; set; }
+    }
+
     public partial class NewPatientWindow : Window
     {
         private static string connString = "Host=db.inftech.hs-mannheim.de;Username=pms1;Password=pms1;Database=pms1";
-
 
         public NewPatientWindow()
         {
             InitializeComponent();
         }
 
+
+
         private void PatientAnlegen_Click(object sender, RoutedEventArgs e)
         {
-            // Verbindungszeichenfolge zur Datenbank
-            string connectionString = connString;
+            string vorname = txtVorname.Text;
+            string nachname = txtNachname.Text;
+            string sex = cmbSex.Text;
 
-            try
+            DateTime geburtsdatum = dpGeburtstag.SelectedDate ?? DateTime.MinValue;
+
+            // Überprüfen, ob das Room-Feld eine gültige Ganzzahl ist
+            if (int.TryParse(txtRoom.Text, out int room))
             {
-                using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                // Überprüfen, ob das Bed-Feld eine gültige Ganzzahl ist
+                if (int.TryParse(txtBed.Text, out int bed))
                 {
-                    connection.Open();
-
-                    // Patientendaten aus den Textfeldern abrufen
-                    string vorname = txtVorname.Text;
-                    string nachname = txtNachname.Text;
-                    DateTime geburtsdatum = dpGeburtstag.SelectedDate ?? DateTime.MinValue;
-
-                    // SQL-Abfrage zum Einfügen von Daten
-                    string insertQuery = "INSERT INTO patients (pid, name, vorname) VALUES (@PID, @Vorname, @Nachname)";
-
-                    using (NpgsqlCommand command = new NpgsqlCommand(insertQuery, connection))
+                    // Überprüfen der Eingabe
+                    if (IsValidInput(vorname, nachname, sex, geburtsdatum, room, bed))
                     {
-                        // Parameter setzen, um SQL Injection zu vermeiden
-                        command.Parameters.AddWithValue("@PID", 250);
-                        command.Parameters.AddWithValue("@Vorname", vorname);
-                        command.Parameters.AddWithValue("@Nachname", nachname);
-                        // command.Parameters.AddWithValue("@Geburtsdatum", geburtsdatum);
+                        // Verbindungszeichenfolge zur Datenbank
+                        string connectionString = connString;
 
-                        // Ausführen der SQL-Abfrage
-                        command.ExecuteNonQuery();
+                    
+                        try
+                        {
+                            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                            {
+                                connection.Open();
+
+                                // SQL-Abfrage zum Einfügen von Daten
+                                string insertQuery = "INSERT INTO patients (name, vorname, sex, bd, rn, bn) VALUES (@Nachname, @Vorname, @Sex, @Birthdate, @Room, @Bed)";
+
+                                using (NpgsqlCommand command = new NpgsqlCommand(insertQuery, connection))
+                                {
+                                    // Parameter setzen, um SQL Injection zu vermeiden
+                                    command.Parameters.AddWithValue("@Vorname", vorname);
+                                    command.Parameters.AddWithValue("@Nachname", nachname);
+                                    command.Parameters.AddWithValue("@Sex", sex);
+                                    command.Parameters.AddWithValue("@Birthdate", geburtsdatum);
+                                    command.Parameters.AddWithValue("@Room", room);
+                                    command.Parameters.AddWithValue("@Bed", bed);
+                                    // Ausführen der SQL-Abfrage
+                                    command.ExecuteNonQuery();
+                                }
+                            }
+
+                            MessageBox.Show("Daten erfolgreich in die Datenbank eingefügt.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Fehler beim Einfügen der Daten: {ex.Message}");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ungültige Eingabe. Stellen Sie sicher, dass alle Felder ausgefüllt sind.");
                     }
                 }
-
-                MessageBox.Show("Daten erfolgreich in die Datenbank eingefügt.");
+                else
+                {
+                    MessageBox.Show("Ungültige Eingabe für Bed. Bitte geben Sie eine gültige Ganzzahl ein.");
+                }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show($"Fehler beim Einfügen der Daten: {ex.Message}");
+                MessageBox.Show("Ungültige Eingabe für Room. Bitte geben Sie eine gültige Ganzzahl ein.");
             }
         }
 
+        private bool IsValidInput(string vorname, string nachname, string sex, DateTime geburtsdatum, int room, int bed)
+        {
+            if (vorname.Length < 3 || nachname.Length < 3)
+            {
+                MessageBox.Show("Name und Vorname müssen mindestens drei Buchstaben enthalten.");
+                return false;
+            }
+            // Hier können Sie zusätzliche Validierungen hinzufügen
+            return !string.IsNullOrEmpty(vorname) &&
+                   !string.IsNullOrEmpty(nachname) &&
+                   !string.IsNullOrEmpty(sex) &&
+                   geburtsdatum != DateTime.MinValue;
+        }
 
         private void Abbruch_Click(object sender, RoutedEventArgs e)
         {
             // Anwendung schließen 
-
             this.Close();
-            
         }
     }
 }
