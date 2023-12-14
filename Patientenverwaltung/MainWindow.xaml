@@ -16,13 +16,13 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Administration"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="20"/>
+        <TextBlock Text="Database Administration Window"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="20"/>
 
 
         <!-- Button 1 - Oberer Bereich -->
         <Button Grid.Row="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" 
                 BorderBrush="Black" BorderThickness="2" Background="Transparent" Foreground="Black" 
-                Name ="AddPatient" Click="Button_Click_AddPatient" Content="add Patient" Padding="10" Width="176" Height="38">
+                Name ="AddPatient" Click="Button_Click_AddPatient" Content="Add Patient" Padding="10" Width="176" Height="38">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
@@ -36,7 +36,7 @@
         <!-- Button 2 - Mittlerer Bereich -->
         <Button Grid.Row="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" 
                 BorderBrush="Black" BorderThickness="2" Background="Transparent" Foreground="Black" 
-                Name ="AddMonitor" Click="Button_Click_AddMonitor" Content="add Monitor" Padding="10" Width="176" Height="39">
+                Name ="AddMonitor" Click="Button_Click_AddMonitor" Content="Add Monitor" Padding="10" Width="176" Height="39">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
@@ -49,22 +49,35 @@
 
         <!-- Button 3 - Unterer Bereich -->
         <Button Grid.Row="3" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" 
-                BorderBrush="Black" BorderThickness="2" Background="Transparent" Foreground="Black" 
-                Name ="ConnectPM" Click="Button_Click_ConnectPM" Content="connect Patient with Monitor" Padding="10" Width="308" Height="38" Margin="0,18,0,0">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
-                            BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
+        BorderBrush="Black" BorderThickness="2" Background="Transparent" Foreground="Black" 
+        Name="ConnectPM" Click="Button_Click_ConnectPM" Content="Connect Patient with Monitor" Padding="10" Width="308" Height="38" Margin="0,18,0,0">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <!-- Hover-Effekt -->
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <!-- Ändern Sie diese Farbe nach Ihren Wünschen -->
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
 
         <!-- Power-Off Button - Unten rechts -->
 
-        <Button Grid.Row="4" Grid.Column="1" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                 BorderBrush="Transparent" Foreground="White" Name ="PowerOff" Click="Button_Click_PowerOff"
+        <Button Grid.Row="4" Grid.Column="1" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="550,0,0,10"
+                 BorderBrush="Black" Foreground="Transparent" Name ="PowerOff" Click="Button_Click_PowerOff"
    >
             <Viewbox Width="30" Height="30" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
                 <Rectangle Width="30" Height="30">

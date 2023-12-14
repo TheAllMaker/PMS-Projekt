@@ -35,7 +35,8 @@ namespace MediTrack.Controller.RemoteController
         private void UpdateButtonColor(Button button)
         {
             // Setze die Hintergrundfarbe basierend auf dem Zustand
-            button.Background = isGreen ? Brushes.Green : Brushes.Red;
+            button.Background = isGreen ? new SolidColorBrush(Color.FromRgb(40, 151, 73)) : new SolidColorBrush(Color.FromRgb(172, 74, 83));
+
         }
 
 

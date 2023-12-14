@@ -39,7 +39,7 @@
         <!-- Weitere UI-Elemente hier -->
 
         <!-- Button zum Anlegen oder Abbrechen -->
-        <Button Content="add Monitor to System" Grid.Row="5" Margin="10,10,10,10" Click="MonitorAnlegen_Click"/>
-        <Button Content="abort" Grid.Row="6" Margin="10,5,10,10" Click="Abbruch_Click"/>
+        <Button Content="Add Monitor to System" Grid.Row="5" Margin="10,10,10,10" Click="MonitorAnlegen_Click"/>
+        <Button Content="Abort" Grid.Row="6" Margin="10,5,10,10" Click="Abbruch_Click"/>
     </Grid>
 </Window>
