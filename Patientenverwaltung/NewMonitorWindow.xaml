@@ -13,33 +13,31 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Überschrift -->
         <TextBlock Text="Monitor Information" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="20"/>
 
         <!-- Hersteller -->
-        <Label Content="Manufacturer:" Grid.Row="1" Margin="10,10,10,5"/>
-        <TextBox x:Name="txtHersteller" Grid.Row="1" Margin="153,10,10,5" />
+        <Label Content="Manufacturer:" Grid.Row="1" Margin="10,5,10,5"/>
+        <ComboBox x:Name="cmbManu" Grid.Row="1" Margin="153,5,10,5">
+            <ComboBoxItem Content="Philips Healthcare"/>
+            <ComboBoxItem Content="GE Healthcare"/>
+            <ComboBoxItem Content="Mindray"/>
+            <ComboBoxItem Content="Dräger"/>
+            <ComboBoxItem Content="Schiller"/>
+        </ComboBox>
+
 
         <!-- Seriennummer -->
         <Label Content="Serial number:" Grid.Row="2" Margin="10,5,10,5"/>
         <TextBox x:Name="txtSeriennummer" Grid.Row="2" Margin="153,5,10,5" />
 
-        <!-- Raumnummer -->
-        <Label Content="Room:" Grid.Row="3" Margin="10,5,10,5"/>
-        <TextBox x:Name="txtRaumnummer" Grid.Row="3" Margin="153,5,10,5" />
-
-        <!-- Bettnummer -->
-        <Label Content="Bed:" Grid.Row="4" Margin="10,5,10,5"/>
-        <TextBox x:Name="txtBettnummer" Grid.Row="4" Margin="153,5,10,5" />
 
         <!-- Weitere UI-Elemente hier -->
 
         <!-- Button zum Anlegen oder Abbrechen -->
-        <Button Content="Add Monitor to System" Grid.Row="5" Margin="10,10,10,10" Click="MonitorAnlegen_Click"/>
-        <Button Content="Abort" Grid.Row="6" Margin="10,5,10,10" Click="Abbruch_Click"/>
+        <Button Content="Add Monitor to System" Grid.Row="3" Margin="10,10,10,10" Click="MonitorAnlegen_Click"/>
+        <Button Content="Abort" Grid.Row="4" Margin="10,5,10,10" Click="Abbruch_Click"/>
     </Grid>
 </Window>
