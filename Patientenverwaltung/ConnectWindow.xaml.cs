@@ -104,7 +104,9 @@ namespace Patientenverwaltung
                             if (count > 0)
                             {
                                 // Update durchführen, wenn der Patient bereits in der belegung existiert
-                                string updateQuery = "UPDATE belegung SET moid = @MonitorId WHERE pid = @PatientId";
+                                string updateQuery = "DELETE FROM belegung WHERE moid = @MonitorId; " +
+                                                 "UPDATE belegung SET moid = @MonitorId WHERE pid = @PatientId";
+
 
                                 using (NpgsqlCommand updateCommand = new NpgsqlCommand(updateQuery, connection))
                                 {

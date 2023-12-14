@@ -9,7 +9,7 @@ namespace Database
 
         static void Main(string[] args)
         {
-            //DeleteTable();
+            DeleteTable();
             CreateTable();
             
         }
