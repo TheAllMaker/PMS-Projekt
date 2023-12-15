@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Vitaldatensimulator
 {
@@ -223,6 +224,11 @@ namespace Vitaldatensimulator
             switch (currentState)
             {
                 case SimulationState.Stopped:
+                    string monitorIDString = MonitorIDBox.Text;
+                    if (!IsMonitorIDAlreadyStored(monitorIDString))
+                    {
+                        WriteMonitorIDToFile(monitorIDString);
+                    }
                     StartSimulation();
                     break;
                 case SimulationState.Running:
@@ -344,5 +350,32 @@ namespace Vitaldatensimulator
             // Rufe die Methode in der anderen Datei auf, um die aktualisierten Werte zu übergeben
             VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
         }
+
+        private void WriteMonitorIDToFile(string monitorID)
+        {
+            string debugDirectory = AppDomain.CurrentDomain.BaseDirectory; // Ausgabeordner (z.B. "bin\Debug\")
+
+            string relativePath = "MonitorID.txt"; // Dateiname
+            string fullPath = System.IO.Path.Combine(debugDirectory, relativePath);
+
+            System.IO.File.WriteAllText(fullPath, monitorID);
+        }
+
+        private bool IsMonitorIDAlreadyStored(string monitorID)
+        {
+            string debugDirectory = AppDomain.CurrentDomain.BaseDirectory; // Ausgabeordner (z.B. "bin\Debug\")
+
+            string relativePath = "MonitorID.txt"; // Dateiname
+            string fullPath = System.IO.Path.Combine(debugDirectory, relativePath);
+
+            if (System.IO.File.Exists(fullPath))
+            {
+                string storedID = System.IO.File.ReadAllText(fullPath);
+                return (storedID == monitorID);
+            }
+
+            return false; // Die Datei existiert nicht oder die ID wurde noch nicht gespeichert
+        }
+
     }
 }
