@@ -4,8 +4,8 @@
     x:Class="MediTrack.Controller.RemoteController.PatientTemplate"
     >
     <DataTemplate x:Key="PatientTemplate">
-
-        <Grid  ShowGridLines="True"  Background="Black">
+        <Border BorderBrush="White" BorderThickness="2">
+            <Grid  ShowGridLines="True"  Background="Black">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -26,24 +26,32 @@
             </Grid>-->
 
             <!-- Name und Co. I -->
-            <Border BorderBrush="Black" Grid.Column="1">
-                <TextBlock Background="Black"  FontSize="16" Grid.Column="1" HorizontalAlignment="Center" 
-                 VerticalAlignment="Center"  Foreground="White" Grid.ColumnSpan="2"
-                  Name ="FirstNameTextBlock" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> 
-                    
+                <Border BorderBrush="Black" Grid.Column="1">
+                    <TextBlock Background="Black"  HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Foreground="White" Grid.ColumnSpan="2">  
+                       <Run Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13"/>
+                       <Run Text=" "/>
+                       <Run Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" FontWeight="Bold"/>
+                    </TextBlock>
+                </Border>
+                
+                <!-- Name und Co. II -->
+
+
+                <TextBlock Background="Black"  FontSize="20" Grid.Column="2" HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"  Foreground="White" Grid.ColumnSpan="2" Name ="LastNameTextBlock">
+                        <Run Text="Bed:"/>
+                        <Run Text="{Binding BedNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Run Text=" "/>
+                        <Run Text="Room:"/>
+                        <Run Text="{Binding RoomNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </TextBlock>
-            </Border>
-
-            <!-- Name und Co. II -->
-            <TextBlock Background="Black"  FontSize="20" Grid.Column="2" HorizontalAlignment="Center" 
-                VerticalAlignment="Center"  Foreground="White" Grid.ColumnSpan="2"
-                Name ="LastNameTextBlock" Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold">
-            </TextBlock>
 
 
-            <!--<Viewbox Width="100" Height="100" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name ="PatientHealthIcon" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">-->
 
-                <Viewbox Width="200" Height="200"  x:Name ="PatientHealthIcon" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
+                <!--<Viewbox Width="100" Height="100" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name ="PatientHealthIcon" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">-->
+
+                <Viewbox Width="200" Height="200" x:Name="PatientHealthIcon" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Visibility="Collapsed">
                 <Rectangle  Width="80" Height="80">
                         <Rectangle.Resources>
                             <SolidColorBrush x:Key="canvas" Opacity="0" />
@@ -73,7 +81,7 @@
 
                 <!-- Icons II -->
             <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2"  
-                Background="Black"  Name ="PatientNetworkIcon" BorderBrush="Transparent" >
+                Background="Black"  Name ="PatientNetworkIcon" BorderBrush="Transparent"  >
                 <Viewbox Width="40 "   Height="40" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
                     <Rectangle Width="16 " Height="16"  Stroke="Transparent">
                         <Rectangle.Resources>
@@ -107,7 +115,7 @@
             <!-- ZoomButton -->
             <Button FontSize="20" Grid.Row="3"  Name ="PatientZoomButton" Click="OpenDetailed" BorderThickness="0"
                  VerticalAlignment="Center"  HorizontalAlignment="Center" Background="Black">
-                <Viewbox Width="50 " Height="50" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
+                    <Viewbox Width="50 " Height="50" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
                     <Rectangle Width="30 " Height="30">
                         <Rectangle.Resources>
                             <SolidColorBrush x:Key="canvas" Opacity="0" />
@@ -222,6 +230,7 @@
 
 
         </Grid>
+        </Border>
     </DataTemplate>
 
 </ResourceDictionary>

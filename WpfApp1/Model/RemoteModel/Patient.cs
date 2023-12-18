@@ -19,7 +19,8 @@ namespace MediTrack.Model.RemoteModel
         private object _oxygenLevel;
         private object _bloodPressureDiastolic;
         private object _bloodPressureSystolic;
-
+        private object _roomNumber;
+        private object _bedNumber;
 
         // INotifyPropertyChanged is a .NET interface and notfiy subscribers ( the Patient member access in mainwindow.cs)
         // when properties are changed. _classvariable declares a private field -> if the customer get&set are 
@@ -219,6 +220,40 @@ namespace MediTrack.Model.RemoteModel
                 {
                     _patientMonitor = value;
                     OnPropertyChanged(nameof(PatientMonitor));
+                }
+            }
+        }
+
+        public object RoomNumber
+        {
+            get
+            {
+                return _roomNumber;
+            }
+
+            set
+            {
+                if (_roomNumber != value)
+                {
+                    _roomNumber = value;
+                    OnPropertyChanged(nameof(RoomNumber));
+                }
+            }
+        }
+
+        public object BedNumber
+        {
+            get
+            {
+                return _bedNumber;
+            }
+
+            set
+            {
+                if (_bedNumber != value)
+                {
+                    _bedNumber = value;
+                    OnPropertyChanged(nameof(BedNumber));
                 }
             }
         }
