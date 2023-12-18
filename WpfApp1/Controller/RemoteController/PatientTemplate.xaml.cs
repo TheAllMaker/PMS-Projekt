@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediTrack.View.RemoteView;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,24 +8,29 @@ using System.Windows;
 
 namespace MediTrack.Controller.RemoteController
 {
-    public partial class PatientTemplate 
-    {
+    //public partial class PatientTemplate : Window
+    //{
 
-        
-        public void OpenDetailed(object sender, RoutedEventArgs e)
-        {
-            //            Window DetailedWindow = new Vitaldatensimulator.MainWindow
-            //           {
-            //                Title = "DetailWindow",
-            //                Width = SystemParameters.PrimaryScreenWidth * 0.75,
-            //                Height = SystemParameters.PrimaryScreenHeight * 0.75,
-            //                WindowStartupLocation = WindowStartupLocation.CenterScreen
-            //            };
-            //            DetailedWindow.Show();
-            //DetailedWindow.Owner = this;
-           // PatientHealthIcon.Visibility = Visibility.Collapsed;
-        }
+    //    ////public PatientTemplate()
+    //    ////{
+    //    ////    InitializeComponent();
+    //    ////}
+
+
+    //    //public void OpenDetailed(object sender, RoutedEventArgs e)
+    //    //{
+    //    //    Window DetailedWindow = new Window
+    //    //    {
+    //    //        Title = "Cut-Off Monitor",
+    //    //        Width = SystemParameters.PrimaryScreenWidth * 0.75,
+    //    //        Height = SystemParameters.PrimaryScreenHeight * 0.75,
+    //    //        WindowStartupLocation = WindowStartupLocation.CenterScreen
+    //    //    };
+    //    //    DetailedWindow.Show();
+    //    //    DetailedWindow.Owner = this;
+    //    //    // PatientHealthIcon.Visibility = Visibility.Collapsed;
+    //    //}
         
 
-    }
+    //}
 }
