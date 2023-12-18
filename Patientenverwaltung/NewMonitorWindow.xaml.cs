@@ -62,6 +62,9 @@ namespace Patientenverwaltung
                             MessageBox.Show("Monitor wurde erfolgreich angelegt.");
                         }
                     }
+                    // Zurücksetzen der Auswahl in den ComboBoxen
+                    cmbManu.SelectedItem = null;
+                    txtSeriennummer.Text = null;
                 }
                 catch (Exception ex)
                 {
