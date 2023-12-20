@@ -26,7 +26,7 @@ namespace MediTrack
 
     public partial class MainWindow : Window
     {
-        Patient existingPatient = null;
+       // Patient existingPatient = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -53,7 +53,7 @@ namespace MediTrack
             ConnectToMQTTBroker();
         }
 
-        private void ConnectToMQTTBroker()
+        private static void ConnectToMQTTBroker()
         {
             MqttHandler handler = new MqttHandler();
             handler.ConnectToServer();
@@ -104,8 +104,11 @@ namespace MediTrack
 
                     Patient PatientenInstanz = new Patient()
                     {
-                        FirstName = sstring[1],
+                        
                         LastName = sstring[0],
+                        FirstName = sstring[1],
+                        RoomNumber = sstring[2],
+                        BedNumber = sstring[3],
                         PatientNumber = puffer,
                         PatientMonitor = queuearray[0],
                         HeartRate = queuearray[1],
@@ -113,7 +116,6 @@ namespace MediTrack
                         BloodPressureDiastolic = queuearray[5],
                         RespirationRate = queuearray[2],
                         BloodPressureSystolic = queuearray[4],
-                        
                         Temperature = queuearray[6],
                     };
 

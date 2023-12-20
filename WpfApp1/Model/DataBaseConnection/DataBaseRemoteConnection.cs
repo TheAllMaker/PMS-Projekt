@@ -115,7 +115,7 @@ namespace MediTrack.Model.DataBaseModelConnection
             }
 
             var DataBaseConnector = DataBaseConnectionCall();
-            string SelectPatientThroughPIDString = "SELECT Name, Vorname FROM public.patients WHERE pid = @PatientID";
+            string SelectPatientThroughPIDString = "SELECT Name, Vorname, Rn, Bn FROM public.patients WHERE pid = @PatientID";
             NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand(SelectPatientThroughPIDString, DataBaseConnector);
             SelectPatientThroughPIDCommand.Parameters.AddWithValue("@PatientID", patientIdentifier);
 
@@ -123,11 +123,13 @@ namespace MediTrack.Model.DataBaseModelConnection
 
             if (PIDReader.Read())
             {
-                string[] sresult = new string[2];
+                string[] sresult = new string[4];
                 sresult[0] = PIDReader["Name"].ToString();
                 sresult[1] = PIDReader["Vorname"].ToString();
+                sresult[2] = PIDReader["Rn"].ToString();
+                sresult[3] = PIDReader["Bn"].ToString();
 
-                Console.WriteLine($"Name: {sresult[0]}, Vorname: {sresult[1]}");
+                Console.WriteLine($"Name: {sresult[0]}, Vorname: {sresult[1]}, Raumnummer: {sresult[2]}, Bettnummer: {sresult[3]}");
                 DataBaseConnector.Close();
                 return sresult;
             }
