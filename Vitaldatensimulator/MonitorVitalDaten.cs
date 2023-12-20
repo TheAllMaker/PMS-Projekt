@@ -13,10 +13,11 @@ namespace Vitaldatensimulator
         public int BloodPressureSystolic { get;  set; }
         public int BloodPressureDiastolic { get;  set; }
         public double Temperature { get; set; }
+        public int Alive { get; set; }
 
         private VitaldatenGenerator generator;
 
-        public MonitorVitalDaten(string MonitorID, int HeartRate, int RespirationRate, int OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, double Temperature)
+        public MonitorVitalDaten(string MonitorID, int HeartRate, int RespirationRate, int OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, double Temperature, int Alive=1)
         {
             this.MonitorID = MonitorID;
             this.HeartRate = HeartRate;
@@ -25,6 +26,7 @@ namespace Vitaldatensimulator
             this.BloodPressureSystolic = BloodPressureSystolic;
             this.BloodPressureDiastolic = BloodPressureDiastolic;
             this.Temperature = Temperature;
+            this.Alive = Alive;
 
             generator = new VitaldatenGenerator();
         }
@@ -39,7 +41,8 @@ namespace Vitaldatensimulator
                 OxygenLevel,
                 BloodPressureSystolic,
                 BloodPressureDiastolic,
-                Temperature
+                Temperature,
+                Alive
             };
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(vitaldaten);

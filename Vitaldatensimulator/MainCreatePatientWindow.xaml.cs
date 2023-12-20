@@ -50,16 +50,19 @@ namespace Vitaldatensimulator
 
         private void VitaldatenSimulator_VitalDataUpdated(object sender, MonitorVitalDaten MonitorVitalDaten)
         {
-            Dispatcher.Invoke(() =>
+            if (MonitorVitalDaten != null)
             {
-                HeartRateValueTextBlock.Text = MonitorVitalDaten.HeartRate.ToString();
-                RespirationRateValueTextBlock.Text = MonitorVitalDaten.RespirationRate.ToString();
-                OxygenLevelValueTextBlock.Text = MonitorVitalDaten.OxygenLevel.ToString();
-                BloodPressureSystolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureSystolic.ToString();
-                BloodPressureDiastolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureDiastolic.ToString();
-                double value = Math.Round(MonitorVitalDaten.Temperature, 1);
-                TemperatureValueTextBlock.Text = value.ToString("0.0");
-            });
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    HeartRateValueTextBlock.Text = MonitorVitalDaten.HeartRate.ToString();
+                    RespirationRateValueTextBlock.Text = MonitorVitalDaten.RespirationRate.ToString();
+                    OxygenLevelValueTextBlock.Text = MonitorVitalDaten.OxygenLevel.ToString();
+                    BloodPressureSystolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureSystolic.ToString();
+                    BloodPressureDiastolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureDiastolic.ToString();
+                    double value = Math.Round(MonitorVitalDaten.Temperature, 1);
+                    TemperatureValueTextBlock.Text = value.ToString("0.0");
+                });
+            }
         }
 
         private void InitializeSliderValues()
@@ -288,7 +291,9 @@ namespace Vitaldatensimulator
 
             if (result == MessageBoxResult.Yes)
             {
+                UpdateAliveStatus();
                 // Schließe das Programm
+                VitaldatenSimulator.isSendingData = false;
                 VitaldatenSimulator.ResetTimer();
                 Application.Current.Shutdown();
             }
@@ -342,6 +347,12 @@ namespace Vitaldatensimulator
 
             // Rufe die Methode in der anderen Datei auf, um die aktualisierten Werte zu übergeben
             VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
+        }
+        private void UpdateAliveStatus()
+        {
+            // Setze Alive auf 0
+            MonitorVitalDaten updatedAliveMonitor = new MonitorVitalDaten(ID, 0, 0, 0, 0, 0, 0, 0);
+            VitaldatenSimulator.DoMqttAndDataOperations(updatedAliveMonitor);
         }
     }
 }
