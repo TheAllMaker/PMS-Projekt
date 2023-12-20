@@ -72,10 +72,15 @@ namespace MediTrack
 
                 object[] mqttMessageQueueArray = MqttMessageQueue.Dequeue();
 
-                if ( (mqttMessageQueueArray.Length != 0) &&  PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]) )
-                {
+               
+
+               if ( (mqttMessageQueueArray.Length != 0) &&  PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]) )
+               {
+
                     Console.WriteLine(StringContainer.MonitorIDFound);
                     Patient existingPatient = PatientDictionary.DictionaryCaller(mqttMessageQueueArray[0]);
+
+//if(existingPatient ) { }
 
                     
                     existingPatient.HeartRate = mqttMessageQueueArray[1];
@@ -92,10 +97,10 @@ namespace MediTrack
                     existingPatient.OnPropertyChanged(nameof(existingPatient.RespirationRate));
                     existingPatient.OnPropertyChanged(nameof(existingPatient.BloodPressureSystolic));
                     existingPatient.OnPropertyChanged(nameof(existingPatient.Temperature));
-                }
+               }
 
-                else if ((mqttMessageQueueArray.Length != 0))
-                {
+               else if ((mqttMessageQueueArray.Length != 0))
+               {
                     object mqttDataString = DataBaseRemoteConnection.CallMonitorIDtoPatientID(mqttMessageQueueArray[0]);
                     object[] patientDataString = DataBaseRemoteConnection.CallForPatientThroughID(mqttDataString);
 
@@ -106,30 +111,35 @@ namespace MediTrack
                         FirstName = patientDataString[1],
                         RoomNumber = patientDataString[2],
                         BedNumber = patientDataString[3],
+
                         PatientNumber = mqttDataString,
+
+
+
                         PatientMonitor = mqttMessageQueueArray[0],
                         HeartRate = mqttMessageQueueArray[1],
-                        OxygenLevel = mqttMessageQueueArray[3],
-                        BloodPressureDiastolic = mqttMessageQueueArray[5],
                         RespirationRate = mqttMessageQueueArray[2],
+                        OxygenLevel = mqttMessageQueueArray[3],
                         BloodPressureSystolic = mqttMessageQueueArray[4],
+                        BloodPressureDiastolic = mqttMessageQueueArray[5],
                         Temperature = mqttMessageQueueArray[6],
+
                     };
 
-                    // Create a new ContentControl for each patient
+                    
                     Dispatcher.Invoke(() =>
                     {
-                        ContentControl contentControl2 = new ContentControl
+                        ContentControl PatientTemplateContentAddition = new ContentControl
                         {
                             ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
                             Content = PatientenInstanz,
                             Margin = new Thickness(5)
                         };
-                        PatientenMonitorDynGrid.Children.Add(contentControl2);
+                        PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
                     });
 
                     PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
-                }
+               }
             }
         }
 
@@ -156,7 +166,11 @@ namespace MediTrack
 
 
 
-
+        //void AssignPatientData(Patient patient, object[] data)
+        //{
+        //    patient.HeartRate = data[1];
+        //    patient.RespirationRate = data[2];
+        //}
 
         private void Add_Button_Clicked(object sender, RoutedEventArgs e)
         {

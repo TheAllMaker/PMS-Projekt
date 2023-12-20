@@ -15,7 +15,7 @@ namespace Vitaldatensimulator
         public double Temperature { get; set; }
         public int Alive { get; set; }
 
-        private VitaldatenGenerator generator;
+        private readonly VitaldatenGenerator generator;
 
         public MonitorVitalDaten(string MonitorID, int HeartRate, int RespirationRate, int OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, double Temperature, int Alive=1)
         {

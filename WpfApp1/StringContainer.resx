@@ -123,4 +123,52 @@
   <data name="MonitorIDFound" xml:space="preserve">
     <value>MQTTQueue: Entry Read In</value>
   </data>
+  <data name="MQTTSubScribeSucc" xml:space="preserve">
+    <value>MQTTHandler: Subscription Was Successful</value>
+  </data>
+  <data name="MQTTSubScribeTopic" xml:space="preserve">
+    <value>MQTTHandler: SubScribed To Topic</value>
+  </data>
+  <data name="PatientDictPatFound" xml:space="preserve">
+    <value>PatientDictionary: Patient Found</value>
+  </data>
+  <data name="PatientDictPatNotFound" xml:space="preserve">
+    <value>PatientDictionary: Patient Not Found</value>
+  </data>
+  <data name="PatientDictRemovedFai" xml:space="preserve">
+    <value>PatientDictionary: Removed PatiendID Failed</value>
+  </data>
+  <data name="PatientDictRemovedSuc" xml:space="preserve">
+    <value>PatientDictionary: Removed PatiendID Successful For </value>
+  </data>
+  <data name="PatientDictSearchedFound" xml:space="preserve">
+    <value>PatientDictionary: Searched Patient Found</value>
+  </data>
+  <data name="PatientDictSearchedFoundNot" xml:space="preserve">
+    <value>PatientDictionary: Searched Patient Not Found</value>
+  </data>
+  <data name="UUIDDictionaryContainFai" xml:space="preserve">
+    <value>UUIDDictionary: Dictionary Does Not Contain UUID</value>
+  </data>
+  <data name="UUIDDictionaryContainSuc" xml:space="preserve">
+    <value>UUIDDictionary: Dictionary Does Contain UUID</value>
+  </data>
+  <data name="UUIDDictionaryFai" xml:space="preserve">
+    <value>UUIDDictionary: MonitorID Isnt Bound At All</value>
+  </data>
+  <data name="UUIDDictionaryInsertFai" xml:space="preserve">
+    <value>UUIDDictionary: Inserted UUID Unsuccessful For</value>
+  </data>
+  <data name="UUIDDictionaryInsertSuc" xml:space="preserve">
+    <value>UUIDDictionary: Inserted UUID Successful For</value>
+  </data>
+  <data name="UUIDDictionaryRemovedFai" xml:space="preserve">
+    <value>UUIDDictionary: Removed UUID Unseccessful</value>
+  </data>
+  <data name="UUIDDictionaryRemovedSuc" xml:space="preserve">
+    <value>UUIDDictionary: Removed UUID Successful For </value>
+  </data>
+  <data name="UUIDDictionarySuc" xml:space="preserve">
+    <value>UUIDDictionary: MonitorID Is Bound To UUID</value>
+  </data>
 </root>

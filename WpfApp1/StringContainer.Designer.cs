@@ -77,5 +77,149 @@ namespace MediTrack {
                 return ResourceManager.GetString("MonitorIDFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die MQTTHandler: Subscription Was Successful ähnelt.
+        /// </summary>
+        internal static string MQTTSubScribeSucc {
+            get {
+                return ResourceManager.GetString("MQTTSubScribeSucc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die MQTTHandler: SubScribed To Topic ähnelt.
+        /// </summary>
+        internal static string MQTTSubScribeTopic {
+            get {
+                return ResourceManager.GetString("MQTTSubScribeTopic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PatientDictionary: Patient Found ähnelt.
+        /// </summary>
+        internal static string PatientDictPatFound {
+            get {
+                return ResourceManager.GetString("PatientDictPatFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PatientDictionary: Patient Not Found ähnelt.
+        /// </summary>
+        internal static string PatientDictPatNotFound {
+            get {
+                return ResourceManager.GetString("PatientDictPatNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PatientDictionary: Removed PatiendID Failed ähnelt.
+        /// </summary>
+        internal static string PatientDictRemovedFai {
+            get {
+                return ResourceManager.GetString("PatientDictRemovedFai", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PatientDictionary: Removed PatiendID Successful For  ähnelt.
+        /// </summary>
+        internal static string PatientDictRemovedSuc {
+            get {
+                return ResourceManager.GetString("PatientDictRemovedSuc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PatientDictionary: Searched Patient Found ähnelt.
+        /// </summary>
+        internal static string PatientDictSearchedFound {
+            get {
+                return ResourceManager.GetString("PatientDictSearchedFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PatientDictionary: Searched Patient Not Found ähnelt.
+        /// </summary>
+        internal static string PatientDictSearchedFoundNot {
+            get {
+                return ResourceManager.GetString("PatientDictSearchedFoundNot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die UUIDDictionary: Dictionary Does Not Contain UUID ähnelt.
+        /// </summary>
+        internal static string UUIDDictionaryContainFai {
+            get {
+                return ResourceManager.GetString("UUIDDictionaryContainFai", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die UUIDDictionary: Dictionary Does Contain UUID ähnelt.
+        /// </summary>
+        internal static string UUIDDictionaryContainSuc {
+            get {
+                return ResourceManager.GetString("UUIDDictionaryContainSuc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die UUIDDictionary: MonitorID Isnt Bound At All ähnelt.
+        /// </summary>
+        internal static string UUIDDictionaryFai {
+            get {
+                return ResourceManager.GetString("UUIDDictionaryFai", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die UUIDDictionary: Inserted UUID Unsuccessful For ähnelt.
+        /// </summary>
+        internal static string UUIDDictionaryInsertFai {
+            get {
+                return ResourceManager.GetString("UUIDDictionaryInsertFai", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die UUIDDictionary: Inserted UUID Successful For ähnelt.
+        /// </summary>
+        internal static string UUIDDictionaryInsertSuc {
+            get {
+                return ResourceManager.GetString("UUIDDictionaryInsertSuc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die UUIDDictionary: Removed UUID Unseccessful ähnelt.
+        /// </summary>
+        internal static string UUIDDictionaryRemovedFai {
+            get {
+                return ResourceManager.GetString("UUIDDictionaryRemovedFai", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die UUIDDictionary: Removed UUID Successful For  ähnelt.
+        /// </summary>
+        internal static string UUIDDictionaryRemovedSuc {
+            get {
+                return ResourceManager.GetString("UUIDDictionaryRemovedSuc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die UUIDDictionary: MonitorID Is Bound To UUID ähnelt.
+        /// </summary>
+        internal static string UUIDDictionarySuc {
+            get {
+                return ResourceManager.GetString("UUIDDictionarySuc", resourceCulture);
+            }
+        }
     }
 }

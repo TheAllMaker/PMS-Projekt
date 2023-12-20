@@ -33,8 +33,8 @@ namespace MediTrack.Model.RemoteModel
         {
             const string topic = "23pms01/test";
             ushort msgId = client.Subscribe(new string[] { topic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
-            Debug.WriteLine("Subscribed to topic: " + topic);
-            Debug.WriteLine("Subscription succ, msgId:" + msgId);
+            Debug.WriteLine(StringContainer.MQTTSubScribeTopic + topic);
+            Debug.WriteLine(StringContainer.MQTTSubScribeSucc + msgId);
             
         }
        public void Client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)

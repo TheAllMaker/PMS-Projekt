@@ -54,27 +54,38 @@ namespace MediTrack.View.RemoteView
 
         private void InputCollector()
         {
-            DataBaseRemoteConnection.DataBaseEntireEntryCall();
-            int counterstrike = DataBaseRemoteConnection.DataBaseEntries.Count();
-            List<int> ListInput = new List<int>();
-            ListInput.AddRange(DataBaseRemoteConnection.DataBaseEntries);
-            ListInput.Sort();
-            Console.WriteLine(counterstrike);
-            foreach (int varI in ListInput)
-            {
-                var viewModel = new MediTrack.Model.RemoteModel.PatientViewModel
-                {
-                    VarI = varI.ToString()
-                };
 
-                ContentControl SelectionUI = new ContentControl
-                {
-                    ContentTemplate = (DataTemplate)Resources["SelectionWindowPatientBox"],
-                    Content = viewModel,
-                    Margin = new Thickness(5)
-                };
-                BoxInputGrid.Children.Add(SelectionUI);
-            }
+            List<string> data = new List<string>()
+            {
+                "Option1",
+                "Option2",
+                "Option3",
+
+            };
+
+            //MyComboBox.ItemsSource = data;
+            //MyComboBox.SelectedIndex = 0;
+            //DataBaseRemoteConnection.DataBaseEntireEntryCall();
+            //int counterstrike = DataBaseRemoteConnection.DataBaseEntries.Count();
+            //List<int> ListInput = new List<int>();
+            //ListInput.AddRange(DataBaseRemoteConnection.DataBaseEntries);
+            //ListInput.Sort();
+            //Console.WriteLine(counterstrike);
+            //foreach (int varI in ListInput)
+            //{
+            //    var viewModel = new MediTrack.Model.RemoteModel.PatientViewModel
+            //    {
+            //        VarI = varI.ToString()
+            //    };
+
+            //    ContentControl SelectionUI = new ContentControl
+            //    {
+            //        ContentTemplate = (DataTemplate)Resources["SelectionWindowPatientBox"],
+            //        Content = viewModel,
+            //        Margin = new Thickness(5)
+            //    };
+            //    BoxInputGrid.Children.Add(SelectionUI);
+            //}
 
             //foreach(int varI in ListInput )
             //{
@@ -91,6 +102,18 @@ namespace MediTrack.View.RemoteView
 
         }
 
+        private void DropdownButton_Click(object sender, RoutedEventArgs e)
+        {
+            DropdownPopup.IsOpen = !DropdownPopup.IsOpen;
+        }
+
+
+        //private void MyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    // Ihr Code hier, z.B.:
+        //    string selected = MyComboBox.SelectedItem as string;
+        //    MessageBox.Show("Sie haben ausgewählt: " + selected);
+        //}
 
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {

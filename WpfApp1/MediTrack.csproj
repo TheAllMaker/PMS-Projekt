@@ -138,6 +138,7 @@
     <Compile Include="Controller\RemoteController\SelectionWindowPatientBox.xaml.cs" />
     <Compile Include="Model\RemoteModel\HashSet.cs" />
     <Compile Include="Model\RemoteModel\MqttMessageQueue.cs" />
+    <Compile Include="Model\RemoteModel\UuidDictionary.cs" />
     <Compile Include="StringContainer.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
