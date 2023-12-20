@@ -258,6 +258,14 @@ namespace Vitaldatensimulator
         private void StartSimulation()
         {
 
+            string monitorIDString = MonitorIDBox.Text;
+
+            if (string.IsNullOrEmpty(monitorIDString) || !int.TryParse(MonitorIDBox.Text, out int monitorID) || monitorID <= 0)
+            {
+                MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             identifier = Guid.NewGuid(); // Generiere eine neue UUID
             ID = identifier.ToString();
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
@@ -268,7 +276,7 @@ namespace Vitaldatensimulator
             double Temperature = TemperatureSlider.Value;
             MonitorIDBox.Text = ID;
 
-            MonitorVitalDaten newMonitor = new MonitorVitalDaten(ID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+            MonitorVitalDaten newMonitor = new MonitorVitalDaten(monitorID.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
 
             VitaldatenSimulator.DoMqttAndDataOperations(newMonitor);
@@ -353,6 +361,7 @@ namespace Vitaldatensimulator
         private void UpdateVitalData()
         {
             // Erstelle ein neues MonitorVitalDaten-Objekt mit den aktualisierten Werten
+            string monitorID = MonitorIDBox.Text;
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
             int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
             int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
@@ -360,7 +369,7 @@ namespace Vitaldatensimulator
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
             double Temperature = TemperatureSlider.Value;
 
-            MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(ID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+            MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
             // Rufe die Methode in der anderen Datei auf, um die aktualisierten Werte zu übergeben
             VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
