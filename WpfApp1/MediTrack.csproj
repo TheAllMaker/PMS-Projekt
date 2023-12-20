@@ -138,6 +138,11 @@
     <Compile Include="Controller\RemoteController\SelectionWindowPatientBox.xaml.cs" />
     <Compile Include="Model\RemoteModel\HashSet.cs" />
     <Compile Include="Model\RemoteModel\MqttMessageQueue.cs" />
+    <Compile Include="StringContainer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StringContainer.resx</DependentUpon>
+    </Compile>
     <Compile Include="View\RemoteView\DetailedWindow.xaml.cs">
       <DependentUpon>DetailedWindow.xaml</DependentUpon>
     </Compile>
@@ -197,6 +202,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StringContainer.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringContainer.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
