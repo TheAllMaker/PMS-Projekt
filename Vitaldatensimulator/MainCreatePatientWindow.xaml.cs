@@ -224,11 +224,11 @@ namespace Vitaldatensimulator
             switch (currentState)
             {
                 case SimulationState.Stopped:
-                    string monitorIDString = MonitorIDBox.Text;
-                    if (!IsMonitorIDAlreadyStored(monitorIDString))
-                    {
-                        WriteMonitorIDToFile(monitorIDString);
-                    }
+                    //string monitorIDString = MonitorIDBox.Text;
+                    //if (!IsMonitorIDAlreadyStored(monitorIDString))
+                    //{
+                    //    WriteMonitorIDToFile(monitorIDString);
+                    //}
                     StartSimulation();
                     break;
                 case SimulationState.Running:
@@ -248,14 +248,8 @@ namespace Vitaldatensimulator
 
         private void StartSimulation()
         {
-            string monitorIDString = MonitorIDBox.Text;
 
-            if (string.IsNullOrEmpty(monitorIDString) || !int.TryParse(MonitorIDBox.Text, out int monitorID) || monitorID <= 0)
-            {
-                MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
+            Guid identifier = Guid.NewGuid(); // Generiere eine neue UUID
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
             int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
             int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
@@ -263,7 +257,7 @@ namespace Vitaldatensimulator
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
             double Temperature = TemperatureSlider.Value;
 
-            MonitorVitalDaten newMonitor = new MonitorVitalDaten(monitorID.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+            MonitorVitalDaten newMonitor = new MonitorVitalDaten(identifier.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
             // Überprüfung der gültigen Monitor-ID vor der Änderung des Button-Texts
             VitaldatenSimulator.DoMqttAndDataOperations(newMonitor);
