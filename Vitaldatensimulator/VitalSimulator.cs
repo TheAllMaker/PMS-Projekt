@@ -45,8 +45,6 @@ namespace Vitaldatensimulator
             }
         }
 
-        // Anstatt var vitaldaten direkt monitor per MQTT versenden
-        // DATENBANK ABFRAGE OB ID SCHON VORHANDEN IST
         public static void SendVitalData(MonitorVitalDaten monitor)
         {
             var vitaldaten = monitor.GetVitalData();

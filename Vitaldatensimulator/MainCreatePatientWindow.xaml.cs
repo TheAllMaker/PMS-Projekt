@@ -30,6 +30,8 @@ namespace Vitaldatensimulator
         private SimulationState currentState = SimulationState.Stopped;
         private Dictionary<Slider, double> originalSliderValues = new Dictionary<Slider, double>();
         private bool isValueChanged = false;
+        private Guid identifier;
+        private string ID;
 
         public MainCreatePatientWindow()
         {
@@ -224,11 +226,6 @@ namespace Vitaldatensimulator
             switch (currentState)
             {
                 case SimulationState.Stopped:
-                    //string monitorIDString = MonitorIDBox.Text;
-                    //if (!IsMonitorIDAlreadyStored(monitorIDString))
-                    //{
-                    //    WriteMonitorIDToFile(monitorIDString);
-                    //}
                     StartSimulation();
                     break;
                 case SimulationState.Running:
@@ -249,7 +246,8 @@ namespace Vitaldatensimulator
         private void StartSimulation()
         {
 
-            Guid identifier = Guid.NewGuid(); // Generiere eine neue UUID
+            identifier = Guid.NewGuid(); // Generiere eine neue UUID
+            ID = identifier.ToString();
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
             int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
             int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
@@ -257,9 +255,9 @@ namespace Vitaldatensimulator
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
             double Temperature = TemperatureSlider.Value;
 
-            MonitorVitalDaten newMonitor = new MonitorVitalDaten(identifier.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+            MonitorVitalDaten newMonitor = new MonitorVitalDaten(ID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
-            // Überprüfung der gültigen Monitor-ID vor der Änderung des Button-Texts
+
             VitaldatenSimulator.DoMqttAndDataOperations(newMonitor);
 
             if (currentState != SimulationState.Running) // Nur wenn der Zustand nicht bereits "Running" ist
@@ -269,7 +267,6 @@ namespace Vitaldatensimulator
                 StartStopButton.Background = new SolidColorBrush(Colors.Yellow);
             }
             MessageBox.Show("Erfolgreich einen Monitor erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
-            MonitorIDBox.IsEnabled = false;
         }
 
         private void StopSimulation()
@@ -331,7 +328,7 @@ namespace Vitaldatensimulator
         private void UpdateVitalData()
         {
             // Erstelle ein neues MonitorVitalDaten-Objekt mit den aktualisierten Werten
-            string monitorID = MonitorIDBox.Text;
+            //string monitorID = MonitorIDBox.Text;
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
             int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
             int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
@@ -339,37 +336,10 @@ namespace Vitaldatensimulator
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
             double Temperature = TemperatureSlider.Value;
 
-            MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(monitorID.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+            MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(ID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
             // Rufe die Methode in der anderen Datei auf, um die aktualisierten Werte zu übergeben
             VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
         }
-
-        private void WriteMonitorIDToFile(string monitorID)
-        {
-            string debugDirectory = AppDomain.CurrentDomain.BaseDirectory; // Ausgabeordner (z.B. "bin\Debug\")
-
-            string relativePath = "MonitorID.txt"; // Dateiname
-            string fullPath = System.IO.Path.Combine(debugDirectory, relativePath);
-
-            System.IO.File.WriteAllText(fullPath, monitorID);
-        }
-
-        private bool IsMonitorIDAlreadyStored(string monitorID)
-        {
-            string debugDirectory = AppDomain.CurrentDomain.BaseDirectory; // Ausgabeordner (z.B. "bin\Debug\")
-
-            string relativePath = "MonitorID.txt"; // Dateiname
-            string fullPath = System.IO.Path.Combine(debugDirectory, relativePath);
-
-            if (System.IO.File.Exists(fullPath))
-            {
-                string storedID = System.IO.File.ReadAllText(fullPath);
-                return (storedID == monitorID);
-            }
-
-            return false; // Die Datei existiert nicht oder die ID wurde noch nicht gespeichert
-        }
-
     }
 }
