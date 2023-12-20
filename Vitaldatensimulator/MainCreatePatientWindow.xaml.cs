@@ -254,6 +254,7 @@ namespace Vitaldatensimulator
             int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
             double Temperature = TemperatureSlider.Value;
+            MonitorIDBox.Text = ID;
 
             MonitorVitalDaten newMonitor = new MonitorVitalDaten(ID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
 
@@ -288,6 +289,7 @@ namespace Vitaldatensimulator
             if (result == MessageBoxResult.Yes)
             {
                 // Schließe das Programm
+                VitaldatenSimulator.ResetTimer();
                 Application.Current.Shutdown();
             }
             else if (result == MessageBoxResult.No)
