@@ -38,7 +38,16 @@ namespace Vitaldatensimulator
             InitializeComponent();
             Loaded += MainCreatePatientWindow_Loaded;
             VitaldatenSimulator.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
+            this.Closing += MainWindow_Closing;
 
+        }
+
+        // Nur als Notfall
+        void CurrentDomain_ProcessExit(object sender, EventArgs e)
+        {
+            // Ihr Code hier
+            UpdateAliveStatus();
         }
 
         private void MainCreatePatientWindow_Loaded(object sender, RoutedEventArgs e)
@@ -293,12 +302,22 @@ namespace Vitaldatensimulator
             {
                 UpdateAliveStatus();
                 // Schließe das Programm
-                VitaldatenSimulator.isSendingData = false;
                 Application.Current.Shutdown();
             }
-            else if (result == MessageBoxResult.No)
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
             {
-                // Nichts unternehmen, da der Benutzer "Nein" geklickt hat
+                UpdateAliveStatus();
+            }
+            else
+            {
+                // Wenn der Benutzer "Nein" auswählt, wird das Schließen des Fensters abgebrochen
+                e.Cancel = true;
             }
         }
 
@@ -334,7 +353,6 @@ namespace Vitaldatensimulator
         private void UpdateVitalData()
         {
             // Erstelle ein neues MonitorVitalDaten-Objekt mit den aktualisierten Werten
-            //string monitorID = MonitorIDBox.Text;
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
             int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
             int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);

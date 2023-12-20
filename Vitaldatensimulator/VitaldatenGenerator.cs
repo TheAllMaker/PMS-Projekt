@@ -7,14 +7,14 @@ internal class VitaldatenGenerator
     // Generiert eine realistische Herzfrequenz basierend auf der aktuellen Herzfrequenz im Bereich von 40 bis 131 mit einer Änderung von -2 bis +2
     public int GenerateHeartRate(int HeartRate)
     {
-        HeartRate = GenerateRealisticValue(HeartRate, 40, 200, -2, 2);
+        HeartRate = GenerateRealisticValue(HeartRate, 40, 200, -1, 1);
         return HeartRate;
     }
 
     // Generiert eine realistische Atemfrequenz basierend auf der aktuellen Atemfrequenz im Bereich von 8 bis 25 mit einer Änderung von -2 bis +2
     public int GenerateRespirationRate(int RespirationRate)
     {
-        return GenerateRealisticValue(RespirationRate, 8, 25, -2, 2);
+        return GenerateRealisticValue(RespirationRate, 8, 25, -1, 1);
     }
 
     // Generiert einen realistischen Sauerstoffgehalt basierend auf dem aktuellen Wert im Bereich von 91 bis 96 mit einer Änderung von -1 bis +1
@@ -26,19 +26,19 @@ internal class VitaldatenGenerator
     // Generiert einen realistischen systolischen Blutdruck basierend auf dem aktuellen Wert im Bereich von 110 bis 130 mit einer Änderung von -3 bis +3
     public int GenerateSystolicBloodPressure(int BloodPressureSystolic)
     {
-        return GenerateRealisticValue(BloodPressureSystolic, 90, 220, -3, 3);
+        return GenerateRealisticValue(BloodPressureSystolic, 90, 220, -1, 1);
     }
 
     // Generiert einen realistischen diastolischen Blutdruck basierend auf dem aktuellen Wert im Bereich von 70 bis 90 mit einer Änderung von -3 bis +3
     public int GenerateDiastolicBloodPressure(int BloodPressureDiastolic)
     {
-        return GenerateRealisticValue(BloodPressureDiastolic, 60, 80, -3, 3);
+        return GenerateRealisticValue(BloodPressureDiastolic, 60, 80, -1, 1);
     }
 
     // Generiert eine realistische Temperatur basierend auf dem aktuellen Wert im Bereich von 35 bis 39.1 mit einer Änderung von -0.1 bis 0.1
     public double GenerateTemperature(double Temperature)
     {
-        return GenerateRealisticTemperature(Temperature, 35, 39, -0.1, 0.1);
+        return GenerateRealisticTemperature(Temperature, 35, 39, -0.05, 0.05);
     }
 
     private double GenerateRealisticTemperature(double currentValue, double minValue, double maxValue, double minChange, double maxChange)
