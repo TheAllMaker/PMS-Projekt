@@ -41,7 +41,7 @@ namespace Vitaldatensimulator
                 OxygenLevel,
                 BloodPressureSystolic,
                 BloodPressureDiastolic,
-                Temperature,
+                Temperature = Math.Round(Temperature, 3),
                 Alive
             };
 

@@ -49,8 +49,17 @@ namespace Vitaldatensimulator
         {
             var vitaldaten = monitor.GetVitalData();
             //VitalDataUpdated?.Invoke(null, new VitalDataEventArgs(monitor.HeartRate, monitor.RespirationRate, monitor.OxygenLevel, monitor.BloodPressureSystolic, monitor.BloodPressureDiastolic, monitor.Temperature));
-            VitalDataUpdated?.Invoke(null, monitor);
-            mqttPublisher.PublishVitaldataJSON(vitaldaten);
+            //VitalDataUpdated?.Invoke(null, monitor);
+            if (monitor.Alive == 0)
+            {
+                mqttPublisher.PublishVitaldataJSON(vitaldaten);
+                isSendingData = false;
+            }
+            else
+            {
+                VitalDataUpdated?.Invoke(null, monitor);
+                mqttPublisher.PublishVitaldataJSON(vitaldaten);
+            }
         }
         public static void ResetTimer()
         {

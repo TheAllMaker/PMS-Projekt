@@ -52,7 +52,7 @@ namespace Vitaldatensimulator
         {
             if (MonitorVitalDaten != null)
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                Dispatcher.Invoke(() =>
                 {
                     HeartRateValueTextBlock.Text = MonitorVitalDaten.HeartRate.ToString();
                     RespirationRateValueTextBlock.Text = MonitorVitalDaten.RespirationRate.ToString();
@@ -294,7 +294,6 @@ namespace Vitaldatensimulator
                 UpdateAliveStatus();
                 // Schließe das Programm
                 VitaldatenSimulator.isSendingData = false;
-                VitaldatenSimulator.ResetTimer();
                 Application.Current.Shutdown();
             }
             else if (result == MessageBoxResult.No)
@@ -348,6 +347,7 @@ namespace Vitaldatensimulator
             // Rufe die Methode in der anderen Datei auf, um die aktualisierten Werte zu übergeben
             VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
         }
+
         private void UpdateAliveStatus()
         {
             // Setze Alive auf 0
