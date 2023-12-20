@@ -304,6 +304,16 @@ namespace Vitaldatensimulator
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
+            ConfirmClose();
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ConfirmClose();
+        }
+
+        private void ConfirmClose()
+        {
             MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
@@ -311,21 +321,6 @@ namespace Vitaldatensimulator
                 UpdateAliveStatus();
                 // Schließe das Programm
                 Application.Current.Shutdown();
-            }
-        }
-
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                UpdateAliveStatus();
-            }
-            else
-            {
-                // Wenn der Benutzer "Nein" auswählt, wird das Schließen des Fensters abgebrochen
-                e.Cancel = true;
             }
         }
 
