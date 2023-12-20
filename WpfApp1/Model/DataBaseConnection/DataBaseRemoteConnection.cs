@@ -18,7 +18,7 @@ namespace MediTrack.Model.DataBaseModelConnection
     public static class DataBaseRemoteConnection
     {
 
-        //private static string ConnectionDatabaseInformation = "Host=db.inftech.hs-mannheim.de;Username=n1921233;Password=123456;Database=n1921233_meditrack";
+        
         private static string ConnectionDatabaseInformation = "Host=db.inftech.hs-mannheim.de;Username=pms1;Password=pms1;Database=pms1";
         public static List<int> DataBaseEntries = new List<int>();
 
