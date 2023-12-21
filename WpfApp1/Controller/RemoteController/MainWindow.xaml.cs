@@ -63,6 +63,7 @@ namespace MediTrack
             Console.WriteLine(StringContainer.HandlerIntializer);
         }
 
+        // auskommentiert weil Code noch nicht fertig von Selcuk 
 
         private async Task ProcessMQTTMessages(CancellationToken cancellationToken)
         {
@@ -72,31 +73,54 @@ namespace MediTrack
 
                 object[] mqttMessageQueueArray = MqttMessageQueue.Dequeue();
 
-               
+                //if((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[7] is int value && value == 0))
+                // {
+                //     UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
 
-               if ( (mqttMessageQueueArray.Length != 0) &&  PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]) )
-               {
+                //     Dispatcher.Invoke(() =>
+                //     {
+                //     //    PatientenMonitorDynGrid.Children.Remove(PatientTemplateContentAddition);
+                //     });
+                //     PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
+                // }
+
+                //else if ( (mqttMessageQueueArray.Length != 0) &&  PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]) )
+                if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
+                {
 
                     Console.WriteLine(StringContainer.MonitorIDFound);
-                    Patient existingPatient = PatientDictionary.DictionaryCaller(mqttMessageQueueArray[0]);
-
-//if(existingPatient ) { }
+                    //try
+                    //{
+                        Patient existingPatient = PatientDictionary.DictionaryCaller(mqttMessageQueueArray[0]);
+                        //object comparevalue = UuidDictionary.UUIDDictionaryCaller(mqttMessageQueueArray[0]);
+                    
 
                     
-                    existingPatient.HeartRate = mqttMessageQueueArray[1];
-                    existingPatient.OxygenLevel = mqttMessageQueueArray[3];
-                    existingPatient.BloodPressureDiastolic = mqttMessageQueueArray[5];
-                    existingPatient.RespirationRate = mqttMessageQueueArray[2];
-                    existingPatient.BloodPressureSystolic = mqttMessageQueueArray[4];
-                    existingPatient.Temperature = mqttMessageQueueArray[6];
+                 
+       //
 
-                    
-                    existingPatient.OnPropertyChanged(nameof(existingPatient.HeartRate));
-                    existingPatient.OnPropertyChanged(nameof(existingPatient.OxygenLevel));
-                    existingPatient.OnPropertyChanged(nameof(existingPatient.BloodPressureDiastolic));
-                    existingPatient.OnPropertyChanged(nameof(existingPatient.RespirationRate));
-                    existingPatient.OnPropertyChanged(nameof(existingPatient.BloodPressureSystolic));
-                    existingPatient.OnPropertyChanged(nameof(existingPatient.Temperature));
+                        //if (mqttMessageQueueArray[7] == comparevalue)
+                        //{
+                            existingPatient.HeartRate = mqttMessageQueueArray[1];
+                            existingPatient.OxygenLevel = mqttMessageQueueArray[3];
+                            existingPatient.BloodPressureDiastolic = mqttMessageQueueArray[5];
+                            existingPatient.RespirationRate = mqttMessageQueueArray[2];
+                            existingPatient.BloodPressureSystolic = mqttMessageQueueArray[4];
+                            existingPatient.Temperature = mqttMessageQueueArray[6];
+
+
+                            existingPatient.OnPropertyChanged(nameof(existingPatient.HeartRate));
+                            existingPatient.OnPropertyChanged(nameof(existingPatient.OxygenLevel));
+                            existingPatient.OnPropertyChanged(nameof(existingPatient.BloodPressureDiastolic));
+                            existingPatient.OnPropertyChanged(nameof(existingPatient.RespirationRate));
+                            existingPatient.OnPropertyChanged(nameof(existingPatient.BloodPressureSystolic));
+                            existingPatient.OnPropertyChanged(nameof(existingPatient.Temperature));
+                        //}
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    //Überlegt euch was ihr da haben wollt 
+                    //}
                }
 
                else if ((mqttMessageQueueArray.Length != 0))
@@ -139,9 +163,32 @@ namespace MediTrack
                     });
 
                     PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
+                   // UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
                }
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
