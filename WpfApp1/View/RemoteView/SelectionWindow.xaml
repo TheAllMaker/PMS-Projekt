@@ -85,14 +85,23 @@
 
 
         </Grid>
-        
-        <UniformGrid Name ="BoxInputGrid" Margin="1" Rows="4" Columns="7">
+
+        <UniformGrid Name ="BoxInputGrid" Margin="1" Rows="4" Columns="4">
+
+
+
+            <Button x:Name="DropdownButton" Content="Wähle Optionen" Click="DropdownButton_Click" Width="200" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Popup x:Name="DropdownPopup" PlacementTarget="{Binding ElementName=DropdownButton}" StaysOpen="False" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <ListBox x:Name="MyListBox" SelectionMode="Multiple" Width="200" Height="300" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <!-- Elemente werden im Code-Behind hinzugefügt -->
+            </ListBox>
+        </Popup>
 
 
 
 
-           
-            <!--<ContentControl ContentTemplate="{DynamicResource SelectionWindowPatientBox}" Margin="5"></ContentControl>-->
+
+        <!--<ContentControl ContentTemplate="{DynamicResource SelectionWindowPatientBox}" Margin="5"></ContentControl>-->
    
 
 

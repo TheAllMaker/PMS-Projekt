@@ -24,23 +24,31 @@ namespace MediTrack.Model.RemoteModel
         {
             if (MQTTQueue.Count > 0)
             {
-                dynamic parsedObject = JsonConvert.DeserializeObject(MQTTQueue.Dequeue());
-                Console.WriteLine(parsedObject.ToString());
-                object[] array =
-{
-    GetIntValue(parsedObject.MonitorID),
-    GetIntValue(parsedObject.HeartRate),
-    GetIntValue(parsedObject.RespirationRate),
-    GetIntValue(parsedObject.OxygenLevel),
-    GetIntValue(parsedObject.BloodPressureSystolic),
-    GetIntValue(parsedObject.BloodPressureDiastolic),
-    GetDoubleValue(parsedObject.Temperature)
-};
-                return array;
+            
+                    dynamic parsedObject = JsonConvert.DeserializeObject(MQTTQueue.Dequeue());
+                    Console.WriteLine(parsedObject.ToString());
+
+                    object[] MQTTMessageContainer =
+                    {
+                    GetIntValue(parsedObject.MonitorID),
+                    GetIntValue(parsedObject.HeartRate),
+                    GetIntValue(parsedObject.RespirationRate),
+                    GetIntValue(parsedObject.OxygenLevel),
+                    GetIntValue(parsedObject.BloodPressureSystolic),
+                    GetIntValue(parsedObject.BloodPressureDiastolic),
+                    GetDoubleValue(parsedObject.Temperature)
+                    //Sobald Selcuks Code implementiert wird: einfach den nächsten Code rauskommentieren.
+                    //GetDoubleValue(parsedObject.Temperature),
+                    //GetIntValue(parsedObject.UUID),
+                    //GetIntValue(parsedObject.Alive)
+                };
+
+                    return MQTTMessageContainer;
             }
+
             else
             {
-                return null;
+                return Array.Empty<object>();
             }
 
         }
@@ -48,15 +56,15 @@ namespace MediTrack.Model.RemoteModel
 
         private static double? GetDoubleValue(object value)
         {
+
             if (value == null)
             {
                 return null;
             }
 
-            double result;
-            if (double.TryParse(value.ToString(), out result))
+            if (double.TryParse(value.ToString(), out double result))
             {
-                // Round to two decimal places
+
                 result = Math.Round(result, 1);
                 return result;
             }
@@ -66,18 +74,21 @@ namespace MediTrack.Model.RemoteModel
 
         private static int? GetIntValue(object value)
         {
+
             if (value == null)
             {
                 return null;
             }
 
-            int result;
-            return int.TryParse(value.ToString(), out result) ? (int?)result : null;
+            return int.TryParse(value.ToString(), out int result) ? (int?)result : null;
         }
 
         public static int Count 
         {
-            get { return MQTTQueue.Count; } 
+            get 
+            {
+                return MQTTQueue.Count; 
+            } 
         }
 
     }

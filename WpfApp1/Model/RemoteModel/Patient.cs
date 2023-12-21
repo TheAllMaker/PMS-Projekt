@@ -21,6 +21,8 @@ namespace MediTrack.Model.RemoteModel
         private object _bloodPressureSystolic;
         private object _roomNumber;
         private object _bedNumber;
+        private object _uUID;
+        private object _alive;
 
         // INotifyPropertyChanged is a .NET interface and notfiy subscribers ( the Patient member access in mainwindow.cs)
         // when properties are changed. _classvariable declares a private field -> if the customer get&set are 
@@ -254,6 +256,40 @@ namespace MediTrack.Model.RemoteModel
                 {
                     _bedNumber = value;
                     OnPropertyChanged(nameof(BedNumber));
+                }
+            }
+        }
+
+        public object UUID
+        {
+            get
+            {
+                return _uUID;
+            }
+
+            set
+            {
+                if (_uUID != value)
+                {
+                    _uUID = value;
+                    OnPropertyChanged(nameof(UUID));
+                }
+            }
+        }
+
+        public object Alive
+        {
+            get
+            {
+                return _alive;
+            }
+
+            set
+            {
+                if (_alive != value)
+                {
+                    _alive = value;
+                    OnPropertyChanged(nameof(Alive));
                 }
             }
         }
