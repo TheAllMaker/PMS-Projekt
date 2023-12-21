@@ -27,11 +27,13 @@ namespace Vitaldatensimulator
             Running,
             Paused
         }
+
         private SimulationState currentState = SimulationState.Stopped;
         private Dictionary<Slider, double> originalSliderValues = new Dictionary<Slider, double>();
         private bool isValueChanged = false;
         private Guid identifier;
         private string ID;
+        private int zaehler;
 
         public MainCreatePatientWindow()
         {
@@ -274,9 +276,9 @@ namespace Vitaldatensimulator
             int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
             double Temperature = TemperatureSlider.Value;
-            MonitorIDBox.Text = ID;
+            MonitorIDBox.Text = monitorIDString;
 
-            MonitorVitalDaten newMonitor = new MonitorVitalDaten(monitorID.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+            MonitorVitalDaten newMonitor = new MonitorVitalDaten(monitorID.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature, ID);
 
 
             VitaldatenSimulator.DoMqttAndDataOperations(newMonitor);
@@ -304,23 +306,28 @@ namespace Vitaldatensimulator
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
+            zaehler += 1;
             ConfirmClose();
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            zaehler += 1;
             ConfirmClose();
         }
 
         private void ConfirmClose()
         {
-            MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
+            if (zaehler == 1)
             {
-                UpdateAliveStatus();
-                // Schließe das Programm
-                Application.Current.Shutdown();
+                MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    UpdateAliveStatus();
+                    // Schließe das Programm
+                    Application.Current.Shutdown();
+                }
             }
         }
 
@@ -364,7 +371,7 @@ namespace Vitaldatensimulator
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
             double Temperature = TemperatureSlider.Value;
 
-            MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature);
+            MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature, ID);
 
             // Rufe die Methode in der anderen Datei auf, um die aktualisierten Werte zu übergeben
             VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
@@ -373,7 +380,8 @@ namespace Vitaldatensimulator
         private void UpdateAliveStatus()
         {
             // Setze Alive auf 0
-            MonitorVitalDaten updatedAliveMonitor = new MonitorVitalDaten(ID, 0, 0, 0, 0, 0, 0, 0);
+            string monitorID = MonitorIDBox.Text;
+            MonitorVitalDaten updatedAliveMonitor = new MonitorVitalDaten(monitorID, 0, 0, 0, 0, 0, 0, ID, 0);
             VitaldatenSimulator.DoMqttAndDataOperations(updatedAliveMonitor);
         }
     }
