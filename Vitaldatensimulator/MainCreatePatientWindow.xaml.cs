@@ -42,7 +42,11 @@ namespace Vitaldatensimulator
             VitaldatenSimulator.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
             this.Closing += MainWindow_Closing;
+        }
 
+        public int Getzaehler()
+        {
+            return zaehler;
         }
 
         // Nur als Notfall
@@ -377,7 +381,7 @@ namespace Vitaldatensimulator
             VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
         }
 
-        private void UpdateAliveStatus()
+        public void UpdateAliveStatus()
         {
             // Setze Alive auf 0
             string monitorID = MonitorIDBox.Text;

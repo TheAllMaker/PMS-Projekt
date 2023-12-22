@@ -19,15 +19,45 @@ namespace Vitaldatensimulator
     /// </summary>
     public partial class MainMenu : Window
     {
+        private MainCreatePatientWindow Simulator;
+        private int zaehler;
+
         public MainMenu()
         {
             InitializeComponent();
+            //this.Closing += MainWindow_Closing;
         }
 
         private void StartNewGenerator_Click(object sender, RoutedEventArgs e)
         {
-            MainCreatePatientWindow mainWindow = new MainCreatePatientWindow();
-            mainWindow.Show();
+            Simulator = new MainCreatePatientWindow();
+            Simulator.Show();
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            zaehler += 1;
+            ConfirmClose();
+        }
+
+        private void ConfirmClose()
+        {
+            if (zaehler == 1)
+            {
+                MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich alle Generatoren und das Hauptmenü schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Simulator.UpdateAliveStatus();
+                    // Schließe das Programm
+                    Application.Current.Shutdown();
+                }
+            }
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

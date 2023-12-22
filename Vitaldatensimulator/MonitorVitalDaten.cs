@@ -53,10 +53,10 @@ namespace Vitaldatensimulator
 
         public void GenerateAllVitaldata()
         {
-            this.HeartRate = generator.GenerateHeartRate(HeartRate); ;
-            this.RespirationRate = generator.GenerateRespirationRate(RespirationRate); ;
-            this.OxygenLevel = generator.GenerateOxygenLevel(OxygenLevel); ;
-            this.BloodPressureSystolic = generator.GenerateSystolicBloodPressure(BloodPressureSystolic); ;
+            this.HeartRate = generator.GenerateHeartRate(HeartRate);
+            this.RespirationRate = generator.GenerateRespirationRate(RespirationRate);
+            this.OxygenLevel = generator.GenerateOxygenLevel(OxygenLevel);
+            this.BloodPressureSystolic = generator.GenerateSystolicBloodPressure(BloodPressureSystolic);
             this.BloodPressureDiastolic = generator.GenerateDiastolicBloodPressure(BloodPressureDiastolic);
             this.Temperature = generator.GenerateTemperature(Temperature);
         }

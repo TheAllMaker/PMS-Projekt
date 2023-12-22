@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Vitaldatensimulator"
         Title="Vitaldaten Simulator" Height="720" Width="1280"
-        Background="#08080F">
+        Background="#08080F" WindowStartupLocation="CenterScreen">
 
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
@@ -136,7 +136,7 @@
         </StackPanel>
 
         <Button x:Name="StartStopButton" Content="Start" FontSize="20" Margin="629,0,-156,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_StartStop" Background="#FF16FF06" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
-        <Button x:Name="CloseButton" Content="Close Program" FontSize="20" Margin="790,0,-317,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Close" Background="Red" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
+        <Button x:Name="CloseButton" Content="Close" FontSize="20" Margin="790,0,-317,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Close" Background="Red" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
         <Button x:Name="ConfirmChangesButton" Content="Änderungen bestätigen" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Height="35" Margin="451,300,0,0" Click="ConfirmChangesButton_Click" IsEnabled="False" Grid.Column="1"/>
     </Grid>
 </Window>
