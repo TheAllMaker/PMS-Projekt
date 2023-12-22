@@ -23,8 +23,9 @@ namespace Vitaldatensimulator
         static void Main()
         {
             Application app = new Application();
-            MainCreatePatientWindow mainWindow = new MainCreatePatientWindow();
-            app.Run(mainWindow);
+            //MainCreatePatientWindow mainWindow = new MainCreatePatientWindow();
+            MainMenu mainMenu = new MainMenu();
+            app.Run(mainMenu);
         }
 
         public static void DoMqttAndDataOperations(MonitorVitalDaten newMonitor)

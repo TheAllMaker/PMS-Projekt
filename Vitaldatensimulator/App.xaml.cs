@@ -10,10 +10,13 @@ namespace Vitaldatensimulator
             base.OnStartup(e);
 
             // Erzeuge die Startfensterinstanz
-            MainCreatePatientWindow startWindow = new MainCreatePatientWindow();
+            //MainCreatePatientWindow startWindow = new MainCreatePatientWindow();
 
             // Zeige das Startfenster an
-            startWindow.Show();
+            //startWindow.Show();
+
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.Show();
         }
     }
 }
