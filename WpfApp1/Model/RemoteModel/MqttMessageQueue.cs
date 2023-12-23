@@ -36,11 +36,9 @@ namespace MediTrack.Model.RemoteModel
                     GetIntValue(parsedObject.OxygenLevel),
                     GetIntValue(parsedObject.BloodPressureSystolic),
                     GetIntValue(parsedObject.BloodPressureDiastolic),
-                    GetDoubleValue(parsedObject.Temperature)
-                    //Sobald Selcuks Code implementiert wird: einfach den nächsten Code rauskommentieren.
-                    //GetDoubleValue(parsedObject.Temperature),
-                    //GetIntValue(parsedObject.UUID),
-                    //GetIntValue(parsedObject.Alive)
+                    GetDoubleValue(parsedObject.Temperature),
+                    GetIntValue(parsedObject.UUID),
+                    GetIntValue(parsedObject.Alive)
                 };
 
                     return MQTTMessageContainer;
