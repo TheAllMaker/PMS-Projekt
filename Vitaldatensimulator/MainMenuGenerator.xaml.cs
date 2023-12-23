@@ -31,10 +31,17 @@ namespace Vitaldatensimulator
         private void StartNewGenerator_Click(object sender, RoutedEventArgs e)
         {
             Simulator = new MainCreatePatientWindow();
+            Simulator.Closing -= Simulator.MainWindow_Closing;
             Simulator.Show();
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            zaehler += 1;
+            ConfirmClose();
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             zaehler += 1;
             ConfirmClose();
@@ -53,11 +60,6 @@ namespace Vitaldatensimulator
                     Application.Current.Shutdown();
                 }
             }
-        }
-
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
     }
 }

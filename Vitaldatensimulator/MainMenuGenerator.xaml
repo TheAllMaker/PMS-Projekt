@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vitaldatensimulator"
         mc:Ignorable="d"
-        Title="Hauptmenü" Height="1280" Width="720" Background="#08080F" WindowStartupLocation="CenterScreen">
+        Title="Hauptmenü" Width="1280" Height="720" Background="#08080F" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Content="Neuen Generator starten" Click="StartNewGenerator_Click" Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock HorizontalAlignment="Center" Margin="0,101,0,0" TextWrapping="Wrap" Text="Vitaldaten Simulator Hauptmenü" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="200" TextAlignment="Center"/>
-        <Button Content="Close" HorizontalAlignment="Left" Margin="681,371,0,0" VerticalAlignment="Top" Height="44" Width="86" Background="Red" FontSize="16"  Click="Close_Click"/>
+        <Button Content="Neuen Generator starten" Click="StartNewGenerator_Click" Width="236" Height="88" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,101,0,0" TextWrapping="Wrap" Text="Vitaldaten Simulator Hauptmenü" VerticalAlignment="Top" Foreground="White" FontSize="25" Width="346" TextAlignment="Center" Height="94"/>
+        <Button Content="Close" Margin="1136,615,0,0" Background="Red" FontSize="16"  Click="Close_Click" HorizontalAlignment="Left" Width="108" Height="58" VerticalAlignment="Top"/>
     </Grid>
 </Window>

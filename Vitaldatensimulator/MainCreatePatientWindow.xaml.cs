@@ -314,7 +314,7 @@ namespace Vitaldatensimulator
             ConfirmClose();
         }
 
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        public void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             zaehler += 1;
             ConfirmClose();

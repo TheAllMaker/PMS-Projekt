@@ -23,7 +23,6 @@ namespace Vitaldatensimulator
         static void Main()
         {
             Application app = new Application();
-            //MainCreatePatientWindow mainWindow = new MainCreatePatientWindow();
             MainMenu mainMenu = new MainMenu();
             app.Run(mainMenu);
         }
@@ -60,6 +59,7 @@ namespace Vitaldatensimulator
                 mqttPublisher.PublishVitaldataJSON(vitaldaten);
             }
         }
+
         public static void ResetTimer()
         {
             if (timer != null)
