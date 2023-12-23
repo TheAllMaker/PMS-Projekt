@@ -19,7 +19,7 @@ namespace Vitaldatensimulator
     /// </summary>
     public partial class MainMenu : Window
     {
-        private MainCreatePatientWindow Simulator;
+        private List<SimulatorUI> simulators = new List<SimulatorUI>();
         private int zaehler;
 
         public MainMenu()
@@ -30,9 +30,10 @@ namespace Vitaldatensimulator
 
         private void StartNewGenerator_Click(object sender, RoutedEventArgs e)
         {
-            Simulator = new MainCreatePatientWindow();
-            Simulator.Closing -= Simulator.MainWindow_Closing;
-            Simulator.Show();
+            var simulator = new SimulatorUI();
+            simulators.Add(simulator);
+            simulator.Closing -= simulator.MainWindow_Closing;
+            simulator.Show();
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -55,7 +56,10 @@ namespace Vitaldatensimulator
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    Simulator.UpdateAliveStatus();
+                    foreach (var simulator in simulators)
+                    {
+                        simulator.SetAliveStatusToZero();
+                    }
                     // Schließe das Programm
                     Application.Current.Shutdown();
                 }

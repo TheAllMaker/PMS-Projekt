@@ -19,7 +19,7 @@ using System.IO;
 
 namespace Vitaldatensimulator
 {
-    public partial class MainCreatePatientWindow : Window
+    public partial class SimulatorUI : Window
     {
         private enum SimulationState
         {
@@ -35,7 +35,7 @@ namespace Vitaldatensimulator
         private string ID;
         private int zaehler;
 
-        public MainCreatePatientWindow()
+        public SimulatorUI()
         {
             InitializeComponent();
             Loaded += MainCreatePatientWindow_Loaded;
@@ -53,7 +53,7 @@ namespace Vitaldatensimulator
         void CurrentDomain_ProcessExit(object sender, EventArgs e)
         {
             // Ihr Code hier
-            UpdateAliveStatus();
+            SetAliveStatusToZero();
         }
 
         private void MainCreatePatientWindow_Loaded(object sender, RoutedEventArgs e)
@@ -310,29 +310,30 @@ namespace Vitaldatensimulator
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
-            zaehler += 1;
             ConfirmClose();
         }
 
         public void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            zaehler += 1;
             ConfirmClose();
         }
 
         private void ConfirmClose()
         {
-            if (zaehler == 1)
-            {
-                MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            zaehler++;
 
-                if (result == MessageBoxResult.Yes)
-                {
-                    UpdateAliveStatus();
-                    // Schließe das Programm
-                    Application.Current.Shutdown();
-                }
+            if (zaehler == 1 && ConfirmCloseApplication())
+            {
+                SetAliveStatusToZero();
+                this.Close();
             }
+        }
+
+        private bool ConfirmCloseApplication()
+        {
+            MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            return result == MessageBoxResult.Yes;
         }
 
         private void ConfirmChangesButton_Click(object sender, RoutedEventArgs e)
@@ -360,7 +361,7 @@ namespace Vitaldatensimulator
             else
             {
                 // Gib eine Meldung aus, dass die Simulation gestartet werden muss, um Änderungen zu bestätigen
-                MessageBox.Show("Die Simulation muss gestartet werden, um Änderungen zu bestätigen.", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Die Simulation muss gestartet werden, um Änderungen bestätigen zu können", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -381,7 +382,7 @@ namespace Vitaldatensimulator
             VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
         }
 
-        public void UpdateAliveStatus()
+        public void SetAliveStatusToZero()
         {
             // Setze Alive auf 0
             string monitorID = MonitorIDBox.Text;
