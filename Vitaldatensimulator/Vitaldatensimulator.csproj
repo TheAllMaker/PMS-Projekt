@@ -121,8 +121,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainCreatePatientWindow.xaml.cs">
-      <DependentUpon>MainCreatePatientWindow.xaml</DependentUpon>
+    <Compile Include="SimulatorUI.xaml.cs">
+      <DependentUpon>SimulatorUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="MonitorVitalDaten.cs" />
     <Compile Include="MqttPublisher.cs" />
@@ -156,7 +156,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MainCreatePatientWindow.xaml">
+    <Page Include="SimulatorUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

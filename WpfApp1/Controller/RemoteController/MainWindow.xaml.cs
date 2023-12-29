@@ -73,7 +73,7 @@ namespace MediTrack
 
                 object[] mqttMessageQueueArray = MqttMessageQueue.Dequeue();
 
-                if ((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[7] is int value && value == 0))
+                if ((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[8] is int value && value == 0))
                 {
                     UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
 
@@ -99,7 +99,7 @@ namespace MediTrack
 
 
 
-                        if (mqttMessageQueueArray[7] == comparevalue)
+                        if (mqttMessageQueueArray[8] == comparevalue)
                         {
                             existingPatient.HeartRate = mqttMessageQueueArray[1];
                             existingPatient.OxygenLevel = mqttMessageQueueArray[3];

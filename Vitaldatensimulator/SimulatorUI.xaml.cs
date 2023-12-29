@@ -44,11 +44,6 @@ namespace Vitaldatensimulator
             this.Closing += MainWindow_Closing;
         }
 
-        public int Getzaehler()
-        {
-            return zaehler;
-        }
-
         // Nur als Notfall
         void CurrentDomain_ProcessExit(object sender, EventArgs e)
         {
@@ -290,7 +285,7 @@ namespace Vitaldatensimulator
             if (currentState != SimulationState.Running) // Nur wenn der Zustand nicht bereits "Running" ist
             {
                 currentState = SimulationState.Running; // Zustand auf "Running" setzen, wenn die Simulation gestartet wird
-                StartStopButton.Content = "Stop"; // Änderung des Button-Texts auf "Stop"
+                StartStopButton.Content = "Stop";
                 StartStopButton.Background = new SolidColorBrush(Colors.Yellow);
             }
             MessageBox.Show("Erfolgreich einen Monitor erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -310,15 +305,19 @@ namespace Vitaldatensimulator
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
+
             ConfirmClose();
         }
 
         public void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ConfirmClose();
+            if (ConfirmClose())
+            {
+                e.Cancel = true;
+            }
         }
 
-        private void ConfirmClose()
+        private bool ConfirmClose()
         {
             zaehler++;
 
@@ -327,11 +326,21 @@ namespace Vitaldatensimulator
                 SetAliveStatusToZero();
                 this.Close();
             }
+            else
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool ConfirmCloseApplication()
         {
             MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.No)
+            {
+                zaehler--;
+            }
 
             return result == MessageBoxResult.Yes;
         }
