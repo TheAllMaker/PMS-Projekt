@@ -305,7 +305,6 @@ namespace Vitaldatensimulator
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
-
             ConfirmClose();
         }
 
@@ -325,12 +324,13 @@ namespace Vitaldatensimulator
             {
                 SetAliveStatusToZero();
                 this.Close();
+                return false;
             }
-            else
+            else if (zaehler == 2)
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
 
         private bool ConfirmCloseApplication()
