@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 using Database;
 using Newtonsoft.Json;
 
@@ -37,7 +38,7 @@ namespace MediTrack.Model.RemoteModel
                     GetIntValue(parsedObject.BloodPressureSystolic),
                     GetIntValue(parsedObject.BloodPressureDiastolic),
                     GetDoubleValue(parsedObject.Temperature),
-                    GetIntValue(parsedObject.UUID),
+                    GetUUIDValue(parsedObject.UUID),
                     GetIntValue(parsedObject.Alive)
                 };
 
@@ -79,6 +80,11 @@ namespace MediTrack.Model.RemoteModel
             }
 
             return int.TryParse(value.ToString(), out int result) ? (int?)result : null;
+        }
+
+        private static string GetUUIDValue(object value)
+        {
+            return value?.ToString();
         }
 
         public static int Count 

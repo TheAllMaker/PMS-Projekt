@@ -26,7 +26,7 @@ namespace Vitaldatensimulator
             SimulatorUI simulator = new SimulatorUI();
             app.Run(simulator);
 
-            //ainMenu mainMenu = new MainMenu();
+            //MainMenu mainMenu = new MainMenu();
             //app.Run(mainMenu);
         }
 
@@ -48,17 +48,17 @@ namespace Vitaldatensimulator
             }
         }
 
-        public static void SendVitalData(MonitorVitalDaten monitor)
+        public static void SendVitalData(MonitorVitalDaten singleMonitor)
         {
-            var vitaldaten = monitor.GetVitalData();
-            if (monitor.Alive == 0)
+            var vitaldaten = singleMonitor.GetVitalData();
+            if (singleMonitor.Alive == 0)
             {
                 mqttPublisher.PublishVitaldataJSON(vitaldaten);
                 isSendingData = false;
             }
             else
             {
-                VitalDataUpdated?.Invoke(null, monitor);
+                VitalDataUpdated?.Invoke(null, singleMonitor);
                 mqttPublisher.PublishVitaldataJSON(vitaldaten);
             }
         }
