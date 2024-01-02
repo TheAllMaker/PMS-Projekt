@@ -20,7 +20,6 @@ namespace Vitaldatensimulator
             timer.Elapsed += OnTimedEvent;
             timer.AutoReset = true;
             timer.Enabled = false;
-            //singleMonitor = monitor;
         }
 
         public void StartSimulator(MonitorVitalDaten monitor)

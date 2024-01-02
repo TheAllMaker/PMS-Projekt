@@ -282,12 +282,14 @@ namespace Vitaldatensimulator
         private void StopSimulation()
         {
             MqttPublisher.isSendingData = false;
+            mySimulatorTimer.ResetTimer();
             MessageBox.Show("Erfolgreich Generierung der Daten gestoppt", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void ContinueSimulation()
         {
             MqttPublisher.isSendingData = true;
+            mySimulatorTimer.ResetTimer();
             MessageBox.Show("Generierung der Daten wird fortgesetzt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -295,6 +297,8 @@ namespace Vitaldatensimulator
         private MonitorVitalDaten CreateMonitorData()
         {
             UUID = GenerateUUID();
+
+            //Guid newUUID = identifier != Guid.Empty ? identifier : GenerateUUID();
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
             int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
             int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
