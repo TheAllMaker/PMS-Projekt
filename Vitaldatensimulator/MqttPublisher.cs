@@ -18,6 +18,8 @@ namespace Vitaldatensimulator
         private const string Topic = "23pms01/test";
         private const int Port = 8883;
         private static MqttClient client;
+        public static event EventHandler<MonitorVitalDaten> VitalDataUpdated;
+        public static bool isSendingData = true;
 
         public MqttPublisher()
         {
@@ -35,6 +37,21 @@ namespace Vitaldatensimulator
         public void Disconnect()
         {
             client.Disconnect();
+        }
+
+        public void SendVitalData(MonitorVitalDaten singleMonitor)
+        {
+            var vitaldaten = singleMonitor.GetVitalData();
+            if (singleMonitor.Alive == 0)
+            {
+                PublishVitaldataJSON(vitaldaten);
+                isSendingData = false;
+            }
+            else
+            {
+                VitalDataUpdated?.Invoke(null, singleMonitor);
+                PublishVitaldataJSON(vitaldaten);
+            }
         }
 
         public void PublishVitaldata(int data)

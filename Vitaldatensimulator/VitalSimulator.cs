@@ -13,11 +13,11 @@ namespace Vitaldatensimulator
 {
     class VitaldatenSimulator
     {
-        private static Timer timer;
-        private static MonitorVitalDaten singleMonitor;
-        public static bool isSendingData = true;
-        public static event EventHandler<MonitorVitalDaten> VitalDataUpdated;
-        private static MqttPublisher mqttPublisher = new MqttPublisher();
+        //private static Timer timer;
+        //private static MonitorVitalDaten singleMonitor;
+        //public static bool isSendingData = true;
+        //public static event EventHandler<MonitorVitalDaten> VitalDataUpdated;
+        //private static MqttPublisher mqttPublisher = new MqttPublisher();
 
         [STAThread]
         static void Main()
@@ -30,45 +30,48 @@ namespace Vitaldatensimulator
             //app.Run(mainMenu);
         }
 
-        public static void DoMqttAndDataOperations(MonitorVitalDaten newMonitor)
-        {
-            singleMonitor = newMonitor;
-            timer = new Timer(1000);
-            timer.Elapsed += OnTimedEvent;
-            timer.AutoReset = true;
-            timer.Enabled = true;
-        }
+        //public static void StartSimulator(MonitorVitalDaten newMonitor)
+        //{
+            //singleMonitor = newMonitor;
+            //SimulatorTimer timer = new SimulatorTimer(newMonitor);
 
-        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
-        {
-            if (isSendingData)
-            {
-                singleMonitor.GenerateAllVitaldata();
-                SendVitalData(singleMonitor);
-            }
-        }
+            //timer = new Timer(1000);
+            //timer.Elapsed += OnTimedEvent;
+            //timer.AutoReset = true;
+            //timer.Enabled = true;
+        //}
 
-        public static void SendVitalData(MonitorVitalDaten singleMonitor)
-        {
-            var vitaldaten = singleMonitor.GetVitalData();
-            if (singleMonitor.Alive == 0)
-            {
-                mqttPublisher.PublishVitaldataJSON(vitaldaten);
-                isSendingData = false;
-            }
-            else
-            {
-                VitalDataUpdated?.Invoke(null, singleMonitor);
-                mqttPublisher.PublishVitaldataJSON(vitaldaten);
-            }
-        }
-        public static void ResetTimer()
-        {
-            if (timer != null)
-            {
-                timer.Stop();
-                timer.Dispose();
-            }
-        }
+        //private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        //{
+        //    if (isSendingData)
+        //    {
+        //        singleMonitor.GenerateAllVitaldata();
+        //        SendVitalData(singleMonitor);
+        //    }
+        //}
+
+        //public static void SendVitalData(MonitorVitalDaten singleMonitor)
+        //{
+        //    var vitaldaten = singleMonitor.GetVitalData();
+        //    if (singleMonitor.Alive == 0)
+        //    {
+        //        mqttPublisher.PublishVitaldataJSON(vitaldaten);
+        //        isSendingData = false;
+        //    }
+        //    else
+        //    {
+        //        VitalDataUpdated?.Invoke(null, singleMonitor);
+        //        mqttPublisher.PublishVitaldataJSON(vitaldaten);
+        //    }
+        //}
+
+        //public static void ResetTimer()
+        //{
+        //    if (timer != null)
+        //    {
+        //        timer.Stop();
+        //        timer.Dispose();
+        //    }
+        //}
     }
 }

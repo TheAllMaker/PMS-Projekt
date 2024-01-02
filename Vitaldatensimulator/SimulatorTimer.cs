@@ -8,28 +8,37 @@ using System.Windows;
 
 namespace Vitaldatensimulator
 {
-    internal class SimulatorTimer
+    public class SimulatorTimer
     {
-        public static Timer timer;
+        private Timer timer;
+        private MonitorVitalDaten singleMonitor;
+        private MqttPublisher publisher;
 
-        public SimulatorTimer(int duration) 
+        public SimulatorTimer() 
         {
-            timer = new Timer(duration);
+            timer = new Timer(1000);
             timer.Elapsed += OnTimedEvent;
             timer.AutoReset = true;
+            timer.Enabled = false;
+            //singleMonitor = monitor;
+        }
+
+        public void StartSimulator(MonitorVitalDaten monitor)
+        {
+            singleMonitor = monitor;
             timer.Enabled = true;
         }
 
-        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            if (VitaldatenSimulator.isSendingData)
+            if (MqttPublisher.isSendingData)
             {
                 singleMonitor.GenerateAllVitaldata();
-                SendVitalData(singleMonitor);
+                publisher.SendVitalData(singleMonitor);
             }
         }
 
-        public static void ResetTimer()
+        public void ResetTimer()
         {
             if (timer != null)
             {
