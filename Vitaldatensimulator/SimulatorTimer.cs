@@ -12,9 +12,9 @@ namespace Vitaldatensimulator
     {
         private Timer timer;
         private MonitorVitalDaten singleMonitor;
-        private MqttPublisher publisher;
+        private MqttPublisher mqttPublisher = new MqttPublisher();
 
-        public SimulatorTimer() 
+        public SimulatorTimer()
         {
             timer = new Timer(1000);
             timer.Elapsed += OnTimedEvent;
@@ -34,7 +34,7 @@ namespace Vitaldatensimulator
             if (MqttPublisher.isSendingData)
             {
                 singleMonitor.GenerateAllVitaldata();
-                publisher.SendVitalData(singleMonitor);
+                mqttPublisher.SendVitalData(singleMonitor);
             }
         }
 
@@ -44,8 +44,10 @@ namespace Vitaldatensimulator
             {
                 timer.Stop();
                 timer.Dispose();
+                timer = new Timer(1000); // Neue Timer-Instanz erstellen
+                timer.Elapsed += OnTimedEvent;
+                timer.AutoReset = true;
             }
         }
-
     }
 }
