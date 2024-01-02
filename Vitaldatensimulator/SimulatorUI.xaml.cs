@@ -32,7 +32,7 @@ namespace Vitaldatensimulator
         private Dictionary<Slider, double> originalSliderValues = new Dictionary<Slider, double>();
         private bool isValueChanged = false;
         private Guid identifier;
-        private string ID;
+        private string UUID;
         private int zaehler;
 
         public SimulatorUI()
@@ -258,28 +258,12 @@ namespace Vitaldatensimulator
 
         private void StartSimulation()
         {
-
-            string monitorIDString = MonitorIDBox.Text;
-
-            if (string.IsNullOrEmpty(monitorIDString) || !int.TryParse(MonitorIDBox.Text, out int monitorID) || monitorID <= 0)
+            if (!ValidateMonitorID())
             {
-                MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            identifier = Guid.NewGuid(); // Generiere eine neue UUID
-            ID = identifier.ToString();
-            int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
-            int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
-            int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
-            int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
-            int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
-            double Temperature = TemperatureSlider.Value;
-            MonitorIDBox.Text = monitorIDString;
-
-            MonitorVitalDaten newMonitor = new MonitorVitalDaten(monitorID.ToString(), HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature, ID);
-
-
+            MonitorVitalDaten newMonitor = CreateMonitorData();
             VitaldatenSimulator.DoMqttAndDataOperations(newMonitor);
 
             if (currentState != SimulationState.Running) // Nur wenn der Zustand nicht bereits "Running" ist
@@ -301,6 +285,51 @@ namespace Vitaldatensimulator
         {
             VitaldatenSimulator.isSendingData = true;
             MessageBox.Show("Generierung der Daten wird fortgesetzt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+
+        private MonitorVitalDaten CreateMonitorData()
+        {
+            UUID = GenerateUUID();
+            int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
+            int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
+            int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
+            int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
+            int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
+            double Temperature = TemperatureSlider.Value;
+
+            MonitorVitalDaten newMonitor = new MonitorVitalDaten(
+                MonitorIDBox.Text,
+                HeartRate,
+                RespirationRate,
+                OxygenLevel,
+                BloodPressureSystolic,
+                BloodPressureDiastolic,
+                Temperature,
+                UUID
+                );
+
+            return newMonitor;
+        }
+
+
+        private string GenerateUUID()
+        {
+            identifier = Guid.NewGuid();
+            return identifier.ToString();
+        }
+
+        private bool ValidateMonitorID()
+        {
+            string monitorIDString = MonitorIDBox.Text;
+
+            if (string.IsNullOrEmpty(MonitorIDBox.Text) || !int.TryParse(MonitorIDBox.Text, out int monitorID) || monitorID <= 0)
+            {
+                MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return true;
         }
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
@@ -385,7 +414,7 @@ namespace Vitaldatensimulator
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
             double Temperature = TemperatureSlider.Value;
 
-            MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature, ID);
+            MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature, UUID);
 
             // Rufe die Methode in der anderen Datei auf, um die aktualisierten Werte zu übergeben
             VitaldatenSimulator.DoMqttAndDataOperations(updatedMonitor);
@@ -395,7 +424,7 @@ namespace Vitaldatensimulator
         {
             // Setze Alive auf 0
             string monitorID = MonitorIDBox.Text;
-            MonitorVitalDaten updatedAliveMonitor = new MonitorVitalDaten(monitorID, 0, 0, 0, 0, 0, 0, ID, 0);
+            MonitorVitalDaten updatedAliveMonitor = new MonitorVitalDaten(monitorID, 0, 0, 0, 0, 0, 0, UUID, 0);
             VitaldatenSimulator.DoMqttAndDataOperations(updatedAliveMonitor);
         }
     }
