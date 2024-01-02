@@ -121,6 +121,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SimulatorTimer.cs" />
     <Compile Include="SimulatorUI.xaml.cs">
       <DependentUpon>SimulatorUI.xaml</DependentUpon>
     </Compile>

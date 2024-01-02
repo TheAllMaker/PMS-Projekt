@@ -34,7 +34,7 @@ namespace Vitaldatensimulator
         {
             singleMonitor = newMonitor;
             timer = new Timer(1000);
-            timer.Elapsed += OnTimedEvent; 
+            timer.Elapsed += OnTimedEvent;
             timer.AutoReset = true;
             timer.Enabled = true;
         }
