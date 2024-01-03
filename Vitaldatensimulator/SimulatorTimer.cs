@@ -25,15 +25,8 @@ namespace Vitaldatensimulator
         public void StartSimulator(MonitorVitalDaten monitor)
         {
             singleMonitor = monitor;
-            if(singleMonitor.Alive == 1) 
-            { 
-                timer.Enabled = true; 
-            }
-            else
-            {
-                mqttPublisher.SendVitalData(singleMonitor);
-            }
-            //timer.Enabled = true;
+            timer.Enabled = true; 
+            mqttPublisher.SendVitalData(singleMonitor);
         }
 
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
