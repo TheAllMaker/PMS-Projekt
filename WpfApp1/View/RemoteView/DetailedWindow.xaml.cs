@@ -73,65 +73,86 @@ namespace MediTrack.View.RemoteView
             }
         }
 
-        private void RespirationRateTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        private void GreenCheckButton_Click(object sender, RoutedEventArgs e)
         {
             UpdateVariableFromTextbox(RespirationRateTextBoxMin, ref respirationRateMin);
-        }
-
-        private void RespirationRateTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
-        {
             UpdateVariableFromTextbox(RespirationRateTextBoxMax, ref respirationRateMax);
-        }
-
-        private void OxygenLevelTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
-        {
             UpdateVariableFromTextbox(OxygenLevelTextBoxMin, ref oxygenLevelMin);
-        }
-
-        private void OxygenLevelTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
-        {
             UpdateVariableFromTextbox(OxygenLevelTextBoxMax, ref oxygenLevelMax);
-        }
-
-        private void TemperatureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
-        {
             UpdateVariableFromTextbox(TemperatureTextBoxMin, ref temperatureMin);
-        }
-
-        private void TemperatureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
-        {
             UpdateVariableFromTextbox(TemperatureTextBoxMax, ref temperatureMax);
-        }
-
-        private void HeartRateTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
-        {
             UpdateVariableFromTextbox(HeartRateTextBoxMin, ref heartRateMin);
-        }
-
-        private void HeartRateTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
-        {
             UpdateVariableFromTextbox(HeartRateTextBoxMax, ref heartRateMax);
-        }
-
-        private void SystolicBloodPressureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
-        {
             UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMin, ref systolicBloodPressureMin);
-        }
-
-        private void SystolicBloodPressureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
-        {
             UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMax, ref systolicBloodPressureMax);
-        }
-
-        private void DiastolicBloodPressureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
-        {
             UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMin, ref diastolicBloodPressureMin);
-        }
-
-        private void DiastolicBloodPressureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
-        {
             UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMax, ref diastolicBloodPressureMax);
         }
+
+        private void SelectionClosedButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        //private void RespirationRateTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(RespirationRateTextBoxMin, ref respirationRateMin);
+        //}
+
+        //private void RespirationRateTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(RespirationRateTextBoxMax, ref respirationRateMax);
+        //}
+
+        //private void OxygenLevelTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(OxygenLevelTextBoxMin, ref oxygenLevelMin);
+        //}
+
+        //private void OxygenLevelTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(OxygenLevelTextBoxMax, ref oxygenLevelMax);
+        //}
+
+        //private void TemperatureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(TemperatureTextBoxMin, ref temperatureMin);
+        //}
+
+        //private void TemperatureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(TemperatureTextBoxMax, ref temperatureMax);
+        //}
+
+        //private void HeartRateTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(HeartRateTextBoxMin, ref heartRateMin);
+        //}
+
+        //private void HeartRateTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(HeartRateTextBoxMax, ref heartRateMax);
+        //}
+
+        //private void SystolicBloodPressureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMin, ref systolicBloodPressureMin);
+        //}
+
+        //private void SystolicBloodPressureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMax, ref systolicBloodPressureMax);
+        //}
+
+        //private void DiastolicBloodPressureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMin, ref diastolicBloodPressureMin);
+        //}
+
+        //private void DiastolicBloodPressureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMax, ref diastolicBloodPressureMax);
+        //}
 
 
 
