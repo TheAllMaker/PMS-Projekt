@@ -33,8 +33,8 @@ namespace MediTrack.Model.RemoteModel
                     {
                     GetIntValue(parsedObject.MonitorID),
                     GetIntValue(parsedObject.HeartRate),
-                    GetIntValue(parsedObject.RespirationRate),
-                    GetIntValue(parsedObject.OxygenLevel),
+                    GetDoubleValue(parsedObject.RespirationRate),
+                    GetDoubleValue(parsedObject.OxygenLevel),
                     GetIntValue(parsedObject.BloodPressureSystolic),
                     GetIntValue(parsedObject.BloodPressureDiastolic),
                     GetDoubleValue(parsedObject.Temperature),
