@@ -70,6 +70,12 @@ namespace Patientenverwaltung
                             }
 
                             MessageBox.Show("Daten erfolgreich in die Datenbank eingefügt.");
+                            cmbSex.SelectedItem = null;
+                            txtVorname.Text = null;
+                            txtNachname.Text = null;
+                            txtRoom.Text = null;
+                            txtBed.Text = null;
+                            dpGeburtstag.SelectedDate = null;
                         }
                         catch (Exception ex)
                         {
@@ -91,12 +97,7 @@ namespace Patientenverwaltung
                 MessageBox.Show("Ungültige Eingabe für Room. Bitte geben Sie eine gültige Ganzzahl ein.");
             }
 
-            cmbSex.SelectedItem = null;
-            txtVorname.Text = null;
-            txtNachname.Text = null;
-            txtRoom.Text = null;
-            txtBed.Text = null;
-            dpGeburtstag.SelectedDate = null;
+            
         }
 
         private bool IsValidInput(string vorname, string nachname, string sex, DateTime geburtsdatum, int room, int bed)
