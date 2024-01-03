@@ -72,7 +72,7 @@ namespace MediTrack
                 await Task.Delay(100);
 
                 object[] mqttMessageQueueArray = MqttMessageQueue.Dequeue();
-
+                // wenn Queue mit Inhalt sowie der Eintrag besteht sowie
                 if ((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[8] is int value && value == 0))
                 {
                     UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
@@ -83,7 +83,7 @@ namespace MediTrack
                     });
                     PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
                 }
-
+                // wenn Queue mit Inhalt sowie Patient gefunden date patient up
                 else if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
                 //if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
                 {
@@ -91,15 +91,14 @@ namespace MediTrack
                     Console.WriteLine(StringContainer.MonitorIDFound);
                     try
                     {
-                        Patient existingPatient = PatientDictionary.DictionaryCaller(mqttMessageQueueArray[0]);
+                    Patient existingPatient = PatientDictionary.DictionaryCaller(mqttMessageQueueArray[0]);
                     object comparevalue = UuidDictionary.UUIDDictionaryCaller(mqttMessageQueueArray[0]);
+                        
 
+                        string value1 = mqttMessageQueueArray[7]?.ToString();
+                        string value2 = comparevalue?.ToString();
 
-
-
-
-
-                        if (mqttMessageQueueArray[8] == comparevalue)
+                        if (string.Equals(value1, value2))
                         {
                             existingPatient.HeartRate = mqttMessageQueueArray[1];
                             existingPatient.OxygenLevel = mqttMessageQueueArray[3];
@@ -115,16 +114,20 @@ namespace MediTrack
                             existingPatient.OnPropertyChanged(nameof(existingPatient.RespirationRate));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.BloodPressureSystolic));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.Temperature));
+                            
                         }
+                        
                     }
                     catch (Exception ex)
                     {
+                        
                         //Überlegt euch was ihr da haben wollt 
                     }
                 }
 
                else if ((mqttMessageQueueArray.Length != 0))
                {
+                    
                     object mqttDataString = DataBaseRemoteConnection.CallMonitorIDtoPatientID(mqttMessageQueueArray[0]);
                     object[] patientDataString = DataBaseRemoteConnection.CallForPatientThroughID(mqttDataString);
 
