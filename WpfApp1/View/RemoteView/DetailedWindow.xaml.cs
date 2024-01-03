@@ -16,6 +16,11 @@ namespace MediTrack.View.RemoteView
         private int temperatureMax;
         private int heartRateMin;
         private int heartRateMax;
+        private int systolicBloodPressureMin;
+        private int systolicBloodPressureMax;
+        private int diastolicBloodPressureMin;
+        private int diastolicBloodPressureMax;
+
 
         public DetailedWindow()
         {
@@ -108,6 +113,28 @@ namespace MediTrack.View.RemoteView
             UpdateVariableFromTextbox(HeartRateTextBoxMax, ref heartRateMax);
         }
 
+        private void SystolicBloodPressureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMin, ref systolicBloodPressureMin);
+        }
+
+        private void SystolicBloodPressureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMax, ref systolicBloodPressureMax);
+        }
+
+        private void DiastolicBloodPressureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMin, ref diastolicBloodPressureMin);
+        }
+
+        private void DiastolicBloodPressureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMax, ref diastolicBloodPressureMax);
+        }
+
+
+
         public int GetRespirationRateMin()
         {
             return respirationRateMin;
@@ -148,6 +175,26 @@ namespace MediTrack.View.RemoteView
             return heartRateMax;
         }
 
+
+        public int GetSystolicBloodPressureMin()
+        {
+            return systolicBloodPressureMin;
+        }
+
+        public int GetSystolicBloodPressureMax()
+        {
+            return systolicBloodPressureMax;
+        }
+
+        public int GetDiastolicBloodPressureMin()
+        {
+            return diastolicBloodPressureMin;
+        }
+
+        public int GetDiastolicBloodPressureMax()
+        {
+            return diastolicBloodPressureMax;
+        }
     }
 }
 
