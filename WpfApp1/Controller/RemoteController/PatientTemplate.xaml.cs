@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace MediTrack.Controller.RemoteController
 {
-    public partial class PatientTemplate : Window // oder eine andere Basisklasse
+    public partial class PatientTemplate : ResourceDictionary 
     {
         public PatientTemplate()
         {
