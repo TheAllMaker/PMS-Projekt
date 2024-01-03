@@ -16,7 +16,8 @@ namespace MediTrack.Model.RemoteModel
             {
                 object UUID = MonitorIdentifierTOUUID[MonitorIdentifierKey];
                 Console.WriteLine(StringContainer.UUIDDictionarySuc + UUID);
-                return UUID;
+                string uuidString = UUID.ToString();
+                return uuidString;
             }
             
             else
