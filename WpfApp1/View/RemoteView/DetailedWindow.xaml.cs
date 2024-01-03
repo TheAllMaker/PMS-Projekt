@@ -8,6 +8,15 @@ namespace MediTrack.View.RemoteView
 {
     public partial class DetailedWindow : Window
     {
+        private int respirationRateMin;
+        private int respirationRateMax;
+        private int oxygenLevelMin;
+        private int oxygenLevelMax;
+        private int temperatureMin;
+        private int temperatureMax;
+        private int heartRateMin;
+        private int heartRateMax;
+
         public DetailedWindow()
         {
             InitializeComponent();
@@ -50,5 +59,95 @@ namespace MediTrack.View.RemoteView
                 e.CancelCommand();
             }
         }
+
+        private void UpdateVariableFromTextbox(TextBox textBox, ref int variable)
+        {
+            if (int.TryParse(textBox.Text, out int value))
+            {
+                variable = value;
+            }
+        }
+
+        private void RespirationRateTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(RespirationRateTextBoxMin, ref respirationRateMin);
+        }
+
+        private void RespirationRateTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(RespirationRateTextBoxMax, ref respirationRateMax);
+        }
+
+        private void OxygenLevelTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(OxygenLevelTextBoxMin, ref oxygenLevelMin);
+        }
+
+        private void OxygenLevelTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(OxygenLevelTextBoxMax, ref oxygenLevelMax);
+        }
+
+        private void TemperatureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(TemperatureTextBoxMin, ref temperatureMin);
+        }
+
+        private void TemperatureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(TemperatureTextBoxMax, ref temperatureMax);
+        }
+
+        private void HeartRateTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(HeartRateTextBoxMin, ref heartRateMin);
+        }
+
+        private void HeartRateTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVariableFromTextbox(HeartRateTextBoxMax, ref heartRateMax);
+        }
+
+        public int GetRespirationRateMin()
+        {
+            return respirationRateMin;
+        }
+
+        public int GetRespirationRateMax()
+        {
+            return respirationRateMax;
+        }
+
+        public int GetOxygenLevelMin()
+        {
+            return oxygenLevelMin;
+        }
+
+        public int GetOxygenLevelMax()
+        {
+            return oxygenLevelMax;
+        }
+
+        public int GetTemperatureMin()
+        {
+            return temperatureMin;
+        }
+
+        public int GetTemperatureMax()
+        {
+            return temperatureMax;
+        }
+
+        public int GetHeartRateMin()
+        {
+            return heartRateMin;
+        }
+
+        public int GetHeartRateMax()
+        {
+            return heartRateMax;
+        }
+
     }
 }
+
