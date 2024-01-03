@@ -97,9 +97,8 @@
             <TextBlock Grid.Row="0" Grid.Column="0" Foreground="#f2f2f2"
            HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
               <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" /> 
+                <Run Text="{Binding DynamicText}" />
             </TextBlock>
-
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="RR MIN" Foreground="LimeGreen"
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="10,0,0,0"
@@ -134,7 +133,6 @@
                 <Run Text="{Binding DynamicText}" />
             </TextBlock>
 
-
             <TextBox Grid.Row="1" Grid.Column="1" Foreground="Orange" Name="TemperatureTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
                  HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" >
             </TextBox>
@@ -144,7 +142,6 @@
                 <Run Text="Curr: " /> 
                 <Run Text="{Binding DynamicText}" />
             </TextBlock>
-
 
             <TextBlock Grid.Column="1" Text="T MAX" Foreground="Orange" 
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="10,128,0,0" Grid.RowSpan="2"
@@ -167,12 +164,10 @@
                 <Run Text="{Binding DynamicText}" />
             </TextBlock>
 
-
             <TextBox Grid.Row="1" Grid.Column="3" Foreground="Yellow" Name="HeartRateTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
                  HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" Grid.ColumnSpan="2" >
             </TextBox>
 
-            
             <TextBlock Grid.Column="3" Text="HR MAX" Foreground="Yellow" Margin="10,128,0,0"
                 HorizontalAlignment="left" VerticalAlignment="Top" FontSize="16" Grid.RowSpan="2"
                 />
@@ -241,6 +236,7 @@
                 <Run Text="Curr: " /> 
                 <Run Text="{Binding DynamicText}" />
             </TextBlock>
+            
             
             <!-- Diastolic Blood Pressure ........................................................................-->
 

@@ -157,7 +157,7 @@
                             <Rectangle.Resources>
                                 <SolidColorBrush x:Key="canv9as" Opacity="0" />
                                 <!--<SolidColorBrush x:Key="ligh9t-red" Color="#c50b17" Opacity="1" />-->
-                                <SolidColorBrush x:Key="ligh9t-red" Color="#ff1a1a" Opacity="1" />
+                                <SolidColorBrush x:Key="ligh9t-red" Color="RoyalBlue" Opacity="1" />
 
                             </Rectangle.Resources>
                             <Rectangle.Fill>
