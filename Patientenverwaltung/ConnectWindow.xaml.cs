@@ -129,6 +129,9 @@ namespace Patientenverwaltung
                                     insertCommand.ExecuteNonQuery();
 
                                     MessageBox.Show("Verbindung erfolgreich erstellt.");
+                                    // Zurücksetzen der Auswahl in den ComboBoxen
+                                    cmbPatient.SelectedItem = null;
+                                    cmbMonitor.SelectedItem = null;
                                 }
                             }
                         }
@@ -139,9 +142,7 @@ namespace Patientenverwaltung
                     MessageBox.Show("Bitte wählen Sie Patient und Monitor aus, um eine Verbindung herzustellen.");
                 }
 
-                // Zurücksetzen der Auswahl in den ComboBoxen
-                cmbPatient.SelectedItem = null;
-                cmbMonitor.SelectedItem = null;
+                
             }
             catch (Exception ex)
             {
