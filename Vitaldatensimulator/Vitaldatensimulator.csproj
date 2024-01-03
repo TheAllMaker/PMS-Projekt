@@ -127,7 +127,6 @@
     </Compile>
     <Compile Include="MonitorVitalDaten.cs" />
     <Compile Include="MqttPublisher.cs" />
-    <Compile Include="VitalDataUI_Updater.cs" />
     <Compile Include="VitaldatenGenerator.cs" />
     <Compile Include="VitalSimulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
