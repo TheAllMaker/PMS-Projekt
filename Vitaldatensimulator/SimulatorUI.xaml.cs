@@ -267,7 +267,6 @@ namespace Vitaldatensimulator
             }
 
             MonitorVitalDaten newMonitor = CreateMonitorData();
-            //VitaldatenSimulator.StartSimulator(newMonitor);
             mySimulatorTimer.StartSimulator(newMonitor);
 
             if (currentState != SimulationState.Running) // Nur wenn der Zustand nicht bereits "Running" ist
