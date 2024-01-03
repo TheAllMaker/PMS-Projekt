@@ -112,13 +112,13 @@
 
             <!-- ZoomButton -->
             <Button FontSize="20" Grid.Row="2"  Name ="PatientZoomButton"  BorderThickness="0"
-                 VerticalAlignment="Center"  HorizontalAlignment="Center" Background="Black">
+                 VerticalAlignment="Center"  HorizontalAlignment="Center" Background="Black" Click="PatientZoomButton_Click">
                     <Viewbox Width="40 " Height="49" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
                         <Rectangle Width="16 " Height="16">
                             <Rectangle.Resources>
                                 <SolidColorBrush x:Key="canvas" Opacity="0" />
-                                <SolidColorBrush x:Key="light-defaultgrey-10" Color="gray" Opacity="0.1" />
-                                <SolidColorBrush x:Key="light-defaultgrey" Color="Gray" Opacity="1" />
+                                <SolidColorBrush x:Key="light-defaultgrey-10" Color="LightGray" Opacity="0.1" />
+                                <SolidColorBrush x:Key="light-defaultgrey" Color="LightGray" Opacity="1" />
                                 <System:Double x:Key="cls-1">0.75</System:Double>
                             </Rectangle.Resources>
                             <Rectangle.Fill>
