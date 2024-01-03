@@ -87,6 +87,7 @@ namespace MediTrack.View.RemoteView
             UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMax, ref systolicBloodPressureMax);
             UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMin, ref diastolicBloodPressureMin);
             UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMax, ref diastolicBloodPressureMax);
+            this.Close();
         }
 
         private void SelectionClosedButton_Click(object sender, RoutedEventArgs e)
@@ -216,6 +217,9 @@ namespace MediTrack.View.RemoteView
         {
             return diastolicBloodPressureMax;
         }
+
     }
 }
+
+
 

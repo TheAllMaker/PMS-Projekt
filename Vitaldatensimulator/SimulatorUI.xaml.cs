@@ -306,8 +306,8 @@ namespace Vitaldatensimulator
 
             //Guid newUUID = identifier != Guid.Empty ? identifier : GenerateUUID();
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
-            int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
-            int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
+            double RespirationRate = RespirationRateSlider.Value;
+            double OxygenLevel = OxygenLevelSlider.Value;
             int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
             double Temperature = TemperatureSlider.Value;
