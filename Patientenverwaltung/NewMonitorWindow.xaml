@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Patientenverwaltung"
         mc:Ignorable="d"
         Title="NewMonitorWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -16,28 +16,40 @@
         </Grid.RowDefinitions>
 
         <!-- Überschrift -->
-        <TextBlock Text="Monitor Information" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="20"/>
+        <TextBlock Text="Monitor Information" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="20" Foreground="White"/>
 
         <!-- Hersteller -->
-        <Label Content="Manufacturer:" Grid.Row="1" Margin="10,5,10,5"/>
-        <ComboBox x:Name="cmbManu" Grid.Row="1" Margin="153,5,10,5">
-            <ComboBoxItem Content="Philips Healthcare"/>
-            <ComboBoxItem Content="GE Healthcare"/>
-            <ComboBoxItem Content="Mindray"/>
-            <ComboBoxItem Content="Dräger"/>
-            <ComboBoxItem Content="Schiller"/>
-        </ComboBox>
-
+        <Label Content="Manufacturer:" Grid.Row="1" Margin="10,5,10,5" Foreground="White"/>
+        <ComboBox x:Name="cmbManu" Grid.Row="1" Margin="153,5,10,5" Background="White" Foreground="Black"/>
 
         <!-- Seriennummer -->
-        <Label Content="Serial number:" Grid.Row="2" Margin="10,5,10,5"/>
-        <TextBox x:Name="txtSeriennummer" Grid.Row="2" Margin="153,5,10,5" />
+        <Label Content="Serial number:" Grid.Row="2" Margin="10,5,10,5" Foreground="White"/>
+        <TextBox x:Name="txtSeriennummer" Grid.Row="2" Margin="153,5,10,5" Background="White" Foreground="Black"/>
 
+        <!-- Button zum Anlegen -->
+        <Button Content="Add Monitor to System" Grid.Row="3" Margin="10,10,10,10" Click="MonitorAnlegen_Click" Width="150" Height="30" 
+                Background="Black" Foreground="White" BorderBrush="White" BorderThickness="2">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
-        <!-- Weitere UI-Elemente hier -->
-
-        <!-- Button zum Anlegen oder Abbrechen -->
-        <Button Content="Add Monitor to System" Grid.Row="3" Margin="10,10,10,10" Click="MonitorAnlegen_Click"/>
-        <Button Content="Abort" Grid.Row="4" Margin="10,5,10,10" Click="Abbruch_Click"/>
+        <!-- Button zum Abbrechen (Close) -->
+        <Button Content="Close" Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,500,0" Click="Abbruch_Click" Width="100" Height="30" 
+                Background="Black" Foreground="White" BorderBrush="White" BorderThickness="2">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>
