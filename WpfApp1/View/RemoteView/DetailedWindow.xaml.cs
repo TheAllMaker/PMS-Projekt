@@ -197,7 +197,6 @@ namespace MediTrack.View.RemoteView
             return heartRateMax;
         }
 
-
         public int GetSystolicBloodPressureMin()
         {
             return systolicBloodPressureMin;

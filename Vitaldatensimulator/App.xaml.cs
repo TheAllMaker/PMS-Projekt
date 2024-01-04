@@ -8,13 +8,6 @@ namespace Vitaldatensimulator
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            // Erzeuge die Startfensterinstanz
-            //MainCreatePatientWindow startWindow = new MainCreatePatientWindow();
-
-            // Zeige das Startfenster an
-            //startWindow.Show();
-
             MainMenu mainMenu = new MainMenu();
             mainMenu.Show();
         }

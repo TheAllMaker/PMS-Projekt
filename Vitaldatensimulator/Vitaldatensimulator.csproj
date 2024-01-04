@@ -121,6 +121,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PowerWindow.xaml.cs">
+      <DependentUpon>PowerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SimulatorTimer.cs" />
     <Compile Include="SimulatorUI.xaml.cs">
       <DependentUpon>SimulatorUI.xaml</DependentUpon>
@@ -156,6 +159,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="PowerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SimulatorUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,6 +177,9 @@
     <Analyzer Include="..\packages\SonarAnalyzer.CSharp.9.15.0.81779\analyzers\SonarAnalyzer.CFG.dll" />
     <Analyzer Include="..\packages\SonarAnalyzer.CSharp.9.15.0.81779\analyzers\SonarAnalyzer.CSharp.dll" />
     <Analyzer Include="..\packages\SonarAnalyzer.CSharp.9.15.0.81779\analyzers\SonarAnalyzer.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="power.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

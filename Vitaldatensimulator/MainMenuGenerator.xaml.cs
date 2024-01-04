@@ -32,7 +32,7 @@ namespace Vitaldatensimulator
         {
             var simulator = new SimulatorUI();
             simulators.Add(simulator);
-            simulator.Closing -= simulator.MainWindow_Closing;
+            simulator.Closing -= simulator.SimulatorUI_Closing;
             simulator.Show();
         }
 

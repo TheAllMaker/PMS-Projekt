@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using MediTrack.View.RemoteView;
 
 namespace Vitaldatensimulator
 {
@@ -31,6 +32,7 @@ namespace Vitaldatensimulator
         private SimulationState currentState = SimulationState.Stopped;
         private Dictionary<Slider, double> originalSliderValues = new Dictionary<Slider, double>();
         private SimulatorTimer mySimulatorTimer;
+        private PowerWindow powerWindow;
         private bool isValueChanged = false;
         private bool isAlreadyClosing = false;
         private bool isUUIDAlreadyCreated = false;
@@ -41,9 +43,9 @@ namespace Vitaldatensimulator
         public SimulatorUI()
         {
             InitializeComponent();
-            Loaded += MainCreatePatientWindow_Loaded;
+            Loaded += SimulatorUI_Loaded;
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
-            this.Closing += MainWindow_Closing;
+            this.Closing += SimulatorUI_Closing;
 
             MqttPublisher.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
             mySimulatorTimer = new SimulatorTimer();
@@ -56,7 +58,7 @@ namespace Vitaldatensimulator
             SetAliveStatusToZero();
         }
 
-        private void MainCreatePatientWindow_Loaded(object sender, RoutedEventArgs e)
+        private void SimulatorUI_Loaded(object sender, RoutedEventArgs e)
         {
             InitializeSliderValues();
             InitializeSliderOriginalValues();
@@ -348,48 +350,60 @@ namespace Vitaldatensimulator
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
-            ConfirmClose();
-        }
+            //ConfirmClose();
 
-        public void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            isAlreadyClosing = true;
-            e.Cancel = ConfirmClose();
-        }
-
-        private bool ConfirmClose()
-        {
-            zaehler++;
-
-            if (zaehler == 1 && ConfirmCloseApplication())
+            if (powerWindow == null)
             {
-                SetAliveStatusToZero();
-                if (!isAlreadyClosing)
-                {
-                    this.Close();
-                }
-                return false;
+                powerWindow = new PowerWindow();
+                powerWindow.Show();
             }
-            else if (zaehler == 2)
-            {
-                return false;
-            }
-            return true;
         }
 
-        private bool ConfirmCloseApplication()
+        public void SimulatorUI_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //isAlreadyClosing = true;
+            //e.Cancel = ConfirmClose();
 
-            if (result == MessageBoxResult.No)
+            if (powerWindow == null)
             {
-                zaehler--;
+                powerWindow = new PowerWindow();
+                powerWindow.Show();
             }
-
-            return result == MessageBoxResult.Yes;
         }
 
-        private void ConfirmChangesButton_Click(object sender, RoutedEventArgs e)
+        //private bool ConfirmClose()
+        //{
+        //    zaehler++;
+
+        //    if (zaehler == 1 && ConfirmCloseApplication())
+        //    {
+        //        SetAliveStatusToZero();
+        //        if (!isAlreadyClosing)
+        //        {
+        //            this.Close();
+        //        }
+        //        return false;
+        //    }
+        //    else if (zaehler == 2)
+        //    {
+        //        return false;
+        //    }
+        //    return true;
+        //}
+
+        //private bool ConfirmCloseApplication()
+        //{
+            //MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            //if (result == MessageBoxResult.No)
+            //{
+                //zaehler--;
+            //}
+
+            //return result == MessageBoxResult.Yes;
+        //}
+
+        private void Button_Click_ConfirmChanges(object sender, RoutedEventArgs e)
         {
             if (currentState != SimulationState.Stopped) // Überprüfung, ob die Simulation gestartet wurde
             {
