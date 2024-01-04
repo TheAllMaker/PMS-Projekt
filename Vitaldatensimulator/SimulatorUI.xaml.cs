@@ -72,12 +72,12 @@ namespace Vitaldatensimulator
                 Dispatcher.Invoke(() =>
                 {
                     HeartRateValueTextBlock.Text = MonitorVitalDaten.HeartRate.ToString();
-                    RespirationRateValueTextBlock.Text = MonitorVitalDaten.RespirationRate.ToString();
-                    OxygenLevelValueTextBlock.Text = MonitorVitalDaten.OxygenLevel.ToString();
+                    RespirationRateValueTextBlock.Text = Math.Round(MonitorVitalDaten.RespirationRate, MidpointRounding.AwayFromZero).ToString();
+                    OxygenLevelValueTextBlock.Text = Math.Round(MonitorVitalDaten.OxygenLevel, MidpointRounding.AwayFromZero).ToString();
                     BloodPressureSystolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureSystolic.ToString();
                     BloodPressureDiastolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureDiastolic.ToString();
                     double value = Math.Round(MonitorVitalDaten.Temperature, 1);
-                    TemperatureValueTextBlock.Text = value.ToString("0.0");
+                    TemperatureValueTextBlock.Text = Math.Round(MonitorVitalDaten.Temperature, 1).ToString("0.0");
                 });
             }
         }
@@ -350,12 +350,13 @@ namespace Vitaldatensimulator
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
-            //ConfirmClose();
 
-            if (powerWindow == null)
+            if (powerWindow == null || !powerWindow.IsVisible)
             {
                 powerWindow = new PowerWindow();
+                powerWindow.ConfirmClicked += PowerWindow_ConfirmClicked;
                 powerWindow.Show();
+
             }
         }
 
@@ -364,44 +365,27 @@ namespace Vitaldatensimulator
             //isAlreadyClosing = true;
             //e.Cancel = ConfirmClose();
 
-            if (powerWindow == null)
+            if (powerWindow == null || !powerWindow.IsVisible)
             {
                 powerWindow = new PowerWindow();
                 powerWindow.Show();
             }
         }
 
-        //private bool ConfirmClose()
-        //{
-        //    zaehler++;
+        private async void PowerWindow_ConfirmClicked(object sender, EventArgs e)
+        {
+            ConfirmClose();
+            await Task.Delay(500);
+            Application.Current.Shutdown();
+            //this.Close();
+        }
 
-        //    if (zaehler == 1 && ConfirmCloseApplication())
-        //    {
-        //        SetAliveStatusToZero();
-        //        if (!isAlreadyClosing)
-        //        {
-        //            this.Close();
-        //        }
-        //        return false;
-        //    }
-        //    else if (zaehler == 2)
-        //    {
-        //        return false;
-        //    }
-        //    return true;
-        //}
 
-        //private bool ConfirmCloseApplication()
-        //{
-            //MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich den Generator schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            //if (result == MessageBoxResult.No)
-            //{
-                //zaehler--;
-            //}
-
-            //return result == MessageBoxResult.Yes;
-        //}
+        private void ConfirmClose()
+        {
+            zaehler++;
+            SetAliveStatusToZero();
+        }
 
         private void Button_Click_ConfirmChanges(object sender, RoutedEventArgs e)
         {

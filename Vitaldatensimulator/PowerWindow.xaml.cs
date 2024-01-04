@@ -8,7 +8,7 @@ namespace MediTrack.View.RemoteView
 {
     public partial class PowerWindow : Window
     {
-        private SimulatorUI simulatorUI;
+        public event EventHandler ConfirmClicked;
         private bool isAlreadyClosing = false;
 
         public PowerWindow()
@@ -19,14 +19,14 @@ namespace MediTrack.View.RemoteView
 
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {
-            simulatorUI.SetAliveStatusToZero();
-            Application.Current.Shutdown();
+            isAlreadyClosing = true;
+            ConfirmClicked?.Invoke(this, EventArgs.Empty);
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
             isAlreadyClosing = true;
-            this.Close();
+            Close();
         }
 
         public void PowerWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
