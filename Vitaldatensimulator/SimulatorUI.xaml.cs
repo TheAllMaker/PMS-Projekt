@@ -32,6 +32,8 @@ namespace Vitaldatensimulator
         private Dictionary<Slider, double> originalSliderValues = new Dictionary<Slider, double>();
         private SimulatorTimer mySimulatorTimer;
         private bool isValueChanged = false;
+        private bool isAlreadyClosing = false;
+        private bool isUUIDAlreadyCreated = false;
         private Guid identifier;
         private string UUID;
         private int zaehler;
@@ -295,15 +297,21 @@ namespace Vitaldatensimulator
 
         private MonitorVitalDaten CreateMonitorData()
         {
-            UUID = GenerateUUID();
+            if (isUUIDAlreadyCreated == false)
+            {
+                UUID = GenerateUUID();
+                isUUIDAlreadyCreated = true;
+            }
+            //UUID = GenerateUUID();
 
             //Guid newUUID = identifier != Guid.Empty ? identifier : GenerateUUID();
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
-            int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
-            int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
+            double RespirationRate = RespirationRateSlider.Value;
+            double OxygenLevel = OxygenLevelSlider.Value;
             int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
             double Temperature = TemperatureSlider.Value;
+            int Alive = 1;
 
             MonitorVitalDaten newMonitor = new MonitorVitalDaten(
                 MonitorIDBox.Text,
@@ -313,7 +321,8 @@ namespace Vitaldatensimulator
                 BloodPressureSystolic,
                 BloodPressureDiastolic,
                 Temperature,
-                UUID
+                UUID,
+                Alive
                 );
 
             return newMonitor;
@@ -344,6 +353,7 @@ namespace Vitaldatensimulator
 
         public void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            isAlreadyClosing = true;
             e.Cancel = ConfirmClose();
         }
 
@@ -354,7 +364,10 @@ namespace Vitaldatensimulator
             if (zaehler == 1 && ConfirmCloseApplication())
             {
                 SetAliveStatusToZero();
-                this.Close();
+                if (!isAlreadyClosing)
+                {
+                    this.Close();
+                }
                 return false;
             }
             else if (zaehler == 2)
@@ -407,19 +420,7 @@ namespace Vitaldatensimulator
 
         private void UpdateVitalData()
         {
-            // Erstelle ein neues MonitorVitalDaten-Objekt mit den aktualisierten Werten
-            //MonitorVitalDaten updatedMonitor = CreateMonitorData();
-            string monitorID = MonitorIDBox.Text;
-            int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
-            int RespirationRate = Convert.ToInt32(RespirationRateSlider.Value);
-            int OxygenLevel = Convert.ToInt32(OxygenLevelSlider.Value);
-            int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
-            int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
-            double Temperature = TemperatureSlider.Value;
-
-            MonitorVitalDaten updatedMonitor = new MonitorVitalDaten(monitorID, HeartRate, RespirationRate, OxygenLevel, BloodPressureSystolic, BloodPressureDiastolic, Temperature, UUID);
-
-            // Rufe die Methode in der anderen Datei auf, um die aktualisierten Werte zu übergeben
+            MonitorVitalDaten updatedMonitor = CreateMonitorData();
             mySimulatorTimer.StartSimulator(updatedMonitor);
         }
 

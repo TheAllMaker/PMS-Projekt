@@ -8,6 +8,20 @@ namespace MediTrack.View.RemoteView
 {
     public partial class DetailedWindow : Window
     {
+        private int respirationRateMin;
+        private int respirationRateMax;
+        private int oxygenLevelMin;
+        private int oxygenLevelMax;
+        private int temperatureMin;
+        private int temperatureMax;
+        private int heartRateMin;
+        private int heartRateMax;
+        private int systolicBloodPressureMin;
+        private int systolicBloodPressureMax;
+        private int diastolicBloodPressureMin;
+        private int diastolicBloodPressureMax;
+
+
         public DetailedWindow()
         {
             InitializeComponent();
@@ -50,5 +64,162 @@ namespace MediTrack.View.RemoteView
                 e.CancelCommand();
             }
         }
+
+        private void UpdateVariableFromTextbox(TextBox textBox, ref int variable)
+        {
+            if (int.TryParse(textBox.Text, out int value))
+            {
+                variable = value;
+            }
+        }
+
+        private void GreenCheckButton_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateVariableFromTextbox(RespirationRateTextBoxMin, ref respirationRateMin);
+            UpdateVariableFromTextbox(RespirationRateTextBoxMax, ref respirationRateMax);
+            UpdateVariableFromTextbox(OxygenLevelTextBoxMin, ref oxygenLevelMin);
+            UpdateVariableFromTextbox(OxygenLevelTextBoxMax, ref oxygenLevelMax);
+            UpdateVariableFromTextbox(TemperatureTextBoxMin, ref temperatureMin);
+            UpdateVariableFromTextbox(TemperatureTextBoxMax, ref temperatureMax);
+            UpdateVariableFromTextbox(HeartRateTextBoxMin, ref heartRateMin);
+            UpdateVariableFromTextbox(HeartRateTextBoxMax, ref heartRateMax);
+            UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMin, ref systolicBloodPressureMin);
+            UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMax, ref systolicBloodPressureMax);
+            UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMin, ref diastolicBloodPressureMin);
+            UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMax, ref diastolicBloodPressureMax);
+            this.Close();
+        }
+
+        private void SelectionClosedButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        //private void RespirationRateTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(RespirationRateTextBoxMin, ref respirationRateMin);
+        //}
+
+        //private void RespirationRateTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(RespirationRateTextBoxMax, ref respirationRateMax);
+        //}
+
+        //private void OxygenLevelTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(OxygenLevelTextBoxMin, ref oxygenLevelMin);
+        //}
+
+        //private void OxygenLevelTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(OxygenLevelTextBoxMax, ref oxygenLevelMax);
+        //}
+
+        //private void TemperatureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(TemperatureTextBoxMin, ref temperatureMin);
+        //}
+
+        //private void TemperatureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(TemperatureTextBoxMax, ref temperatureMax);
+        //}
+
+        //private void HeartRateTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(HeartRateTextBoxMin, ref heartRateMin);
+        //}
+
+        //private void HeartRateTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(HeartRateTextBoxMax, ref heartRateMax);
+        //}
+
+        //private void SystolicBloodPressureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMin, ref systolicBloodPressureMin);
+        //}
+
+        //private void SystolicBloodPressureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMax, ref systolicBloodPressureMax);
+        //}
+
+        //private void DiastolicBloodPressureTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMin, ref diastolicBloodPressureMin);
+        //}
+
+        //private void DiastolicBloodPressureTextBoxMax_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMax, ref diastolicBloodPressureMax);
+        //}
+
+
+
+        public int GetRespirationRateMin()
+        {
+            return respirationRateMin;
+        }
+
+        public int GetRespirationRateMax()
+        {
+            return respirationRateMax;
+        }
+
+        public int GetOxygenLevelMin()
+        {
+            return oxygenLevelMin;
+        }
+
+        public int GetOxygenLevelMax()
+        {
+            return oxygenLevelMax;
+        }
+
+        public int GetTemperatureMin()
+        {
+            return temperatureMin;
+        }
+
+        public int GetTemperatureMax()
+        {
+            return temperatureMax;
+        }
+
+        public int GetHeartRateMin()
+        {
+            return heartRateMin;
+        }
+
+        public int GetHeartRateMax()
+        {
+            return heartRateMax;
+        }
+
+
+        public int GetSystolicBloodPressureMin()
+        {
+            return systolicBloodPressureMin;
+        }
+
+        public int GetSystolicBloodPressureMax()
+        {
+            return systolicBloodPressureMax;
+        }
+
+        public int GetDiastolicBloodPressureMin()
+        {
+            return diastolicBloodPressureMin;
+        }
+
+        public int GetDiastolicBloodPressureMax()
+        {
+            return diastolicBloodPressureMax;
+        }
+
     }
 }
+
+
+

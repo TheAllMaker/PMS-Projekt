@@ -72,7 +72,7 @@ namespace MediTrack
                 await Task.Delay(100);
 
                 object[] mqttMessageQueueArray = MqttMessageQueue.Dequeue();
-
+                // wenn Queue mit Inhalt sowie der Eintrag besteht sowie
                 if ((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[8] is int value && value == 0))
                 {
                     UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
@@ -83,7 +83,7 @@ namespace MediTrack
                     });
                     PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
                 }
-
+                // wenn Queue mit Inhalt sowie Patient gefunden date patient up
                 else if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
                 //if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
                 {
@@ -92,14 +92,13 @@ namespace MediTrack
                     try
                     {
                         Patient existingPatient = PatientDictionary.DictionaryCaller(mqttMessageQueueArray[0]);
-                    object comparevalue = UuidDictionary.UUIDDictionaryCaller(mqttMessageQueueArray[0]);
+                        object comparevalue = UuidDictionary.UUIDDictionaryCaller(mqttMessageQueueArray[0]);
 
 
+                        string value1 = mqttMessageQueueArray[7]?.ToString();
+                        string value2 = comparevalue?.ToString();
 
-
-
-
-                        if (mqttMessageQueueArray[8] == comparevalue)
+                        if (string.Equals(value1, value2))
                         {
                             existingPatient.HeartRate = mqttMessageQueueArray[1];
                             existingPatient.OxygenLevel = mqttMessageQueueArray[3];
@@ -115,56 +114,66 @@ namespace MediTrack
                             existingPatient.OnPropertyChanged(nameof(existingPatient.RespirationRate));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.BloodPressureSystolic));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.Temperature));
+
                         }
+
                     }
                     catch (Exception ex)
                     {
+
                         //Überlegt euch was ihr da haben wollt 
                     }
                 }
 
-               else if ((mqttMessageQueueArray.Length != 0))
-               {
+                else if ((mqttMessageQueueArray.Length != 0))
+                {
+
                     object mqttDataString = DataBaseRemoteConnection.CallMonitorIDtoPatientID(mqttMessageQueueArray[0]);
                     object[] patientDataString = DataBaseRemoteConnection.CallForPatientThroughID(mqttDataString);
-
-                    Patient PatientenInstanz = new Patient()
+                    try
                     {
-                        
-                        LastName = patientDataString[0],
-                        FirstName = patientDataString[1],
-                        RoomNumber = patientDataString[2],
-                        BedNumber = patientDataString[3],
-
-                        PatientNumber = mqttDataString,
-
-
-
-                        PatientMonitor = mqttMessageQueueArray[0],
-                        HeartRate = mqttMessageQueueArray[1],
-                        RespirationRate = mqttMessageQueueArray[2],
-                        OxygenLevel = mqttMessageQueueArray[3],
-                        BloodPressureSystolic = mqttMessageQueueArray[4],
-                        BloodPressureDiastolic = mqttMessageQueueArray[5],
-                        Temperature = mqttMessageQueueArray[6],
-
-                    };
-
-                    
-                    Dispatcher.Invoke(() =>
-                    {
-                        ContentControl PatientTemplateContentAddition = new ContentControl
+                        Patient PatientenInstanz = new Patient()
                         {
-                            ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
-                            Content = PatientenInstanz,
-                            Margin = new Thickness(5)
-                        };
-                        PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
-                    });
 
-                    PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
-                    UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
-                }
+                            LastName = patientDataString[0],
+                            FirstName = patientDataString[1],
+                            RoomNumber = patientDataString[2],
+                            BedNumber = patientDataString[3],
+
+                            PatientNumber = mqttDataString,
+
+
+
+                            PatientMonitor = mqttMessageQueueArray[0],
+                            HeartRate = mqttMessageQueueArray[1],
+                            RespirationRate = mqttMessageQueueArray[2],
+                            OxygenLevel = mqttMessageQueueArray[3],
+                            BloodPressureSystolic = mqttMessageQueueArray[4],
+                            BloodPressureDiastolic = mqttMessageQueueArray[5],
+                            Temperature = mqttMessageQueueArray[6],
+
+                        };
+
+
+                        Dispatcher.Invoke(() =>
+                        {
+                            ContentControl PatientTemplateContentAddition = new ContentControl
+                            {
+                                ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+                                Content = PatientenInstanz,
+                                Margin = new Thickness(5)
+                            };
+                            PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
+                        });
+
+                        PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
+                        UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
+                    }
+                    catch
+                    {
+
+                    }
+                    }
             }
         }
 

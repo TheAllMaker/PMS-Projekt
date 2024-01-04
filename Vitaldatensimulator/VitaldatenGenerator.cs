@@ -14,15 +14,15 @@ namespace Vitaldatensimulator
         }
 
         // Generiert eine realistische Atemfrequenz basierend auf der aktuellen Atemfrequenz im Bereich von 8 bis 25 mit einer Änderung von -1 bis +1
-        public int GenerateRespirationRate(int RespirationRate)
+        public double GenerateRespirationRate(double RespirationRate)
         {
-            return GenerateRealisticValue(RespirationRate, 8, 25, -1, 1);
+            return GenerateRealisticValueDouble(RespirationRate, 8, 25, -0.2, 0.2);
         }
 
         // Generiert einen realistischen Sauerstoffgehalt basierend auf dem aktuellen Wert im Bereich von 91 bis 96 mit einer Änderung von -1 bis +1
-        public int GenerateOxygenLevel(int OxygenLevel)
+        public double GenerateOxygenLevel(double OxygenLevel)
         {
-            return GenerateRealisticValue(OxygenLevel, 91, 96, -1, 1);
+            return GenerateRealisticValueDouble(OxygenLevel, 91, 96, -0.1, 0.1);
         }
 
         // Generiert einen realistischen systolischen Blutdruck basierend auf dem aktuellen Wert im Bereich von 90 bis 220 mit einer Änderung von -1 bis +1
@@ -40,10 +40,10 @@ namespace Vitaldatensimulator
         // Generiert eine realistische Temperatur basierend auf dem aktuellen Wert im Bereich von 35 bis 39 mit einer Änderung von -0.05 bis 0.05
         public double GenerateTemperature(double Temperature)
         {
-            return GenerateRealisticTemperature(Temperature, 35, 39, -0.05, 0.05);
+            return GenerateRealisticValueDouble(Temperature, 35, 39, -0.05, 0.05);
         }
 
-        private double GenerateRealisticTemperature(double currentValue, double minValue, double maxValue, double minChange, double maxChange)
+        private double GenerateRealisticValueDouble(double currentValue, double minValue, double maxValue, double minChange, double maxChange)
         {
             double change = r.NextDouble() * (maxChange - minChange) + minChange;
             currentValue += change;
