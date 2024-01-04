@@ -247,8 +247,8 @@ namespace MediTrack
             Window PowerWindow = new PowerWindow
             {
                 Title = "Power Window",
-                Width = SystemParameters.PrimaryScreenWidth * 0.75,
-                Height = SystemParameters.PrimaryScreenHeight * 0.75,
+                Width = 800,
+                Height = 450,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
             PowerWindow.Show();

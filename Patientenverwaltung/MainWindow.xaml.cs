@@ -81,16 +81,10 @@ namespace Patientenverwaltung
             };
 
             // Das Fenster wird geöffnet
-            PowerWindow.ShowDialog();
+            PowerWindow.Show();
 
             // Hier wird das Hauptfenster als Owner für das PowerWindow festgelegt
             PowerWindow.Owner = this;
-
-            // Das Fenster wird sofort geschlossen
-            PowerWindow.Close();
-
-            // Anwendung wird nicht sofort geschlossen
-            // Application.Current.Shutdown();
         }
 
 
