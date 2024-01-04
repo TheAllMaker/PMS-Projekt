@@ -136,9 +136,23 @@
         </StackPanel>
 
         <Button x:Name="StartStopButton" Content="Start" FontSize="20" Margin="629,0,-156,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_StartStop" Background="#FF16FF06" Grid.Column="1" Height="72" VerticalAlignment="Bottom"/>
-        <Button x:Name="CloseButton" FontSize="20" Margin="790,0,-317,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Close" Background="Red" Grid.Column="1" Width="75" Height="50" VerticalAlignment="Bottom">
-            <Image Source="/Vitaldatensimulator/poweroff.png"/>
+        <!-- <Button x:Name="CloseButton" FontSize="20" Margin="790,0,-317,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_Close" Background="Red" Grid.Column="1" Height="72" VerticalAlignment="Bottom">
+             <Image Source="power.png" Width="40" Height="40"/>
+          </Button> -->
+
+        <Button x:Name="CloseBu2tton" Click ="Button_Click_Close" Width="75" Height="50" Margin="790,0,-317,-150" Background="#08080F" VerticalAlignment="Bottom" BorderBrush="Transparent" HorizontalAlignment="Center" Grid.Column="1">
+            <Image Source="poweroff.png"/>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.1"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
+        
         <Button x:Name="ConfirmChangesButton" Content="Änderungen bestätigen" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Height="35" Margin="451,300,0,0" Click="Button_Click_ConfirmChanges" IsEnabled="False" Grid.Column="1"/>
     </Grid>
 </Window>

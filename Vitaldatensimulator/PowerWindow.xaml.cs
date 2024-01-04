@@ -33,7 +33,7 @@ namespace MediTrack.View.RemoteView
         {
             if (!isAlreadyClosing)
             {
-                this.Close();
+                Close();
             }
         }
     }

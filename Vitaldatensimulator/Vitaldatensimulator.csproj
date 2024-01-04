@@ -181,5 +181,8 @@
   <ItemGroup>
     <Resource Include="power.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="poweroff.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
