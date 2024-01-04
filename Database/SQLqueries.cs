@@ -1,5 +1,6 @@
 ﻿using System;
 using Npgsql;
+using System.Windows;
 
 namespace Database
 {
@@ -9,9 +10,9 @@ namespace Database
 
         static void Main(string[] args)
         {
-            DeleteTable();
-            CreateTable();
-            
+            //DeleteTable();
+            //CreateTable();
+
         }
 
         public static void CreateTable()

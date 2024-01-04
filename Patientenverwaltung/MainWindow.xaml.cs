@@ -52,7 +52,7 @@ namespace Patientenverwaltung
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
             NewMonitorWindow.ShowDialog();
-            NewMonitorWindow.Owner = this;
+            
         }
 
         private void Button_Click_ConnectPM(object sender, RoutedEventArgs e)
@@ -66,7 +66,7 @@ namespace Patientenverwaltung
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
             ConnectWindow.ShowDialog();
-            ConnectWindow.Owner = this;
+            
         }
 
         private void Button_Click_PowerOff(object sender, RoutedEventArgs e)

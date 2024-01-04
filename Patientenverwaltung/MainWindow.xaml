@@ -73,9 +73,20 @@
 
         <!-- Power-Off Button - Unten rechts -->
         <Button Grid.Row="4" Grid.Column="1" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="550,0,0,10"
-                BorderBrush="Transparent" Foreground="Transparent" Name="PowerOff" Click="Button_Click_PowerOff">
+        BorderBrush="Transparent" Background="Black" Foreground="White" Name="PowerOff" Click="Button_Click_PowerOff">
             <Image Source="power.png" Width="30" Height="30"/>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.3"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
+
+
 
     </Grid>
 </Window>
