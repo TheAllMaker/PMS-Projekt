@@ -140,43 +140,6 @@ namespace MediTrack.Model.DataBaseModelConnection
                 return null;
             }
         }
-
-
-
-
-
-
-        public static void SelcukSQL()
-        {
-            var DataBaseConnector = DataBaseConnectionCall();
-            //string = $"";
-            // NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand(SelectPatientThroughPIDString, DataBaseConnector);
-
-
-            //public void AddPatientIntoDataBase(int pid, string FirstName, string LastName)
-            //{
-            //    var DataBaseConnector = DataBaseConnectionCall();
-            //    string InsertPatientCommandString = $"INSERT INTO patients VALUES ({pid},'{FirstName}','{LastName}')";
-            //    NpgsqlCommand InsertPatientCommand = new NpgsqlCommand("InsertPatientCommandString", DataBaseConnector);
-            //}
-
-
-
-
-
-
-
-
-
-
-
-            // Code Deponie
-            //NpgsqlCommand SelectCountCommand = new NpgsqlCommand("SELECT COUNT(*) FROM patients ", DataBaseConnector);
-            //Int64 EntryCount = (Int64)SelectCountCommand.ExecuteScalar();
-
-
-        }
-
     }
 }
 
