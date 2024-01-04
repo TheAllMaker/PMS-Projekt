@@ -71,8 +71,28 @@ namespace Patientenverwaltung
 
         private void Button_Click_PowerOff(object sender, RoutedEventArgs e)
         {
-            // Anwendung schließen
-            Application.Current.Shutdown();
+            // Hier wird eine Instanz von PowerWindow erstellt
+            Window PowerWindow = new PowerWindow
+            {
+                Title = "Connect Patient with Monitor",
+                Width = 800,
+                Height = 450,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            // Das Fenster wird geöffnet
+            PowerWindow.Show();
+
+            // Hier wird das Hauptfenster als Owner für das PowerWindow festgelegt
+            PowerWindow.Owner = this;
+
+            // Das Fenster wird sofort geschlossen
+            PowerWindow.Close();
+
+            // Anwendung wird nicht sofort geschlossen
+            // Application.Current.Shutdown();
         }
+
+
     }
 }

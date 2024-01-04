@@ -44,7 +44,7 @@
         <Label Content="Bed:" Grid.Row="6" Margin="10,5,10,5" Foreground="White"/>
         <TextBox x:Name="txtBed" Grid.Row="6" Margin="153,5,10,5" Background="White" Foreground="Black"/>
 
-        <Button Content="Add Patient to System" Grid.Row="8" Margin="10,10,10,10" Click="PatientAnlegen_Click" Width="150" Height="30" 
+        <Button Content="Add Patient to System" Grid.Row="8" Margin="10,10,350,10" Click="PatientAnlegen_Click" Width="150" Height="30" 
         Background="Black" Foreground="White" BorderBrush="White" BorderThickness="2">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -56,7 +56,7 @@
             </Button.Template>
         </Button>
 
-        <Button Content="Close" Grid.Row="8" HorizontalAlignment="Right" Margin="0,10,10,10" Click="Abbruch_Click" Width="100" Height="30" 
+        <Button Content="Close" Grid.Row="8" HorizontalAlignment="Right" Margin="0,10,-125,10" Click="Abbruch_Click" Width="100" Height="30" 
         Background="Black" Foreground="White" BorderBrush="White" BorderThickness="2">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
