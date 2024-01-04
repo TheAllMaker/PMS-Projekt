@@ -15,7 +15,7 @@
 
 
 
-        <TextBlock Text="Do you really want to turn off the simulator ?" HorizontalAlignment="Center" 
+        <TextBlock Text="Do you really want to turn off the Administration?" HorizontalAlignment="Center" 
                VerticalAlignment="Center" Margin="0,0,0,20" FontSize="20" Foreground="White"/>
 
 
