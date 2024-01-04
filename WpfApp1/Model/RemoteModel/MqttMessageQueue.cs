@@ -9,6 +9,37 @@ using System.Windows.Shapes;
 using Database;
 using Newtonsoft.Json;
 
+/*
+ * MqttMessageQueue Class in MediTrack.Model.RemoteModel Namespace
+ * 
+ * Overview:
+ * The MqttMessageQueue class is a static utility class designed to handle MQTT messages within the MediTrack system. 
+ * It primarily functions as a message queue for MQTT messages, providing mechanisms for enqueuing and dequeuing 
+ * these messages in a thread-safe manner. This class is crucial for handling real-time data communication in 
+ * health monitoring scenarios.
+ * 
+ * Usage:
+ * - Enqueue(string message): Adds a new MQTT message to the queue. This method is used to insert messages 
+ *   received from MQTT topics into the queue for subsequent processing.
+ * - Dequeue(): Retrieves and removes the oldest message from the queue. It parses the JSON content of the 
+ *   MQTT message, extracts vital health parameters, and returns them in an object array. This method is 
+ *   typically called by consumers of MQTT data for processing.
+ * - Count: Provides the current number of messages in the queue, useful for monitoring the queue's status.
+ *
+ * Details:
+ * - The internal implementation uses a Queue<string> to store the messages.
+ * - The Dequeue method is responsible for parsing the JSON message into a dynamic object, extracting relevant 
+ *   health monitoring data (like HeartRate, RespirationRate, etc.), and converting them to their appropriate 
+ *   data types (int, double, string) with necessary null checks and parsing.
+ * - The class provides helper methods for data type conversions and rounding off double values.
+ * - Thread safety should be considered and ensured by the caller, as this class does not inherently provide 
+ *   thread-safe mechanisms for accessing the queue.
+ * 
+ * Example:
+ * To use the MqttMessageQueue, first enqueue messages using `MqttMessageQueue.Enqueue(message)`. Then, you can 
+ * periodically dequeue messages using `MqttMessageQueue.Dequeue()` to process the latest health data.
+ *
+ */
 
 namespace MediTrack.Model.RemoteModel
 {

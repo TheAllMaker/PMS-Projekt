@@ -12,7 +12,39 @@ using Database;
 using MediTrack.Model.RemoteModel;
 using Npgsql;
 
-// hier ist noch der Rückgabe Typ offen !
+
+/*
+ * DataBaseRemoteConnection Class in MediTrack.Model.DataBaseModelConnection Namespace
+ * 
+ * Overview:
+ * The DataBaseRemoteConnection class is a static class that manages the database connections and data retrieval 
+ * for the MediTrack system. It utilizes Npgsql to connect to a PostgreSQL database, performing various queries 
+ * and operations to support the application's data management requirements.
+ * 
+ * Key Functionalities:
+ * - DataBaseConnectionCall(): Establishes a connection to the database using Npgsql. Handles any exceptions 
+ *   during connection and returns either a valid connection object or null.
+ * - DataBaseEntireEntryCall(): Executes a SQL query to fetch all patient IDs from the 'patients' table, 
+ *   storing them in a public list. This method is essential for retrieving a complete list of patient identifiers.
+ * - CallMonitorIDtoPatientID(object MonitorIDSearchKey): Takes a monitor ID and retrieves the corresponding 
+ *   patient ID from the 'belegung' table. Useful for linking monitor data to specific patients.
+ * - CallForPatientThroughID(object patientIdentifier): Retrieves detailed patient information (name, room 
+ *   number, bed number) based on the patient ID. This method is critical for obtaining patient-specific 
+ *   details for health monitoring and management.
+ * 
+ * Usage:
+ * These methods are utilized within the MediTrack system to interact with the database for various purposes, 
+ * such as obtaining patient details, monitoring IDs, and managing health data. The class serves as an 
+ * intermediary for all database interactions within the application.
+ * 
+ * Example:
+ * To retrieve patient data for a specific monitor ID, use `CallMonitorIDtoPatientID(monitorID)` method, and 
+ * to fetch detailed information for a patient, use `CallForPatientThroughID(patientID)`.
+ 
+ */
+
+
+
 namespace MediTrack.Model.DataBaseModelConnection
 {
     public static class DataBaseRemoteConnection

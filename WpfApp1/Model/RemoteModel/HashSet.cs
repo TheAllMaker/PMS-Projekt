@@ -25,12 +25,6 @@ namespace MediTrack.Model.RemoteModel
         {
            return MonitorHashSet.Contains(MonitorKey);
         }
-        // -> für Selcuk: Wie greife ich darauf zu ? -> in deinem File: 1) namespace Zugriff deklarieren + 2) Assembly reinhauen 
-        // + 3) dann zugreifen mit classennamen.klassenemthode -> also hier HashSet.InsertMonitorKeyToHash(MonitorID);
-        // Wie würde ich es machen:
-        // if( HashSet.ContainsHashMonitorKey (int MonitorKey) == false)
-        // { if(HashSet.InsertMonitorKeyToHash == true) Console.Writeline("Insert succesful blablalbab else dann ne Nachricht
-        // NICHT VERGESSEN: die Zugriffe geben Bools zurück so dass du sehen kannst was schief gelaufen ist und dich daran orientieren kannst !
     }
 }
 
