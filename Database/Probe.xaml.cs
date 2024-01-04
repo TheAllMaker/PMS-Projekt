@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Database
 {
     /// <summary>
-    /// Interaktionslogik für TestMainWindow.xaml
+    /// Interaktionslogik für Probe.xaml
     /// </summary>
-    public partial class TestMainWindow : UserControl
+    public partial class Probe : UserControl
     {
-        public TestMainWindow()
+        public Probe()
         {
             InitializeComponent();
         }
