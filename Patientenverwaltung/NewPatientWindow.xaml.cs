@@ -34,11 +34,10 @@ namespace Patientenverwaltung
             DateTime geburtsdatum = dpGeburtstag.SelectedDate ?? DateTime.MinValue;
 
             // Überprüfen, ob das Room-Feld eine gültige Ganzzahl ist
-            if (int.TryParse(txtRoom.Text, out int room))
+            if (int.TryParse(txtRoom.Text, out int room) && int.TryParse(txtBed.Text, out int bed))
             {
                 // Überprüfen, ob das Bed-Feld eine gültige Ganzzahl ist
-                if (int.TryParse(txtBed.Text, out int bed))
-                {
+                
                     // Überprüfen der Eingabe
                     if (IsValidInput(vorname, nachname, sex, geburtsdatum, room, bed))
                     {
@@ -87,14 +86,9 @@ namespace Patientenverwaltung
                         MessageBox.Show("Ungültige Eingabe. Stellen Sie sicher, dass alle Felder ausgefüllt sind.");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Ungültige Eingabe für Bed. Bitte geben Sie eine gültige Ganzzahl ein.");
-                }
-            }
             else
             {
-                MessageBox.Show("Ungültige Eingabe für Room. Bitte geben Sie eine gültige Ganzzahl ein.");
+                MessageBox.Show("Ungültige Eingabe. Bitte geben Sie eine gültige Ganzzahl ein für Bed und Room ein.");
             }
 
             
