@@ -304,16 +304,15 @@ namespace Vitaldatensimulator
                 UUID = GenerateUUID();
                 isUUIDAlreadyCreated = true;
             }
-            //UUID = GenerateUUID();
 
-            //Guid newUUID = identifier != Guid.Empty ? identifier : GenerateUUID();
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
-            double RespirationRate = RespirationRateSlider.Value;
-            double OxygenLevel = OxygenLevelSlider.Value;
             int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
             int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
-            double Temperature = TemperatureSlider.Value;
             int Alive = 1;
+
+            double Temperature = TemperatureSlider.Value;
+            double RespirationRate = RespirationRateSlider.Value;
+            double OxygenLevel = OxygenLevelSlider.Value;
 
             MonitorVitalDaten newMonitor = new MonitorVitalDaten(
                 MonitorIDBox.Text,
@@ -362,12 +361,11 @@ namespace Vitaldatensimulator
 
         public void SimulatorUI_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //isAlreadyClosing = true;
-            //e.Cancel = ConfirmClose();
-
             if (powerWindow == null || !powerWindow.IsVisible)
             {
+                e.Cancel = true;
                 powerWindow = new PowerWindow();
+                powerWindow.ConfirmClicked += PowerWindow_ConfirmClicked;
                 powerWindow.Show();
             }
         }
@@ -375,15 +373,13 @@ namespace Vitaldatensimulator
         private async void PowerWindow_ConfirmClicked(object sender, EventArgs e)
         {
             ConfirmClose();
-            await Task.Delay(500);
+            await Task.Delay(100);
             Application.Current.Shutdown();
-            //this.Close();
         }
 
 
         private void ConfirmClose()
         {
-            zaehler++;
             SetAliveStatusToZero();
         }
 
@@ -395,8 +391,6 @@ namespace Vitaldatensimulator
                 // Übernehme die geänderten Slider-Werte und setze sie als aktuelle Werte für die Übertragung oder Simulation
                 if (isValueChanged)
                 {
-                    mySimulatorTimer.ResetTimer();
-
                     HeartRateSlider.Value = Convert.ToDouble(HeartRateBox.Text);
                     RespirationRateSlider.Value = Convert.ToDouble(RespirationRateBox.Text);
                     OxygenLevelSlider.Value = Convert.ToDouble(OxygenLevelBox.Text);
@@ -406,6 +400,7 @@ namespace Vitaldatensimulator
 
                     isValueChanged = false; // Setze isValueChanged zurück
                     ConfirmChangesButton.IsEnabled = false; // Deaktiviere den Bestätigen-Button wieder
+                    mySimulatorTimer.ResetTimer();
                     UpdateVitalData();
                 }
             }
