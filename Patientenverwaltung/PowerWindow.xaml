@@ -20,7 +20,7 @@
 
         
             <Viewbox Width="50" Height="50" Grid.Row="1">
-            <Image Source="/View/Bilder/power.png"  Width="200" Height="200"/>
+            <Image Source="power.png"  Width="200" Height="200"/>
             </Viewbox>
 
 

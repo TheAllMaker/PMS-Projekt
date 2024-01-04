@@ -26,22 +26,22 @@ namespace Patientenverwaltung
         }
         private void Button_Click_AddPatient(object sender, RoutedEventArgs e)
         {
-            // Öffne NewPatientWindow
-            Window NewPatientWindow = new NewPatientWindow
+            // Öffne NewPatientWindow als modales Dialogfeld
+            NewPatientWindow newPatientWindow = new NewPatientWindow
             {
                 Title = "Add New Patient",
                 Width = 800,
                 Height = 450,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
-            NewPatientWindow.Show();
-            NewPatientWindow.Owner = this;
-           
-            
+
+            // Zeige das Fenster als modales Dialogfeld an
+            newPatientWindow.ShowDialog();
         }
 
 
-            private void Button_Click_AddMonitor(object sender, RoutedEventArgs e)
+
+        private void Button_Click_AddMonitor(object sender, RoutedEventArgs e)
         {
             // Öffne NewMonitorWindow
             Window NewMonitorWindow = new NewMonitorWindow
@@ -51,7 +51,7 @@ namespace Patientenverwaltung
                 Height = 450,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
-            NewMonitorWindow.Show();
+            NewMonitorWindow.ShowDialog();
             NewMonitorWindow.Owner = this;
         }
 
@@ -65,7 +65,7 @@ namespace Patientenverwaltung
                 Height = 450,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
-            ConnectWindow.Show();
+            ConnectWindow.ShowDialog();
             ConnectWindow.Owner = this;
         }
 
@@ -81,7 +81,7 @@ namespace Patientenverwaltung
             };
 
             // Das Fenster wird geöffnet
-            PowerWindow.Show();
+            PowerWindow.ShowDialog();
 
             // Hier wird das Hauptfenster als Owner für das PowerWindow festgelegt
             PowerWindow.Owner = this;
