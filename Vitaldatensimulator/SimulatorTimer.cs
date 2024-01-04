@@ -11,7 +11,7 @@ namespace Vitaldatensimulator
     public class SimulatorTimer
     {
         private Timer timer;
-        private MonitorVitalDaten singleMonitor;
+        private VitalData singleMonitor;
         private readonly MqttPublisher mqttPublisher = MqttPublisher.GetInstance();
 
         public SimulatorTimer()
@@ -22,7 +22,7 @@ namespace Vitaldatensimulator
             timer.Enabled = false;
         }
 
-        public void StartSimulator(MonitorVitalDaten monitor)
+        public void StartSimulator(VitalData monitor)
         {
             singleMonitor = monitor;
             timer.Enabled = true; 

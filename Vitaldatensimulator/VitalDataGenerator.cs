@@ -2,7 +2,7 @@
 
 namespace Vitaldatensimulator
 {
-    internal class VitaldatenGenerator
+    internal class VitalDataGenerator
     {
         private static readonly Random r = new Random();
 

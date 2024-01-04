@@ -4,7 +4,7 @@ using System.Reflection.Emit;
 
 namespace Vitaldatensimulator
 {
-    public class MonitorVitalDaten
+    public class VitalData
     {
         public string MonitorID { get; set; }
         public int HeartRate { get;  set; }
@@ -16,9 +16,9 @@ namespace Vitaldatensimulator
         public int Alive { get; set; }
         public string UUID { get; set; }
 
-        private readonly VitaldatenGenerator generator;
+        private readonly VitalDataGenerator generator;
 
-        public MonitorVitalDaten(string MonitorID, int HeartRate, double RespirationRate, double OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, double Temperature, string UUID, int Alive = 1)
+        public VitalData(string MonitorID, int HeartRate, double RespirationRate, double OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, double Temperature, string UUID, int Alive = 1)
         {
             this.MonitorID = MonitorID;
             this.HeartRate = HeartRate;
@@ -30,7 +30,7 @@ namespace Vitaldatensimulator
             this.Alive = Alive;
             this.UUID = UUID;
 
-            generator = new VitaldatenGenerator();
+            generator = new VitalDataGenerator();
         }
 
         public string GetVitalData()

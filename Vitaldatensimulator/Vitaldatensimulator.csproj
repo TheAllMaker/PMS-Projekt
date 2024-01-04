@@ -135,9 +135,9 @@
     <Compile Include="SimulatorUI.xaml.cs">
       <DependentUpon>SimulatorUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MonitorVitalDaten.cs" />
+    <Compile Include="VitalData.cs" />
     <Compile Include="MqttPublisher.cs" />
-    <Compile Include="VitaldatenGenerator.cs" />
+    <Compile Include="VitalDataGenerator.cs" />
     <Compile Include="VitalSimulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -199,6 +199,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="poweroff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bilder\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

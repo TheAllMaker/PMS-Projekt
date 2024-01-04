@@ -7,9 +7,9 @@ namespace Vitaldatensimulator
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
+            //base.OnStartup(e);
+            //MainMenu mainMenu = new MainMenu();
+            //mainMenu.Show();
         }
     }
 }

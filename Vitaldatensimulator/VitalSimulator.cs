@@ -19,9 +19,6 @@ namespace Vitaldatensimulator
             Application app = new Application();
             SimulatorUI simulator = new SimulatorUI();
             app.Run(simulator);
-
-            //MainMenu mainMenu = new MainMenu();
-            //app.Run(mainMenu);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Vitaldatensimulator
 
         private static MqttClient client;
         private static MqttPublisher instance;
-        public static event EventHandler<MonitorVitalDaten> VitalDataUpdated;
+        public static event EventHandler<VitalData> VitalDataUpdated;
         public static bool isSendingData = true;
 
         public MqttPublisher()
@@ -51,7 +51,7 @@ namespace Vitaldatensimulator
             client.Disconnect();
         }
 
-        public void SendVitalData(MonitorVitalDaten singleMonitor)
+        public void SendVitalData(VitalData singleMonitor)
         {
             var vitaldaten = singleMonitor.GetVitalData();
             if (singleMonitor.Alive == 0)

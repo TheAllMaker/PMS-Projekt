@@ -34,11 +34,9 @@ namespace Vitaldatensimulator
         private SimulatorTimer mySimulatorTimer;
         private PowerWindow powerWindow;
         private bool isValueChanged = false;
-        private bool isAlreadyClosing = false;
         private bool isUUIDAlreadyCreated = false;
         private Guid identifier;
         private string UUID;
-        private int zaehler;
 
         public SimulatorUI()
         {
@@ -46,7 +44,6 @@ namespace Vitaldatensimulator
             Loaded += SimulatorUI_Loaded;
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
             this.Closing += SimulatorUI_Closing;
-
             MqttPublisher.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
             mySimulatorTimer = new SimulatorTimer();
         }
@@ -54,7 +51,6 @@ namespace Vitaldatensimulator
         // Nur als Notfall
         void CurrentDomain_ProcessExit(object sender, EventArgs e)
         {
-            // Ihr Code hier
             SetAliveStatusToZero();
         }
 
@@ -66,7 +62,7 @@ namespace Vitaldatensimulator
         }
 
         //Updaten der Anzeige der aktuell versendeten Vitalwerte
-        private void VitaldatenSimulator_VitalDataUpdated(object sender, MonitorVitalDaten MonitorVitalDaten)
+        private void VitaldatenSimulator_VitalDataUpdated(object sender, VitalData MonitorVitalDaten)
         {
             if (MonitorVitalDaten != null)
             {
@@ -284,7 +280,7 @@ namespace Vitaldatensimulator
         {
             if (!ValidateMonitorID()) return;
 
-            MonitorVitalDaten newMonitor = CreateMonitorData();
+            VitalData newMonitor = CreateMonitorData();
             mySimulatorTimer.StartSimulator(newMonitor);
 
             if (currentState != SimulationState.Running)
@@ -311,7 +307,7 @@ namespace Vitaldatensimulator
         }
 
         //Érstellen von einem Monitor Objekt mit Vitaldaten
-        private MonitorVitalDaten CreateMonitorData()
+        private VitalData CreateMonitorData()
         {
             if (!isUUIDAlreadyCreated)
             {
@@ -326,7 +322,7 @@ namespace Vitaldatensimulator
             double RespirationRate = RespirationRateSlider.Value;
             double OxygenLevel = OxygenLevelSlider.Value;
 
-            MonitorVitalDaten newMonitor = new MonitorVitalDaten(
+            VitalData newMonitor = new VitalData(
                 MonitorIDBox.Text,
                 HeartRate,
                 RespirationRate,
@@ -424,14 +420,14 @@ namespace Vitaldatensimulator
         //Update die versendeten Vitaldaten nach der Änderung
         private void UpdateVitalData()
         {
-            MonitorVitalDaten updatedMonitor = CreateMonitorData();
+            VitalData updatedMonitor = CreateMonitorData();
             mySimulatorTimer.StartSimulator(updatedMonitor);
         }
 
         // Schicke als letzte Nachricht noch Alive = 0
         public void SetAliveStatusToZero()
         {
-            MonitorVitalDaten updatedAliveMonitor = new MonitorVitalDaten(MonitorIDBox.Text, 0, 0, 0, 0, 0, 0, UUID, 0);
+            VitalData updatedAliveMonitor = new VitalData(MonitorIDBox.Text, 0, 0, 0, 0, 0, 0, UUID, 0);
             mySimulatorTimer.StartSimulator(updatedAliveMonitor);
         }
     }
