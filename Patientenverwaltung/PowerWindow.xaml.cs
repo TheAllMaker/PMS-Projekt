@@ -16,15 +16,13 @@ namespace Patientenverwaltung
 
         private void PowerWindowClosing(object sender, CancelEventArgs e)
         {
-            if (!UserConfirmed)
-            {
-                e.Cancel = true;
-            }
+            // Allow the window to close, regardless of UserConfirmed value
+            // This will be handled by the Button_Click_Cancel method.
         }
 
         private void ShowConfirmationDialog()
         {
-            // Weisen Sie die Ereignishandler zu
+            // Assign event handlers
             ConfirmButton.Click += Button_Click_Confirm;
             CancelButton.Click += Button_Click_Cancel;
         }
@@ -41,4 +39,6 @@ namespace Patientenverwaltung
             Close();
         }
     }
+
 }
+

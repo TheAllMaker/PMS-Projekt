@@ -106,7 +106,7 @@
                         <Style TargetType="Button">
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Opacity" Value="0.1"/>
+                                    <Setter Property="Opacity" Value="0.9"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
