@@ -14,7 +14,6 @@ namespace MediTrack.View.RemoteView
         public PowerWindow()
         {
             InitializeComponent();
-            Closing += PowerWindow_Closing;
         }
 
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
@@ -27,14 +26,6 @@ namespace MediTrack.View.RemoteView
         {
             isAlreadyClosing = true;
             Close();
-        }
-
-        public void PowerWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (!isAlreadyClosing)
-            {
-                Close();
-            }
         }
     }
 }
