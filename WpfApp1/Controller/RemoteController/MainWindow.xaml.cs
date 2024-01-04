@@ -46,6 +46,7 @@ namespace MediTrack
         {
             InitializeComponent();
             Loaded += InitializeComponents;
+            
             _cancellationTokenSource = new CancellationTokenSource();
             Loaded += async (sender, args) => await ProcessMQTTMessages(_cancellationTokenSource.Token);
         }
@@ -182,26 +183,6 @@ namespace MediTrack
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void Select_Button_Clicked(object sender, RoutedEventArgs e)
         {
             // Instanziert ein neues Fenster
@@ -254,6 +235,7 @@ namespace MediTrack
             PowerWindow.Show();
             PowerWindow.Owner = this;
         }
+       
 
 
     }

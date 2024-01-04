@@ -20,9 +20,12 @@ namespace Patientenverwaltung
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool isAlreadyClosing = false;
+        private PowerWindow powerWindow;
         public MainWindow()
         {
             InitializeComponent();
+            this.Closing += MainWindow_Closing;
         }
         private void Button_Click_AddPatient(object sender, RoutedEventArgs e)
         {
@@ -52,7 +55,7 @@ namespace Patientenverwaltung
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
             NewMonitorWindow.ShowDialog();
-            
+
         }
 
         private void Button_Click_ConnectPM(object sender, RoutedEventArgs e)
@@ -66,7 +69,7 @@ namespace Patientenverwaltung
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
             ConnectWindow.ShowDialog();
-            
+
         }
 
         private void Button_Click_PowerOff(object sender, RoutedEventArgs e)
@@ -85,6 +88,37 @@ namespace Patientenverwaltung
 
             // Hier wird das Hauptfenster als Owner für das PowerWindow festgelegt
             PowerWindow.Owner = this;
+        }
+
+
+
+        public void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!isAlreadyClosing)
+            {
+                if (powerWindow == null || !powerWindow.IsVisible)
+                {
+                    // If the PowerWindow instance doesn't exist or is not visible, create and show it.
+                    powerWindow = new PowerWindow
+                    {
+                        Title = "Connect Patient with Monitor",
+                        Width = 800,
+                        Height = 450,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen
+                    };
+
+                    powerWindow.Owner = this;
+                    powerWindow.Show();
+                }
+                else
+                {
+                    // If the PowerWindow is already visible, just bring it to the front.
+                    powerWindow.Activate();
+                }
+
+                // Cancel the main window closing to handle it in PowerWindow.
+                e.Cancel = true;
+            }
         }
 
 
