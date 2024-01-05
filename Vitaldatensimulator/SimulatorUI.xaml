@@ -138,27 +138,60 @@
         <Button x:Name="StartStopButton" Content="Start" FontSize="20" Margin="629,0,-156,-160" RenderTransformOrigin="0.5,0.5" Click="Button_Click_StartStop" Background="#FF16FF06" Grid.Column="1" Height="72" VerticalAlignment="Bottom">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                    <Border x:Name="border" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Opacity" Value="0.4" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="CloseButton" Click="Button_Click_Close" Width="75" Height="50" Margin="790,0,-317,-150" Background="#08080F" VerticalAlignment="Bottom" BorderBrush="Transparent" HorizontalAlignment="Center" Grid.Column="1">
+            <Image Source="poweroff.png"/>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" Opacity="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Opacity" Value="0.25"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="ConfirmChangesButton" Content="Confirm Changes" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Height="35" Margin="451,300,0,0" Click="Button_Click_ConfirmChanges" IsEnabled="False" Grid.Column="1">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" Opacity="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Opacity" Value="0.6"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
         </Button>
 
 
-        <Button x:Name="CloseButton" Click ="Button_Click_Close" Width="75" Height="50" Margin="790,0,-317,-150" Background="#08080F" VerticalAlignment="Bottom" BorderBrush="Transparent" HorizontalAlignment="Center" Grid.Column="1">
-            <Image Source="poweroff.png"/>
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="1"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
-        
-        <Button x:Name="ConfirmChangesButton" Content="Confirm Changes" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Height="35" Margin="451,300,0,0" Click="Button_Click_ConfirmChanges" IsEnabled="False" Grid.Column="1"/>
     </Grid>
 </Window>
