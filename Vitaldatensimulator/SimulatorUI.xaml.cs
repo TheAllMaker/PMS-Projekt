@@ -42,17 +42,17 @@ namespace Vitaldatensimulator
         {
             InitializeComponent();
             Loaded += SimulatorUI_Loaded;
-            AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
+            //AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
             this.Closing += SimulatorUI_Closing;
             MqttPublisher.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
             mySimulatorTimer = new SimulatorTimer();
         }
 
         // Nur als Notfall
-        void CurrentDomain_ProcessExit(object sender, EventArgs e)
-        {
-            SetAliveStatusToZero();
-        }
+        //void CurrentDomain_ProcessExit(object sender, EventArgs e)
+        //{
+        //    SetAliveStatusToZero();
+        //}
 
         private void SimulatorUI_Loaded(object sender, RoutedEventArgs e)
         {
@@ -285,6 +285,8 @@ namespace Vitaldatensimulator
 
             if (currentState != SimulationState.Running)
             {
+                StartStopButton.Content = "Stop";
+                StartStopButton.Background = new SolidColorBrush(Colors.Yellow);
                 currentState = SimulationState.Running;
             }
             MessageBox.Show("Erfolgreich einen Monitor erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -295,7 +297,7 @@ namespace Vitaldatensimulator
         {
             MqttPublisher.isSendingData = false;
             mySimulatorTimer.ResetTimer();
-            MessageBox.Show("Erfolgreich Generierung der Daten gestoppt", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Generierung der Daten gestoppt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         //Simulation fortsetzen
@@ -382,7 +384,7 @@ namespace Vitaldatensimulator
         //Schließen des Projekts nach 100ms, damit letzte Nachricht noch versendet werden kann
         private async void PowerWindow_ConfirmClicked(object sender, EventArgs e)
         {
-            if (currentState == SimulationState.Running)
+            if (currentState != SimulationState.Stopped)
             {
                 SetAliveStatusToZero();
             }
