@@ -261,14 +261,14 @@ namespace MediTrack
                 string selectedOption = OptionsListBox.SelectedItem.ToString();
 
                 // Erstellen eines neuen Buttons
-                Button newButton = new Button
+                ContentControl newButton = new ContentControl
                 {
-                    Content = selectedOption,
+                    ContentTemplate = (DataTemplate)Resources["CrossButton"],
                     // Weitere Eigenschaften des Buttons können hier festgelegt werden
                 };
 
                 // Fügen Sie eine Click-Ereignishandler-Methode für den neuen Button hinzu, falls erforderlich
-                newButton.Click += NewButton_Click;
+                //newButton.Click += NewButton_Click;
 
                 // Platzieren des Buttons im Grid
                 PatientenMonitorDynGrid.Children.Add(newButton);
@@ -282,10 +282,7 @@ namespace MediTrack
             }
         }
 
-        private void NewButton_Click(object sender, RoutedEventArgs e)
-{
-    // Logik, die ausgeführt wird, wenn der neue Button geklickt wird
-}
+
 
     }
 }
