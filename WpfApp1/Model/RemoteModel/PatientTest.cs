@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace MediTrack.Model.RemoteModel
 {
-    public class PatientTest
+    public static class PatientTest
     {
-    public void TestPatientCall1()
+    public static void TestPatientCall1()
         {
 
 
@@ -32,7 +32,7 @@ namespace MediTrack.Model.RemoteModel
             Application.Current.Resources["TestPatient1"] = TestPatient1;
         }
 
-      public void TestPatientCall2()
+      public static void TestPatientCall2()
         {
 
 

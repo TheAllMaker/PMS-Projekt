@@ -25,10 +25,10 @@ namespace MediTrack.View.RemoteView
         }
 
 
-        //private void ShowOptions_Click(object sender, RoutedEventArgs e)
-        //{
-        //    OptionsPopup.IsOpen = true;
-        //}
+        private void ShowOptions_Click1(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("soyoz Neruwinlju resiuvnik");
+        }
 
         //private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{

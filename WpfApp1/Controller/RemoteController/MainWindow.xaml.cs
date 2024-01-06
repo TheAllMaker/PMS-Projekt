@@ -46,7 +46,7 @@ namespace MediTrack
         {
             InitializeComponent();
             Loaded += InitializeComponents;
-            
+            PatientTest.TestPatientCall2();
             _cancellationTokenSource = new CancellationTokenSource();
             Loaded += async (sender, args) => await ProcessMQTTMessages(_cancellationTokenSource.Token);
         }
@@ -247,38 +247,75 @@ namespace MediTrack
             OptionsPopup.IsOpen = true;
         }
 
+        //private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    //if (OptionsListBox.SelectedItem is ListBoxItem selectedOption)
+        //    //{
+        //    //    MessageBox.Show($"Sie haben '{selectedOption.Content}' ausgewählt.");
+        //    //}
+
+        //    //// Schließen Sie das Popup nach der Auswahl
+        //    //OptionsPopup.IsOpen = false;
+        //    if (OptionsListBox.SelectedItem != null)
+        //    {
+        //        string selectedOption = OptionsListBox.SelectedItem.ToString();
+
+        //        // Erstellen eines neuen Buttons
+        //        ContentControl newButton = new ContentControl
+        //        {
+        //            ContentTemplate = (DataTemplate)Resources["CrossButton"],
+        //            // Weitere Eigenschaften des Buttons können hier festgelegt werden
+        //        };
+
+        //        // Fügen Sie eine Click-Ereignishandler-Methode für den neuen Button hinzu, falls erforderlich
+        //        //newButton.Click += NewButton_Click;
+
+        //        // Platzieren des Buttons im Grid
+        //        PatientenMonitorDynGrid.Children.Add(newButton);
+
+        //        // Optional: Setzen von Grid.Row und Grid.Column, wenn Sie ein mehrspaltiges/mehrreihiges Grid haben
+        //        // Grid.SetRow(newButton, rowIndex);
+        //        // Grid.SetColumn(newButton, columnIndex);
+
+        //        // Zurücksetzen der Auswahl, falls gewünscht
+        //        OptionsListBox.SelectedItem = null;
+        //    }
+        //}
+
         private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (OptionsListBox.SelectedItem is ListBoxItem selectedOption)
-            //{
-            //    MessageBox.Show($"Sie haben '{selectedOption.Content}' ausgewählt.");
-            //}
-
-            //// Schließen Sie das Popup nach der Auswahl
-            //OptionsPopup.IsOpen = false;
             if (OptionsListBox.SelectedItem != null)
             {
-                string selectedOption = OptionsListBox.SelectedItem.ToString();
-
-                // Erstellen eines neuen Buttons
-                ContentControl newButton = new ContentControl
+                // Erstellen eines neuen ContentControls für das nächste UniformGrid
+                ContentControl newContentControlForGrid = new ContentControl
                 {
-                    ContentTemplate = (DataTemplate)Resources["CrossButton"],
-                    // Weitere Eigenschaften des Buttons können hier festgelegt werden
+                    ContentTemplate = (DataTemplate)FindResource("CrossButton"),
+                    
+                    Margin = new Thickness(5)
                 };
 
-                // Fügen Sie eine Click-Ereignishandler-Methode für den neuen Button hinzu, falls erforderlich
-                //newButton.Click += NewButton_Click;
+                // Hinzufügen des neuen ContentControls zum nächsten UniformGrid
+                PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
 
-                // Platzieren des Buttons im Grid
-                PatientenMonitorDynGrid.Children.Add(newButton);
+                // Aktualisieren des ContentTemplates des ausgewählten CrossButtons
+                //if (PatientNe9tworkIcon.Content is ContentControl currentContentControl)
+                //{
+                //    currentContentControl.ContentTemplate = (DataTemplate)FindResource("PatientTemplate");
+                //    //currentContentControl.Content = Application.Current.Resources["TestPatient2"] /* Hier das entsprechende Content-Objekt setzen */;
+                //    //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+                //    //    Content = Application.Current.Resources["TestPatient2"],
+                //}
+                ContentControl newContent = new ContentControl();
+                newContent.ContentTemplate = this.Resources["PatientTemplate"] as DataTemplate;
+                newContent.Content = Application.Current.Resources["TestPatient2"]; // Set the content you want to display
 
-                // Optional: Setzen von Grid.Row und Grid.Column, wenn Sie ein mehrspaltiges/mehrreihiges Grid haben
-                // Grid.SetRow(newButton, rowIndex);
-                // Grid.SetColumn(newButton, columnIndex);
+             PatientNe9tworkIcon.Content = newContent;
 
-                // Zurücksetzen der Auswahl, falls gewünscht
+                // Close the popup if necessary
+                OptionsPopup.IsOpen = false;
+                // Zurücksetzen der Auswahl im Popup und Schließen des Popups
                 OptionsListBox.SelectedItem = null;
+                OptionsPopup.IsOpen = false;
             }
         }
 
