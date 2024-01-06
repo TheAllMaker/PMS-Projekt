@@ -15,8 +15,7 @@ using Newtonsoft.Json;
  * Overview:
  * The MqttMessageQueue class is a static utility class designed to handle MQTT messages within the MediTrack system. 
  * It primarily functions as a message queue for MQTT messages, providing mechanisms for enqueuing and dequeuing 
- * these messages in a thread-safe manner. This class is crucial for handling real-time data communication in 
- * health monitoring scenarios.
+ * these messages in a thread-safe manner. 
  * 
  * Usage:
  * - Enqueue(string message): Adds a new MQTT message to the queue. This method is used to insert messages 
@@ -27,13 +26,11 @@ using Newtonsoft.Json;
  * - Count: Provides the current number of messages in the queue, useful for monitoring the queue's status.
  *
  * Details:
- * - The internal implementation uses a Queue<string> to store the messages.
+ * - The internal implementation uses a Queue <string> to store the messages.
  * - The Dequeue method is responsible for parsing the JSON message into a dynamic object, extracting relevant 
  *   health monitoring data (like HeartRate, RespirationRate, etc.), and converting them to their appropriate 
  *   data types (int, double, string) with necessary null checks and parsing.
  * - The class provides helper methods for data type conversions and rounding off double values.
- * - Thread safety should be considered and ensured by the caller, as this class does not inherently provide 
- *   thread-safe mechanisms for accessing the queue.
  * 
  * Example:
  * To use the MqttMessageQueue, first enqueue messages using `MqttMessageQueue.Enqueue(message)`. Then, you can 

@@ -134,7 +134,6 @@
     <Compile Include="Controller\AssemblyInfo.cs" />
     <Compile Include="Controller\RemoteController\AddPatientWindow.xaml.cs" />
     <Compile Include="Controller\RemoteController\App.xaml.cs" />
-    <Compile Include="Controller\RemoteController\ConfirmationDialog.cs" />
     <Compile Include="Controller\RemoteController\MainWindow.xaml.cs" />
     <Compile Include="Controller\RemoteController\PatientTemplate.xaml.cs" />
     <Compile Include="Model\RemoteModel\HashSet.cs" />
