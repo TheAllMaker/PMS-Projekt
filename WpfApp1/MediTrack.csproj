@@ -137,8 +137,6 @@
     <Compile Include="Controller\RemoteController\ConfirmationDialog.cs" />
     <Compile Include="Controller\RemoteController\MainWindow.xaml.cs" />
     <Compile Include="Controller\RemoteController\PatientTemplate.xaml.cs" />
-    <Compile Include="Controller\RemoteController\SelectionWindow.xaml.cs" />
-    <Compile Include="Controller\RemoteController\SelectionWindowPatientBox.xaml.cs" />
     <Compile Include="Model\RemoteModel\HashSet.cs" />
     <Compile Include="Model\RemoteModel\MqttMessageQueue.cs" />
     <Compile Include="Model\RemoteModel\UuidDictionary.cs" />
@@ -146,6 +144,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StringContainer.resx</DependentUpon>
+    </Compile>
+    <Compile Include="View\RemoteView\CrossButton.xaml.cs">
+      <DependentUpon>CrossButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RemoteView\DetailedWindow.xaml.cs">
       <DependentUpon>DetailedWindow.xaml</DependentUpon>
@@ -160,6 +161,10 @@
     <Page Include="View\RemoteView\AddPatientWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\RemoteView\CrossButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RemoteView\DetailedWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -176,14 +181,6 @@
     <Page Include="View\RemoteView\PowerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\RemoteView\SelectionWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\RemoteView\SelectionWindowPatientBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

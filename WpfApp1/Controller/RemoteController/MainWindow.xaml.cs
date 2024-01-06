@@ -183,22 +183,22 @@ namespace MediTrack
 
 
 
-        private void Select_Button_Clicked(object sender, RoutedEventArgs e)
-        {
-            // Instanziert ein neues Fenster
-            Window SelectWindow = new SelectionWindow
-            {
-                Title = "Select Patient", // Name des neuen Fenster's
-                Width = SystemParameters.PrimaryScreenWidth * 0.75,
-                Height = SystemParameters.PrimaryScreenHeight * 0.75,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen
-            };
-            SelectWindow.Show();
-            SelectWindow.Owner = this;
-            //SelectWindow.ShowDialog();
+        //private void Select_Button_Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    // Instanziert ein neues Fenster
+        //    Window SelectWindow = new SelectionWindow
+        //    {
+        //        Title = "Select Patient", // Name des neuen Fenster's
+        //        Width = SystemParameters.PrimaryScreenWidth * 0.75,
+        //        Height = SystemParameters.PrimaryScreenHeight * 0.75,
+        //        WindowStartupLocation = WindowStartupLocation.CenterScreen
+        //    };
+        //    SelectWindow.Show();
+        //    SelectWindow.Owner = this;
+        //    //SelectWindow.ShowDialog();
 
 
-        }
+        //}
 
 
 
@@ -235,8 +235,57 @@ namespace MediTrack
             PowerWindow.Show();
             PowerWindow.Owner = this;
         }
-       
 
+        //private void PatientNetworkIcon_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MyPopup.IsOpen = !MyPopup.IsOpen; // Schaltet die Sichtbarkeit des Popups um
+        //}
+
+
+        private void ShowOptions_Click(object sender, RoutedEventArgs e)
+        {
+            OptionsPopup.IsOpen = true;
+        }
+
+        private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //if (OptionsListBox.SelectedItem is ListBoxItem selectedOption)
+            //{
+            //    MessageBox.Show($"Sie haben '{selectedOption.Content}' ausgewählt.");
+            //}
+
+            //// Schließen Sie das Popup nach der Auswahl
+            //OptionsPopup.IsOpen = false;
+            if (OptionsListBox.SelectedItem != null)
+            {
+                string selectedOption = OptionsListBox.SelectedItem.ToString();
+
+                // Erstellen eines neuen Buttons
+                Button newButton = new Button
+                {
+                    Content = selectedOption,
+                    // Weitere Eigenschaften des Buttons können hier festgelegt werden
+                };
+
+                // Fügen Sie eine Click-Ereignishandler-Methode für den neuen Button hinzu, falls erforderlich
+                newButton.Click += NewButton_Click;
+
+                // Platzieren des Buttons im Grid
+                PatientenMonitorDynGrid.Children.Add(newButton);
+
+                // Optional: Setzen von Grid.Row und Grid.Column, wenn Sie ein mehrspaltiges/mehrreihiges Grid haben
+                // Grid.SetRow(newButton, rowIndex);
+                // Grid.SetColumn(newButton, columnIndex);
+
+                // Zurücksetzen der Auswahl, falls gewünscht
+                OptionsListBox.SelectedItem = null;
+            }
+        }
+
+        private void NewButton_Click(object sender, RoutedEventArgs e)
+{
+    // Logik, die ausgeführt wird, wenn der neue Button geklickt wird
+}
 
     }
 }
