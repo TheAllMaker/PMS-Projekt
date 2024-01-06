@@ -20,6 +20,8 @@ namespace MediTrack.View.RemoteView
     /// </summary>
     public partial class CrossButton : ResourceDictionary
     {
+        MainWindow _mainWindow = Application.Current.MainWindow as MainWindow;
+
         public CrossButton()
         {
             InitializeComponent();
@@ -86,7 +88,7 @@ namespace MediTrack.View.RemoteView
 
 
                     // Hinzufügen des neuen ContentControls zum nächsten UniformGrid
-                    //MainWindow.PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
+                    _mainWindow.PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
 
                     // Aktualisieren des ContentTemplates des ausgewählten CrossButtons
                     //if (PatientNe9tworkIcon.Content is ContentControl currentContentControl)
@@ -105,8 +107,8 @@ namespace MediTrack.View.RemoteView
                     // Close the popup if necessary
                     //popup.IsOpen = false;
                     // Zurücksetzen der Auswahl im Popup und Schließen des Popups
-                    itemCount.SelectedItem = null;
-                    popup.IsOpen = false;
+                    //itemCount.SelectedItem = null;
+                    //popup.IsOpen = false;
                 }
             }
         }
