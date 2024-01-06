@@ -6,7 +6,11 @@
              xmlns:test="clr-namespace:MediTrack.View.RemoteView">
 
     <Application.Resources>
-    
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View/RemoteView/CrossButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
 
