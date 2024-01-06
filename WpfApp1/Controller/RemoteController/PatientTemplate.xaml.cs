@@ -17,10 +17,22 @@ namespace MediTrack.Controller.RemoteController
 
         private void PatientZoomButton_Click(object sender, RoutedEventArgs e)
         {
-            DetailedWindow detailedWindow = new DetailedWindow();
-            detailedWindow.Show();  // oder detailedWindow.ShowDialog(); für ein modales Fenster
+
+            if (WindowCounter.OpenWindows < 1)
+            {
+                DetailedWindow detailedWindow = new DetailedWindow();
+                detailedWindow.Show();
+                WindowCounter.OpenWindows++;
+                detailedWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
+
+
+            }
         }
 
+        private static class WindowCounter
+        {
+            public static int OpenWindows = 0;
+        }
 
         //public partial class PatientTemplate : Window
         //{

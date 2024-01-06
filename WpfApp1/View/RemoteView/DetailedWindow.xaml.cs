@@ -95,6 +95,8 @@ namespace MediTrack.View.RemoteView
             this.Close();
         }
 
+
+
         //private void RespirationRateTextBoxMin_TextChanged(object sender, TextChangedEventArgs e)
         //{
         //    UpdateVariableFromTextbox(RespirationRateTextBoxMin, ref respirationRateMin);
@@ -217,6 +219,7 @@ namespace MediTrack.View.RemoteView
             return diastolicBloodPressureMax;
         }
 
+ 
     }
 }
 

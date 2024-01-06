@@ -209,31 +209,42 @@ namespace MediTrack
         //    patient.RespirationRate = data[2];
         //}
 
-        private void Add_Button_Clicked(object sender, RoutedEventArgs e)
-        {
-            Window AddNewPatient = new AddPatientWindow
-            {
-                Title = "Add a new Patient",
-                Width = SystemParameters.PrimaryScreenWidth * 0.75,
-                Height = SystemParameters.PrimaryScreenHeight * 0.75,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen
-            };
-            AddNewPatient.Show();
-            AddNewPatient.Owner = this;
+        //private void Add_Button_Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    Window AddNewPatient = new AddPatientWindow
+        //    {
+        //        Title = "Add a new Patient",
+        //        Width = SystemParameters.PrimaryScreenWidth * 0.75,
+        //        Height = SystemParameters.PrimaryScreenHeight * 0.75,
+        //        WindowStartupLocation = WindowStartupLocation.CenterScreen
+        //    };
+        //    AddNewPatient.Show();
+        //    AddNewPatient.Owner = this;
 
+        //}
+
+        private static class WindowCounter
+        {
+            public static int OpenWindows = 0;
         }
 
         private void POWER_Button_Clicked(object sender, RoutedEventArgs e)
         {
-            Window PowerWindow = new PowerWindow
+            if (WindowCounter.OpenWindows < 1)
             {
-                Title = "Power Window",
-                Width = 800,
-                Height = 450,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen
-            };
-            PowerWindow.Show();
-            PowerWindow.Owner = this;
+
+                Window PowerWindow = new PowerWindow
+                {
+                    Title = "Power Window",
+                    Width = 800,
+                    Height = 450,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen
+                };
+                PowerWindow.Show();
+                PowerWindow.Owner = this;
+                WindowCounter.OpenWindows++;
+                PowerWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
+            }
         }
 
         //private void PatientNetworkIcon_Click(object sender, RoutedEventArgs e)

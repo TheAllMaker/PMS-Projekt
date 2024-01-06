@@ -58,5 +58,7 @@ namespace MediTrack.View.RemoteView
             var button = sender as Button; // Wenn nötig
             // ... Weitere Aktionen beim Abbrechen
         }
+
+        
     }
 }
