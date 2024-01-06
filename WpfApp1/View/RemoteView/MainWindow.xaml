@@ -130,19 +130,19 @@
                 <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
                 <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>-->
                 <!--<ContentControl ContentTemplate="{StaticResource PatientTemplate}" Content="{DynamicResource PatientenInstanz}" Margin="5"/>-->
-                <!--<ContentControl ContentTemplate="{StaticResource PatientTemplate}" Content="{DynamicResource TestPatient1}" Margin="5"/>-->
-
-
-            
+                <ContentControl ContentTemplate="{StaticResource PatientTemplate}" Content="{DynamicResource TestPatient1}" />
 
 
 
 
-                <ToggleButton FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Opacity="1" 
-                     Background="#111622"  Name ="PatientNe9tworkIcon" BorderBrush="Transparent" Click="ShowOptions_Click" >
+
+
+
+                <Button  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Opacity="1" 
+                     Background="#111622"  Name ="PatientNe9tworkIcon"  Click="ShowOptions_Click" >
                     <StackPanel>
 
-                        <Viewbox Width="100 " Height="100" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
+                        <Viewbox Stretch="Uniform" Width="200 " Height="200" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
                             <Rectangle Width="20 " Height="20">
                                 <Rectangle.Resources>
                                     <SolidColorBrush x:Key="canvas" Opacity="0" />
@@ -150,7 +150,7 @@
                                     <SolidColorBrush x:Key="light-green" Color="#1f801f" Opacity="1" />
                                 </Rectangle.Resources>
                                 <Rectangle.Fill>
-                                    <DrawingBrush Stretch="None">
+                                    <DrawingBrush Stretch="Fill">
                                         <DrawingBrush.Drawing>
                                             <DrawingGroup>
                                                 <DrawingGroup x:Name="c4anvas">
@@ -166,8 +166,8 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Viewbox>
-                        <Popup Name="OptionsPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=PatientNetworkIcon}" StaysOpen="False">
-                            <Border BorderBrush="Gray" BorderThickness="1" Background="White" CornerRadius="5">
+                        <Popup Name="OptionsPopup" Placement="Bottom"  StaysOpen="False">
+                            <Border BorderBrush="Gray" BorderThickness="1" Background="White" >
                                 <ListBox Name="OptionsListBox" SelectionChanged="OptionsListBox_SelectionChanged">
                                     <ListBoxItem Content="Option 1"/>
                                     <ListBoxItem Content="Option 2"/>
@@ -195,7 +195,7 @@
                             </Border>
                         </Popup>
                     </StackPanel>
-                </ToggleButton>
+                </Button>
 
                   
 

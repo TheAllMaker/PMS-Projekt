@@ -302,7 +302,6 @@ namespace MediTrack
                 {
                     ContentTemplate = (DataTemplate)FindResource("CrossButton"),
                     
-                    Margin = new Thickness(5)
                 };
 
                 // Hinzufügen des neuen ContentControls zum nächsten UniformGrid
