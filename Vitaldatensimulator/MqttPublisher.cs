@@ -58,6 +58,7 @@ namespace Vitaldatensimulator
             {
                 PublishVitaldataJSON(vitaldaten);
                 isSendingData = false;
+                client.Disconnect();
             }
             else
             {

@@ -50,5 +50,16 @@ namespace Vitaldatensimulator
                 timer.Enabled = true;
             }
         }
+
+        public void StopTimer()
+        {
+            if (timer != null)
+            {
+                timer.Stop(); // Stoppt den Timer
+                timer.Elapsed -= OnTimedEvent; // Entfernt das Ereignis
+                timer.Dispose(); // Gibt die Ressourcen frei
+                timer = null; // Setzt den Timer auf null
+            }
+        }
     }
 }
