@@ -221,9 +221,9 @@
       <Project>{c76fb375-105d-435e-a38f-97f04b127ddc}</Project>
       <Name>Database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Vitaldatensimulator\Vitaldatensimulator.csproj">
+    <ProjectReference Include="..\Vitaldatensimulator\VitalDatenSimulator.csproj">
       <Project>{5769f5f7-77dd-4372-bf71-c5826cb9cd1e}</Project>
-      <Name>Vitaldatensimulator</Name>
+      <Name>VitalDatenSimulator</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

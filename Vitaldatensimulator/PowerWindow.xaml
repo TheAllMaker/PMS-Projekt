@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediTrack.View.RemoteView"
         mc:Ignorable="d"
-        Title="PowerWindow" Height="450" Width="800" 
+        Title="Power Window" Height="450" Width="800" 
         WindowStartupLocation="CenterScreen">
     <Grid Background="Black">
         <Grid.RowDefinitions>
@@ -23,26 +23,42 @@
             </Viewbox>
 
 
-        <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="left" Grid.Row="2" Margin="250,0,0,0"
-                Background="Black" BorderBrush="Transparent" Foreground="Black" x:Name="ConfirmButton" Click="Button_Click_Confirm">
+        <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Margin="250,0,0,0"
+        Background="Black" BorderBrush="Transparent" Foreground="Black" x:Name="ConfirmButton" Click="Button_Click_Confirm">
             <Viewbox Width="50" Height="30" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-            <Rectangle Width="30" Height="30">
-                <Rectangle.Fill>
-                    <DrawingBrush>
-                        <DrawingBrush.Drawing>
-                            <DrawingGroup>
-                                <DrawingGroup.Children>
-                                    <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
-                                    <GeometryDrawing Brush="#FF329932" Geometry="F1M6.1668,9.1924L3.0308,6.0554 0.555800000000001,8.5304 6.1668,14.1414 15.4438,4.8634 12.9698,2.3894z" />
-                                    <GeometryDrawing Brush="#FF329932" Geometry="F1M6.1665,12.7275L1.9695,8.5305 3.0305,7.4695 6.1665,10.6065 12.9695,3.8035 14.0305,4.8635z" />
-                                </DrawingGroup.Children>
-                            </DrawingGroup>
-                        </DrawingBrush.Drawing>
-                    </DrawingBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-        </Viewbox>
-    </Button>
+                <Rectangle Width="30" Height="30">
+                    <Rectangle.Fill>
+                        <DrawingBrush>
+                            <DrawingBrush.Drawing>
+                                <DrawingGroup>
+                                    <DrawingGroup.Children>
+                                        <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                                        <GeometryDrawing Brush="#FF329932" Geometry="F1M6.1668,9.1924L3.0308,6.0554 0.555800000000001,8.5304 6.1668,14.1414 15.4438,4.8634 12.9698,2.3894z" />
+                                        <GeometryDrawing Brush="#FF329932" Geometry="F1M6.1665,12.7275L1.9695,8.5305 3.0305,7.4695 6.1665,10.6065 12.9695,3.8035 14.0305,4.8635z" />
+                                    </DrawingGroup.Children>
+                                </DrawingGroup>
+                            </DrawingBrush.Drawing>
+                        </DrawingBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Viewbox>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" Opacity="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Opacity" Value="0.6"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
 
         <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,250,0"
                 Background="Black" BorderBrush="Transparent" Foreground="Black" x:Name="CancelButton" Click ="Button_Click_Cancel">
@@ -63,6 +79,24 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Viewbox>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" Opacity="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Opacity" Value="0.6"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
         </Button>
+
+
+
     </Grid>
 </Window>

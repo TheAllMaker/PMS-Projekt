@@ -174,7 +174,21 @@
             </Button.Template>
         </Button>
 
-        <Button x:Name="ConfirmChangesButton" Content="Confirm Changes" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Height="35" Margin="451,300,0,0" Click="Button_Click_ConfirmChanges" IsEnabled="False" Grid.Column="1">
+        <Button x:Name="ConfirmChangesButton" Content="Confirm Changes" FontSize="14" HorizontalAlignment="Left" 
+        VerticalAlignment="Top" Width="160" Height="35" Margin="451,300,0,0" Click="Button_Click_ConfirmChanges" IsEnabled="False" Grid.Column="1">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#CCCCCC"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#AAAAAA"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Background" Value="#EEEEEE"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" Opacity="1">
@@ -191,7 +205,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-
 
     </Grid>
 </Window>

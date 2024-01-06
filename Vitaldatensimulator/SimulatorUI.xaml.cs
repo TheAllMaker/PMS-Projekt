@@ -33,8 +33,8 @@ namespace Vitaldatensimulator
         private Dictionary<Slider, double> originalSliderValues = new Dictionary<Slider, double>();
         private SimulatorTimer mySimulatorTimer;
         private PowerWindow powerWindow;
-        private bool isValueChanged = false;
-        private bool isUUIDAlreadyCreated = false;
+        private bool isValueChanged;
+        private bool isUUIDAlreadyCreated;
         private Guid identifier;
         private string UUID;
 
@@ -386,7 +386,8 @@ namespace Vitaldatensimulator
             {
                 SetAliveStatusToZero();
             }
-            await Task.Delay(100);
+            await Task.Delay(300);
+            mySimulatorTimer.StopTimer();
             Application.Current.Shutdown();
         }
 
