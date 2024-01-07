@@ -28,6 +28,19 @@ namespace MediTrack.Model.RemoteModel
 
         }
 
+        public static bool IsNewMonitorOnline(object[] mqttMessageArray)
+        {
+            if ((mqttMessageArray[8] is int value && value == 0))
+            {
+                return false;
+            }
+            else 
+            {
+                return true;
+            }
+
+        }
+
 
 
 
