@@ -216,13 +216,13 @@ namespace MediTrack
 
                         Dispatcher.Invoke(() =>
                         {
-                            //ContentControl PatientTemplateContentAddition = new ContentControl
-                            //{
-                            //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
-                            //    Content = PatientenInstanz,
-                            //    Margin = new Thickness(5)
-                            //};
-                            //PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
+                            ContentControl PatientTemplateContentAddition = new ContentControl
+                            {
+                                ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+                                Content = PatientenInstanz,
+                                Margin = new Thickness(5)
+                            };
+                            PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
                         });
 
                         PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
