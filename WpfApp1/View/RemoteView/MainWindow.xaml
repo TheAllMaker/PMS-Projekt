@@ -59,7 +59,7 @@
 
 
 
-                <Button  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Opacity="1" 
+                <!--<Button  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Opacity="1" 
                      Background="#111622"  Name ="PatientNe9tworkIcon"  Click="ShowOptions_Click" >
                     <StackPanel>
 
@@ -97,7 +97,7 @@
                             </Border>
                         </Popup>
                     </StackPanel>
-                </Button>
+                </Button>-->
             </UniformGrid>
         </DockPanel>
     </Border>

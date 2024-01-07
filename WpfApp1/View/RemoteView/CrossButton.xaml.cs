@@ -77,7 +77,7 @@ namespace MediTrack.View.RemoteView
 
 
                 var itemCount = control.FindName("CrossButtonListBox") as ListBox;
-                Console.WriteLine("ddwdw");
+
                 if (itemCount.SelectedItem != null)
                 {
 
@@ -105,7 +105,8 @@ namespace MediTrack.View.RemoteView
                     ContentControl newContent = new ContentControl();
                     newContent.ContentTemplate = control.Resources["PatientTemplate"] as DataTemplate;
                     newContent.Content = PatientenInstanz; // Set the content you want to display
-
+                    newContent.Width = 465;
+                    newContent.Height = 220;
                     //PatientNe9tworkIcon.Content = newContent;
 
                     var CrossButtonBlock = control.FindName("CrossButtonBlock") as Button;
