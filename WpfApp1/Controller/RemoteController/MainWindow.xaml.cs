@@ -187,50 +187,6 @@ namespace MediTrack
         }
 
 
-
-
-
-
-        //private void Select_Button_Clicked(object sender, RoutedEventArgs e)
-        //{
-        //    // Instanziert ein neues Fenster
-        //    Window SelectWindow = new SelectionWindow
-        //    {
-        //        Title = "Select Patient", // Name des neuen Fenster's
-        //        Width = SystemParameters.PrimaryScreenWidth * 0.75,
-        //        Height = SystemParameters.PrimaryScreenHeight * 0.75,
-        //        WindowStartupLocation = WindowStartupLocation.CenterScreen
-        //    };
-        //    SelectWindow.Show();
-        //    SelectWindow.Owner = this;
-        //    //SelectWindow.ShowDialog();
-
-
-        //}
-
-
-
-
-        //void AssignPatientData(Patient patient, object[] data)
-        //{
-        //    patient.HeartRate = data[1];
-        //    patient.RespirationRate = data[2];
-        //}
-
-        //private void Add_Button_Clicked(object sender, RoutedEventArgs e)
-        //{
-        //    Window AddNewPatient = new AddPatientWindow
-        //    {
-        //        Title = "Add a new Patient",
-        //        Width = SystemParameters.PrimaryScreenWidth * 0.75,
-        //        Height = SystemParameters.PrimaryScreenHeight * 0.75,
-        //        WindowStartupLocation = WindowStartupLocation.CenterScreen
-        //    };
-        //    AddNewPatient.Show();
-        //    AddNewPatient.Owner = this;
-
-        //}
-
         private static class WindowCounter
         {
             public static int OpenWindows = 0;
@@ -255,51 +211,11 @@ namespace MediTrack
             }
         }
 
-        //private void PatientNetworkIcon_Click(object sender, RoutedEventArgs e)
-        //{
-        //    MyPopup.IsOpen = !MyPopup.IsOpen; // Schaltet die Sichtbarkeit des Popups um
-        //}
-
 
         private void ShowOptions_Click(object sender, RoutedEventArgs e)
         {
             OptionsPopup.IsOpen = true;
         }
-
-        //private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    //if (OptionsListBox.SelectedItem is ListBoxItem selectedOption)
-        //    //{
-        //    //    MessageBox.Show($"Sie haben '{selectedOption.Content}' ausgewählt.");
-        //    //}
-
-        //    //// Schließen Sie das Popup nach der Auswahl
-        //    //OptionsPopup.IsOpen = false;
-        //    if (OptionsListBox.SelectedItem != null)
-        //    {
-        //        string selectedOption = OptionsListBox.SelectedItem.ToString();
-
-        //        // Erstellen eines neuen Buttons
-        //        ContentControl newButton = new ContentControl
-        //        {
-        //            ContentTemplate = (DataTemplate)Resources["CrossButton"],
-        //            // Weitere Eigenschaften des Buttons können hier festgelegt werden
-        //        };
-
-        //        // Fügen Sie eine Click-Ereignishandler-Methode für den neuen Button hinzu, falls erforderlich
-        //        //newButton.Click += NewButton_Click;
-
-        //        // Platzieren des Buttons im Grid
-        //        PatientenMonitorDynGrid.Children.Add(newButton);
-
-        //        // Optional: Setzen von Grid.Row und Grid.Column, wenn Sie ein mehrspaltiges/mehrreihiges Grid haben
-        //        // Grid.SetRow(newButton, rowIndex);
-        //        // Grid.SetColumn(newButton, columnIndex);
-
-        //        // Zurücksetzen der Auswahl, falls gewünscht
-        //        OptionsListBox.SelectedItem = null;
-        //    }
-        //}
 
         private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -316,14 +232,6 @@ namespace MediTrack
                 // Hinzufügen des neuen ContentControls zum nächsten UniformGrid
                 PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
 
-                // Aktualisieren des ContentTemplates des ausgewählten CrossButtons
-                //if (PatientNe9tworkIcon.Content is ContentControl currentContentControl)
-                //{
-                //    currentContentControl.ContentTemplate = (DataTemplate)FindResource("PatientTemplate");
-                //    //currentContentControl.Content = Application.Current.Resources["TestPatient2"] /* Hier das entsprechende Content-Objekt setzen */;
-                //    //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
-                //    //    Content = Application.Current.Resources["TestPatient2"],
-                //}
                 ContentControl newContent = new ContentControl();
                 newContent.ContentTemplate = this.Resources["PatientTemplate"] as DataTemplate;
                 //newContent.Content = Application.Current.Resources["TestPatient2"]; // Set the content you want to display
