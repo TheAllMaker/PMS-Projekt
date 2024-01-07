@@ -301,12 +301,13 @@ namespace MediTrack
                 ContentControl newContentControlForGrid = new ContentControl
                 {
                     ContentTemplate = (DataTemplate)FindResource("CrossButton"),
+
                     
                 };
 
                 // Hinzufügen des neuen ContentControls zum nächsten UniformGrid
                 PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
-
+                
                 // Aktualisieren des ContentTemplates des ausgewählten CrossButtons
                 //if (PatientNe9tworkIcon.Content is ContentControl currentContentControl)
                 //{
@@ -318,8 +319,10 @@ namespace MediTrack
                 ContentControl newContent = new ContentControl();
                 newContent.ContentTemplate = this.Resources["PatientTemplate"] as DataTemplate;
                 newContent.Content = Application.Current.Resources["TestPatient2"]; // Set the content you want to display
+                newContent.Width = 465;
+                newContent.Height = 220;
 
-             PatientNe9tworkIcon.Content = newContent;
+                PatientNe9tworkIcon.Content = newContent;
 
                 // Close the popup if necessary
                 OptionsPopup.IsOpen = false;
