@@ -1,5 +1,4 @@
-﻿using MediTrack.Model.RemoteModel;
-using MediTrack.View.RemoteView;
+﻿using MediTrack.View.RemoteView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,16 +28,6 @@ namespace MediTrack.Controller.RemoteController
 
             }
         }
-
-
-
-        private void MinusButton(object sender, RoutedEventArgs e)
-        {
-            //PatientenMonitorDynGrid.Children.Remove(this);
-           // ActiveMonitorIDManager.DeactivateMonitor()
-        }
-
-
 
         private static class WindowCounter
         {

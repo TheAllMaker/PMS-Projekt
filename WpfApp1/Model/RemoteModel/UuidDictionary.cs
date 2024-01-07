@@ -8,7 +8,7 @@ namespace MediTrack.Model.RemoteModel
 {
     public static class UuidDictionary
     {
-       public static Dictionary<object, object> MonitorIdentifierTOUUID = new Dictionary<object, object>();
+       private static Dictionary<object, object> MonitorIdentifierTOUUID = new Dictionary<object, object>();
 
         public static object UUIDDictionaryCaller(object MonitorIdentifierKey)
         {
