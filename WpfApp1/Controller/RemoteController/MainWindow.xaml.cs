@@ -1,77 +1,64 @@
 ﻿using MediTrack.Model.DataBaseModelConnection;
 using MediTrack.Model.RemoteModel;
-using MediTrack.Properties;
 using MediTrack.View.RemoteView;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using uPLibrary.Networking.M2Mqtt.Messages;
+
+/*
+ *MainWindow Class in MediTrack.Model.RemoteModel Namespace
+ * 
+ * Overview:
+ * The MainWindow class is the colletive main logic class designed to handle all incoming MQTT messages and 
+ * distribute them through the entire RemoteWindow
+ * 
+ * Usage:
+ * 
+ * Details:
+ */
+
+
 
 namespace MediTrack
 {
-
-    //PatientTest patientTest = new PatientTest();
-    //patientTest.TestPatientCall1();
-    //patientTest.TestPatientCall2();
-
-    //ContentControl contentControl = new ContentControl
-    //{
-    //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
-    //    Content = Application.Current.Resources["TestPatient2"],
-    //    Margin = new Thickness(5)
-    //};
-
-
-
     public partial class MainWindow : Window
     {
+
         private CancellationTokenSource _cancellationTokenSource;
+
         public Patient PatientenInstanz;
+
         public object[] mqttMessageQueueArray;
+
+
+
 
         public MainWindow()
         {
+            
+            // UI Constructor/Intializer -> constructs the entire UI elements
             InitializeComponent();
+
+            // Binding of the EventHandler -> after a successfull InitializeComponent we're calling 
+            // for our defined fucntions inside it -> Logic Constrcutor in a nutshell
             Loaded += InitializeComponents;
+            
             PatientTest.TestPatientCall2();
-            StartCrossButton();
+          
+
             _cancellationTokenSource = new CancellationTokenSource();
             Loaded += async (sender, args) => await ProcessMQTTMessages(_cancellationTokenSource.Token);
         }
 
+
+
         private void InitializeComponents(object sender, RoutedEventArgs e)
         {
             ConnectToMQTTBroker();
+            StartCrossButton();
         }
-
-
-        private void StartCrossButton()
-        {
-            DataTemplate crossButtonTemplate = (DataTemplate)Resources["CrossButton"];
-
-            ContentControl contentControl = new ContentControl
-            {
-                ContentTemplate = crossButtonTemplate
-            };
-
-            PatientenMonitorDynGrid.Children.Add(contentControl);
-        }
-
 
         private static void ConnectToMQTTBroker()
         {
@@ -81,16 +68,67 @@ namespace MediTrack
             Console.WriteLine(StringContainer.HandlerIntializer);
         }
 
-        // auskommentiert weil Code noch nicht fertig von Selcuk 
+        private void StartCrossButton()
+        {
+            DataTemplate crossButtonTemplate = (DataTemplate)Resources["CrossButton"];
+
+            ContentControl contentControl = new ContentControl
+            {
+                ContentTemplate = crossButtonTemplate
+            };
+            PatientenMonitorDynGrid.Children.Add(contentControl);
+        }
+
+        public Patient GetPatient()
+        {
+            return PatientenInstanz;
+        }
+
+        public object[] GetMQTTMessage()
+        {
+            return mqttMessageQueueArray;
+        }
+
+        private static class WindowCounter
+        {
+            public static int OpenWindows = 0;
+        }
+
+        private void POWER_Button_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (WindowCounter.OpenWindows < 1)
+            {
+
+                Window PowerWindow = new PowerWindow
+                {
+                    Title = "Power Window",
+                    Width = 800,
+                    Height = 450,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen
+                };
+                PowerWindow.Show();
+                PowerWindow.Owner = this;
+                WindowCounter.OpenWindows++;
+                PowerWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
+            }
+        }
+
+
+
+
 
         private async Task ProcessMQTTMessages(CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                await Task.Delay(100);
+                await Task.Delay(100); // necessary why -> ? 
 
-                mqttMessageQueueArray = MqttMessageQueue.Dequeue();
-                // wenn Queue mit Inhalt sowie der Eintrag besteht sowie
+                mqttMessageQueueArray = MqttMessageQueue.Dequeue(); // Get MQTTMessages into a Array
+
+                //////////////////////////////////////////////////////////////////////////////////
+
+                // 1)  if MQTTMessages != null + 2) if UUID known + 3) IsAlive == null -> kill the patient and remove him of the dictionaries
+
                 if ((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[8] is int value && value == 0))
                 {
                     UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
@@ -99,9 +137,14 @@ namespace MediTrack
                     {
                         //PatientenMonitorDynGrid.Children.Remove(PatientTemplateContentAddition);
                     });
+
                     PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
                 }
-                // wenn Queue mit Inhalt sowie Patient gefunden date patient up
+
+                //////////////////////////////////////////////////////////////////////////////////
+
+                // 1)  if MQTTMessages != null + 2) if UUID known and Patient UUID the same -> update the RemotePatient 
+
                 else if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
                 //if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
                 {
@@ -139,9 +182,12 @@ namespace MediTrack
                     catch (Exception ex)
                     {
 
-                        //Überlegt euch was ihr da haben wollt 
                     }
                 }
+
+                //////////////////////////////////////////////////////////////////////////////////
+
+                // 1)  if MQTTMessages != null -> every other case has been catched to this point -> this is a new MQTTMessage of a new monitor
 
                 else if ((mqttMessageQueueArray.Length != 0))
                 {
@@ -152,16 +198,7 @@ namespace MediTrack
                     {
                         PatientenInstanz = new Patient()
                         {
-
-                            LastName = patientDataString[0],
-                            FirstName = patientDataString[1],
-                            RoomNumber = patientDataString[2],
-                            BedNumber = patientDataString[3],
-
                             PatientNumber = mqttDataString,
-
-
-
                             PatientMonitor = mqttMessageQueueArray[0],
                             HeartRate = mqttMessageQueueArray[1],
                             RespirationRate = mqttMessageQueueArray[2],
@@ -169,7 +206,10 @@ namespace MediTrack
                             BloodPressureSystolic = mqttMessageQueueArray[4],
                             BloodPressureDiastolic = mqttMessageQueueArray[5],
                             Temperature = mqttMessageQueueArray[6],
-
+                            LastName = patientDataString[0],
+                            FirstName = patientDataString[1],
+                            RoomNumber = patientDataString[2],
+                            BedNumber = patientDataString[3],
                         };
 
 
@@ -188,48 +228,15 @@ namespace MediTrack
                         UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
                         OptionsData.Options.Add(mqttMessageQueueArray[0]);
                     }
+
                     catch
                     {
 
                     }
-                    }
-            }
-        }
 
-        public Patient GetPatient()
-        {
-            return PatientenInstanz;
-        }
-
-        public object[] GetMQTTMessage()
-        {
-            return mqttMessageQueueArray;
-        }
-
-
-
-
-        private static class WindowCounter
-        {
-            public static int OpenWindows = 0;
-        }
-
-        private void POWER_Button_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (WindowCounter.OpenWindows < 1)
-            {
-
-                Window PowerWindow = new PowerWindow
-                {
-                    Title = "Power Window",
-                    Width = 800,
-                    Height = 450,
-                    WindowStartupLocation = WindowStartupLocation.CenterScreen
-                };
-                PowerWindow.Show();
-                PowerWindow.Owner = this;
-                WindowCounter.OpenWindows++;
-                PowerWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
+                //////////////////////////////////////////////////////////////////////////////////
+                
+                }
             }
         }
 
@@ -288,6 +295,20 @@ namespace MediTrack
 
 
 
+
+
+
+
+        //PatientTest patientTest = new PatientTest();
+        //patientTest.TestPatientCall1();
+        //patientTest.TestPatientCall2();
+
+        //ContentControl contentControl = new ContentControl
+        //{
+        //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+        //    Content = Application.Current.Resources["TestPatient2"],
+        //    Margin = new Thickness(5)
+        //};
 
 
 
@@ -315,12 +336,12 @@ namespace MediTrack
         //        {
         //            ContentTemplate = (DataTemplate)FindResource("CrossButton"),
 
-                    
+
         //        };
 
         //        // Hinzufügen des neuen ContentControls zum nächsten UniformGrid
         //        PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
-                
+
         //        // Aktualisieren des ContentTemplates des ausgewählten CrossButtons
         //        //if (PatientNe9tworkIcon.Content is ContentControl currentContentControl)
         //        //{

@@ -9,7 +9,10 @@ namespace MediTrack.Model.RemoteModel
 {
     public static class OptionsData
     {
-        public static List<object> Options = new List<object>();
+        public static List<object> Options = new List<object>
+        {
+            "DauerStänder"
+        };
 
 
         public static void OptionsInput(int UID)
