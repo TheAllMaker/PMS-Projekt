@@ -49,6 +49,7 @@ namespace MediTrack
             InitializeComponent();
             Loaded += InitializeComponents;
             PatientTest.TestPatientCall2();
+            ///*StartCrossButton*/();
             _cancellationTokenSource = new CancellationTokenSource();
             Loaded += async (sender, args) => await ProcessMQTTMessages(_cancellationTokenSource.Token);
         }
@@ -57,6 +58,20 @@ namespace MediTrack
         {
             ConnectToMQTTBroker();
         }
+
+
+        private void StartCrossButton()
+        {
+            DataTemplate crossButtonTemplate = (DataTemplate)Resources["CrossButton"];
+
+            ContentControl contentControl = new ContentControl
+            {
+                ContentTemplate = crossButtonTemplate
+            };
+
+            PatientenMonitorDynGrid.Children.Add(contentControl);
+        }
+
 
         private static void ConnectToMQTTBroker()
         {
@@ -171,7 +186,7 @@ namespace MediTrack
 
                         PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
                         UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
-                       // OptionsData.Options.Add(mqttMessageQueueArray[0]);
+                        OptionsData.Options.Add(mqttMessageQueueArray[0]);
                     }
                     catch
                     {
@@ -218,10 +233,7 @@ namespace MediTrack
             }
         }
 
-        //private void PatientNetworkIcon_Click(object sender, RoutedEventArgs e)
-        //{
-        //    MyPopup.IsOpen = !MyPopup.IsOpen; // Schaltet die Sichtbarkeit des Popups um
-        //}
+
 
 
         private void ShowOptions_Click(object sender, RoutedEventArgs e)
@@ -229,40 +241,7 @@ namespace MediTrack
             OptionsPopup.IsOpen = true;
         }
 
-        //private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    //if (OptionsListBox.SelectedItem is ListBoxItem selectedOption)
-        //    //{
-        //    //    MessageBox.Show($"Sie haben '{selectedOption.Content}' ausgewählt.");
-        //    //}
 
-        //    //// Schließen Sie das Popup nach der Auswahl
-        //    //OptionsPopup.IsOpen = false;
-        //    if (OptionsListBox.SelectedItem != null)
-        //    {
-        //        string selectedOption = OptionsListBox.SelectedItem.ToString();
-
-        //        // Erstellen eines neuen Buttons
-        //        ContentControl newButton = new ContentControl
-        //        {
-        //            ContentTemplate = (DataTemplate)Resources["CrossButton"],
-        //            // Weitere Eigenschaften des Buttons können hier festgelegt werden
-        //        };
-
-        //        // Fügen Sie eine Click-Ereignishandler-Methode für den neuen Button hinzu, falls erforderlich
-        //        //newButton.Click += NewButton_Click;
-
-        //        // Platzieren des Buttons im Grid
-        //        PatientenMonitorDynGrid.Children.Add(newButton);
-
-        //        // Optional: Setzen von Grid.Row und Grid.Column, wenn Sie ein mehrspaltiges/mehrreihiges Grid haben
-        //        // Grid.SetRow(newButton, rowIndex);
-        //        // Grid.SetColumn(newButton, columnIndex);
-
-        //        // Zurücksetzen der Auswahl, falls gewünscht
-        //        OptionsListBox.SelectedItem = null;
-        //    }
-        //}
 
         private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
