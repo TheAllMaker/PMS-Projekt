@@ -49,7 +49,7 @@ namespace MediTrack
             InitializeComponent();
             Loaded += InitializeComponents;
             PatientTest.TestPatientCall2();
-            ///*StartCrossButton*/();
+            StartCrossButton();
             _cancellationTokenSource = new CancellationTokenSource();
             Loaded += async (sender, args) => await ProcessMQTTMessages(_cancellationTokenSource.Token);
         }
@@ -236,51 +236,114 @@ namespace MediTrack
 
 
 
-        private void ShowOptions_Click(object sender, RoutedEventArgs e)
-        {
-            OptionsPopup.IsOpen = true;
-        }
 
 
 
-        private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (OptionsListBox.SelectedItem != null)
-            {
-                // Erstellen eines neuen ContentControls für das nächste UniformGrid
-                ContentControl newContentControlForGrid = new ContentControl
-                {
-                    ContentTemplate = (DataTemplate)FindResource("CrossButton"),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //private void ShowOptions_Click(object sender, RoutedEventArgs e)
+        //{
+        //    OptionsPopup.IsOpen = true;
+        //}
+
+
+
+        //private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (OptionsListBox.SelectedItem != null)
+        //    {
+        //        // Erstellen eines neuen ContentControls für das nächste UniformGrid
+        //        ContentControl newContentControlForGrid = new ContentControl
+        //        {
+        //            ContentTemplate = (DataTemplate)FindResource("CrossButton"),
 
                     
-                };
+        //        };
 
-                // Hinzufügen des neuen ContentControls zum nächsten UniformGrid
-                PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
+        //        // Hinzufügen des neuen ContentControls zum nächsten UniformGrid
+        //        PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
                 
-                // Aktualisieren des ContentTemplates des ausgewählten CrossButtons
-                //if (PatientNe9tworkIcon.Content is ContentControl currentContentControl)
-                //{
-                //    currentContentControl.ContentTemplate = (DataTemplate)FindResource("PatientTemplate");
-                //    //currentContentControl.Content = Application.Current.Resources["TestPatient2"] /* Hier das entsprechende Content-Objekt setzen */;
-                //    //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
-                //    //    Content = Application.Current.Resources["TestPatient2"],
-                //}
-                ContentControl newContent = new ContentControl();
-                newContent.ContentTemplate = this.Resources["PatientTemplate"] as DataTemplate;
-                newContent.Content = PatientenInstanz;
-                newContent.Width = 465;
-                newContent.Height = 220;
+        //        // Aktualisieren des ContentTemplates des ausgewählten CrossButtons
+        //        //if (PatientNe9tworkIcon.Content is ContentControl currentContentControl)
+        //        //{
+        //        //    currentContentControl.ContentTemplate = (DataTemplate)FindResource("PatientTemplate");
+        //        //    //currentContentControl.Content = Application.Current.Resources["TestPatient2"] /* Hier das entsprechende Content-Objekt setzen */;
+        //        //    //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+        //        //    //    Content = Application.Current.Resources["TestPatient2"],
+        //        //}
+        //        ContentControl newContent = new ContentControl();
+        //        newContent.ContentTemplate = this.Resources["PatientTemplate"] as DataTemplate;
+        //        newContent.Content = PatientenInstanz;
+        //        newContent.Width = 465;
+        //        newContent.Height = 220;
 
-                PatientNe9tworkIcon.Content = newContent;
+        //        PatientNe9tworkIcon.Content = newContent;
 
-                // Close the popup if necessary
-                OptionsPopup.IsOpen = false;
-                // Zurücksetzen der Auswahl im Popup und Schließen des Popups
-                OptionsListBox.SelectedItem = null;
-                OptionsPopup.IsOpen = false;
-            }
-        }
+        //        // Close the popup if necessary
+        //        OptionsPopup.IsOpen = false;
+        //        // Zurücksetzen der Auswahl im Popup und Schließen des Popups
+        //        OptionsListBox.SelectedItem = null;
+        //        OptionsPopup.IsOpen = false;
+        //    }
+        //}
 
 
 

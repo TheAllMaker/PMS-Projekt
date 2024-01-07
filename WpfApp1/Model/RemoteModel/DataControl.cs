@@ -8,5 +8,20 @@ namespace MediTrack.Model.RemoteModel
 {
     public class DataControl
     {
+    
+        //public static bool isAlive()
+        //{
+
+
+        //            }
+
+
+
+        
+    
+    
+    
+    
+    
     }
 }

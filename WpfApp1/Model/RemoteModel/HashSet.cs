@@ -28,10 +28,4 @@ namespace MediTrack.Model.RemoteModel
     }
 }
 
-//Button{
 
-//     If( HashSet.ContainsHashMonitorKey( MonitorKey) == true)
-//    {
-
-//    }
-//}
