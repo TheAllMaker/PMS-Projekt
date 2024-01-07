@@ -107,21 +107,46 @@ namespace MediTrack.View.RemoteView
                     newContent.Content = PatientenInstanz; // Set the content you want to display
                     newContent.Width = 465;
                     newContent.Height = 220;
-                    //PatientNe9tworkIcon.Content = newContent;
 
-                    var CrossButtonBlock = control.FindName("CrossButtonBlock") as Button;
-                    CrossButtonBlock.Content = newContent;
-                    var popup = control.FindName("CrossButtonOptionsPopUp") as Popup;
 
-                    // Close the popup if necessary
-                    //popup.IsOpen = false;
-                    // Zurücksetzen der Auswahl im Popup und Schließen des Popups
-                    //itemCount.SelectedItem = null;
-                    //popup.IsOpen = false;
+
+                    var selectedValueControl = control.FindName("SelectedValueControl") as TextBlock;
+
+                    if (selectedValueControl != null)
+                    {
+                        
+                        var selectedValue = selectedValueControl.Text;
+
+                        
+                        if (int.TryParse(selectedValue, out int intValue))
+                        {
+                            
+                            ActiveMonitorIDManager.InsertActiveMonitor(intValue);
+                        }
+                        else
+                        {
+                            Console.Write("Test");
+
+                        }
+
+
+
+
+                        //PatientNe9tworkIcon.Content = newContent;
+
+                        var CrossButtonBlock = control.FindName("CrossButtonBlock") as Button;
+                        CrossButtonBlock.Content = newContent;
+                        var popup = control.FindName("CrossButtonOptionsPopUp") as Popup;
+
+                        // Close the popup if necessary
+                        //popup.IsOpen = false;
+                        // Zurücksetzen der Auswahl im Popup und Schließen des Popups
+                        //itemCount.SelectedItem = null;
+                        //popup.IsOpen = false;
+                    }
                 }
             }
+
         }
-
-
     }
 }

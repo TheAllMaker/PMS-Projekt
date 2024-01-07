@@ -7,21 +7,21 @@ using System.Windows.Controls;
 
 namespace MediTrack.Model.RemoteModel
 {
-    public static class HashSet
+    public static class ActiveMonitorIDManager
     {
      private static HashSet<int> MonitorHashSet = new HashSet<int>();
-
-        public static bool InsertMonitorKeyToHash(int MonitorKey)
+         
+        public static bool InsertActiveMonitor (int MonitorKey)
         {
          return MonitorHashSet.Add(MonitorKey);
         }
 
-        public static bool RemoveMonitorKeyToHash(int MonitorKey)
+        public static bool DeactivateMonitor (int MonitorKey)
         {
           return MonitorHashSet.Remove(MonitorKey);
         }
 
-        public static bool ContainsHashMonitorKey (int MonitorKey)
+        public static bool IsThisAnActiveMonitor (int MonitorKey)
         {
            return MonitorHashSet.Contains(MonitorKey);
         }

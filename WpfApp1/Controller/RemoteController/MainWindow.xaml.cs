@@ -129,7 +129,7 @@ namespace MediTrack
 
                 // 1)  if MQTTMessages != null + 2) if UUID known + 3) IsAlive == null -> kill the patient and remove him of the dictionaries
 
-                if ((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[8] is int value && value == 0))
+                if ((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[8] is int value && value == 0) && (mqttMessageQueueArray[0] is int intValue01) && (ActiveMonitorIDManager.IsThisAnActiveMonitor(intValue01)))
                 {
                     UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
 
@@ -145,7 +145,7 @@ namespace MediTrack
 
                 // 1)  if MQTTMessages != null + 2) if UUID known and Patient UUID the same -> update the RemotePatient 
 
-                else if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
+                else if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]) && (mqttMessageQueueArray[0] is int intValue02) && (ActiveMonitorIDManager.IsThisAnActiveMonitor(intValue02)))
                 //if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
                 {
 
@@ -189,7 +189,8 @@ namespace MediTrack
 
                 // 1)  if MQTTMessages != null -> every other case has been catched to this point -> this is a new MQTTMessage of a new monitor
 
-                else if ((mqttMessageQueueArray.Length != 0))
+                //else if ((mqttMessageQueueArray.Length != 0) &&  (mqttMessageQueueArray[0] is int value) && (ActiveMonitorIDManager.IsThisAnActiveMonitor(mqttMessageQueueArray[0]))
+                else if ((mqttMessageQueueArray.Length != 0) && (mqttMessageQueueArray[0] is int intValue03) && (ActiveMonitorIDManager.IsThisAnActiveMonitor(intValue03)))
                 {
 
                     object mqttDataString = DataBaseRemoteConnection.CallMonitorIDtoPatientID(mqttMessageQueueArray[0]);
@@ -236,6 +237,14 @@ namespace MediTrack
 
                 //////////////////////////////////////////////////////////////////////////////////
                 
+                }
+
+                 else if (mqttMessageQueueArray.Length != 0)
+                {
+
+                    OptionsData.Options.Add(mqttMessageQueueArray[0]); 
+
+
                 }
             }
         }
