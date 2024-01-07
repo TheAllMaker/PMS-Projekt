@@ -139,6 +139,7 @@
     <Compile Include="Model\RemoteModel\DataControl.cs" />
     <Compile Include="Model\RemoteModel\HashSet.cs" />
     <Compile Include="Model\RemoteModel\MqttMessageQueue.cs" />
+    <Compile Include="Model\RemoteModel\OptionsData.cs" />
     <Compile Include="Model\RemoteModel\UuidDictionary.cs" />
     <Compile Include="StringContainer.Designer.cs">
       <AutoGen>True</AutoGen>

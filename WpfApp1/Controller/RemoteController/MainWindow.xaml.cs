@@ -169,6 +169,7 @@ namespace MediTrack
 
                         PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
                         UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
+                        OptionsData.Options.Add(mqttMessageQueueArray[0]);
                     }
                     catch
                     {
