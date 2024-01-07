@@ -41,6 +41,8 @@ namespace MediTrack
     public partial class MainWindow : Window
     {
         private CancellationTokenSource _cancellationTokenSource;
+        public Patient PatientenInstanz;
+        public object[] mqttMessageQueueArray;
 
         public MainWindow()
         {
@@ -72,7 +74,7 @@ namespace MediTrack
             {
                 await Task.Delay(100);
 
-                object[] mqttMessageQueueArray = MqttMessageQueue.Dequeue();
+                mqttMessageQueueArray = MqttMessageQueue.Dequeue();
                 // wenn Queue mit Inhalt sowie der Eintrag besteht sowie
                 if ((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[8] is int value && value == 0))
                 {
@@ -133,7 +135,7 @@ namespace MediTrack
                     object[] patientDataString = DataBaseRemoteConnection.CallForPatientThroughID(mqttDataString);
                     try
                     {
-                        Patient PatientenInstanz = new Patient()
+                        PatientenInstanz = new Patient()
                         {
 
                             LastName = patientDataString[0],
@@ -158,18 +160,18 @@ namespace MediTrack
 
                         Dispatcher.Invoke(() =>
                         {
-                            ContentControl PatientTemplateContentAddition = new ContentControl
-                            {
-                                ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
-                                Content = PatientenInstanz,
-                                Margin = new Thickness(5)
-                            };
-                            PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
+                            //ContentControl PatientTemplateContentAddition = new ContentControl
+                            //{
+                            //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+                            //    Content = PatientenInstanz,
+                            //    Margin = new Thickness(5)
+                            //};
+                            //PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
                         });
 
                         PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
                         UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
-                        OptionsData.Options.Add(mqttMessageQueueArray[0]);
+                       // OptionsData.Options.Add(mqttMessageQueueArray[0]);
                     }
                     catch
                     {
@@ -179,50 +181,18 @@ namespace MediTrack
             }
         }
 
+        public Patient GetPatient()
+        {
+            return PatientenInstanz;
+        }
+
+        public object[] GetMQTTMessage()
+        {
+            return mqttMessageQueueArray;
+        }
 
 
 
-
-
-        //private void Select_Button_Clicked(object sender, RoutedEventArgs e)
-        //{
-        //    // Instanziert ein neues Fenster
-        //    Window SelectWindow = new SelectionWindow
-        //    {
-        //        Title = "Select Patient", // Name des neuen Fenster's
-        //        Width = SystemParameters.PrimaryScreenWidth * 0.75,
-        //        Height = SystemParameters.PrimaryScreenHeight * 0.75,
-        //        WindowStartupLocation = WindowStartupLocation.CenterScreen
-        //    };
-        //    SelectWindow.Show();
-        //    SelectWindow.Owner = this;
-        //    //SelectWindow.ShowDialog();
-
-
-        //}
-
-
-
-
-        //void AssignPatientData(Patient patient, object[] data)
-        //{
-        //    patient.HeartRate = data[1];
-        //    patient.RespirationRate = data[2];
-        //}
-
-        //private void Add_Button_Clicked(object sender, RoutedEventArgs e)
-        //{
-        //    Window AddNewPatient = new AddPatientWindow
-        //    {
-        //        Title = "Add a new Patient",
-        //        Width = SystemParameters.PrimaryScreenWidth * 0.75,
-        //        Height = SystemParameters.PrimaryScreenHeight * 0.75,
-        //        WindowStartupLocation = WindowStartupLocation.CenterScreen
-        //    };
-        //    AddNewPatient.Show();
-        //    AddNewPatient.Owner = this;
-
-        //}
 
         private static class WindowCounter
         {
@@ -319,7 +289,7 @@ namespace MediTrack
                 //}
                 ContentControl newContent = new ContentControl();
                 newContent.ContentTemplate = this.Resources["PatientTemplate"] as DataTemplate;
-                newContent.Content = Application.Current.Resources["TestPatient2"]; // Set the content you want to display
+                newContent.Content = PatientenInstanz;
                 newContent.Width = 465;
                 newContent.Height = 220;
 

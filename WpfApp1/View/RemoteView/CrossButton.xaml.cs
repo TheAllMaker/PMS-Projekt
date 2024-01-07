@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediTrack.Model.RemoteModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -68,37 +69,49 @@ namespace MediTrack.View.RemoteView
 
         private void CrossButtonSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             var control = sender as FrameworkElement;
             if (control != null)
             {
+
+
+
                 var itemCount = control.FindName("CrossButtonListBox") as ListBox;
                 Console.WriteLine("ddwdw");
                 if (itemCount.SelectedItem != null)
                 {
-                    // Create a new ContentControl for the new content
+
                     ContentControl newContentControlForGrid = new ContentControl();
                     newContentControlForGrid.ContentTemplate = control.FindResource("CrossButton") as DataTemplate;
+                    //var dataTemplate = this.FindResource("CrossButton") as DataTemplate;
 
-                    // Set the size of the new ContentControl
-                    
 
-                    // Add the new ContentControl to the grid
+
+
+                    // Hinzufügen des neuen ContentControls zum nächsten UniformGrid
                     _mainWindow.PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
 
-                    // Create a new ContentControl for the content of CrossButtonBlock
+                    // Aktualisieren des ContentTemplates des ausgewählten CrossButtons
+                    //if (PatientNe9tworkIcon.Content is ContentControl currentContentControl)
+                    //{
+                    //    currentContentControl.ContentTemplate = (DataTemplate)FindResource("PatientTemplate");
+                    //    //currentContentControl.Content = Application.Current.Resources["TestPatient2"] /* Hier das entsprechende Content-Objekt setzen */;
+                    //    //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+                    //    //    Content = Application.Current.Resources["TestPatient2"],
+                    //}
+
+                    Patient PatientenInstanz = _mainWindow.GetPatient();
+
                     ContentControl newContent = new ContentControl();
-                    newContent.ContentTemplate = control.FindResource("PatientTemplate") as DataTemplate;
-                    newContent.Content = Application.Current.Resources["TestPatient2"]; // Set the content you want to display
+                    newContent.ContentTemplate = control.Resources["PatientTemplate"] as DataTemplate;
+                    newContent.Content = PatientenInstanz; // Set the content you want to display
 
-                    // Set the size of the new ContentControl
-                    newContent.Width = 460;
-                    newContent.Height = 220;
+                    //PatientNe9tworkIcon.Content = newContent;
 
-                    // Set the new content for CrossButtonBlock
                     var CrossButtonBlock = control.FindName("CrossButtonBlock") as Button;
                     CrossButtonBlock.Content = newContent;
-
                     var popup = control.FindName("CrossButtonOptionsPopUp") as Popup;
+
                     // Close the popup if necessary
                     //popup.IsOpen = false;
                     // Zurücksetzen der Auswahl im Popup und Schließen des Popups
@@ -107,7 +120,6 @@ namespace MediTrack.View.RemoteView
                 }
             }
         }
-
 
 
     }
