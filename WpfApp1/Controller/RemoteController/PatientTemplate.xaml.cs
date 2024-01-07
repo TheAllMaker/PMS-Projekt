@@ -29,6 +29,15 @@ namespace MediTrack.Controller.RemoteController
             }
         }
 
+
+
+        private void MinusButton(object sender, RoutedEventArgs e)
+        {
+            //PatientenMonitorDynGrid.Children.Remove(this);
+        }
+
+
+
         private static class WindowCounter
         {
             public static int OpenWindows = 0;
