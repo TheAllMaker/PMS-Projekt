@@ -17,12 +17,12 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="Database Administration Window"  HorizontalAlignment="Center" VerticalAlignment="Top" 
-                    Margin="10,10,0,0" FontSize="20" Foreground="White"/>
+                    Margin="10,10,0,0" FontSize="20"  Foreground="White"/>
 
         <!-- Button 1 - Oberer Bereich -->
         <Button Grid.Row="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"
                 BorderBrush="White" BorderThickness="2" Background="White" 
-                Name ="AddPatient" FontWeight="Bold" Click="Button_Click_AddPatient" Content="Add Patient" Padding="10" Width="176" Height="38">
+                Name ="AddPatient" Click="Button_Click_AddPatient" Content="Add Patient" Padding="10" Width="176" Height="38">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="border" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
@@ -44,7 +44,7 @@
         <!-- Button 2 - Mittlerer Bereich -->
         <Button Grid.Row="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" 
                 BorderBrush="White" BorderThickness="2" Background="White" Foreground="Black" 
-                Name ="AddMonitor" FontWeight="Bold" Click="Button_Click_AddMonitor" Content="Add Monitor" Padding="10" Width="176" Height="39">
+                Name ="AddMonitor"  Click="Button_Click_AddMonitor" Content="Add Monitor" Padding="10" Width="176" Height="39">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="border" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
@@ -66,7 +66,7 @@
         <!-- Button 3 - Unterer Bereich -->
         <Button Grid.Row="3" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" 
                 BorderBrush="White" BorderThickness="2" Background="White" Foreground="Black" 
-                Name="ConnectPM" Click="Button_Click_ConnectPM" Content="Connect Patient with Monitor" FontWeight="Bold" Padding="10" Width="308" Height="38" Margin="0,18,0,0">
+                Name="ConnectPM" Click="Button_Click_ConnectPM" Content="Connect Patient with Monitor" Padding="10" Width="308" Height="38" Margin="0,18,0,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="border" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
