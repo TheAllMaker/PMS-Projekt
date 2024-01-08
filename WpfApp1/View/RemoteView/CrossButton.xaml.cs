@@ -50,38 +50,46 @@ namespace MediTrack.View.RemoteView
 
         private void CrossButtonSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var listBox = sender as ListBox;
 
-            var control = sender as FrameworkElement;
-            if (control != null)
+            if (listBox != null && listBox.SelectedItem != null)
             {
+                // Der ausgewählte Wert im ListBox-Element
+                var selectedValue = listBox.SelectedItem.ToString();
 
-
-
-                var itemCount = control.FindName("CrossButtonListBox") as ListBox;
-                
-                if (itemCount.SelectedItem != null)
+                if (int.TryParse(selectedValue, out int intValue))
                 {
-
-                    ContentControl newContentControlForGrid = new ContentControl();
-                    newContentControlForGrid.ContentTemplate = control.FindResource("CrossButton") as DataTemplate;
-                    _mainWindow.PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
-
-                    Patient PatientenInstanz = _mainWindow.GetPatient();
-                    ContentControl newContent = new ContentControl();
-                    newContent.ContentTemplate = control.FindResource("PatientTemplate") as DataTemplate;
-                    //newContent.Content = Application.Current.Resources["TestPatient2"]; // Set the content you want to display
-                    newContent.Content = PatientenInstanz;
-
-                    newContent.Width = 460;
-                    newContent.Height = 220;
-
-
-                    var CrossButtonBlock = control.FindName("CrossButtonBlock") as ToggleButton;
-                    CrossButtonBlock.Content = newContent;
-                    var popup = control.FindName("CrossButtonOptionsPopUp") as Popup;
+                    // Wert erfolgreich geparst, jetzt können Sie ihn verwenden
+                    ActiveMonitorIDManager.InsertActiveMonitor(intValue);
+                }
+                else
+                {
+                    Console.Write("Test");
                 }
             }
         }
+
+
+
+
+        //ContentControl newContentControlForGrid = new ContentControl();
+        //newContentControlForGrid.ContentTemplate = control.FindResource("CrossButton") as DataTemplate;
+        //_mainWindow.PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
+
+        //Patient PatientenInstanz = _mainWindow.GetPatient();
+        //ContentControl newContent = new ContentControl();
+        //newContent.ContentTemplate = control.FindResource("PatientTemplate") as DataTemplate;
+        //newContent.Content = Application.Current.Resources["TestPatient2"]; // Set the content you want to display
+        //newContent.Content = PatientenInstanz;
+
+        //newContent.Width = 460;
+        //newContent.Height = 220;
+
+
+        //var CrossButtonBlock = control.FindName("CrossButtonBlock") as ToggleButton;
+        ////CrossButtonBlock.Content = newContent;
+        //var popup = control.FindName("CrossButtonOptionsPopUp") as Popup;
+
 
         //private void ShowOptions_Click(object sender, RoutedEventArgs e)
         //{

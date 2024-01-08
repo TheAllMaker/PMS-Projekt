@@ -9,18 +9,13 @@ namespace MediTrack.Model.RemoteModel
 {
     public static class OptionsData
     {
-        public static List<object> Options = new List<object>
-        {
-            "DauerStänder"
-        };
+        public static HashSet<object> Options = new HashSet<object>();
+       
 
 
         public static void OptionsInput(int UID)
         {
-            
- 
-                OptionsData.Options.Add(UID); 
-            
+                OptionsData.Options.Add(UID);          
         }
 
 

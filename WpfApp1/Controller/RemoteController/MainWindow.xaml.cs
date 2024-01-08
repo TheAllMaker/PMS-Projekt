@@ -25,16 +25,18 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 namespace MediTrack
 {
 
-    //PatientTest patientTest = new PatientTest();
-    //patientTest.TestPatientCall1();
-    //patientTest.TestPatientCall2();
 
-    //ContentControl contentControl = new ContentControl
-    //{
-    //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
-    //    Content = Application.Current.Resources["TestPatient2"],
-    //    Margin = new Thickness(5)
-    //};
+    /*
+     *MainWindow Class in MediTrack.Model.RemoteModel Namespace
+     * 
+     * Overview:
+     * The MainWindow class is the colletive main logic class designed to handle all incoming MQTT messages and 
+     * distribute them through the entire RemoteWindow
+     * 
+     * Usage:
+     * 
+     * Details:
+     */
 
 
 
@@ -94,8 +96,11 @@ namespace MediTrack
                 await Task.Delay(100);
 
                 object[] mqttMessageQueueArray = MqttMessageQueue.Dequeue();
-                // wenn Queue mit Inhalt sowie der Eintrag besteht sowie
-                if ((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[8] is int value && value == 0))
+
+
+
+                // 1)  if MQTTMessages != null + 2) if UUID known + 3) IsAlive == null -> kill the patient and remove him of the dictionaries
+                if ((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[8] is int value && value == 0) && (mqttMessageQueueArray[0] is int intValue01) && (ActiveMonitorIDManager.IsThisAnActiveMonitor(intValue01)))
                 {
                     UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
 
@@ -105,8 +110,15 @@ namespace MediTrack
                     });
                     PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
                 }
+
+
+
+
+
+
+
                 // wenn Queue mit Inhalt sowie Patient gefunden date patient up
-                else if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
+                else if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]) && (mqttMessageQueueArray[0] is int intValue02) && (ActiveMonitorIDManager.IsThisAnActiveMonitor(intValue02)))
                 //if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
                 {
 
@@ -147,7 +159,7 @@ namespace MediTrack
                     }
                 }
 
-                else if ((mqttMessageQueueArray.Length != 0))
+                else if ((mqttMessageQueueArray.Length != 0) && (mqttMessageQueueArray[0] is int intValue03) && (ActiveMonitorIDManager.IsThisAnActiveMonitor(intValue03)))
                 {
 
                     object mqttDataString = DataBaseRemoteConnection.CallMonitorIDtoPatientID(mqttMessageQueueArray[0]);
@@ -179,13 +191,13 @@ namespace MediTrack
 
                         Dispatcher.Invoke(() =>
                         {
-                            //ContentControl PatientTemplateContentAddition = new ContentControl
-                            //{
-                            //    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
-                            //    Content = PatientenInstanz,
-                            //    Margin = new Thickness(5)
-                            //};
-                            //PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
+                            ContentControl PatientTemplateContentAddition = new ContentControl
+                            {
+                                ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+                                Content = PatientenInstanz,
+                                Margin = new Thickness(5)
+                            };
+                            PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
                         });
 
                         PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
@@ -196,6 +208,11 @@ namespace MediTrack
 
                     }
                     }
+
+                else if(mqttMessageQueueArray.Length != 0)
+                {
+                    OptionsData.Options.Add(mqttMessageQueueArray[0]);
+                }
             }
         }
 
