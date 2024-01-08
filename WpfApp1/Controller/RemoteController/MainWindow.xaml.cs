@@ -81,19 +81,50 @@ namespace MediTrack
         private void StartCrossButton()
         {
             DataTemplate crossButtonTemplate = (DataTemplate)Resources["CrossButton"];
+       
 
             ContentControl contentControl = new ContentControl
             {
                 ContentTemplate = crossButtonTemplate
             };
+            contentControl.Tag = "Killme";
+            contentControl.Name = "Killme";
             PatientenMonitorDynGrid.Children.Add(contentControl);
         }
+
+        private void RemoveCrossButton()
+        {
+            foreach (var child in PatientenMonitorDynGrid.Children)
+            {
+                if (child is FrameworkElement element && element.Tag as string == "Killme")
+                {
+                    PatientenMonitorDynGrid.Children.Remove(child as UIElement);
+                    break; // break if only one element needs to be removed
+                }
+            }
+        }
+
+
+        private void NewCrossButton()
+        {
+
+            DataTemplate crossButtonTemplate = (DataTemplate)Resources["CrossButton"];
+
+            ContentControl contentControl = new ContentControl
+            {
+                ContentTemplate = crossButtonTemplate
+            };
+            contentControl.Tag = "Killme";
+            PatientenMonitorDynGrid.Children.Add(contentControl);
+        }
+
+
 
         public async Task ProcessMQTTMessages(CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                await Task.Delay(100);
+                await Task.Delay(30);
 
                 object[] mqttMessageQueueArray = MqttMessageQueue.Dequeue();
 
@@ -188,7 +219,7 @@ namespace MediTrack
 
                         };
 
-
+                        RemoveCrossButton();
                         Dispatcher.Invoke(() =>
                         {
                             ContentControl PatientTemplateContentAddition = new ContentControl
@@ -199,7 +230,7 @@ namespace MediTrack
                             };
                             PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
                         });
-
+                        NewCrossButton();
                         PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
                         UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
                     }

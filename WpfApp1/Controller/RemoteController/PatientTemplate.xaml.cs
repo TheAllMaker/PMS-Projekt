@@ -35,9 +35,8 @@ namespace MediTrack.Controller.RemoteController
                 detailedWindow.Show();
                 WindowCounter.OpenWindows++;
                 detailedWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
-
-
             }
+
         }
 
         private static class WindowCounter
