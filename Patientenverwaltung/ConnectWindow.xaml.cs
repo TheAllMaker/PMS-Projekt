@@ -167,66 +167,72 @@ namespace Patientenverwaltung
                     using (NpgsqlConnection connection = new NpgsqlConnection(connString))
                     {
                         connection.Open();
-                        bool count = IsPatientConnected(patientId);
+
+                        // Check if the patient is connected to a monitor
+                        bool isPatientConnected = IsPatientConnected(patientId);
+
                         // Überprüfen, ob die Verbindung bereits existiert
-                        //string checkQuery = "SELECT COUNT(*) FROM belegung WHERE pid = @PatientId";
-
-                        //using (NpgsqlCommand checkCommand = new NpgsqlCommand(checkQuery, connection))
-                        //{
-                        //    checkCommand.Parameters.AddWithValue("@PatientId", patientId);
-
-                        //    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
-
-                            if (count == true)
-                            {
-                                // Update durchführen, wenn der Patient bereits in der belegung existiert
-                                string updateQuery = "DELETE FROM belegung WHERE moid = @MonitorId; " +
+                        if (isPatientConnected)
+                        {
+                            // Update durchführen, wenn der Patient bereits in der belegung existiert
+                            string updateQuery = "DELETE FROM belegung WHERE moid = @MonitorId; " +
                                                  "UPDATE belegung SET moid = @MonitorId WHERE pid = @PatientId";
 
-
-                                using (NpgsqlCommand updateCommand = new NpgsqlCommand(updateQuery, connection))
-                                {
-                                    updateCommand.Parameters.AddWithValue("@MonitorId", monitorId);
-                                    updateCommand.Parameters.AddWithValue("@PatientId", patientId);
-                                    updateCommand.ExecuteNonQuery();
-
-                                    MessageBox.Show("Verbindung erfolgreich aktualisiert.");
-                                }
-                            }
-                            else
+                            using (NpgsqlCommand updateCommand = new NpgsqlCommand(updateQuery, connection))
                             {
-                                // Insert durchführen, wenn der Patient noch nicht in der belegung existiert
-                                string insertQuery = "INSERT INTO belegung (moid, pid) VALUES (@MonitorId, @PatientId)";
+                                updateCommand.Parameters.AddWithValue("@MonitorId", monitorId);
+                                updateCommand.Parameters.AddWithValue("@PatientId", patientId);
+                                updateCommand.ExecuteNonQuery();
 
-                                using (NpgsqlCommand insertCommand = new NpgsqlCommand(insertQuery, connection))
-                                {
-                                    insertCommand.Parameters.AddWithValue("@MonitorId", monitorId);
-                                    insertCommand.Parameters.AddWithValue("@PatientId", patientId);
-                                    insertCommand.ExecuteNonQuery();
-
-                                    MessageBox.Show("Verbindung erfolgreich erstellt.");
-
-                                    
-
-                                    cmbPatient.SelectedItem = null;
-                                    cmbMonitor.SelectedItem = null;
-                                }
+                                MessageBox.Show("Verbindung erfolgreich aktualisiert.");
                             }
-                        //}
+                        }
+                        else
+                        {
+                            // Insert durchführen, wenn der Patient noch nicht in der belegung existiert
+                            string insertQuery = "INSERT INTO belegung (moid, pid) VALUES (@MonitorId, @PatientId)";
+
+                            using (NpgsqlCommand insertCommand = new NpgsqlCommand(insertQuery, connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@MonitorId", monitorId);
+                                insertCommand.Parameters.AddWithValue("@PatientId", patientId);
+                                insertCommand.ExecuteNonQuery();
+
+                                MessageBox.Show("Verbindung erfolgreich erstellt.");
+                            }
+                        }
+
+                        // Change the background color of the selected items to LightGray
+                        ChangeSelectedItemBackground(cmbPatient, Brushes.LightGray);
+                        ChangeSelectedItemBackground(cmbMonitor, Brushes.LightGray);
+
+                        cmbPatient.SelectedItem = null;
+                        cmbMonitor.SelectedItem = null;
+
+                        // Force a visual update
+                        InvalidateVisual();
                     }
                 }
                 else
                 {
                     MessageBox.Show("Bitte wählen Sie Patient und Monitor aus, um eine Verbindung herzustellen.");
                 }
-
-                
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Fehler beim Erstellen der Verbindung: {ex.Message}");
             }
         }
+
+        private void ChangeSelectedItemBackground(ComboBox comboBox, Brush background)
+        {
+            var selectedComboBoxItem = comboBox.ItemContainerGenerator.ContainerFromItem(comboBox.SelectedItem) as ComboBoxItem;
+            if (selectedComboBoxItem != null)
+            {
+                selectedComboBoxItem.Background = background;
+            }
+        }
+
 
 
 
