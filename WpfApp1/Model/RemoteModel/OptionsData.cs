@@ -11,8 +11,6 @@ namespace MediTrack.Model.RemoteModel
     {
         public static HashSet<object> Options = new HashSet<object>();
        
-
-
         public static void OptionsInput(int UID)
         {
                 OptionsData.Options.Add(UID);          

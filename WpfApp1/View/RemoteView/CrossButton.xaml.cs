@@ -16,9 +16,7 @@ using MediTrack.Model.RemoteModel;
 
 namespace MediTrack.View.RemoteView
 {
-    /// <summary>
-    /// Interaktionslogik für CrossButton.xaml
-    /// </summary>
+
     public partial class CrossButton : ResourceDictionary
     {
         MainWindow _mainWindow = Application.Current.MainWindow as MainWindow;
@@ -65,67 +63,6 @@ namespace MediTrack.View.RemoteView
                 }
             }
         }
-
-
-
-
-        //ContentControl newContentControlForGrid = new ContentControl();
-        //newContentControlForGrid.ContentTemplate = control.FindResource("CrossButton") as DataTemplate;
-        //_mainWindow.PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
-
-        //Patient PatientenInstanz = _mainWindow.GetPatient();
-        //ContentControl newContent = new ContentControl();
-        //newContent.ContentTemplate = control.FindResource("PatientTemplate") as DataTemplate;
-        //newContent.Content = Application.Current.Resources["TestPatient2"]; // Set the content you want to display
-        //newContent.Content = PatientenInstanz;
-
-        //newContent.Width = 460;
-        //newContent.Height = 220;
-
-
-        //var CrossButtonBlock = control.FindName("CrossButtonBlock") as ToggleButton;
-        ////CrossButtonBlock.Content = newContent;
-        //var popup = control.FindName("CrossButtonOptionsPopUp") as Popup;
-
-
-        //private void ShowOptions_Click(object sender, RoutedEventArgs e)
-        //{
-        //    OptionsPopup.IsOpen = true;
-        //}
-
-
-        //private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (OptionsListBox.SelectedItem != null)
-        //    {
-        //        // Erstellen eines neuen ContentControls für das nächste UniformGrid
-        //        ContentControl newContentControlForGrid = new ContentControl
-        //        {
-        //            ContentTemplate = (DataTemplate)FindResource("CrossButton"),
-
-        //            Margin = new Thickness(5)
-        //        };
-
-        //        // Hinzufügen des neuen ContentControls zum nächsten UniformGrid
-        //        PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
-
-        //        ContentControl newContent = new ContentControl();
-        //        newContent.ContentTemplate = this.Resources["PatientTemplate"] as DataTemplate;
-        //        //newContent.Content = Application.Current.Resources["TestPatient2"]; // Set the content you want to display
-        //        newContent.Content = GetPatient();
-        //        newContent.Width = 465;
-        //        newContent.Height = 220;
-
-        //        PatientNe9tworkIcon.Content = newContent;
-
-        //        // Close the popup if necessary
-        //        OptionsPopup.IsOpen = false;
-        //        // Zurücksetzen der Auswahl im Popup und Schließen des Popups
-        //        OptionsListBox.SelectedItem = null;
-        //        OptionsPopup.IsOpen = false;
-        //    }
-        //}
-
 
     }
 }
