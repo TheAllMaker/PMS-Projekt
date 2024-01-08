@@ -82,5 +82,45 @@ namespace MediTrack.View.RemoteView
                 }
             }
         }
+
+        //private void ShowOptions_Click(object sender, RoutedEventArgs e)
+        //{
+        //    OptionsPopup.IsOpen = true;
+        //}
+
+
+        //private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (OptionsListBox.SelectedItem != null)
+        //    {
+        //        // Erstellen eines neuen ContentControls für das nächste UniformGrid
+        //        ContentControl newContentControlForGrid = new ContentControl
+        //        {
+        //            ContentTemplate = (DataTemplate)FindResource("CrossButton"),
+
+        //            Margin = new Thickness(5)
+        //        };
+
+        //        // Hinzufügen des neuen ContentControls zum nächsten UniformGrid
+        //        PatientenMonitorDynGrid.Children.Add(newContentControlForGrid);
+
+        //        ContentControl newContent = new ContentControl();
+        //        newContent.ContentTemplate = this.Resources["PatientTemplate"] as DataTemplate;
+        //        //newContent.Content = Application.Current.Resources["TestPatient2"]; // Set the content you want to display
+        //        newContent.Content = GetPatient();
+        //        newContent.Width = 465;
+        //        newContent.Height = 220;
+
+        //        PatientNe9tworkIcon.Content = newContent;
+
+        //        // Close the popup if necessary
+        //        OptionsPopup.IsOpen = false;
+        //        // Zurücksetzen der Auswahl im Popup und Schließen des Popups
+        //        OptionsListBox.SelectedItem = null;
+        //        OptionsPopup.IsOpen = false;
+        //    }
+        //}
+
+
     }
 }

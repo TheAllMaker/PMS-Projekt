@@ -131,7 +131,7 @@
 
 
 
-                <ToggleButton FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Opacity="1" 
+                <!--<ToggleButton FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Opacity="1" 
                      Background="#111622"  Name ="PatientNe9tworkIcon" BorderBrush="Transparent" Click="ShowOptions_Click" >
                     <StackPanel>
 
@@ -169,7 +169,7 @@
                             </Border>
                         </Popup>
                     </StackPanel>
-                </ToggleButton>
+                </ToggleButton>-->
 
 
 
