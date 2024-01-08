@@ -173,25 +173,6 @@
                                     <ListBoxItem Content="Option 1"/>
                                     <ListBoxItem Content="Option 2"/>
                                     <ListBoxItem Content="Option 3"/>
-                                    <ListBoxItem Content="Option 1"/>
-                                    <ListBoxItem Content="Option 2"/>
-                                    <ListBoxItem Content="Option 3"/>
-                                    <ListBoxItem Content="Option 1"/>
-                                    <ListBoxItem Content="Option 2"/>
-                                    <ListBoxItem Content="Option 3"/>
-                                    <ListBoxItem Content="Option 1"/>
-                                    <ListBoxItem Content="Option 2"/>
-                                    <ListBoxItem Content="Option 3"/>
-                                    <ListBoxItem Content="Option 1"/>
-                                    <ListBoxItem Content="Option 2"/>
-                                    <ListBoxItem Content="Option 3"/>
-                                    <ListBoxItem Content="Option 1"/>
-                                    <ListBoxItem Content="Option 2"/>
-                                    <ListBoxItem Content="Option 3"/>
-                                    <ListBoxItem Content="Option 1"/>
-                                    <ListBoxItem Content="Option 2"/>
-                                    <ListBoxItem Content="Option 3"/>
-                                    <!-- Weitere Optionen hier -->
                                 </ListBox>
                             </Border>
                         </Popup>
