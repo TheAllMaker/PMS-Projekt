@@ -58,7 +58,7 @@ namespace MediTrack.View.RemoteView
 
 
                 var itemCount = control.FindName("CrossButtonListBox") as ListBox;
-                Console.WriteLine("ddwdw");
+                
                 if (itemCount.SelectedItem != null)
                 {
 

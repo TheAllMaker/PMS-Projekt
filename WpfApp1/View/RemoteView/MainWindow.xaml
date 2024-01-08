@@ -123,15 +123,7 @@
             <UniformGrid Name="PatientenMonitorDynGrid" DockPanel.Dock="Top" Background="#111622" Columns="4" Rows="4" >
 
 
-                <!--<ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>-->
-                <!--<ContentControl ContentTemplate="{DynamicResource PatientTemplate[PatientenInstanz]}" Margin="5"> </ContentControl>-->
-                <!--
-                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
-                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
-                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>
-                <ContentControl ContentTemplate="{DynamicResource PatientTemplate}" Margin="5"> </ContentControl>-->
-                <!--<ContentControl ContentTemplate="{StaticResource PatientTemplate}" Content="{DynamicResource PatientenInstanz}" Margin="5"/>-->
-                <!--<ContentControl ContentTemplate="{StaticResource PatientTemplate}" Content="{DynamicResource TestPatient1}" Margin="5"/>-->
+
 
 
 
