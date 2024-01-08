@@ -168,6 +168,12 @@ namespace MediTrack
 
                         if (string.Equals(value1, value2))
                         {
+
+                            //// hier muss eine ThresholdGuard Funktion rein die alle Werte mal einliest oder ähnliches und sie im ThresholdGuard vergleicht
+
+
+                            ////////////////////////////////
+
                             existingPatient.HeartRate = mqttMessageQueueArray[1];
                             existingPatient.OxygenLevel = mqttMessageQueueArray[3];
                             existingPatient.BloodPressureDiastolic = mqttMessageQueueArray[5];
