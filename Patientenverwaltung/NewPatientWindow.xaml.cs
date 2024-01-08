@@ -21,6 +21,7 @@ namespace Patientenverwaltung
         public NewPatientWindow()
         {
             InitializeComponent();
+            dpGeburtstag.Language = System.Windows.Markup.XmlLanguage.GetLanguage("en-US");
         }
 
 

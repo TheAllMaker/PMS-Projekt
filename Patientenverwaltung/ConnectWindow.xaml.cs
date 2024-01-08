@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace Patientenverwaltung
 {
@@ -17,6 +19,39 @@ namespace Patientenverwaltung
             FillMonitorsComboBox();
         }
 
+
+        private static bool IsPatientConnected(int pid)
+        {
+            // Check if the patient is connected to a mid in the belegung table
+            using (NpgsqlConnection connection = new NpgsqlConnection(connString))
+            {
+                connection.Open();
+
+                string query = $"SELECT COUNT(*) FROM belegung WHERE pid = {pid}";
+
+                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                {
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+                    return count > 0;
+                }
+            }
+        }
+        private static bool IsMonitorConnected(int mid)
+        {
+            // Check if the patient is connected to a mid in the belegung table
+            using (NpgsqlConnection connection = new NpgsqlConnection(connString))
+            {
+                connection.Open();
+
+                string query = $"SELECT COUNT(*) FROM belegung WHERE moid = {mid}";
+
+                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                {
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+                    return count > 0;
+                }
+            }
+        }
         private void FillPatientsComboBox()
         {
             try
@@ -36,7 +71,26 @@ namespace Patientenverwaltung
                                 int pid = reader.GetInt32(0);
                                 string name = reader.GetString(1);
                                 string vorname = reader.GetString(2);
-                                cmbPatient.Items.Add(new ComboBoxItem { Content = $"{pid}: {name}, {vorname}", Tag = pid });
+
+                                // Check if the patient is connected to a mid in the belegung table
+                                bool isConnected = IsPatientConnected(pid);
+
+                                // Create a ComboBoxItem
+                                ComboBoxItem comboBoxItem = new ComboBoxItem
+                                {
+                                    Content = $"{pid}: {name}, {vorname}",
+                                    Tag = pid
+                                };
+
+                                // Set ComboBoxItem properties based on connection status
+                                if (isConnected)
+                                {
+                                    comboBoxItem.IsEnabled = true; // Disable the item if connected
+                                    comboBoxItem.Background = Brushes.LightGray; // Optionally, change the text color
+                                }
+
+                                // Add the ComboBoxItem to the ComboBox
+                                cmbPatient.Items.Add(comboBoxItem);
                             }
                         }
                     }
@@ -47,6 +101,8 @@ namespace Patientenverwaltung
                 MessageBox.Show($"Fehler beim Laden der Patienten: {ex.Message}");
             }
         }
+
+
 
         private void FillMonitorsComboBox()
         {
@@ -67,8 +123,28 @@ namespace Patientenverwaltung
                                 int moid = reader.GetInt32(0);
                                 string mf = reader.GetString(1);
                                 string sn = reader.GetString(2);
-                                cmbMonitor.Items.Add(new ComboBoxItem { Content = $"{moid}: {mf}, {sn}", Tag = moid });
+                                // Check if the patient is connected to a mid in the belegung table
+                                bool isConnected = IsMonitorConnected(moid);
+
+                                // Create a ComboBoxItem
+                                ComboBoxItem comboBoxItem = new ComboBoxItem
+                                {
+                                    Content = $"{moid}: {mf}, {sn}",
+                                    Tag = moid
+                                };
+                               
+
+                                // Set ComboBoxItem properties based on connection status
+                                if (isConnected)
+                                {
+                                    comboBoxItem.IsEnabled = true; // Disable the item if connected
+                                    comboBoxItem.Background = Brushes.LightGray; // Optionally, change the text color
+                                }
+                                // Add the ComboBoxItem to the ComboBox
+                                cmbMonitor.Items.Add(comboBoxItem);
                             }
+
+                            
                         }
                     }
                 }
@@ -91,17 +167,17 @@ namespace Patientenverwaltung
                     using (NpgsqlConnection connection = new NpgsqlConnection(connString))
                     {
                         connection.Open();
-
+                        bool count = IsPatientConnected(patientId);
                         // Überprüfen, ob die Verbindung bereits existiert
-                        string checkQuery = "SELECT COUNT(*) FROM belegung WHERE pid = @PatientId";
+                        //string checkQuery = "SELECT COUNT(*) FROM belegung WHERE pid = @PatientId";
 
-                        using (NpgsqlCommand checkCommand = new NpgsqlCommand(checkQuery, connection))
-                        {
-                            checkCommand.Parameters.AddWithValue("@PatientId", patientId);
+                        //using (NpgsqlCommand checkCommand = new NpgsqlCommand(checkQuery, connection))
+                        //{
+                        //    checkCommand.Parameters.AddWithValue("@PatientId", patientId);
 
-                            int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+                        //    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
 
-                            if (count > 0)
+                            if (count == true)
                             {
                                 // Update durchführen, wenn der Patient bereits in der belegung existiert
                                 string updateQuery = "DELETE FROM belegung WHERE moid = @MonitorId; " +
@@ -129,12 +205,14 @@ namespace Patientenverwaltung
                                     insertCommand.ExecuteNonQuery();
 
                                     MessageBox.Show("Verbindung erfolgreich erstellt.");
-                                    // Zurücksetzen der Auswahl in den ComboBoxen
+
+                                    
+
                                     cmbPatient.SelectedItem = null;
                                     cmbMonitor.SelectedItem = null;
                                 }
                             }
-                        }
+                        //}
                     }
                 }
                 else
