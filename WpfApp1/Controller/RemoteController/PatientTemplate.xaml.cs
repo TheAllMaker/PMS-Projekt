@@ -14,7 +14,6 @@ namespace MediTrack.Controller.RemoteController
     public partial class PatientTemplate : ResourceDictionary
     {
 
-
         MainWindow _mainWindow = Application.Current.MainWindow as MainWindow;
 
         public PatientTemplate()
@@ -30,8 +29,7 @@ namespace MediTrack.Controller.RemoteController
                 DetailedWindow detailedWindow = new DetailedWindow
                 {
                     Title = "Threshold Editor",
-                    //Width = SystemParameters.PrimaryScreenWidth * 0.75,
-                    //Height = SystemParameters.PrimaryScreenHeight * 0.75,
+
                     WindowStartupLocation = WindowStartupLocation.CenterScreen
                 };
                 detailedWindow.Show();
@@ -47,95 +45,24 @@ namespace MediTrack.Controller.RemoteController
             public static int OpenWindows = 0;
         }
 
-        //private void MinusButton(object sender, RoutedEventArgs e)
-        //{
-        //    Debug.WriteLine("fef");
-        //    if (_mainWindow.PatientenMonitorDynGrid.Children.Contains(sender as ContentControl))
-        //    {
-        //        _mainWindow.PatientenMonitorDynGrid.Children.Remove(sender as ContentControl );
-        //    }
-        //}
-        //private void MinusButton(object sender, RoutedEventArgs e)
-        //{
-        //    Button button = sender as Button;
-        //    if (button != null)
-        //    {
-        //        // Durchlaufen Sie die visuellen Eltern des Buttons, um das übergeordnete ContentControl zu finden.
-        //        DependencyObject parent = VisualTreeHelper.GetParent(button);
-
-        //        while (parent != null && !(parent is ContentControl))
-        //        {
-        //            parent = VisualTreeHelper.GetParent(parent);
-        //        }
-
-        //        if (parent is ContentControl contentControl)
-        //        {
-        //            // Entfernen Sie das ContentControl (PatientTemplate) aus dem UniformGrid.
-        //            if (_mainWindow.PatientenMonitorDynGrid.Children.Contains(contentControl))
-        //            {
-        //                _mainWindow.PatientenMonitorDynGrid.Children.Remove(contentControl);
-        //            }
-        //        }
-        //    }
-        //}
-
         private void MinusButton(object sender, RoutedEventArgs e)
         {
-            //var button = sender as FrameworkElement;
-            //if (button == null) return;
+            var button = sender as FrameworkElement;
+            if (button == null) return;
 
-            //// Durchlaufen der übergeordneten Elemente, bis das ContentControl gefunden wird
-            //var parent = VisualTreeHelper.GetParent(button);
-            //while (parent != null && !(parent is ContentControl))
-            //{
-            //    parent = VisualTreeHelper.GetParent(parent);
-            //}
+            // Durchlaufen der übergeordneten Elemente, bis das ContentControl gefunden wird
+            var parent = VisualTreeHelper.GetParent(button);
+            while (parent != null && !(parent is ContentControl))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
 
-            //var contentControl = parent as ContentControl;
-            //if (contentControl != null)
-            //{
-            //    // Zugriff auf das Tag des ContentControl
-            // /*   var patientenInstanz = contentControl.Tag as Patient;*/ // oder entsprechender Typ
-
-            //    // Hier können Sie Operationen mit patientenInstanz durchführen
-
-            //    // Entfernen des ContentControl aus dem Grid
-            //    _mainWindow.PatientenMonitorDynGrid.Children.Remove(contentControl);
-            //}
+            var contentControl = parent as ContentControl;
+            if (contentControl != null)
+            {
+                _mainWindow.PatientenMonitorDynGrid.Children.Remove(contentControl);
+            }
         }
 
-        //        Button button = sender as Button;
-        //        if (button != null)
-        //        {
-        //            // Durchlaufen Sie die visuellen Eltern des Buttons, um das übergeordnete ContentControl zu finden.
-        //            DependencyObject parent = VisualTreeHelper.GetParent(button);
-
-        //            while (parent != null && !(parent is ContentControl))
-        //            {
-        //                parent = VisualTreeHelper.GetParent(parent);
-        //            }
-
-        //            if (parent is ContentControl contentControl)
-        //            {
-        //                // Finden Sie das DataTemplate, das auf das ContentControl angewendet wird.
-        //                DataTemplate dataTemplate = contentControl.ContentTemplate;
-
-        //                // Erzeugen Sie ein ContentPresenter, um das DataTemplate zu laden.
-        //                ContentPresenter contentPresenter = new ContentPresenter();
-        //                contentPresenter.ContentTemplate = dataTemplate;
-
-        //                // Greifen Sie auf das geladene Inhaltselement (UIElement) zu.
-        //                UIElement contentElement = contentPresenter.Content as UIElement;
-
-        //                // Entfernen Sie das gefundene Inhaltselement aus dem UniformGrid.
-        //                if (contentElement != null && _mainWindow.PatientenMonitorDynGrid.Children.Contains(contentElement))
-        //                {
-        //                    _mainWindow.PatientenMonitorDynGrid.Children.Remove(contentElement);
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //}
     }
 }
