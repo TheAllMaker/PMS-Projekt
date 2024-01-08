@@ -61,6 +61,7 @@ namespace MediTrack.Controller.RemoteController
             if (contentControl != null)
             {
                 _mainWindow.PatientenMonitorDynGrid.Children.Remove(contentControl);
+                 MainWindow.RemoteWindowCounter -= 1;
             }
 
             var tag =(int) contentControl.Tag;

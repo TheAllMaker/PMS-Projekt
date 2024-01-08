@@ -45,6 +45,8 @@ namespace MediTrack
         private CancellationTokenSource _cancellationTokenSource;
 
         public Patient PatientenInstanz;
+        public static int RemoteWindowCounter;
+
 
         public MainWindow()
         {
@@ -55,7 +57,7 @@ namespace MediTrack
             // for our defined fucntions inside it -> Logic Constrcutor in a nutshell
             Loaded += InitializeComponents;
 
-            PatientTest.TestPatientCall2();
+            //PatientTest.TestPatientCall2();
 
             _cancellationTokenSource = new CancellationTokenSource();
             Loaded += async (sender, args) => await ProcessMQTTMessages(_cancellationTokenSource.Token);
@@ -138,6 +140,7 @@ namespace MediTrack
                     Dispatcher.Invoke(() =>
                     {
                         //PatientenMonitorDynGrid.Children.Remove(PatientTemplateContentAddition);
+                        RemoteWindowCounter -= 1;
                     });
                     PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
                 }
@@ -220,20 +223,30 @@ namespace MediTrack
                         };
 
                         RemoveCrossButton();
-                        Dispatcher.Invoke(() =>
+                        if (RemoteWindowCounter <= 16)
                         {
-                            ContentControl PatientTemplateContentAddition = new ContentControl
+                            Dispatcher.Invoke(() =>
                             {
-                                ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
-                                Content = PatientenInstanz,
-                                Margin = new Thickness(5)
-                            };
-                            PatientTemplateContentAddition.Tag = mqttMessageQueueArray[0];
-                            PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
-                        });
-                        NewCrossButton();
-                        PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
-                        UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
+                                ContentControl PatientTemplateContentAddition = new ContentControl
+                                {
+                                    ContentTemplate = (DataTemplate)Resources["PatientTemplate"],
+                                    Content = PatientenInstanz,
+                                    Margin = new Thickness(5)
+                                };
+                                PatientTemplateContentAddition.Tag = mqttMessageQueueArray[0];
+                                PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
+                                RemoteWindowCounter += 1;
+                            });
+
+
+                            // do it only 16 Times 
+                            if (RemoteWindowCounter <= 16)
+                            {
+                                NewCrossButton();
+                            }
+                            PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
+                            UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
+                        }
                     }
                     catch
                     {
