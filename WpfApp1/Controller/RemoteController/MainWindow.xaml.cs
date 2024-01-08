@@ -46,9 +46,15 @@ namespace MediTrack
 
         public MainWindow()
         {
+            // UI Constructor/Intializer -> constructs the entire UI elements
             InitializeComponent();
+
+            // Binding of the EventHandler -> after a successfull InitializeComponent we're calling 
+            // for our defined fucntions inside it -> Logic Constrcutor in a nutshell
             Loaded += InitializeComponents;
+
             PatientTest.TestPatientCall2();
+
             _cancellationTokenSource = new CancellationTokenSource();
             Loaded += async (sender, args) => await ProcessMQTTMessages(_cancellationTokenSource.Token);
         }
@@ -56,6 +62,7 @@ namespace MediTrack
         private void InitializeComponents(object sender, RoutedEventArgs e)
         {
             ConnectToMQTTBroker();
+            StartCrossButton();
         }
 
         private static void ConnectToMQTTBroker()
@@ -66,9 +73,21 @@ namespace MediTrack
             Console.WriteLine(StringContainer.HandlerIntializer);
         }
 
-        // auskommentiert weil Code noch nicht fertig von Selcuk 
 
-        private async Task ProcessMQTTMessages(CancellationToken cancellationToken)
+
+
+        private void StartCrossButton()
+        {
+            DataTemplate crossButtonTemplate = (DataTemplate)Resources["CrossButton"];
+
+            ContentControl contentControl = new ContentControl
+            {
+                ContentTemplate = crossButtonTemplate
+            };
+            PatientenMonitorDynGrid.Children.Add(contentControl);
+        }
+
+        public async Task ProcessMQTTMessages(CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
             {
