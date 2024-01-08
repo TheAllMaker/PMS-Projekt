@@ -36,7 +36,6 @@ namespace MediTrack.View.RemoteView
             var control = sender as FrameworkElement;
             if (control != null)
             {
-                // Suchen des Popups im gleichen Namensraum wie 'sender'
                 var popup = control.FindName("CrossButtonOptionsPopUp") as Popup;
                 if (popup != null)
                 {
@@ -54,12 +53,10 @@ namespace MediTrack.View.RemoteView
 
             if (listBox != null && listBox.SelectedItem != null)
             {
-                // Der ausgewählte Wert im ListBox-Element
                 var selectedValue = listBox.SelectedItem.ToString();
 
                 if (int.TryParse(selectedValue, out int intValue))
                 {
-                    // Wert erfolgreich geparst, jetzt können Sie ihn verwenden
                     ActiveMonitorIDManager.InsertActiveMonitor(intValue);
                 }
                 else

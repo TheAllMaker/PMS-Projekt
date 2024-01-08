@@ -99,7 +99,7 @@ namespace MediTrack
                 if (child is FrameworkElement element && element.Tag as string == "Killme")
                 {
                     PatientenMonitorDynGrid.Children.Remove(child as UIElement);
-                    break; // break if only one element needs to be removed
+                    break; 
                 }
             }
         }
@@ -228,6 +228,7 @@ namespace MediTrack
                                 Content = PatientenInstanz,
                                 Margin = new Thickness(5)
                             };
+                            PatientTemplateContentAddition.Tag = mqttMessageQueueArray[0];
                             PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
                         });
                         NewCrossButton();

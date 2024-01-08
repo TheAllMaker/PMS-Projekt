@@ -1,4 +1,5 @@
-﻿using MediTrack.View.RemoteView;
+﻿using MediTrack.Model.RemoteModel;
+using MediTrack.View.RemoteView;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -55,12 +56,18 @@ namespace MediTrack.Controller.RemoteController
             {
                 parent = VisualTreeHelper.GetParent(parent);
             }
-
+            
             var contentControl = parent as ContentControl;
             if (contentControl != null)
             {
                 _mainWindow.PatientenMonitorDynGrid.Children.Remove(contentControl);
             }
+
+            var tag =(int) contentControl.Tag;
+            OptionsData.OptionsPop(tag);
+            ActiveMonitorIDManager.DeactivateMonitor(tag);
+
+
         }
 
     }

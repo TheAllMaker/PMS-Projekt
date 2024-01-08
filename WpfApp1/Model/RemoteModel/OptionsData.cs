@@ -18,6 +18,11 @@ namespace MediTrack.Model.RemoteModel
                 OptionsData.Options.Add(UID);          
         }
 
+        public static void OptionsPop(int UID)
+        {
+            OptionsData.Options.Remove(UID);
+        }
+
 
 
 
