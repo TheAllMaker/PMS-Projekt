@@ -216,6 +216,7 @@ namespace MediTrack
         {
             OptionsPopup.IsOpen = true;
         }
+       
 
         private void OptionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
