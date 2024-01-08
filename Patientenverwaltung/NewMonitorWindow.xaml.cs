@@ -55,7 +55,7 @@ namespace Patientenverwaltung
                         {
                             // Parameter setzen, um SQL Injection zu vermeiden
                             command.Parameters.AddWithValue("@Manu", manu);
-                            command.Parameters.AddWithValue("@Serial", serial);
+                            command.Parameters.AddWithValue("@Serial", "S/N" + serial); // Concatenate "S/N" before the serial number
                             // Ausführen der SQL-Abfrage
                             command.ExecuteNonQuery();
 

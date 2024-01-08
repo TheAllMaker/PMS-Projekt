@@ -20,7 +20,12 @@
 
         <!-- Hersteller -->
         <Label Content="Manufacturer:" Grid.Row="1" Margin="10,5,10,5" Foreground="White"/>
-        <ComboBox x:Name="cmbManu" Grid.Row="1" Margin="153,5,10,5" Background="White" Foreground="Black"/>
+        <ComboBox x:Name="cmbManu" Grid.Row="1" Margin="153,5,10,5" Background="White" Foreground="Black">
+            <ComboBoxItem Content="Philips Healthcare"/>
+            <ComboBoxItem Content="GE Healthcare"/>
+            <ComboBoxItem Content="Mindray"/>
+            <ComboBoxItem Content="Siemens Healthineers"/>
+        </ComboBox>
 
         <!-- Seriennummer -->
         <Label Content="Serial number:" Grid.Row="2" Margin="10,5,10,5" Foreground="White"/>
