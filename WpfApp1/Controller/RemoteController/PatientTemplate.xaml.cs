@@ -81,14 +81,29 @@ namespace MediTrack.Controller.RemoteController
 
         private void MinusButton(object sender, RoutedEventArgs e)
         {
-            // Finden Sie das "PatientTemplateElement" im UniformGrid und entfernen Sie es.
-            UIElement elementToRemove = _mainWindow.PatientenMonitorDynGrid.FindName("PatientTemplateElement") as UIElement;
+            //var button = sender as FrameworkElement;
+            //if (button == null) return;
 
-            if (elementToRemove != null && _mainWindow.PatientenMonitorDynGrid.Children.Contains(elementToRemove))
-            {
-                _mainWindow.PatientenMonitorDynGrid.Children.Remove(elementToRemove);
-            }
+            //// Durchlaufen der übergeordneten Elemente, bis das ContentControl gefunden wird
+            //var parent = VisualTreeHelper.GetParent(button);
+            //while (parent != null && !(parent is ContentControl))
+            //{
+            //    parent = VisualTreeHelper.GetParent(parent);
+            //}
+
+            //var contentControl = parent as ContentControl;
+            //if (contentControl != null)
+            //{
+            //    // Zugriff auf das Tag des ContentControl
+            // /*   var patientenInstanz = contentControl.Tag as Patient;*/ // oder entsprechender Typ
+
+            //    // Hier können Sie Operationen mit patientenInstanz durchführen
+
+            //    // Entfernen des ContentControl aus dem Grid
+            //    _mainWindow.PatientenMonitorDynGrid.Children.Remove(contentControl);
+            //}
         }
+
         //        Button button = sender as Button;
         //        if (button != null)
         //        {

@@ -78,13 +78,13 @@ namespace MediTrack
 
         private void StartCrossButton()
         {
-            DataTemplate crossButtonTemplate = (DataTemplate)Resources["CrossButton"];
+            //DataTemplate crossButtonTemplate = (DataTemplate)Resources["CrossButton"];
 
-            ContentControl contentControl = new ContentControl
-            {
-                ContentTemplate = crossButtonTemplate
-            };
-            PatientenMonitorDynGrid.Children.Add(contentControl);
+            //ContentControl contentControl = new ContentControl
+            //{
+            //    ContentTemplate = crossButtonTemplate
+            //};
+            //PatientenMonitorDynGrid.Children.Add(contentControl);
         }
 
         public async Task ProcessMQTTMessages(CancellationToken cancellationToken)
