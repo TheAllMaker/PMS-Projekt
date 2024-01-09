@@ -39,8 +39,8 @@ namespace Vitaldatensimulator
             {
                 MonitorID,
                 HeartRate,
-                RespirationRate = Math.Round(Temperature, 3),
-                OxygenLevel = Math.Round(Temperature, 3),
+                RespirationRate = Math.Round(RespirationRate, 3),
+                OxygenLevel = Math.Round(OxygenLevel, 3),
                 BloodPressureSystolic,
                 BloodPressureDiastolic,
                 Temperature = Math.Round(Temperature, 3),
