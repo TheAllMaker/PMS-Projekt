@@ -1,13 +1,19 @@
-﻿using System;
+﻿//using System;
+using System.Collections.Generic;
+using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MediTrack.Model.RemoteModel;
 
 namespace MediTrack.View.RemoteView
 {
     public partial class DetailedWindow : Window
     {
+        public static bool IsInstanceCreated { get; private set; }
+
+
         private double respirationRateMin;
         private double respirationRateMax;
         private double oxygenLevelMin;
@@ -34,10 +40,17 @@ namespace MediTrack.View.RemoteView
         private double respirationRateMinThreshold = 8;
         private double respirationRateMaxThreshold = 25;
 
+        int iD;
 
-        public DetailedWindow()
+        private Threshold threshold;
+
+        public DetailedWindow(object ID)
         {
             InitializeComponent();
+            iD = Convert.ToInt32(ID);
+
+            IsInstanceCreated = true;
+
             RespirationRateTextBoxMin.PreviewTextInput += ValidateTextInput;
             RespirationRateTextBoxMax.PreviewTextInput += ValidateTextInput;
             OxygenLevelTextBoxMin.PreviewTextInput += ValidateTextInput;
@@ -129,6 +142,8 @@ namespace MediTrack.View.RemoteView
             UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMin, ref diastolicBloodPressureMin, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold);
             UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMax, ref diastolicBloodPressureMax, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold);
 
+            threshold = new Threshold(iD, heartRateMin,heartRateMax);
+
             this.Close();
         }
 
@@ -137,6 +152,92 @@ namespace MediTrack.View.RemoteView
         {
             this.Close();
         }
+
+
+
+        public void ThresholdCheck(List<object> mqttValues)
+        {
+            double respirationRateMinValue = GetRespirationRateMin();
+            double respirationRateMaxValue = GetRespirationRateMax();
+
+            double oxygenLevelMinValue = GetOxygenLevelMin();
+            double oxygenLevelMaxValue = GetOxygenLevelMax();
+
+            double temperatureMinValue = GetTemperatureMin();
+            double temperatureMaxValue = GetTemperatureMax();
+
+            int heartRateMinValue = GetHeartRateMin();
+            int heartRateMaxValue = GetHeartRateMax();
+
+            int systolicBloodPressureMinValue = GetSystolicBloodPressureMin();
+            int systolicBloodPressureMaxValue = GetSystolicBloodPressureMax();
+
+            int diastolicBloodPressureMinValue = GetDiastolicBloodPressureMin();
+            int diastolicBloodPressureMaxValue = GetDiastolicBloodPressureMax();
+
+            double currentRespiration = Convert.ToDouble(mqttValues[1]);
+            double currentOxygenLevel = Convert.ToDouble(mqttValues[2]);
+            double currentTemperature = Convert.ToDouble(mqttValues[5]);
+            int currentHeartRate = Convert.ToInt32(mqttValues[0]);
+            int currentSystolicBloodPressure = Convert.ToInt32(mqttValues[3]);
+            int currentDiastolicBloodPressure = Convert.ToInt32(mqttValues[4]);
+
+            if (respirationRateMinValue != 0 || respirationRateMaxValue != 0 && IsValueOutOfRange(currentRespiration, respirationRateMinValue, respirationRateMaxValue))
+            {
+                Console.WriteLine("Geklappt?");
+            }
+
+            if (oxygenLevelMinValue != 0 || oxygenLevelMaxValue != 0 && IsValueOutOfRange(currentOxygenLevel, oxygenLevelMinValue, oxygenLevelMaxValue))
+            {
+                // handle out of range for oxygen level
+            }
+
+            if (temperatureMinValue != 0 || temperatureMaxValue != 0 && IsValueOutOfRange(currentTemperature, temperatureMinValue, temperatureMaxValue))
+            {
+                // handle out of range for temperature
+            }
+
+            if (heartRateMinValue != 0 || heartRateMaxValue != 0 && IsValueOutOfRange(currentHeartRate, heartRateMinValue, heartRateMaxValue))
+            {
+                Console.WriteLine("Geklappt?");
+            }
+
+            if (systolicBloodPressureMinValue != 0 || systolicBloodPressureMaxValue != 0 && IsValueOutOfRange(currentSystolicBloodPressure, systolicBloodPressureMinValue, systolicBloodPressureMaxValue))
+            {
+                // handle out of range for systolic blood pressure
+            }
+
+            if (diastolicBloodPressureMinValue != 0 || diastolicBloodPressureMaxValue != 0 && IsValueOutOfRange(currentDiastolicBloodPressure, diastolicBloodPressureMinValue, diastolicBloodPressureMaxValue))
+            {
+                // handle out of range for diastolic blood pressure
+            }
+
+
+        }
+
+        private bool IsValueOutOfRange(double value, double minValue, double maxValue)
+        {
+            return value < minValue || value > maxValue;
+        }
+
+        private bool IsValueOutOfRange(int value, int minValue, int maxValue)
+        {
+            return value < minValue || value > maxValue;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

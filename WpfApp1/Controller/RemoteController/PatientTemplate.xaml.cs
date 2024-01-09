@@ -14,31 +14,77 @@ namespace MediTrack.Controller.RemoteController
 {
     public partial class PatientTemplate : ResourceDictionary
     {
-
+        DetailedWindow detailedWindow;
         MainWindow _mainWindow = Application.Current.MainWindow as MainWindow;
+        private object _tagValue; 
 
         public PatientTemplate()
         {
             InitializeComponent();
+
         }
+
+        private void DetailedWindowConstructor(object tagValue)
+        {
+            detailedWindow = new DetailedWindow(tagValue)
+            {
+                Title = "Threshold Editor",
+                
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Tag = tagValue
+            };
+
+        }
+
+        //private void CreateAndManageDetailedWindow(object tagValue)
+        //{
+        //    DetailedWindow detailedWindow = new DetailedWindow
+        //    {
+        //        Title = "Threshold Editor",
+        //        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+        //        Tag = tagValue
+        //    };
+
+
+        //}
+
+
+        //private void PatientZoomButton_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //    if (WindowCounter.OpenWindows < 1)
+        //    {
+
+        //        detailedWindow.Show();
+        //       // detailedWindow.Tag = ;
+        //        WindowCounter.OpenWindows++;
+        //        detailedWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
+        //    }
+
+        //}
 
         private void PatientZoomButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var control = sender as FrameworkElement;
             if (WindowCounter.OpenWindows < 1)
             {
-                DetailedWindow detailedWindow = new DetailedWindow
+                // Holen Sie den Tag-Wert vom Sender (Button) und übergeben Sie diesen an DetailedWindowConstructor
+                if (control is FrameworkElement element && element.Tag != null)
                 {
-                    Title = "Threshold Editor",
+                    DetailedWindowConstructor(element.Tag);
+                }
 
-                    WindowStartupLocation = WindowStartupLocation.CenterScreen
-                };
                 detailedWindow.Show();
                 WindowCounter.OpenWindows++;
                 detailedWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
             }
-
         }
+
+        //public DetailedWindow GetDetailedWindowInstance()
+        //{
+        //    return detailedWindow;
+        //}
+
 
         private static class WindowCounter
         {
@@ -68,6 +114,12 @@ namespace MediTrack.Controller.RemoteController
             OptionsData.OptionsPop(tag);
             ActiveMonitorIDManager.DeactivateMonitor(tag);
 
+
+        }
+
+        public void SetId(int ID)
+        {
+            int iD = ID;
 
         }
 

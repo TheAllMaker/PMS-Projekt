@@ -138,6 +138,7 @@
     <Compile Include="Controller\RemoteController\PatientTemplate.xaml.cs" />
     <Compile Include="Model\RemoteModel\ActiveMonitorIDManager.cs" />
     <Compile Include="Model\RemoteModel\MqttMessageQueue.cs" />
+    <Compile Include="Model\RemoteModel\Threshold.cs" />
     <Compile Include="Model\RemoteModel\ThresholdGuard.cs" />
     <Compile Include="Model\RemoteModel\UuidDictionary.cs" />
     <Compile Include="Model\RemoteModel\OptionsData.cs" />

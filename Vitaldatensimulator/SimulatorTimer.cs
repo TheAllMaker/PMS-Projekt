@@ -36,7 +36,7 @@ namespace Vitaldatensimulator
 
         public void StartTimer()
         {
-            timer = new Timer(1000);
+            timer = new Timer(500);
             timer.Elapsed += OnTimedEvent;
             timer.AutoReset = true;
             timer.Enabled = true;
@@ -57,7 +57,7 @@ namespace Vitaldatensimulator
             {
                 timer.Stop();
                 timer.Dispose();
-                timer = new Timer(1000); // Neue Timer-Instanz erstellen
+                timer = new Timer(500); // Neue Timer-Instanz erstellen
                 timer.Elapsed += OnTimedEvent;
                 timer.AutoReset = true;
                 timer.Enabled = true;
