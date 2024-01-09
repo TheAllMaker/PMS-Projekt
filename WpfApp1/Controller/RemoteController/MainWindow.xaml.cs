@@ -252,7 +252,7 @@ namespace MediTrack
                         };
 
                         RemoveCrossButton();
-                        if (RemoteWindowCounter <= 16)
+                        if (RemoteWindowCounter <= 15)
                         {
                             Dispatcher.Invoke(() =>
                             {
@@ -272,7 +272,7 @@ namespace MediTrack
 
 
                             // do it only 16 Times 
-                            if (RemoteWindowCounter <= 16)
+                            if (RemoteWindowCounter <= 15)
                             {
                                 NewCrossButton();
                             }
