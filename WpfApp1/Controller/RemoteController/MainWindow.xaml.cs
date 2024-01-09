@@ -341,32 +341,32 @@ namespace MediTrack
             int currentSystolicBloodPressure = Convert.ToInt32(mqttValues[3]);
             int currentDiastolicBloodPressure = Convert.ToInt32(mqttValues[4]);
 
-            if (currentRespiration != 0 && IsValueOutOfRange(currentRespiration, respirationRateMinValue, respirationRateMaxValue))
+            if (respirationRateMinValue != 0 || respirationRateMaxValue != 0 && IsValueOutOfRange(currentRespiration, respirationRateMinValue, respirationRateMaxValue))
             {
-                // handle out of range for respiration rate
+                Console.WriteLine("Geklappt?");
             }
 
-            if (currentOxygenLevel != 0 && IsValueOutOfRange(currentOxygenLevel, oxygenLevelMinValue, oxygenLevelMaxValue))
+            if (oxygenLevelMinValue != 0 || oxygenLevelMaxValue != 0 && IsValueOutOfRange(currentOxygenLevel, oxygenLevelMinValue, oxygenLevelMaxValue))
             {
                 // handle out of range for oxygen level
             }
 
-            if (currentTemperature != 0 && IsValueOutOfRange(currentTemperature, temperatureMinValue, temperatureMaxValue))
+            if (temperatureMinValue != 0 || temperatureMaxValue != 0 && IsValueOutOfRange(currentTemperature, temperatureMinValue, temperatureMaxValue))
             {
                 // handle out of range for temperature
             }
 
-            if (currentHeartRate != 0 && IsValueOutOfRange(currentHeartRate, heartRateMinValue, heartRateMaxValue))
+            if (heartRateMinValue != 0 || heartRateMaxValue != 0 && IsValueOutOfRange(currentHeartRate, heartRateMinValue, heartRateMaxValue))
             {
-                // handle out of range for heart rate
+                Console.WriteLine("Geklappt?");
             }
 
-            if (currentSystolicBloodPressure != 0 && IsValueOutOfRange(currentSystolicBloodPressure, systolicBloodPressureMinValue, systolicBloodPressureMaxValue))
+            if (systolicBloodPressureMinValue != 0 || systolicBloodPressureMaxValue != 0 && IsValueOutOfRange(currentSystolicBloodPressure, systolicBloodPressureMinValue, systolicBloodPressureMaxValue))
             {
                 // handle out of range for systolic blood pressure
             }
 
-            if (currentDiastolicBloodPressure != 0 && IsValueOutOfRange(currentDiastolicBloodPressure, diastolicBloodPressureMinValue, diastolicBloodPressureMaxValue))
+            if (diastolicBloodPressureMinValue != 0 || diastolicBloodPressureMaxValue != 0 && IsValueOutOfRange(currentDiastolicBloodPressure, diastolicBloodPressureMinValue, diastolicBloodPressureMaxValue))
             {
                 // handle out of range for diastolic blood pressure
             }
