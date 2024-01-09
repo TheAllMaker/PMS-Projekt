@@ -46,6 +46,7 @@ namespace MediTrack
 
         public Patient PatientenInstanz;
         public static int RemoteWindowCounter;
+        private DetailedWindow detailedWindowInstance;
 
 
         public MainWindow()
@@ -61,6 +62,8 @@ namespace MediTrack
 
             _cancellationTokenSource = new CancellationTokenSource();
             Loaded += async (sender, args) => await ProcessMQTTMessages(_cancellationTokenSource.Token);
+
+            detailedWindowInstance = new DetailedWindow();
         }
 
         private void InitializeComponents(object sender, RoutedEventArgs e)
@@ -83,7 +86,7 @@ namespace MediTrack
         private void StartCrossButton()
         {
             DataTemplate crossButtonTemplate = (DataTemplate)Resources["CrossButton"];
-       
+
 
             ContentControl contentControl = new ContentControl
             {
@@ -101,7 +104,7 @@ namespace MediTrack
                 if (child is FrameworkElement element && element.Tag as string == "Killme")
                 {
                     PatientenMonitorDynGrid.Children.Remove(child as UIElement);
-                    break; 
+                    break;
                 }
             }
         }
@@ -181,6 +184,19 @@ namespace MediTrack
                             existingPatient.BloodPressureSystolic = mqttMessageQueueArray[4];
                             existingPatient.Temperature = mqttMessageQueueArray[6];
 
+                            List<object> mqttValuesList = new List<object>
+                            {
+                                mqttMessageQueueArray[1],    // HeartRate
+                                mqttMessageQueueArray[3],    // OxygenLevel
+                                mqttMessageQueueArray[5],    // BloodPressureDiastolic
+                                mqttMessageQueueArray[2],    // RespirationRate
+                                mqttMessageQueueArray[4],    // BloodPressureSystolic
+                                mqttMessageQueueArray[6]     // Temperature
+                            };
+
+                            // Rufe ThresholdCheck auf und übergebe die Liste
+                            ThresholdCheck(mqttValuesList);
+
 
                             existingPatient.OnPropertyChanged(nameof(existingPatient.HeartRate));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.OxygenLevel));
@@ -258,9 +274,9 @@ namespace MediTrack
                     {
 
                     }
-                    }
+                }
 
-                else if(mqttMessageQueueArray.Length != 0)
+                else if (mqttMessageQueueArray.Length != 0)
                 {
                     OptionsData.Options.Add(mqttMessageQueueArray[0]);
                 }
@@ -298,11 +314,80 @@ namespace MediTrack
             }
         }
 
+        private void ThresholdCheck(List<object> mqttValues)
+        {
+            double respirationRateMinValue = detailedWindowInstance.GetRespirationRateMin();
+            double respirationRateMaxValue = detailedWindowInstance.GetRespirationRateMax();
+
+            double oxygenLevelMinValue = detailedWindowInstance.GetOxygenLevelMin();
+            double oxygenLevelMaxValue = detailedWindowInstance.GetOxygenLevelMax();
+
+            double temperatureMinValue = detailedWindowInstance.GetTemperatureMin();
+            double temperatureMaxValue = detailedWindowInstance.GetTemperatureMax();
+
+            int heartRateMinValue = detailedWindowInstance.GetHeartRateMin();
+            int heartRateMaxValue = detailedWindowInstance.GetHeartRateMax();
+
+            int systolicBloodPressureMinValue = detailedWindowInstance.GetSystolicBloodPressureMin();
+            int systolicBloodPressureMaxValue = detailedWindowInstance.GetSystolicBloodPressureMax();
+
+            int diastolicBloodPressureMinValue = detailedWindowInstance.GetDiastolicBloodPressureMin();
+            int diastolicBloodPressureMaxValue = detailedWindowInstance.GetDiastolicBloodPressureMax();
+
+            double currentRespiration = Convert.ToDouble(mqttValues[1]);
+            double currentOxygenLevel = Convert.ToDouble(mqttValues[2]);
+            double currentTemperature = Convert.ToDouble(mqttValues[5]);
+            int currentHeartRate = Convert.ToInt32(mqttValues[0]);
+            int currentSystolicBloodPressure = Convert.ToInt32(mqttValues[3]);
+            int currentDiastolicBloodPressure = Convert.ToInt32(mqttValues[4]);
+
+            if (currentRespiration != 0 && IsValueOutOfRange(currentRespiration, respirationRateMinValue, respirationRateMaxValue))
+            {
+                // handle out of range for respiration rate
+            }
+
+            if (currentOxygenLevel != 0 && IsValueOutOfRange(currentOxygenLevel, oxygenLevelMinValue, oxygenLevelMaxValue))
+            {
+                // handle out of range for oxygen level
+            }
+
+            if (currentTemperature != 0 && IsValueOutOfRange(currentTemperature, temperatureMinValue, temperatureMaxValue))
+            {
+                // handle out of range for temperature
+            }
+
+            if (currentHeartRate != 0 && IsValueOutOfRange(currentHeartRate, heartRateMinValue, heartRateMaxValue))
+            {
+                // handle out of range for heart rate
+            }
+
+            if (currentSystolicBloodPressure != 0 && IsValueOutOfRange(currentSystolicBloodPressure, systolicBloodPressureMinValue, systolicBloodPressureMaxValue))
+            {
+                // handle out of range for systolic blood pressure
+            }
+
+            if (currentDiastolicBloodPressure != 0 && IsValueOutOfRange(currentDiastolicBloodPressure, diastolicBloodPressureMinValue, diastolicBloodPressureMaxValue))
+            {
+                // handle out of range for diastolic blood pressure
+            }
 
 
+        }
+
+        private bool IsValueOutOfRange(double value, double minValue, double maxValue)
+        {
+            return value < minValue || value > maxValue;
+        }
+
+        private bool IsValueOutOfRange(int value, int minValue, int maxValue)
+        {
+            return value < minValue || value > maxValue;
+        }
 
     }
 }
+
+
 
 //private async Task StartAsyncBackGroundLogic()
 //{

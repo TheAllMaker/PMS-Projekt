@@ -88,7 +88,7 @@ namespace MediTrack.View.RemoteView
                 }
                 else
                 {
-                    MessageBox.Show("Der eingegebene Wert liegt außerhalb des gültigen Bereichs.");
+                    //MessageBox.Show("Der eingegebene Wert liegt außerhalb des gültigen Bereichs.");
                 }
             }
         }
@@ -103,13 +103,13 @@ namespace MediTrack.View.RemoteView
                 }
                 else
                 {
-                    MessageBox.Show("Der eingegebene Wert liegt außerhalb des gültigen Bereichs.");
+                    //MessageBox.Show("Der eingegebene Wert liegt außerhalb des gültigen Bereichs.");
                 }
             }
         }
 
 
-        private void GreenCheckButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_SelectionConfirmed(object sender, RoutedEventArgs e)
         {
             UpdateVariableFromTextbox(RespirationRateTextBoxMin, ref respirationRateMin, respirationRateMinThreshold, respirationRateMaxThreshold);
             UpdateVariableFromTextbox(RespirationRateTextBoxMax, ref respirationRateMax, respirationRateMinThreshold, respirationRateMaxThreshold);
@@ -133,7 +133,7 @@ namespace MediTrack.View.RemoteView
         }
 
 
-        private void SelectionClosedButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_SelectionClosed(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

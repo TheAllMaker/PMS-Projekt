@@ -283,6 +283,8 @@ namespace Vitaldatensimulator
             VitalData newMonitor = CreateMonitorData();
             mySimulatorTimer.StartSimulator(newMonitor);
 
+            MonitorIDBox.IsEnabled = false;
+
             if (currentState != SimulationState.Running)
             {
                 StartStopButton.Content = "Stop";
