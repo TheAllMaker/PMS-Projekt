@@ -8,18 +8,31 @@ namespace MediTrack.View.RemoteView
 {
     public partial class DetailedWindow : Window
     {
-        private int respirationRateMin;
-        private int respirationRateMax;
-        private int oxygenLevelMin;
-        private int oxygenLevelMax;
-        private int temperatureMin;
-        private int temperatureMax;
+        private double respirationRateMin;
+        private double respirationRateMax;
+        private double oxygenLevelMin;
+        private double oxygenLevelMax;
+        private double temperatureMin;
+        private double temperatureMax;
         private int heartRateMin;
         private int heartRateMax;
         private int systolicBloodPressureMin;
         private int systolicBloodPressureMax;
         private int diastolicBloodPressureMin;
         private int diastolicBloodPressureMax;
+
+        private int heartRateMinThreshold = 40;
+        private int heartRateMaxThreshold = 200;
+        private int systolicBloodPressureMinThreshold = 90;
+        private int systolicBloodPressureMaxThreshold = 220;
+        private int diastolicBloodPressureMinThreshold = 60;
+        private int diastolicBloodPressureMaxThreshold = 80;
+        private double temperatureMinThreshold = 35;
+        private double temperatureMaxThreshold = 39;
+        private double oxygenLevelMinThreshold = 91;
+        private double oxygenLevelMaxThreshold = 96;
+        private double respirationRateMinThreshold = 8;
+        private double respirationRateMaxThreshold = 25;
 
 
         public DetailedWindow()
@@ -65,30 +78,60 @@ namespace MediTrack.View.RemoteView
             }
         }
 
-        private void UpdateVariableFromTextbox(TextBox textBox, ref int variable)
+        private void UpdateVariableFromTextbox(TextBox textBox, ref int variable, int minThreshold, int maxThreshold)
         {
             if (int.TryParse(textBox.Text, out int value))
             {
-                variable = value;
+                if (value >= minThreshold && value <= maxThreshold)
+                {
+                    variable = value;
+                }
+                else
+                {
+                    MessageBox.Show("Der eingegebene Wert liegt außerhalb des gültigen Bereichs.");
+                }
             }
         }
 
+        private void UpdateVariableFromTextbox(TextBox textBox, ref double variable, double minThreshold, double maxThreshold)
+        {
+            if (double.TryParse(textBox.Text, out double value))
+            {
+                if (value >= minThreshold && value <= maxThreshold)
+                {
+                    variable = value;
+                }
+                else
+                {
+                    MessageBox.Show("Der eingegebene Wert liegt außerhalb des gültigen Bereichs.");
+                }
+            }
+        }
+
+
         private void GreenCheckButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateVariableFromTextbox(RespirationRateTextBoxMin, ref respirationRateMin);
-            UpdateVariableFromTextbox(RespirationRateTextBoxMax, ref respirationRateMax);
-            UpdateVariableFromTextbox(OxygenLevelTextBoxMin, ref oxygenLevelMin);
-            UpdateVariableFromTextbox(OxygenLevelTextBoxMax, ref oxygenLevelMax);
-            UpdateVariableFromTextbox(TemperatureTextBoxMin, ref temperatureMin);
-            UpdateVariableFromTextbox(TemperatureTextBoxMax, ref temperatureMax);
-            UpdateVariableFromTextbox(HeartRateTextBoxMin, ref heartRateMin);
-            UpdateVariableFromTextbox(HeartRateTextBoxMax, ref heartRateMax);
-            UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMin, ref systolicBloodPressureMin);
-            UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMax, ref systolicBloodPressureMax);
-            UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMin, ref diastolicBloodPressureMin);
-            UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMax, ref diastolicBloodPressureMax);
+            UpdateVariableFromTextbox(RespirationRateTextBoxMin, ref respirationRateMin, respirationRateMinThreshold, respirationRateMaxThreshold);
+            UpdateVariableFromTextbox(RespirationRateTextBoxMax, ref respirationRateMax, respirationRateMinThreshold, respirationRateMaxThreshold);
+
+            UpdateVariableFromTextbox(OxygenLevelTextBoxMin, ref oxygenLevelMin, oxygenLevelMinThreshold, oxygenLevelMaxThreshold);
+            UpdateVariableFromTextbox(OxygenLevelTextBoxMax, ref oxygenLevelMax, oxygenLevelMinThreshold, oxygenLevelMaxThreshold);
+
+            UpdateVariableFromTextbox(TemperatureTextBoxMin, ref temperatureMin, temperatureMinThreshold, temperatureMaxThreshold);
+            UpdateVariableFromTextbox(TemperatureTextBoxMax, ref temperatureMax, temperatureMinThreshold, temperatureMaxThreshold);
+
+            UpdateVariableFromTextbox(HeartRateTextBoxMin, ref heartRateMin, heartRateMinThreshold, heartRateMaxThreshold);
+            UpdateVariableFromTextbox(HeartRateTextBoxMax, ref heartRateMax, heartRateMinThreshold, heartRateMaxThreshold);
+
+            UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMin, ref systolicBloodPressureMin, systolicBloodPressureMinThreshold, systolicBloodPressureMaxThreshold);
+            UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMax, ref systolicBloodPressureMax, systolicBloodPressureMinThreshold, systolicBloodPressureMaxThreshold);
+
+            UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMin, ref diastolicBloodPressureMin, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold);
+            UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMax, ref diastolicBloodPressureMax, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold);
+
             this.Close();
         }
+
 
         private void SelectionClosedButton_Click(object sender, RoutedEventArgs e)
         {
@@ -159,32 +202,32 @@ namespace MediTrack.View.RemoteView
 
 
 
-        public int GetRespirationRateMin()
+        public double GetRespirationRateMin()
         {
             return respirationRateMin;
         }
 
-        public int GetRespirationRateMax()
+        public double GetRespirationRateMax()
         {
             return respirationRateMax;
         }
 
-        public int GetOxygenLevelMin()
+        public double GetOxygenLevelMin()
         {
             return oxygenLevelMin;
         }
 
-        public int GetOxygenLevelMax()
+        public double GetOxygenLevelMax()
         {
             return oxygenLevelMax;
         }
 
-        public int GetTemperatureMin()
+        public double GetTemperatureMin()
         {
             return temperatureMin;
         }
 
-        public int GetTemperatureMax()
+        public double GetTemperatureMax()
         {
             return temperatureMax;
         }

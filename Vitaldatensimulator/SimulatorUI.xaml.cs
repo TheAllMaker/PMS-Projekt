@@ -289,23 +289,20 @@ namespace Vitaldatensimulator
                 StartStopButton.Background = new SolidColorBrush(Colors.Yellow);
                 currentState = SimulationState.Running;
             }
-            MessageBox.Show("Erfolgreich einen Monitor erstellt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         //Simulation stoppen
         private void StopSimulation()
         {
             MqttPublisher.isSendingData = false;
-            mySimulatorTimer.ResetTimer();
-            MessageBox.Show("Generierung der Daten gestoppt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+            mySimulatorTimer.StopTimer();
         }
 
         //Simulation fortsetzen
         private void ContinueSimulation()
         {
             MqttPublisher.isSendingData = true;
-            mySimulatorTimer.ResetTimer();
-            MessageBox.Show("Generierung der Daten wird fortgesetzt!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+            mySimulatorTimer.StartTimer();
         }
 
         //Érstellen von einem Monitor Objekt mit Vitaldaten

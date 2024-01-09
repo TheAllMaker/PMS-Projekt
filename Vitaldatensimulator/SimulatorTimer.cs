@@ -16,17 +16,30 @@ namespace Vitaldatensimulator
 
         public SimulatorTimer()
         {
-            timer = new Timer(1000);
-            timer.Elapsed += OnTimedEvent;
-            timer.AutoReset = true;
-            timer.Enabled = false;
+            //timer = new Timer(1000);
+            //timer.Elapsed += OnTimedEvent;
+            //timer.AutoReset = true;
+            //timer.Enabled = false;
+            //timer.Stop();
         }
 
         public void StartSimulator(VitalData monitor)
         {
+            if (timer == null)
+            {
+                StartTimer();
+            }
+
             singleMonitor = monitor;
-            timer.Enabled = true; 
             mqttPublisher.SendVitalData(singleMonitor);
+        }
+
+        public void StartTimer()
+        {
+            timer = new Timer(1000);
+            timer.Elapsed += OnTimedEvent;
+            timer.AutoReset = true;
+            timer.Enabled = true;
         }
 
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
