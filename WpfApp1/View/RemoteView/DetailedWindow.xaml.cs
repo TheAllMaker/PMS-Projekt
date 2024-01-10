@@ -142,7 +142,9 @@ namespace MediTrack.View.RemoteView
             UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMin, ref diastolicBloodPressureMin, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold);
             UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMax, ref diastolicBloodPressureMax, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold);
 
-            threshold = new Threshold(iD, heartRateMin,heartRateMax);
+            threshold = new Threshold(iD, heartRateMin,heartRateMax, respirationRateMin, respirationRateMax, 
+                oxygenLevelMin, oxygenLevelMax, temperatureMin, temperatureMax, systolicBloodPressureMin, systolicBloodPressureMax,
+                diastolicBloodPressureMin, diastolicBloodPressureMax);
 
             this.Close();
         }

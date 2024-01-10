@@ -16,7 +16,7 @@ namespace MediTrack.Controller.RemoteController
     {
         DetailedWindow detailedWindow;
         MainWindow _mainWindow = Application.Current.MainWindow as MainWindow;
-        private object _tagValue; 
+        private int monitorID;
 
         public PatientTemplate()
         {
@@ -24,14 +24,14 @@ namespace MediTrack.Controller.RemoteController
 
         }
 
-        private void DetailedWindowConstructor(object tagValue)
+        private void DetailedWindowConstructor(int MonitorID)
         {
-            detailedWindow = new DetailedWindow(tagValue)
+            detailedWindow = new DetailedWindow(MonitorID)
             {
                 Title = "Threshold Editor",
                 
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Tag = tagValue
+                Tag = MonitorID
             };
 
         }
@@ -65,15 +65,23 @@ namespace MediTrack.Controller.RemoteController
 
         private void PatientZoomButton_Click(object sender, RoutedEventArgs e)
         {
-            var control = sender as FrameworkElement;
+            var button = sender as FrameworkElement;
+            if (button == null) return;
+
+            // Durchlaufen der übergeordneten Elemente, bis das ContentControl gefunden wird
+            var parent = VisualTreeHelper.GetParent(button);
+            while (parent != null && !(parent is ContentControl))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+
+            var contentControl = parent as ContentControl;
+
+            monitorID = Convert.ToInt32(contentControl.Tag);
+
             if (WindowCounter.OpenWindows < 1)
             {
-                // Holen Sie den Tag-Wert vom Sender (Button) und übergeben Sie diesen an DetailedWindowConstructor
-                if (control is FrameworkElement element && element.Tag != null)
-                {
-                    DetailedWindowConstructor(element.Tag);
-                }
-
+                DetailedWindowConstructor(monitorID);
                 detailedWindow.Show();
                 WindowCounter.OpenWindows++;
                 detailedWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
@@ -111,10 +119,11 @@ namespace MediTrack.Controller.RemoteController
                  MainWindow.RemoteWindowCounter -= 1;
                 _mainWindow.StartCrossButton();
             }
+            monitorID = Convert.ToInt32(contentControl.Tag);
 
-            var tag =(int) contentControl.Tag;
-            OptionsData.OptionsPop(tag);
-            ActiveMonitorIDManager.DeactivateMonitor(tag);
+            Threshold.RemoveThresholdByMonitorID(monitorID);
+            OptionsData.OptionsPop(monitorID);
+            ActiveMonitorIDManager.DeactivateMonitor(monitorID);
 
 
         }

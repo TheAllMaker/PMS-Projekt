@@ -47,6 +47,7 @@ namespace MediTrack
 
         public Patient PatientenInstanz;
         public static int RemoteWindowCounter;
+        Threshold threshold;
 
 
         public MainWindow()
@@ -209,7 +210,19 @@ namespace MediTrack
                             };
 
                             // Rufe ThresholdCheck auf und übergebe die Liste
-                           
+                            int monitorID = Convert.ToInt32(mqttMessageQueueArray[0]);
+                            threshold = Threshold.GetThresholdByMonitorID(monitorID);
+                            bool isWithinThreshold = threshold.CheckVitalDataAgainstThreshold(
+                            Convert.ToInt32(mqttMessageQueueArray[1]), // HeartRate
+                            Convert.ToInt32(mqttMessageQueueArray[3]), // OxygenLevel
+                            Convert.ToInt32(mqttMessageQueueArray[5]), // BloodPressureDiastolic
+                            Convert.ToInt32(mqttMessageQueueArray[2]), // RespirationRate
+                            Convert.ToInt32(mqttMessageQueueArray[4]), // BloodPressureSystolic
+                            Convert.ToInt32(mqttMessageQueueArray[6])  // Temperature
+                            );
+
+
+
 
 
                             existingPatient.OnPropertyChanged(nameof(existingPatient.HeartRate));
@@ -276,9 +289,10 @@ namespace MediTrack
                                     Content = PatientenInstanz,
                                     Margin = new Thickness(5),
                                     Tag = mqttMessageQueueArray[0],
+                                    //Tag = PatientenInstanz,
                                 };
-                                
 
+                                //(PatientTemplateContentAddition.Content as PatientTemplate).MqttMessageQueueItem = mqttMessageQueueArray[0];
                                 PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
                                 RemoteWindowCounter += 1;
                                 //CreateAndManageDetailedWindow(patientTemplateContentAddition.Tag);
