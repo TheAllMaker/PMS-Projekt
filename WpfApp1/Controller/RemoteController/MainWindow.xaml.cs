@@ -212,6 +212,7 @@ namespace MediTrack
                             // Rufe ThresholdCheck auf und übergebe die Liste
                             int monitorID = Convert.ToInt32(mqttMessageQueueArray[0]);
                             threshold = Threshold.GetThresholdByMonitorID(monitorID);
+
                             bool isWithinThreshold = threshold.CheckVitalDataAgainstThreshold(
                             Convert.ToInt32(mqttMessageQueueArray[1]), // HeartRate
                             Convert.ToInt32(mqttMessageQueueArray[3]), // OxygenLevel

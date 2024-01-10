@@ -16,7 +16,6 @@ namespace MediTrack.Controller.RemoteController
     {
         DetailedWindow detailedWindow;
         MainWindow _mainWindow = Application.Current.MainWindow as MainWindow;
-        private int monitorID;
 
         public PatientTemplate()
         {
@@ -77,7 +76,7 @@ namespace MediTrack.Controller.RemoteController
 
             var contentControl = parent as ContentControl;
 
-            monitorID = Convert.ToInt32(contentControl.Tag);
+            int monitorID = Convert.ToInt32(contentControl.Tag);
 
             if (WindowCounter.OpenWindows < 1)
             {
@@ -119,7 +118,7 @@ namespace MediTrack.Controller.RemoteController
                  MainWindow.RemoteWindowCounter -= 1;
                 _mainWindow.StartCrossButton();
             }
-            monitorID = Convert.ToInt32(contentControl.Tag);
+            int monitorID = Convert.ToInt32(contentControl.Tag);
 
             Threshold.RemoveThresholdByMonitorID(monitorID);
             OptionsData.OptionsPop(monitorID);

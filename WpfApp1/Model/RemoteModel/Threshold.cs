@@ -43,7 +43,15 @@ namespace MediTrack.Model.RemoteModel
             respirationRateMin = RespirationRateMin;
             respirationRateMax = RespirationRateMax;
 
-            thresholdDictionary.Add(monitorID, this);
+            if (thresholdDictionary.ContainsKey(monitorID))
+            {
+                // Update existing instance instead of adding a new one
+                thresholdDictionary[monitorID] = this;
+            }
+            else
+            {
+                thresholdDictionary.Add(monitorID, this);
+            }
         }
 
         public static Threshold GetThresholdByMonitorID(int monitorID)
@@ -81,5 +89,66 @@ namespace MediTrack.Model.RemoteModel
 
             return isWithinThreshold;
         }
+
+        public int GetHeartRateMin()
+        {
+            return heartRateMin;
+        }
+
+        public int GetHeartRateMax()
+        {
+            return heartRateMax;
+        }
+
+        public double GetRespirationRateMin()
+        {
+            return respirationRateMin;
+        }
+
+        public double GetRespirationRateMax()
+        {
+            return respirationRateMax;
+        }
+
+        public double GetOxygenLevelMin()
+        {
+            return oxygenLevelMin;
+        }
+
+        public double GetOxygenLevelMax()
+        {
+            return oxygenLevelMax;
+        }
+
+        public double GetTemperatureMin()
+        {
+            return temperatureMin;
+        }
+
+        public double GetTemperatureMax()
+        {
+            return temperatureMax;
+        }
+
+        public int GetSystolicBloodPressureMin()
+        {
+            return systolicBloodPressureMin;
+        }
+
+        public int GetSystolicBloodPressureMax()
+        {
+            return systolicBloodPressureMax;
+        }
+
+        public int GetDiastolicBloodPressureMin()
+        {
+            return diastolicBloodPressureMin;
+        }
+
+        public int GetDiastolicBloodPressureMax()
+        {
+            return diastolicBloodPressureMax;
+        }
+
     }
 }

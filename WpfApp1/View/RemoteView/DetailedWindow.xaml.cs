@@ -11,9 +11,6 @@ namespace MediTrack.View.RemoteView
 {
     public partial class DetailedWindow : Window
     {
-        public static bool IsInstanceCreated { get; private set; }
-
-
         private double respirationRateMin;
         private double respirationRateMax;
         private double oxygenLevelMin;
@@ -49,8 +46,6 @@ namespace MediTrack.View.RemoteView
             InitializeComponent();
             iD = Convert.ToInt32(ID);
 
-            IsInstanceCreated = true;
-
             RespirationRateTextBoxMin.PreviewTextInput += ValidateTextInput;
             RespirationRateTextBoxMax.PreviewTextInput += ValidateTextInput;
             OxygenLevelTextBoxMin.PreviewTextInput += ValidateTextInput;
@@ -68,6 +63,24 @@ namespace MediTrack.View.RemoteView
             DataObject.AddPastingHandler(TemperatureTextBoxMax, OnPaste);
             DataObject.AddPastingHandler(HeartRateTextBoxMin, OnPaste);
             DataObject.AddPastingHandler(HeartRateTextBoxMax, OnPaste);
+
+            threshold = Threshold.GetThresholdByMonitorID(iD);
+            if (threshold != null)
+            {
+                RespirationRateTextBoxMin.Text = threshold.GetRespirationRateMin().ToString();
+                RespirationRateTextBoxMax.Text = threshold.GetRespirationRateMax().ToString();
+                OxygenLevelTextBoxMin.Text = threshold.GetOxygenLevelMin().ToString();
+                OxygenLevelTextBoxMax.Text = threshold.GetOxygenLevelMax().ToString();
+                TemperatureTextBoxMin.Text = threshold.GetTemperatureMin().ToString();
+                TemperatureTextBoxMax.Text = threshold.GetTemperatureMax().ToString();
+                HeartRateTextBoxMin.Text = threshold.GetHeartRateMin().ToString();
+                HeartRateTextBoxMax.Text = threshold.GetHeartRateMax().ToString();
+                SystolicBloodPressureTextBoxMin.Text = threshold.GetSystolicBloodPressureMin().ToString();
+                SystolicBloodPressureTextBoxMax.Text = threshold.GetSystolicBloodPressureMax().ToString();
+                DiastolicBloodPressureTextBoxMin.Text = threshold.GetDiastolicBloodPressureMin().ToString();
+                DiastolicBloodPressureTextBoxMax.Text = threshold.GetDiastolicBloodPressureMax().ToString();
+            }
+
         }
 
         private void ValidateTextInput(object sender, TextCompositionEventArgs e)
