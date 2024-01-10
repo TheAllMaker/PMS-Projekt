@@ -106,8 +106,10 @@ namespace MediTrack.Controller.RemoteController
             var contentControl = parent as ContentControl;
             if (contentControl != null)
             {
+                _mainWindow.RemoveCrossButton();
                 _mainWindow.PatientenMonitorDynGrid.Children.Remove(contentControl);
                  MainWindow.RemoteWindowCounter -= 1;
+                _mainWindow.StartCrossButton();
             }
 
             var tag =(int) contentControl.Tag;

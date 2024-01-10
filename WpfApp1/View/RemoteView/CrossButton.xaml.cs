@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,17 +32,24 @@ namespace MediTrack.View.RemoteView
 
         private void ShowBlockOptions(object sender, RoutedEventArgs e)
         {
-            var control = sender as FrameworkElement;
-            if (control != null)
+            try
             {
-                var popup = control.FindName("CrossButtonOptionsPopUp") as Popup;
-                if (popup != null)
+                var control = sender as FrameworkElement;
+                if (control != null)
                 {
-                    popup.IsOpen = true;
+                    var popup = control.FindName("CrossButtonOptionsPopUp") as Popup;
+                    if (popup != null)
+                    {
+                        popup.IsOpen = true;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                // Fehlerbehandlung hier
+                Debug.WriteLine("Fehler beim Anzeigen der Optionen: " + ex.Message);
+            }
         }
-
 
 
 
