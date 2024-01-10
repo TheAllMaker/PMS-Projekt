@@ -61,11 +61,9 @@ namespace MediTrack.Model.RemoteModel
             {
                 return threshold;
             }
-            else
-            {
-                throw new ArgumentException("Threshold für die gegebene monitorID wurde nicht gefunden.");
-            }
+            return null;
         }
+
         public static void RemoveThresholdByMonitorID(int monitorID)
         {
             if (thresholdDictionary.ContainsKey(monitorID))
@@ -89,6 +87,60 @@ namespace MediTrack.Model.RemoteModel
 
             return isWithinThreshold;
         }
+        public bool CheckHeartRate(int heartRate)
+        {
+            if (heartRate != 0)
+            {
+                return heartRate >= heartRateMin && heartRate <= heartRateMax;
+            }
+            return true;
+        }
+
+        public bool CheckOxygenLevel(int oxygenLevel)
+        {
+            if (oxygenLevel != 0)
+            {
+                return oxygenLevel >= oxygenLevelMin && oxygenLevel <= oxygenLevelMax;
+            }
+            return true;
+        }
+
+        public bool CheckBloodPressureDiastolic(int bloodPressureDiastolic)
+        {
+            if (bloodPressureDiastolic != 0)
+            {
+                return bloodPressureDiastolic >= diastolicBloodPressureMin && bloodPressureDiastolic <= diastolicBloodPressureMax;
+            }
+            return true;
+        }
+
+        public bool CheckRespirationRate(int respirationRate)
+        {
+            if (respirationRate != 0)
+            {
+                return respirationRate >= respirationRateMin && respirationRate <= respirationRateMax;
+            }
+            return true;
+        }
+
+        public bool CheckBloodPressureSystolic(int bloodPressureSystolic)
+        {
+            if (bloodPressureSystolic != 0)
+            {
+                return bloodPressureSystolic >= systolicBloodPressureMin && bloodPressureSystolic <= systolicBloodPressureMax;
+            }
+            return true;
+        }
+
+        public bool CheckTemperature(int temperature)
+        {
+            if (temperature != 0)
+            {
+                return temperature >= temperatureMin && temperature <= temperatureMax;
+            }
+            return true;
+        }
+
 
         public int GetHeartRateMin()
         {

@@ -80,7 +80,6 @@ namespace MediTrack.View.RemoteView
                 DiastolicBloodPressureTextBoxMin.Text = threshold.GetDiastolicBloodPressureMin().ToString();
                 DiastolicBloodPressureTextBoxMax.Text = threshold.GetDiastolicBloodPressureMax().ToString();
             }
-
         }
 
         private void ValidateTextInput(object sender, TextCompositionEventArgs e)

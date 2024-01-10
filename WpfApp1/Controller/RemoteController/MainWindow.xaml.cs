@@ -198,31 +198,19 @@ namespace MediTrack
                             existingPatient.BloodPressureSystolic = mqttMessageQueueArray[4];
                             existingPatient.Temperature = mqttMessageQueueArray[6];
 
-                            List<object> mqttValuesList = new List<object>
-                            { 
-                                mqttMessageQueueArray[0],    // MonitorID
-                                mqttMessageQueueArray[1],    // HeartRate
-                                mqttMessageQueueArray[3],    // OxygenLevel
-                                mqttMessageQueueArray[5],    // BloodPressureDiastolic
-                                mqttMessageQueueArray[2],    // RespirationRate
-                                mqttMessageQueueArray[4],    // BloodPressureSystolic
-                                mqttMessageQueueArray[6]     // Temperature
-                            };
-
                             // Rufe ThresholdCheck auf und übergebe die Liste
                             int monitorID = Convert.ToInt32(mqttMessageQueueArray[0]);
                             threshold = Threshold.GetThresholdByMonitorID(monitorID);
 
-                            bool isWithinThreshold = threshold.CheckVitalDataAgainstThreshold(
-                            Convert.ToInt32(mqttMessageQueueArray[1]), // HeartRate
-                            Convert.ToInt32(mqttMessageQueueArray[3]), // OxygenLevel
-                            Convert.ToInt32(mqttMessageQueueArray[5]), // BloodPressureDiastolic
-                            Convert.ToInt32(mqttMessageQueueArray[2]), // RespirationRate
-                            Convert.ToInt32(mqttMessageQueueArray[4]), // BloodPressureSystolic
-                            Convert.ToInt32(mqttMessageQueueArray[6])  // Temperature
-                            );
-
-
+                            if (threshold != null)
+                            {
+                                bool isHeartRateWithinThreshold = threshold.CheckHeartRate(Convert.ToInt32(mqttMessageQueueArray[1]));
+                                bool isOxygenLevelWithinThreshold = threshold.CheckOxygenLevel(Convert.ToInt32(mqttMessageQueueArray[3]));
+                                bool isBloodPressureDiastolicWithinThreshold = threshold.CheckBloodPressureDiastolic(Convert.ToInt32(mqttMessageQueueArray[5]));
+                                bool isRespirationRateWithinThreshold = threshold.CheckRespirationRate(Convert.ToInt32(mqttMessageQueueArray[2]));
+                                bool isBloodPressureSystolicWithinThreshold = threshold.CheckBloodPressureSystolic(Convert.ToInt32(mqttMessageQueueArray[4]));
+                                bool isTemperatureWithinThreshold = threshold.CheckTemperature(Convert.ToInt32(mqttMessageQueueArray[6]));
+                            }
 
 
 
@@ -232,14 +220,6 @@ namespace MediTrack
                             existingPatient.OnPropertyChanged(nameof(existingPatient.RespirationRate));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.BloodPressureSystolic));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.Temperature));
-
-                            //DetailedWindow detailedWindowInstance = PatientTemplate.GetDetailedWindowInstance();
-                            //DetailedWindow.ThresholdCheck(mqttValuesList);
-
-                            //if (DetailedWindow.CurrentInstance != null)
-                            //{
-                            //    DetailedWindow.CurrentInstance.ThresholdCheck(mqttValuesList);
-                            //}
                         }
 
                     }
@@ -353,7 +333,7 @@ namespace MediTrack
             }
         }
 
-        
+
 
     }
 }

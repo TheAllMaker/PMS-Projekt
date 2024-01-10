@@ -28,39 +28,10 @@ namespace MediTrack.Controller.RemoteController
             detailedWindow = new DetailedWindow(MonitorID)
             {
                 Title = "Threshold Editor",
-                
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Tag = MonitorID
             };
 
         }
-
-        //private void CreateAndManageDetailedWindow(object tagValue)
-        //{
-        //    DetailedWindow detailedWindow = new DetailedWindow
-        //    {
-        //        Title = "Threshold Editor",
-        //        WindowStartupLocation = WindowStartupLocation.CenterScreen,
-        //        Tag = tagValue
-        //    };
-
-
-        //}
-
-
-        //private void PatientZoomButton_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //    if (WindowCounter.OpenWindows < 1)
-        //    {
-
-        //        detailedWindow.Show();
-        //       // detailedWindow.Tag = ;
-        //        WindowCounter.OpenWindows++;
-        //        detailedWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
-        //    }
-
-        //}
 
         private void PatientZoomButton_Click(object sender, RoutedEventArgs e)
         {
@@ -75,7 +46,6 @@ namespace MediTrack.Controller.RemoteController
             }
 
             var contentControl = parent as ContentControl;
-
             int monitorID = Convert.ToInt32(contentControl.Tag);
 
             if (WindowCounter.OpenWindows < 1)
@@ -86,11 +56,6 @@ namespace MediTrack.Controller.RemoteController
                 detailedWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
             }
         }
-
-        //public DetailedWindow GetDetailedWindowInstance()
-        //{
-        //    return detailedWindow;
-        //}
 
 
         private static class WindowCounter
@@ -126,12 +91,5 @@ namespace MediTrack.Controller.RemoteController
 
 
         }
-
-        public void SetId(int ID)
-        {
-            int iD = ID;
-
-        }
-
     }
 }
