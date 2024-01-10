@@ -21,11 +21,13 @@
                                         <Setter TargetName="buttonBorder" Property="Background">
                                             <Setter.Value>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                    <GradientStop Offset="0" Color="#808080" />
-                                                    <!-- Darker tone of gray -->
-                                                    <GradientStop Offset="1" Color="#404040" />
-                                                    <!-- Even darker tone of gray -->
+                                                    <GradientStop Offset="0" Color="#222222" />
+                                                    <!-- Nearly black -->
+                                                    <GradientStop Offset="1" Color="#333333" />
+                                                    <!-- Dark gray -->
                                                 </LinearGradientBrush>
+
+
 
 
 
