@@ -45,6 +45,7 @@ namespace MediTrack.View.RemoteView
 
 
 
+
         private void CrossButtonSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var listBox = sender as ListBox;
