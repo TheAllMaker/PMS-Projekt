@@ -100,7 +100,7 @@ namespace Vitaldatensimulator
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Slider slider = sender as Slider;
-            if (_currentState != SimulationState.Stopped && _originalSliderValues.ContainsKey(slider) && slider.Value != _originalSliderValues[slider])
+            if (slider != null && _currentState != SimulationState.Stopped && _originalSliderValues.ContainsKey(slider) && slider.Value != _originalSliderValues[slider])
             {
                 double previousValue = _originalSliderValues[slider];
                 double currentValue = slider.Value;
@@ -271,7 +271,7 @@ namespace Vitaldatensimulator
             VitalData newMonitor = CreateMonitorData();
             _mySimulatorTimer.StartSimulator(newMonitor);
 
-            MonitorIDBox.IsEnabled = false;
+            MonitorIdBox.IsEnabled = false;
 
             if (_currentState != SimulationState.Running)
             {
@@ -304,21 +304,21 @@ namespace Vitaldatensimulator
                 _isUuidAlreadyCreated = true;
             }
 
-            int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
-            int BloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
-            int BloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
-            double Temperature = TemperatureSlider.Value;
-            double RespirationRate = RespirationRateSlider.Value;
-            double OxygenLevel = OxygenLevelSlider.Value;
+            int heartRate = Convert.ToInt32(HeartRateSlider.Value);
+            int bloodPressureSystolic = Convert.ToInt32(BloodPressureSystolicSlider.Value);
+            int bloodPressureDiastolic = Convert.ToInt32(BloodPressureDiastolicSlider.Value);
+            double temperature = TemperatureSlider.Value;
+            double respirationRate = RespirationRateSlider.Value;
+            double oxygenLevel = OxygenLevelSlider.Value;
 
             VitalData newMonitor = new VitalData(
-                MonitorIDBox.Text,
-                HeartRate,
-                RespirationRate,
-                OxygenLevel,
-                BloodPressureSystolic,
-                BloodPressureDiastolic,
-                Temperature,
+                MonitorIdBox.Text,
+                heartRate,
+                respirationRate,
+                oxygenLevel,
+                bloodPressureSystolic,
+                bloodPressureDiastolic,
+                temperature,
                 _uuid
                 );
 
@@ -335,7 +335,7 @@ namespace Vitaldatensimulator
         //Kontrolle, dass die MonitorID nur eine Zahl ist
         private bool ValidateMonitorID()
         {
-            if (string.IsNullOrEmpty(MonitorIDBox.Text) || !int.TryParse(MonitorIDBox.Text, out int monitorID) || monitorID <= 0)
+            if (string.IsNullOrEmpty(MonitorIdBox.Text) || !int.TryParse(MonitorIdBox.Text, out int monitorID) || monitorID <= 0)
             {
                 MessageBox.Show("Bitte geben Sie eine gültige Monitor-ID (positive Zahl) ein.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -347,13 +347,10 @@ namespace Vitaldatensimulator
         //Starten der PowerWindow UI um es schließen zu können
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
-            if (_powerWindow == null || !_powerWindow.IsVisible)
-            {
-                _powerWindow = new PowerWindow();
-                _powerWindow.ConfirmClicked += PowerWindow_ConfirmClicked;
-                _powerWindow.Show();
-
-            }
+            if (_powerWindow != null && _powerWindow.IsVisible) return;
+            _powerWindow = new PowerWindow();
+            _powerWindow.ConfirmClicked += PowerWindow_ConfirmClicked;
+            _powerWindow.Show();
         }
 
         //Falls das fenster über "x" Knopf geschlossen wird soll trotzdem das PowerWindow gestartet werden
@@ -397,11 +394,6 @@ namespace Vitaldatensimulator
                     _isValueChanged = false;
                     ConfirmChangesButton.IsEnabled = false;
                     //_mySimulatorTimer.ResetTimer();
-
-                    if (_currentState == SimulationState.Paused)
-                    {
-                        UpdateVitalData();
-                    }   
                     UpdateVitalData();
                 }
             }
@@ -422,7 +414,7 @@ namespace Vitaldatensimulator
         // Schicke als letzte Nachricht noch Alive = 0
         public void SetAliveStatusToZero()
         {
-            VitalData updatedAliveMonitor = new VitalData(MonitorIDBox.Text, 0, 0, 0, 0, 0, 0, _uuid, 0);
+            VitalData updatedAliveMonitor = new VitalData(MonitorIdBox.Text, 0, 0, 0, 0, 0, 0, _uuid, 0);
             _mySimulatorTimer.StartSimulator(updatedAliveMonitor);
         }
     }
