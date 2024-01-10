@@ -102,15 +102,23 @@
 
                 <Button Click ="POWER_Button_Clicked" Width="75" Height="50" Background="#08080F" VerticalAlignment="Center" BorderBrush="Transparent" HorizontalAlignment="Center" Name="POWER"  Grid.Column="5">
                     <Image Source="/View/Bilder/poweroff.png"/>
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" Opacity="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Opacity" Value="0.9"/>
+                                    <Setter TargetName="border" Property="Opacity" Value="0.25"/>
                                 </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter TargetName="border" Property="Opacity" Value="1"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
 
             </Grid>
