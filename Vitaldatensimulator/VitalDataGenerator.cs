@@ -4,48 +4,48 @@ namespace Vitaldatensimulator
 {
     internal class VitalDataGenerator
     {
-        private static readonly Random r = new Random();
+        private static readonly Random R = new Random();
 
         // Generiert eine realistische Herzfrequenz basierend auf der aktuellen Herzfrequenz im Bereich von 40 bis 200 mit einer Änderung von -1 bis +1
-        public int GenerateHeartRate(int HeartRate)
+        public int GenerateHeartRate(int heartRate)
         {
-            HeartRate = GenerateRealisticValue(HeartRate, 40, 200, -1, 1);
-            return HeartRate;
+            heartRate = GenerateRealisticValue(heartRate, 40, 200, -1, 1);
+            return heartRate;
         }
 
         // Generiert eine realistische Atemfrequenz basierend auf der aktuellen Atemfrequenz im Bereich von 8 bis 25 mit einer Änderung von -1 bis +1
-        public double GenerateRespirationRate(double RespirationRate)
+        public double GenerateRespirationRate(double respirationRate)
         {
-            return GenerateRealisticValueDouble(RespirationRate, 8, 25, -0.2, 0.2);
+            return GenerateRealisticValueDouble(respirationRate, 8, 25, -0.2, 0.2);
         }
 
         // Generiert einen realistischen Sauerstoffgehalt basierend auf dem aktuellen Wert im Bereich von 91 bis 96 mit einer Änderung von -1 bis +1
-        public double GenerateOxygenLevel(double OxygenLevel)
+        public double GenerateOxygenLevel(double oxygenLevel)
         {
-            return GenerateRealisticValueDouble(OxygenLevel, 91, 96, -0.1, 0.1);
+            return GenerateRealisticValueDouble(oxygenLevel, 91, 96, -0.1, 0.1);
         }
 
         // Generiert einen realistischen systolischen Blutdruck basierend auf dem aktuellen Wert im Bereich von 90 bis 220 mit einer Änderung von -1 bis +1
-        public int GenerateSystolicBloodPressure(int BloodPressureSystolic)
+        public int GenerateSystolicBloodPressure(int bloodPressureSystolic)
         {
-            return GenerateRealisticValue(BloodPressureSystolic, 90, 220, -1, 1);
+            return GenerateRealisticValue(bloodPressureSystolic, 90, 220, -1, 1);
         }
 
         // Generiert einen realistischen diastolischen Blutdruck basierend auf dem aktuellen Wert im Bereich von 60 bis 80 mit einer Änderung von -1 bis +1
-        public int GenerateDiastolicBloodPressure(int BloodPressureDiastolic)
+        public int GenerateDiastolicBloodPressure(int bloodPressureDiastolic)
         {
-            return GenerateRealisticValue(BloodPressureDiastolic, 60, 80, -1, 1);
+            return GenerateRealisticValue(bloodPressureDiastolic, 60, 80, -1, 1);
         }
 
         // Generiert eine realistische Temperatur basierend auf dem aktuellen Wert im Bereich von 35 bis 39 mit einer Änderung von -0.05 bis 0.05
-        public double GenerateTemperature(double Temperature)
+        public double GenerateTemperature(double temperature)
         {
-            return GenerateRealisticValueDouble(Temperature, 35, 39, -0.05, 0.05);
+            return GenerateRealisticValueDouble(temperature, 35, 39, -0.05, 0.05);
         }
 
         private double GenerateRealisticValueDouble(double currentValue, double minValue, double maxValue, double minChange, double maxChange)
         {
-            double change = r.NextDouble() * (maxChange - minChange) + minChange;
+            double change = R.NextDouble() * (maxChange - minChange) + minChange;
             currentValue += change;
 
             // Wertebereich überprüfen und auf Mindest- oder Höchstwert setzen, falls überschritten
@@ -65,7 +65,7 @@ namespace Vitaldatensimulator
         // Hilfsfunktion zur Generierung realistischer Werte innerhalb eines bestimmten Bereichs mit einer zufälligen Änderung
         public int GenerateRealisticValue(int currentValue, int minValue, int maxValue, int minChange, int maxChange)
         {
-            int change = r.Next(minChange, maxChange + 1);
+            int change = R.Next(minChange, maxChange + 1);
             currentValue += change;
 
             // Wertebereich überprüfen und auf Mindest- oder Höchstwert setzen, falls überschritten

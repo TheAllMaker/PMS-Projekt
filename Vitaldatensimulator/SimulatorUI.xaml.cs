@@ -1,22 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
-using MediTrack.View.RemoteView;
 
 namespace Vitaldatensimulator
 {
@@ -29,14 +18,14 @@ namespace Vitaldatensimulator
             Paused
         }
 
-        private SimulationState currentState = SimulationState.Stopped;
-        private Dictionary<Slider, double> originalSliderValues = new Dictionary<Slider, double>();
-        private SimulatorTimer mySimulatorTimer;
-        private PowerWindow powerWindow;
-        private bool isValueChanged;
-        private bool isUUIDAlreadyCreated;
-        private Guid identifier;
-        private string UUID;
+        private SimulationState _currentState = SimulationState.Stopped;
+        private readonly Dictionary<Slider, double> _originalSliderValues = new Dictionary<Slider, double>();
+        private SimulatorTimer _mySimulatorTimer;
+        private PowerWindow _powerWindow;
+        private bool _isValueChanged;
+        private bool _isUuidAlreadyCreated;
+        private Guid _identifier;
+        private string _uuid;
 
         public SimulatorUI()
         {
@@ -45,7 +34,7 @@ namespace Vitaldatensimulator
             //AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
             this.Closing += SimulatorUI_Closing;
             MqttPublisher.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
-            mySimulatorTimer = new SimulatorTimer();
+            _mySimulatorTimer = new SimulatorTimer();
         }
 
         // Nur als Notfall
@@ -73,7 +62,6 @@ namespace Vitaldatensimulator
                     OxygenLevelValueTextBlock.Text = Math.Round(MonitorVitalDaten.OxygenLevel, MidpointRounding.AwayFromZero).ToString();
                     BloodPressureSystolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureSystolic.ToString();
                     BloodPressureDiastolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureDiastolic.ToString();
-                    double value = Math.Round(MonitorVitalDaten.Temperature, 1);
                     TemperatureValueTextBlock.Text = Math.Round(MonitorVitalDaten.Temperature, 1).ToString("0.0");
                 });
             }
@@ -93,12 +81,12 @@ namespace Vitaldatensimulator
         //Abspeichern der Originalen Slider werte zum Vergleich
         private void InitializeSliderOriginalValues()
         {
-            originalSliderValues.Add(HeartRateSlider, HeartRateSlider.Value);
-            originalSliderValues.Add(RespirationRateSlider, RespirationRateSlider.Value);
-            originalSliderValues.Add(OxygenLevelSlider, OxygenLevelSlider.Value);
-            originalSliderValues.Add(BloodPressureSystolicSlider, BloodPressureSystolicSlider.Value);
-            originalSliderValues.Add(BloodPressureDiastolicSlider, BloodPressureDiastolicSlider.Value);
-            originalSliderValues.Add(TemperatureSlider, TemperatureSlider.Value);
+            _originalSliderValues.Add(HeartRateSlider, HeartRateSlider.Value);
+            _originalSliderValues.Add(RespirationRateSlider, RespirationRateSlider.Value);
+            _originalSliderValues.Add(OxygenLevelSlider, OxygenLevelSlider.Value);
+            _originalSliderValues.Add(BloodPressureSystolicSlider, BloodPressureSystolicSlider.Value);
+            _originalSliderValues.Add(BloodPressureDiastolicSlider, BloodPressureDiastolicSlider.Value);
+            _originalSliderValues.Add(TemperatureSlider, TemperatureSlider.Value);
 
             HeartRateSlider.ValueChanged += Slider_ValueChanged;
             RespirationRateSlider.ValueChanged += Slider_ValueChanged;
@@ -112,22 +100,22 @@ namespace Vitaldatensimulator
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Slider slider = sender as Slider;
-            if (currentState != SimulationState.Stopped && originalSliderValues.ContainsKey(slider) && slider.Value != originalSliderValues[slider])
+            if (_currentState != SimulationState.Stopped && _originalSliderValues.ContainsKey(slider) && slider.Value != _originalSliderValues[slider])
             {
-                double previousValue = originalSliderValues[slider];
+                double previousValue = _originalSliderValues[slider];
                 double currentValue = slider.Value;
 
                 if (currentValue != previousValue)
                 {
-                    originalSliderValues[slider] = currentValue;
-                    isValueChanged = true;
+                    _originalSliderValues[slider] = currentValue;
+                    _isValueChanged = true;
                     // Aktiviere den Bestätigen-Button
                     ConfirmChangesButton.IsEnabled = true;
                 }
             }
         }
 
-        //Slider werden beim Startup auf die mitte gestellt
+        //Slider werden beim Starten auf die mitte gestellt
         private void SetSliderToMiddleValue(Slider slider)
         {
             if (slider != null)
@@ -255,7 +243,7 @@ namespace Vitaldatensimulator
         //Methode zum Wechseln zwischen den einzelnen Zuständen
         private void Button_Click_StartStop(object sender, RoutedEventArgs e)
         {
-            switch (currentState)
+            switch (_currentState)
             {
                 case SimulationState.Stopped:
                     StartSimulation();
@@ -263,57 +251,57 @@ namespace Vitaldatensimulator
                 case SimulationState.Running:
                     StopSimulation();
                     StartStopButton.Content = "Continue"; // Änderung des Button-Texts auf "Continue"
-                    currentState = SimulationState.Paused; // Zustand auf "Paused" setzen
+                    _currentState = SimulationState.Paused; // Zustand auf "Paused" setzen
                     StartStopButton.Background = (Brush)new BrushConverter().ConvertFromString("#FF16FF06");
                     break;
                 case SimulationState.Paused:
                     ContinueSimulation();
                     StartStopButton.Content = "Stop"; // Änderung des Button-Texts auf "Stop"
-                    currentState = SimulationState.Running; // Zustand auf "Running" setzen
+                    _currentState = SimulationState.Running; // Zustand auf "Running" setzen
                     StartStopButton.Background = new SolidColorBrush(Colors.Yellow);
                     break;
             }
         }
 
-        //Starten der Simulation und erstellen des Monitor Objektes mit Vitaldaten
+        //Starten der Simulation und erstellen des Monitorbjektes mit Vitaldaten
         private void StartSimulation()
         {
             if (!ValidateMonitorID()) return;
 
             VitalData newMonitor = CreateMonitorData();
-            mySimulatorTimer.StartSimulator(newMonitor);
+            _mySimulatorTimer.StartSimulator(newMonitor);
 
             MonitorIDBox.IsEnabled = false;
 
-            if (currentState != SimulationState.Running)
+            if (_currentState != SimulationState.Running)
             {
                 StartStopButton.Content = "Stop";
                 StartStopButton.Background = new SolidColorBrush(Colors.Yellow);
-                currentState = SimulationState.Running;
+                _currentState = SimulationState.Running;
             }
         }
 
         //Simulation stoppen
         private void StopSimulation()
         {
-            MqttPublisher.isSendingData = false;
-            mySimulatorTimer.StopTimer();
+            MqttPublisher.IsSendingData = false;
+            _mySimulatorTimer.StopTimer();
         }
 
         //Simulation fortsetzen
         private void ContinueSimulation()
         {
-            MqttPublisher.isSendingData = true;
-            mySimulatorTimer.StartTimer();
+            MqttPublisher.IsSendingData = true;
+            _mySimulatorTimer.StartTimer();
         }
 
         //Érstellen von einem Monitor Objekt mit Vitaldaten
         private VitalData CreateMonitorData()
         {
-            if (!isUUIDAlreadyCreated)
+            if (!_isUuidAlreadyCreated)
             {
-                UUID = GenerateUUID();
-                isUUIDAlreadyCreated = true;
+                _uuid = GenerateUUID();
+                _isUuidAlreadyCreated = true;
             }
 
             int HeartRate = Convert.ToInt32(HeartRateSlider.Value);
@@ -331,7 +319,7 @@ namespace Vitaldatensimulator
                 BloodPressureSystolic,
                 BloodPressureDiastolic,
                 Temperature,
-                UUID
+                _uuid
                 );
 
             return newMonitor;
@@ -340,8 +328,8 @@ namespace Vitaldatensimulator
         //Generiere eine UUID
         private string GenerateUUID()
         {
-            identifier = Guid.NewGuid();
-            return identifier.ToString();
+            _identifier = Guid.NewGuid();
+            return _identifier.ToString();
         }
 
         //Kontrolle, dass die MonitorID nur eine Zahl ist
@@ -359,11 +347,11 @@ namespace Vitaldatensimulator
         //Starten der PowerWindow UI um es schließen zu können
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
-            if (powerWindow == null || !powerWindow.IsVisible)
+            if (_powerWindow == null || !_powerWindow.IsVisible)
             {
-                powerWindow = new PowerWindow();
-                powerWindow.ConfirmClicked += PowerWindow_ConfirmClicked;
-                powerWindow.Show();
+                _powerWindow = new PowerWindow();
+                _powerWindow.ConfirmClicked += PowerWindow_ConfirmClicked;
+                _powerWindow.Show();
 
             }
         }
@@ -371,33 +359,33 @@ namespace Vitaldatensimulator
         //Falls das fenster über "x" Knopf geschlossen wird soll trotzdem das PowerWindow gestartet werden
         public void SimulatorUI_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (powerWindow == null || !powerWindow.IsVisible)
+            if (_powerWindow == null || !_powerWindow.IsVisible)
             {
                 e.Cancel = true;
-                powerWindow = new PowerWindow();
-                powerWindow.ConfirmClicked += PowerWindow_ConfirmClicked;
-                powerWindow.Show();
+                _powerWindow = new PowerWindow();
+                _powerWindow.ConfirmClicked += PowerWindow_ConfirmClicked;
+                _powerWindow.Show();
             }
         }
 
         //Schließen des Projekts nach 100ms, damit letzte Nachricht noch versendet werden kann
         private async void PowerWindow_ConfirmClicked(object sender, EventArgs e)
         {
-            if (currentState != SimulationState.Stopped)
+            if (_currentState != SimulationState.Stopped)
             {
                 SetAliveStatusToZero();
             }
             await Task.Delay(300);
-            mySimulatorTimer.StopTimer();
+            _mySimulatorTimer.StopTimer();
             Application.Current.Shutdown();
         }
 
         //Logik zur Änderung der versendeten Werte anhand der Slider
         private void Button_Click_ConfirmChanges(object sender, RoutedEventArgs e)
         {
-            if (currentState != SimulationState.Stopped) // Überprüfung, ob die Simulation gestartet wurde
+            if (_currentState != SimulationState.Stopped) // Überprüfung, ob die Simulation gestartet wurde
             {
-                if (isValueChanged)
+                if (_isValueChanged)
                 {
                     HeartRateSlider.Value = Convert.ToDouble(HeartRateBox.Text);
                     RespirationRateSlider.Value = Convert.ToDouble(RespirationRateBox.Text);
@@ -406,9 +394,14 @@ namespace Vitaldatensimulator
                     BloodPressureDiastolicSlider.Value = Convert.ToDouble(BloodPressureDiastolicBox.Text);
                     TemperatureSlider.Value = Convert.ToDouble(TemperatureBox.Text);
 
-                    isValueChanged = false;
+                    _isValueChanged = false;
                     ConfirmChangesButton.IsEnabled = false;
-                    mySimulatorTimer.ResetTimer();
+                    //_mySimulatorTimer.ResetTimer();
+
+                    if (_currentState == SimulationState.Paused)
+                    {
+                        UpdateVitalData();
+                    }   
                     UpdateVitalData();
                 }
             }
@@ -423,14 +416,14 @@ namespace Vitaldatensimulator
         private void UpdateVitalData()
         {
             VitalData updatedMonitor = CreateMonitorData();
-            mySimulatorTimer.StartSimulator(updatedMonitor);
+            _mySimulatorTimer.StartSimulator(updatedMonitor);
         }
 
         // Schicke als letzte Nachricht noch Alive = 0
         public void SetAliveStatusToZero()
         {
-            VitalData updatedAliveMonitor = new VitalData(MonitorIDBox.Text, 0, 0, 0, 0, 0, 0, UUID, 0);
-            mySimulatorTimer.StartSimulator(updatedAliveMonitor);
+            VitalData updatedAliveMonitor = new VitalData(MonitorIDBox.Text, 0, 0, 0, 0, 0, 0, _uuid, 0);
+            _mySimulatorTimer.StartSimulator(updatedAliveMonitor);
         }
     }
 }

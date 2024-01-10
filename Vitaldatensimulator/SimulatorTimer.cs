@@ -1,77 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
-using System.Windows;
+
 
 namespace Vitaldatensimulator
 {
     public class SimulatorTimer
     {
-        private Timer timer;
-        private VitalData singleMonitor;
-        private readonly MqttPublisher mqttPublisher = MqttPublisher.GetInstance();
-
-        public SimulatorTimer()
-        {
-            //timer = new Timer(1000);
-            //timer.Elapsed += OnTimedEvent;
-            //timer.AutoReset = true;
-            //timer.Enabled = false;
-            //timer.Stop();
-        }
+        private Timer _timer;
+        private VitalData _singleMonitor;
+        private readonly MqttPublisher _mqttPublisher = MqttPublisher.GetInstance();
 
         public void StartSimulator(VitalData monitor)
         {
-            if (timer == null)
+            if (_timer == null)
             {
                 StartTimer();
             }
 
-            singleMonitor = monitor;
-            mqttPublisher.SendVitalData(singleMonitor);
+            _singleMonitor = monitor;
+            //Kann eingebaut werden wenn man die Daten direkt beim Start senden will
+            //_mqttPublisher.SendVitalData(_singleMonitor);
         }
 
         public void StartTimer()
         {
-            timer = new Timer(500);
-            timer.Elapsed += OnTimedEvent;
-            timer.AutoReset = true;
-            timer.Enabled = true;
+            _timer = new Timer(500);
+            _timer.Elapsed += OnTimedEvent;
+            _timer.AutoReset = true;
+            _timer.Enabled = true;
         }
 
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            if (MqttPublisher.isSendingData)
-            {
-                singleMonitor.GenerateAllVitaldata();
-                mqttPublisher.SendVitalData(singleMonitor);
-            }
+            if (!MqttPublisher.IsSendingData) return;
+            _singleMonitor.GenerateAllVitaldata();
+            _mqttPublisher.SendVitalData(_singleMonitor);
         }
 
         public void ResetTimer()
         {
-            if (timer != null)
+            if (_timer != null)
             {
-                timer.Stop();
-                timer.Dispose();
-                timer = new Timer(500); // Neue Timer-Instanz erstellen
-                timer.Elapsed += OnTimedEvent;
-                timer.AutoReset = true;
-                timer.Enabled = true;
+                _timer.Stop();
+                _timer.Dispose();
+                _timer = new Timer(500); // Neue Timer-Instanz erstellen
+                _timer.Elapsed += OnTimedEvent;
+                _timer.AutoReset = true;
+                _timer.Enabled = true;
             }
         }
 
         public void StopTimer()
         {
-            if (timer != null)
+            if (_timer != null)
             {
-                timer.Stop(); // Stoppt den Timer
-                timer.Elapsed -= OnTimedEvent; // Entfernt das Ereignis
-                timer.Dispose(); // Gibt die Ressourcen frei
-                timer = null; // Setzt den Timer auf null
+                _timer.Stop(); // Stoppt den Timer
+                _timer.Elapsed -= OnTimedEvent; // Entfernt das Ereignis
+                _timer.Dispose(); // Gibt die Ressourcen frei
+                _timer = null; // Setzt den Timer auf null
             }
         }
     }

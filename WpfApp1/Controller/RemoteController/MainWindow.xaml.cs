@@ -211,6 +211,9 @@ namespace MediTrack
                                 bool isTemperatureWithinThreshold = threshold.CheckTemperature(Convert.ToInt32(mqttMessageQueueArray[6]));
                             }
 
+                            // timer = timer(5000)
+                            // if (mqttMessageQueueArray[0]) keine neuen Daten
+                            // => trigger event für Netzwerk Icon
 
 
                             existingPatient.OnPropertyChanged(nameof(existingPatient.HeartRate));

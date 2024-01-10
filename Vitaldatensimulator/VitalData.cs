@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Emit;
 
 namespace Vitaldatensimulator
 {
@@ -18,17 +16,17 @@ namespace Vitaldatensimulator
 
         private readonly VitalDataGenerator generator;
 
-        public VitalData(string MonitorID, int HeartRate, double RespirationRate, double OxygenLevel, int BloodPressureSystolic, int BloodPressureDiastolic, double Temperature, string UUID, int Alive = 1)
+        public VitalData(string monitorId, int heartRate, double respirationRate, double oxygenLevel, int bloodPressureSystolic, int bloodPressureDiastolic, double temperature, string uuid, int alive = 1)
         {
-            this.MonitorID = MonitorID;
-            this.HeartRate = HeartRate;
-            this.RespirationRate = RespirationRate;
-            this.OxygenLevel = OxygenLevel;
-            this.BloodPressureSystolic = BloodPressureSystolic;
-            this.BloodPressureDiastolic = BloodPressureDiastolic;
-            this.Temperature = Temperature;
-            this.Alive = Alive;
-            this.UUID = UUID;
+            this.MonitorID = monitorId;
+            this.HeartRate = heartRate;
+            this.RespirationRate = respirationRate;
+            this.OxygenLevel = oxygenLevel;
+            this.BloodPressureSystolic = bloodPressureSystolic;
+            this.BloodPressureDiastolic = bloodPressureDiastolic;
+            this.Temperature = temperature;
+            this.Alive = alive;
+            this.UUID = uuid;
 
             generator = new VitalDataGenerator();
         }

@@ -1,15 +1,12 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using Vitaldatensimulator;
 
-namespace MediTrack.View.RemoteView
+namespace Vitaldatensimulator
 {
     public partial class PowerWindow : Window
     {
         public event EventHandler ConfirmClicked;
-        private bool isAlreadyClosing = false;
+        private bool _isAlreadyClosing;
 
         public PowerWindow()
         {
@@ -18,13 +15,13 @@ namespace MediTrack.View.RemoteView
 
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {
-            isAlreadyClosing = true;
+            _isAlreadyClosing = true;
             ConfirmClicked?.Invoke(this, EventArgs.Empty);
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
-            isAlreadyClosing = true;
+            _isAlreadyClosing = true;
             Close();
         }
     }
