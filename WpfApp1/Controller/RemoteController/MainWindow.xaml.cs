@@ -82,7 +82,7 @@ namespace MediTrack
 
 
 
-        private void StartCrossButton()
+        public void StartCrossButton()
         {
             DataTemplate crossButtonTemplate = (DataTemplate)Resources["CrossButton"];
 
@@ -96,7 +96,7 @@ namespace MediTrack
             PatientenMonitorDynGrid.Children.Add(contentControl);
         }
 
-        private void RemoveCrossButton()
+        public void RemoveCrossButton()
         {
             foreach (var child in PatientenMonitorDynGrid.Children)
             {
@@ -107,6 +107,7 @@ namespace MediTrack
                 }
             }
         }
+
 
 
         private void NewCrossButton()
@@ -141,8 +142,21 @@ namespace MediTrack
 
                     Dispatcher.Invoke(() =>
                     {
-                        //PatientenMonitorDynGrid.Children.Remove(PatientTemplateContentAddition);
-                        RemoteWindowCounter -= 1;
+                        var itemToRemove = PatientenMonitorDynGrid.Children
+                            .OfType<ContentControl>()
+                            .FirstOrDefault(cc => cc.Tag.Equals(mqttMessageQueueArray[0]));
+
+                        if (itemToRemove != null)
+                        {
+                            RemoveCrossButton();
+                            PatientenMonitorDynGrid.Children.Remove(itemToRemove);
+                            StartCrossButton();
+                            RemoteWindowCounter -= 1;
+                            if (mqttMessageQueueArray[0] is int intValue)
+                            {
+                                OptionsData.OptionsPop(intValue);
+                            }
+                        }
                     });
                     PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
                 }
