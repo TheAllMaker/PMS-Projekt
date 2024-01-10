@@ -199,8 +199,7 @@ namespace MediTrack
                             existingPatient.Temperature = mqttMessageQueueArray[6];
 
                             // Rufe ThresholdCheck auf und übergebe die Liste
-                            int monitorID = Convert.ToInt32(mqttMessageQueueArray[0]);
-                            threshold = Threshold.GetThresholdByMonitorID(monitorID);
+                            threshold = Threshold.GetThresholdByMonitorID(Convert.ToInt32(mqttMessageQueueArray[0]));
 
                             if (threshold != null)
                             {
