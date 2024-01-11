@@ -17,14 +17,5 @@ namespace MediTrack.Model.RemoteModel
             OptionsData.Options.Remove(UID);
         }
 
-
-
-
-
-
-
-
-
-
     }
 }
