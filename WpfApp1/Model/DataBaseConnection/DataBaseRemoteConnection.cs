@@ -1,15 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
-using System.Windows.Navigation;
-using Database;
-using MediTrack.Model.RemoteModel;
 using Npgsql;
 
 
@@ -68,7 +58,7 @@ namespace MediTrack.Model.DataBaseModelConnection
 
             catch (Exception ex)
             {
-                Console.WriteLine("Error when connecting to the database:  " + ex.Message);
+                //Console.WriteLine("Error when connecting to the database:  " + ex.Message);
                 return null;
             }
         }
@@ -119,7 +109,6 @@ namespace MediTrack.Model.DataBaseModelConnection
 
             var DataBaseConnector = DataBaseConnectionCall();
             string SelectString = "SELECT pid FROM public.belegung WHERE moid = @MonitorIDSearchKey";
-            Console.WriteLine(SelectString);
 
             using (NpgsqlCommand SelectPatientIDThroughMonitorID = new NpgsqlCommand(SelectString, DataBaseConnector))
             {
@@ -129,7 +118,7 @@ namespace MediTrack.Model.DataBaseModelConnection
 
                 if (PIDSearcher.Read())
                 {
-                    Console.WriteLine("PidNummer " + PIDSearcher["pid"]);
+                    
                     return (int?)PIDSearcher["pid"];
                 }
                 else
@@ -161,13 +150,11 @@ namespace MediTrack.Model.DataBaseModelConnection
                 sresult[2] = PIDReader["Rn"].ToString();
                 sresult[3] = PIDReader["Bn"].ToString();
 
-                Console.WriteLine($"Name: {sresult[0]}, Vorname: {sresult[1]}, Raumnummer: {sresult[2]}, Bettnummer: {sresult[3]}");
                 DataBaseConnector.Close();
                 return sresult;
             }
             else
             {
-                Console.WriteLine($"No DataBase Entry found for PID {patientIdentifier}");
                 DataBaseConnector.Close();
                 return null;
             }

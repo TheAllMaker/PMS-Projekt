@@ -12,14 +12,14 @@ namespace MediTrack.Model.RemoteModel
             if(MonitorIdentifierTOUUID.ContainsKey(MonitorIdentifierKey))
             {
                 object UUID = MonitorIdentifierTOUUID[MonitorIdentifierKey];
-                Console.WriteLine(StringContainer.UUIDDictionarySuc + UUID);
+                //Console.WriteLine(StringContainer.UUIDDictionarySuc + UUID);
                 string uuidString = UUID.ToString();
                 return uuidString;
             }
             
             else
             {
-                Console.WriteLine(StringContainer.UUIDDictionaryFai);
+                //Console.WriteLine(StringContainer.UUIDDictionaryFai);
                 return null; 
             }
 
@@ -30,12 +30,12 @@ namespace MediTrack.Model.RemoteModel
             try
             {
                 MonitorIdentifierTOUUID.Remove(MonitorIdentifierKey);
-                Console.WriteLine(StringContainer.UUIDDictionaryRemovedSuc + MonitorIdentifierKey);
+                //Console.WriteLine(StringContainer.UUIDDictionaryRemovedSuc + MonitorIdentifierKey);
             }
             
             catch (ArgumentException)
             {
-                Console.WriteLine(StringContainer.UUIDDictionaryRemovedFai + MonitorIdentifierKey);
+                //Console.WriteLine(StringContainer.UUIDDictionaryRemovedFai + MonitorIdentifierKey);
             }
 
         }
@@ -45,12 +45,12 @@ namespace MediTrack.Model.RemoteModel
             try
             {
                 MonitorIdentifierTOUUID.Add(MonitorIdentifierKey, UUIDKey);
-                Console.WriteLine(StringContainer.UUIDDictionaryInsertSuc);
+                //Console.WriteLine(StringContainer.UUIDDictionaryInsertSuc);
             }
 
             catch (ArgumentException)
             {
-                Console.WriteLine(StringContainer.UUIDDictionaryInsertFai);
+                //Console.WriteLine(StringContainer.UUIDDictionaryInsertFai);
             }
         }
 
@@ -59,13 +59,13 @@ namespace MediTrack.Model.RemoteModel
             if (MonitorIdentifierKey == null) return false;
             if (MonitorIdentifierTOUUID.ContainsKey(MonitorIdentifierKey))
             {
-                Console.WriteLine(StringContainer.UUIDDictionaryContainSuc);
+                //Console.WriteLine(StringContainer.UUIDDictionaryContainSuc);
                 return true;
             }
 
             else
             {
-                Console.WriteLine(StringContainer.UUIDDictionaryContainFai);
+                //Console.WriteLine(StringContainer.UUIDDictionaryContainFai);
                 return false;
             }
 

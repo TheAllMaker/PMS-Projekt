@@ -9,7 +9,7 @@ namespace MediTrack.Model.RemoteModel
        
         public static void OptionsInput(int UID)
         {
-                OptionsData.Options.Add(UID);          
+            OptionsData.Options.Add(UID);          
         }
 
         public static void OptionsPop(int UID)
