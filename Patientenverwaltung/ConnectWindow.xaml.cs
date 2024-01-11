@@ -1,14 +1,12 @@
 ﻿using Npgsql;
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Xml.Linq;
 
 namespace Patientenverwaltung
 {
-    public partial class ConnectWindow : Window
+    public partial class ConnectWindow
     {
         private static string connString = "Host=db.inftech.hs-mannheim.de;Username=pms1;Password=pms1;Database=pms1";
 

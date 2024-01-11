@@ -132,7 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\AssemblyInfo.cs" />
-    <Compile Include="Controller\RemoteController\AddPatientWindow.xaml.cs" />
     <Compile Include="Controller\RemoteController\App.xaml.cs" />
     <Compile Include="Controller\RemoteController\MainWindow.xaml.cs" />
     <Compile Include="Controller\RemoteController\PatientTemplate.xaml.cs" />
@@ -157,10 +156,6 @@
       <DependentUpon>PowerWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="View\App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\RemoteView\AddPatientWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -191,7 +186,6 @@
     <Compile Include="Model\RemoteModel\Patient.cs" />
     <Compile Include="Model\RemoteModel\PatientDictionary.cs" />
     <Compile Include="Model\RemoteModel\PatientViewModel.cs" />
-    <Compile Include="Model\RemoteModel\PatientTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

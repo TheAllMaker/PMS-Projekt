@@ -4,17 +4,9 @@ using Npgsql;
 
 namespace Patientenverwaltung
 {
-    public class Patient
-    {
-        public string Vorname { get; set; }
-        public string Nachname { get; set; }
-        public string Geschlecht { get; set; }
-        public DateTime Geburtsdatum { get; set; }
-        public int Room { get; set; }
-        public int Bed { get; set; }
-    }
 
-    public partial class NewPatientWindow : Window
+
+    public partial class NewPatientWindow
     {
         private static string connString = "Host=db.inftech.hs-mannheim.de;Username=pms1;Password=pms1;Database=pms1";
 
@@ -40,7 +32,7 @@ namespace Patientenverwaltung
                 // Überprüfen, ob das Bed-Feld eine gültige Ganzzahl ist
                 
                     // Überprüfen der Eingabe
-                    if (IsValidInput(vorname, nachname, sex, geburtsdatum, room, bed))
+                    if (IsValidInput(vorname, nachname, sex, geburtsdatum))
                     {
                         // Verbindungszeichenfolge zur Datenbank
                         string connectionString = connString;
@@ -95,7 +87,7 @@ namespace Patientenverwaltung
             
         }
 
-        private bool IsValidInput(string vorname, string nachname, string sex, DateTime geburtsdatum, int room, int bed)
+        private bool IsValidInput(string vorname, string nachname, string sex, DateTime geburtsdatum)
         {
             if (vorname.Length < 3 || nachname.Length < 3)
             {
