@@ -21,6 +21,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace MediTrack
@@ -48,6 +49,8 @@ namespace MediTrack
         public Patient PatientenInstanz;
         public static int RemoteWindowCounter;
         Threshold threshold;
+        Dictionary<int, Patient> patientenListe = new Dictionary<int, Patient>();
+        Dictionary<int, ContentControl> patientenDictionary = new Dictionary<int, ContentControl>();
 
 
         public MainWindow()
@@ -199,6 +202,7 @@ namespace MediTrack
                             existingPatient.Temperature = mqttMessageQueueArray[6];
 
                             // Rufe ThresholdCheck auf und übergebe die Liste
+                            int id = Convert.ToInt32(mqttMessageQueueArray[0]);
                             threshold = Threshold.GetThresholdByMonitorID(Convert.ToInt32(mqttMessageQueueArray[0]));
 
                             if (threshold != null)
@@ -209,14 +213,56 @@ namespace MediTrack
                                 bool isRespirationRateWithinThreshold = threshold.CheckRespirationRate(Convert.ToInt32(mqttMessageQueueArray[2]));
                                 bool isBloodPressureSystolicWithinThreshold = threshold.CheckBloodPressureSystolic(Convert.ToInt32(mqttMessageQueueArray[4]));
                                 bool isTemperatureWithinThreshold = threshold.CheckTemperature(Convert.ToInt32(mqttMessageQueueArray[6]));
+
+                                if (patientenDictionary.ContainsKey(id))
+                                {
+                                    Patient patientInstance = (Patient)patientenDictionary[id].Content;
+
+                                    patientInstance.IsHeartRateOutOfRange = !isHeartRateWithinThreshold;
+                                    patientInstance.IsRespirationRateOutOfRange = !isRespirationRateWithinThreshold;
+                                    patientInstance.IsOxygenLevelOutOfRange = !isOxygenLevelWithinThreshold;
+                                    patientInstance.IsBloodPressureDiastolicOutOfRange = !isBloodPressureDiastolicWithinThreshold;
+                                    patientInstance.IsBloodPressureSystolicOutOfRange = !isBloodPressureSystolicWithinThreshold;
+                                    patientInstance.IsTemperatureOutOfRange = !isTemperatureWithinThreshold;
+                                }
+                            }
+                            if (patientenDictionary.ContainsKey(id))
+                            {
+                                Patient patientInstance = (Patient)patientenDictionary[id].Content;
+
+                                if (patientInstance.UpdateTimer != null)
+                                {
+                                    patientInstance.UpdateTimer.Stop();
+                                }
+
+                                // Erstelle einen neuen Timer
+                                DispatcherTimer timer = new DispatcherTimer();
+                                timer.Interval = TimeSpan.FromSeconds(5);
+
+                                // Setze die Aktion, die bei Timeout aufgerufen wird
+                                timer.Tick += (sender, e) =>
+                                {
+                                    // Hier wird der Button blinken ausgelöst
+                                    patientInstance.IsBlinking = true;
+
+                                    // Stoppe den Timer
+                                    timer.Stop();
+                                };
+
+                                // Starte den Timer
+                                timer.Start();
+
+                                // Setze den Timer in der Patienteninstanz
+                                patientInstance.UpdateTimer = timer;
                             }
 
-                            // timer = timer(5000)
-                            // if (mqttMessageQueueArray[0]) keine neuen Daten
-                            // => trigger event für Netzwerk Icon
+                                // timer = timer(5000)
+                                // if (mqttMessageQueueArray[0]) keine neuen Daten
+                                // => trigger event für Netzwerk Icon
 
 
-                            existingPatient.OnPropertyChanged(nameof(existingPatient.HeartRate));
+
+                                existingPatient.OnPropertyChanged(nameof(existingPatient.HeartRate));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.OxygenLevel));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.BloodPressureDiastolic));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.RespirationRate));
@@ -260,6 +306,8 @@ namespace MediTrack
                             Temperature = mqttMessageQueueArray[6],
 
                         };
+                        int id2 = Convert.ToInt32(mqttMessageQueueArray[0]);
+                        patientenListe.Add(id2,PatientenInstanz);
 
                         RemoveCrossButton();
                         if (RemoteWindowCounter <= 15)
@@ -274,6 +322,8 @@ namespace MediTrack
                                     Tag = mqttMessageQueueArray[0],
                                     //Tag = PatientenInstanz,
                                 };
+                                //patientenListe.Add(PatientTemplateContentAddition);
+                                patientenDictionary.Add(Convert.ToInt32(mqttMessageQueueArray[0]), PatientTemplateContentAddition);
 
                                 //(PatientTemplateContentAddition.Content as PatientTemplate).MqttMessageQueueItem = mqttMessageQueueArray[0];
                                 PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);

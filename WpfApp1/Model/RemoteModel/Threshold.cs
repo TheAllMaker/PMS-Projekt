@@ -89,7 +89,7 @@ namespace MediTrack.Model.RemoteModel
         }
         public bool CheckHeartRate(int heartRate)
         {
-            if (heartRate != 0)
+            if (heartRateMin != 0 || heartRateMax != 0)
             {
                 return heartRate >= heartRateMin && heartRate <= heartRateMax;
             }
@@ -98,7 +98,7 @@ namespace MediTrack.Model.RemoteModel
 
         public bool CheckOxygenLevel(int oxygenLevel)
         {
-            if (oxygenLevel != 0)
+            if(oxygenLevelMin != 0 || oxygenLevelMax != 0)
             {
                 return oxygenLevel >= oxygenLevelMin && oxygenLevel <= oxygenLevelMax;
             }
@@ -107,7 +107,7 @@ namespace MediTrack.Model.RemoteModel
 
         public bool CheckBloodPressureDiastolic(int bloodPressureDiastolic)
         {
-            if (bloodPressureDiastolic != 0)
+            if (diastolicBloodPressureMin != 0 || diastolicBloodPressureMax != 0)
             {
                 return bloodPressureDiastolic >= diastolicBloodPressureMin && bloodPressureDiastolic <= diastolicBloodPressureMax;
             }
@@ -116,7 +116,7 @@ namespace MediTrack.Model.RemoteModel
 
         public bool CheckRespirationRate(int respirationRate)
         {
-            if (respirationRate != 0)
+            if (respirationRateMin != 0 || respirationRateMax != 0)
             {
                 return respirationRate >= respirationRateMin && respirationRate <= respirationRateMax;
             }
@@ -125,7 +125,7 @@ namespace MediTrack.Model.RemoteModel
 
         public bool CheckBloodPressureSystolic(int bloodPressureSystolic)
         {
-            if (bloodPressureSystolic != 0)
+            if (systolicBloodPressureMin != 0 || systolicBloodPressureMax != 0)
             {
                 return bloodPressureSystolic >= systolicBloodPressureMin && bloodPressureSystolic <= systolicBloodPressureMax;
             }
@@ -134,7 +134,7 @@ namespace MediTrack.Model.RemoteModel
 
         public bool CheckTemperature(int temperature)
         {
-            if (temperature != 0)
+            if (temperatureMin != 0 || temperatureMax != 0)
             {
                 return temperature >= temperatureMin && temperature <= temperatureMax;
             }

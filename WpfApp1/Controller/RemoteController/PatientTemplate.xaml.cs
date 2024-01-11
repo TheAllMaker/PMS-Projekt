@@ -88,7 +88,10 @@ namespace MediTrack.Controller.RemoteController
             Threshold.RemoveThresholdByMonitorID(monitorID);
             OptionsData.OptionsPop(monitorID);
             ActiveMonitorIDManager.DeactivateMonitor(monitorID);
+        }
 
+        public void oxygenred()
+        {
 
         }
     }

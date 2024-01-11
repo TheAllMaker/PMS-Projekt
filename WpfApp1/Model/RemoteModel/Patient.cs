@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace MediTrack.Model.RemoteModel
 {
@@ -23,6 +24,121 @@ namespace MediTrack.Model.RemoteModel
         private object _bedNumber;
         private object _uUID;
         private object _alive;
+
+        private bool _isHeartRateOutOfRange;
+        private bool _isRespirationRateOutOfRange;
+        private bool _isOxygenLevelOutOfRange;
+        private bool _isBloodPressureDiastolicOutOfRange;
+        private bool _isBloodPressureSystolicOutOfRange;
+        private bool _isTemperatureOutOfRange;
+
+        private bool _isBlinking;
+
+        private DispatcherTimer updateTimer;
+
+        public DispatcherTimer UpdateTimer
+        {
+            get { return updateTimer; }
+            set
+            {
+                if (updateTimer != value)
+                {
+                    updateTimer = value;
+                    OnPropertyChanged(nameof(UpdateTimer));
+                }
+            }
+        }
+
+        public bool IsHeartRateOutOfRange
+        {
+            get { return _isHeartRateOutOfRange; }
+            set
+            {
+                if (_isHeartRateOutOfRange != value)
+                {
+                    _isHeartRateOutOfRange = value;
+                    OnPropertyChanged(nameof(IsHeartRateOutOfRange));
+                }
+            }
+        }
+
+        public bool IsRespirationRateOutOfRange
+        {
+            get { return _isRespirationRateOutOfRange; }
+            set
+            {
+                if (_isRespirationRateOutOfRange != value)
+                {
+                    _isRespirationRateOutOfRange = value;
+                    OnPropertyChanged(nameof(IsRespirationRateOutOfRange));
+                }
+            }
+        }
+
+        public bool IsOxygenLevelOutOfRange
+        {
+            get { return _isOxygenLevelOutOfRange; }
+            set
+            {
+                if (_isOxygenLevelOutOfRange != value)
+                {
+                    _isOxygenLevelOutOfRange = value;
+                    OnPropertyChanged(nameof(IsOxygenLevelOutOfRange));
+                }
+            }
+        }
+
+        public bool IsBloodPressureDiastolicOutOfRange
+        {
+            get { return _isBloodPressureDiastolicOutOfRange; }
+            set
+            {
+                if (_isBloodPressureDiastolicOutOfRange != value)
+                {
+                    _isBloodPressureDiastolicOutOfRange = value;
+                    OnPropertyChanged(nameof(IsBloodPressureDiastolicOutOfRange));
+                }
+            }
+        }
+
+        public bool IsBloodPressureSystolicOutOfRange
+        {
+            get { return _isBloodPressureSystolicOutOfRange; }
+            set
+            {
+                if (_isBloodPressureSystolicOutOfRange != value)
+                {
+                    _isBloodPressureSystolicOutOfRange = value;
+                    OnPropertyChanged(nameof(IsBloodPressureSystolicOutOfRange));
+                }
+            }
+        }
+
+        public bool IsTemperatureOutOfRange
+        {
+            get { return _isTemperatureOutOfRange; }
+            set
+            {
+                if (_isTemperatureOutOfRange != value)
+                {
+                    _isTemperatureOutOfRange = value;
+                    OnPropertyChanged(nameof(IsTemperatureOutOfRange));
+                }
+            }
+        }
+
+        public bool IsBlinking
+        {
+            get { return _isBlinking; }
+            set
+            {
+                if (_isBlinking != value)
+                {
+                    _isBlinking = value;
+                    OnPropertyChanged(nameof(IsBlinking));
+                }
+            }
+        }
 
         // INotifyPropertyChanged is a .NET interface and notfiy subscribers ( the Patient member access in mainwindow.cs)
         // when properties are changed. _classvariable declares a private field -> if the customer get&set are 
