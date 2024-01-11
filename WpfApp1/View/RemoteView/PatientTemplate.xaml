@@ -102,10 +102,10 @@
                         <Rectangle Width="16" Height="16" Stroke="Transparent">
                             <Rectangle.Resources>
                                 <SolidColorBrush x:Key="canvas" Opacity="0" />
-                                <SolidColorBrush x:Key="light-lightblue-10" Color="Red" Opacity="0.1" />
-                                <SolidColorBrush x:Key="light-teal-10" Color="Red" Opacity="0.1" />
-                                <SolidColorBrush x:Key="light-teal" Color="Red" Opacity="1" />
-                                <SolidColorBrush x:Key="light-lightblue" Color="Red" Opacity="1" />
+                                <SolidColorBrush x:Key="light-lightblue-10" Color="Green" Opacity="0.1" />
+                                <SolidColorBrush x:Key="light-teal-10" Color="Green" Opacity="0.1" />
+                                <SolidColorBrush x:Key="light-teal" Color="Green" Opacity="1" />
+                                <SolidColorBrush x:Key="light-lightblue" Color="Green" Opacity="1" />
                             </Rectangle.Resources>
                             <Rectangle.Fill>
                                 <DrawingBrush Stretch="None">
@@ -175,7 +175,7 @@
                             <Rectangle.Resources>
                                 <SolidColorBrush x:Key="canv9as" Opacity="0" />
                                 <!--<SolidColorBrush x:Key="ligh9t-red" Color="#c50b17" Opacity="1" />-->
-                                <SolidColorBrush x:Key="ligh9t-red" Color="RoyalBlue" Opacity="1" />
+                                <SolidColorBrush x:Key="ligh9t-red" Color="Red" Opacity="1" />
 
                             </Rectangle.Resources>
                             <Rectangle.Fill>
@@ -240,7 +240,7 @@
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsRespirationRateOutOfRange}" Value="True">
-                                    <Setter Property="Background" Value="Red"/>
+                                    <Setter Property="Background" Value="Tomato"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding IsRespirationRateOutOfRange}" Value="False">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -264,7 +264,7 @@
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsTemperatureOutOfRange}" Value="True">
-                                    <Setter Property="Background" Value="Red"/>
+                                    <Setter Property="Background" Value="Tomato"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding IsTemperatureOutOfRange}" Value="False">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -289,7 +289,7 @@
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsHeartRateOutOfRange}" Value="True">
-                                    <Setter Property="Background" Value="Red"/>
+                                    <Setter Property="Background" Value="Tomato"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding IsHeartRateOutOfRange}" Value="False">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -305,7 +305,7 @@
             
             <!-- OS -->
 
-                <TextBlock Grid.Row="1" Grid.Column="2" Foreground="RoyalBlue" Name="OxygenLevelTextBlock"
+                <TextBlock Grid.Row="1" Grid.Column="2" Foreground="BlueViolet" Name="OxygenLevelTextBlock"
            HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
     <Run Text="{Binding OxygenLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     <Run Text=" %" FontSize="16"/>
@@ -313,7 +313,7 @@
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsOxygenLevelOutOfRange}" Value="True">
-                                    <Setter Property="Background" Value="Red"/>
+                                    <Setter Property="Background" Value="Tomato"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding IsOxygenLevelOutOfRange}" Value="False">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -323,13 +323,13 @@
                     </TextBlock.Style>
                 </TextBlock>
 
-                <TextBlock Grid.Row="1" Grid.Column="2" Text="OS" Foreground="RoyalBlue" Margin="5,0,5,5"
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="SPo2" Foreground="BlueViolet" Margin="5,0,5,5"
                   HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"
                   />
             
             <!-- S BP -->
 
-                <TextBlock Grid.Row="3" Grid.Column="2"  Foreground="#ff3333" Name="BloodPressureTextBlock"
+                <TextBlock Grid.Row="3" Grid.Column="2"  Foreground="DodgerBlue" Name="BloodPressureTextBlock"
            HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
     <Run Text="{Binding BloodPressureSystolic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
     <Run Text=" mmHG" FontSize="16" />
@@ -337,7 +337,7 @@
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsBloodPressureSystolicOutOfRange}" Value="True">
-                                    <Setter Property="Background" Value="Red"/>
+                                    <Setter Property="Background" Value="Tomato"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding IsBloodPressureSystolicOutOfRange}" Value="False">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -347,14 +347,14 @@
                     </TextBlock.Style>
                 </TextBlock>
 
-                <TextBlock Grid.Row="3" Grid.Column="2" Text="S BP" Foreground="#ff3333" Margin="5,0,5,5"
+                <TextBlock Grid.Row="3" Grid.Column="2" Text="S BP" Foreground="DodgerBlue" Margin="5,0,5,5"
                    HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"
                     />
 
             <!-- D BP -->
 
 
-                <TextBlock Grid.Row="3" Grid.Column="1"  Foreground="#ff8080" Name="PatientScoreTextBlock"
+                <TextBlock Grid.Row="3" Grid.Column="1"  Foreground="Cyan" Name="PatientScoreTextBlock"
            HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">
     <Run Text="{Binding BloodPressureDiastolic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
     <Run Text=" mmHG" FontSize="16" />
@@ -362,7 +362,7 @@
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsBloodPressureDiastolicOutOfRange}" Value="True">
-                                    <Setter Property="Background" Value="Red"/>
+                                    <Setter Property="Background" Value="Tomato"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding IsBloodPressureDiastolicOutOfRange}" Value="False">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -372,7 +372,7 @@
                     </TextBlock.Style>
                 </TextBlock>
 
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="D BP" Foreground="#ff8080" Margin="5,0,5,5"
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="D BP" Foreground="Cyan" Margin="5,0,5,5"
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"
                   />
 
