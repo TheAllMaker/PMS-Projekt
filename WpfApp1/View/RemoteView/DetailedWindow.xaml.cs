@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using MediTrack.Model.RemoteModel;
 //using System.Windows.Forms;
@@ -22,18 +23,19 @@ namespace MediTrack.View.RemoteView
         private int diastolicBloodPressureMin;
         private int diastolicBloodPressureMax;
 
-        private int heartRateMinThreshold = 40;
-        private int heartRateMaxThreshold = 200;
-        private int systolicBloodPressureMinThreshold = 90;
-        private int systolicBloodPressureMaxThreshold = 220;
-        private int diastolicBloodPressureMinThreshold = 60;
-        private int diastolicBloodPressureMaxThreshold = 80;
         private double temperatureMinThreshold = 35;
         private double temperatureMaxThreshold = 39;
         private double oxygenLevelMinThreshold = 91;
         private double oxygenLevelMaxThreshold = 96;
         private double respirationRateMinThreshold = 8;
         private double respirationRateMaxThreshold = 25;
+        private int heartRateMinThreshold = 40;
+        private int heartRateMaxThreshold = 200;
+        private int systolicBloodPressureMinThreshold = 90;
+        private int systolicBloodPressureMaxThreshold = 220;
+        private int diastolicBloodPressureMinThreshold = 60;
+        private int diastolicBloodPressureMaxThreshold = 80;
+
 
         private int _monitorId;
 
@@ -101,131 +103,90 @@ namespace MediTrack.View.RemoteView
             }
         }
 
-        private void UpdateVariableFromTextbox(int minValue, int maxValue, int minThreshold, int maxThreshold)
-        {
-                // Zusätzlich: Stelle sicher, dass heartRateMin nicht größer ist als heartRateMax
-                if (minValue > maxValue)
-                {
-                    //heartRateMax = heartRateMin+1;
-                    //HeartRateTextBoxMax.Text = heartRateMax.ToString();
-                    MessageBox.Show("Fehler bei der Eingabe. Min Wert ist größer als Max Wert", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else if (heartRateMax < heartRateMin)
-                {
-                    heartRateMin = variable;
-                    HeartRateTextBoxMin.Text = variable.ToString();
-                }
-
-                // Erlaube Werte innerhalb des Bereichs von minThreshold bis maxThreshold
-                if (value >= minThreshold && value <= maxThreshold)
-                {
-                    variable = value;
-                }
-                else
-                {
-                    // Setze den Wert auf den näheren Schwellenwert.
-                    if (value < minThreshold)
-                    {
-                        variable = minThreshold;
-                        textBox.Text = minThreshold.ToString();
-                    }
-                    else
-                    {
-                        variable = maxThreshold;
-                        textBox.Text = maxThreshold.ToString();
-                    }
-                }
-        }
-
-        private void UpdateVariableFromTextbox(double minValue, double maxValue, double minThreshold, double maxThreshold)
-        {
-            if (double.TryParse(textBox.Text, out double value))
-            {
-                if (value >= minThreshold && value <= maxThreshold)
-                {
-                    variable = value;
-                }
-                else
-                {
-                    //MessageBox.Show("Der eingegebene Wert liegt außerhalb des gültigen Bereichs.");
-                }
-            }
-        }
-
-
         private void Button_Click_SelectionConfirmed(object sender, RoutedEventArgs e)
         {
-            respirationRateMin = double.Parse(RespirationRateTextBoxMin.Text);
-            respirationRateMax = double.Parse(RespirationRateTextBoxMax.Text);
-            if (respirationRateMin > respirationRateMax)
-            {
-                MessageBox.Show("Respiration min value is smaller than max value", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                UpdateVariableFromTextbox(respirationRateMin, respirationRateMin, respirationRateMinThreshold, respirationRateMaxThreshold);
-            }
-
-            oxygenLevelMin = double.Parse(OxygenLevelTextBoxMin.Text);
-            oxygenLevelMax = double.Parse(OxygenLevelTextBoxMax.Text);
-            if (oxygenLevelMin > oxygenLevelMax)
-            {
-                MessageBox.Show("Oxygen level min value is smaller than max value", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                UpdateVariableFromTextbox(oxygenLevelMin, oxygenLevelMin, oxygenLevelMinThreshold, oxygenLevelMaxThreshold);
-            }
-
-            temperatureMin = double.Parse(TemperatureTextBoxMin.Text);
-            temperatureMax = double.Parse(TemperatureTextBoxMax.Text);
-            if (temperatureMin > temperatureMax)
-            {
-                MessageBox.Show("Temperature min value is smaller than max value", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                UpdateVariableFromTextbox(temperatureMin, temperatureMin, temperatureMinThreshold, temperatureMaxThreshold);
-            }
-
-            heartRateMin = int.Parse(HeartRateTextBoxMin.Text);
-            heartRateMax = int.Parse(HeartRateTextBoxMax.Text);
-            if (heartRateMin > heartRateMax)
-            {
-                MessageBox.Show("Heart rate min value is smaller than max value", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                UpdateVariableFromTextbox(heartRateMin, heartRateMax, heartRateMinThreshold, heartRateMaxThreshold);
-            }
-
-            systolicBloodPressureMin = int.Parse(SystolicBloodPressureTextBoxMin.Text);
-            systolicBloodPressureMax = int.Parse(SystolicBloodPressureTextBoxMax.Text);
-            if (systolicBloodPressureMin > systolicBloodPressureMax)
-            {
-                MessageBox.Show("Systolic blood pressure min value is smaller than max value", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                UpdateVariableFromTextbox(systolicBloodPressureMin, systolicBloodPressureMax, systolicBloodPressureMinThreshold, systolicBloodPressureMaxThreshold);
-            }
-
-            diastolicBloodPressureMin = int.Parse(DiastolicBloodPressureTextBoxMin.Text);
-            diastolicBloodPressureMax = int.Parse(DiastolicBloodPressureTextBoxMax.Text);
-            if (diastolicBloodPressureMin > diastolicBloodPressureMax)
-            {
-                MessageBox.Show("Diastolic blood pressure min value is smaller than max value", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                UpdateVariableFromTextbox(diastolicBloodPressureMin, diastolicBloodPressureMax, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold);
-            }
+            UpdateVitalSigns("Respiration", ref respirationRateMin, ref respirationRateMax, respirationRateMinThreshold, respirationRateMaxThreshold, RespirationRateTextBoxMin, RespirationRateTextBoxMax);
+            UpdateVitalSigns("Oxygen Level", ref oxygenLevelMin,ref  oxygenLevelMax, oxygenLevelMinThreshold, oxygenLevelMaxThreshold, OxygenLevelTextBoxMin, OxygenLevelTextBoxMax);
+            UpdateVitalSigns("Temperature", ref temperatureMin, ref temperatureMax, temperatureMinThreshold, temperatureMaxThreshold, TemperatureTextBoxMin, TemperatureTextBoxMax);
+            UpdateVitalSigns("Heart Rate", ref heartRateMin, ref heartRateMax, heartRateMinThreshold, heartRateMaxThreshold, HeartRateTextBoxMin, HeartRateTextBoxMax);
+            UpdateVitalSigns("Systolic Blood Pressure", ref systolicBloodPressureMin, ref systolicBloodPressureMax, systolicBloodPressureMinThreshold, systolicBloodPressureMaxThreshold, SystolicBloodPressureTextBoxMin, SystolicBloodPressureTextBoxMax);
+            UpdateVitalSigns("Diastolic Blood Pressure", ref diastolicBloodPressureMin,ref  diastolicBloodPressureMax, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold, DiastolicBloodPressureTextBoxMin, DiastolicBloodPressureTextBoxMax);
 
             threshold = new Threshold(_monitorId, heartRateMin, heartRateMax, respirationRateMin, respirationRateMax,
                 oxygenLevelMin, oxygenLevelMax, temperatureMin, temperatureMax, systolicBloodPressureMin, systolicBloodPressureMax,
                 diastolicBloodPressureMin, diastolicBloodPressureMax);
 
             this.Close();
+        }
+
+        private void UpdateVitalSigns(string vitalSignName, ref double minValue, ref double maxValue, double minThreshold, double maxThreshold, TextBox minTextBox, TextBox maxTextBox)
+        {
+            if (!string.IsNullOrWhiteSpace(minTextBox.Text) && !string.IsNullOrWhiteSpace(maxTextBox.Text) && double.Parse(minTextBox.Text) != 0 && double.Parse(maxTextBox.Text) != 0)
+            {
+                minValue = double.Parse(minTextBox.Text);
+                maxValue = double.Parse(maxTextBox.Text);
+
+                if (minValue > maxValue)
+                {
+                    MessageBox.Show($"{vitalSignName} min value is smaller than max value", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    UpdateVariableFromTextbox(ref minValue, minThreshold, maxThreshold, minTextBox);
+                    UpdateVariableFromTextbox(ref maxValue, minThreshold, maxThreshold, maxTextBox);
+                }
+            }
+        }
+
+        private void UpdateVitalSigns(string vitalSignName, ref int minValue, ref int maxValue, int minThreshold, int maxThreshold, TextBox minTextBox, TextBox maxTextBox)
+        {
+            if (!string.IsNullOrWhiteSpace(minTextBox.Text) && !string.IsNullOrWhiteSpace(maxTextBox.Text) && int.Parse(minTextBox.Text) != 0 && int.Parse(maxTextBox.Text) != 0)
+            {
+                minValue = int.Parse(minTextBox.Text);
+                maxValue = int.Parse(maxTextBox.Text);
+
+                if (minValue > maxValue)
+                {
+                    MessageBox.Show($"{vitalSignName} min value is smaller than max value", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    UpdateVariableFromTextbox(ref minValue, minThreshold, maxThreshold, minTextBox);
+                    UpdateVariableFromTextbox(ref maxValue, minThreshold, maxThreshold, maxTextBox);
+                }
+            }
+        }
+
+        private void UpdateVariableFromTextbox(ref double variable, double minThreshold, double maxThreshold, TextBox textBox)
+        {
+            // Erlaube Werte innerhalb des Bereichs von minThreshold bis maxThreshold
+            if (variable < minThreshold)
+            {
+                variable = minThreshold;
+            }
+            else if (variable > maxThreshold)
+            {
+                variable = maxThreshold;
+            }
+
+            // Setze den TextBox-Wert auf den aktualisierten Wert.
+            textBox.Text = variable.ToString();
+        }
+
+        private void UpdateVariableFromTextbox(ref int variable, int minThreshold, int maxThreshold, TextBox textBox)
+        {
+            // Erlaube Werte innerhalb des Bereichs von minThreshold bis maxThreshold
+            if (variable < minThreshold)
+            {
+                variable = minThreshold;
+            }
+            else if (variable > maxThreshold)
+            {
+                variable = maxThreshold;
+            }
+
+            // Setze den TextBox-Wert auf den aktualisierten Wert.
+            textBox.Text = variable.ToString();
         }
 
 

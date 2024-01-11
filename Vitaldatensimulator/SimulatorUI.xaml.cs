@@ -395,7 +395,7 @@ namespace Vitaldatensimulator
             {
                 SetAliveStatusToZero();
             }
-            await Task.Delay(300);
+            await Task.Delay(500);
             _mySimulatorTimer.StopTimer();
             Application.Current.Shutdown();
         }
