@@ -1,12 +1,12 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    x:Class="MediTrack.Controller.RemoteController.PatientTemplate"
-    >
+    x:Class="MediTrack.Controller.RemoteController.PatientTemplate">
+
     <DataTemplate x:Key="PatientTemplate">
+
         <Border BorderBrush="White" BorderThickness="2">
             <Grid  ShowGridLines="True"  Background="Black">
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="3*"/>
@@ -20,8 +20,6 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-
-           
 
             <!-- Name und Co. I -->
                 <Border BorderBrush="Black" Grid.Column="1">
@@ -44,38 +42,6 @@
                         <Run Text="Room:" FontSize="13"/>
                         <Run Text="{Binding RoomNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </TextBlock>
-
-
-
-                <!--<Viewbox Width="100" Height="100" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name ="PatientHealthIcon" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">-->
-
-                <!--<Viewbox Width="200" Height="200" x:Name="PatientHealthIcon" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Visibility="Collapsed">
-                <Rectangle  Width="80" Height="80">
-                        <Rectangle.Resources>
-                            <SolidColorBrush x:Key="canvas" Opacity="0" />
-                            <SolidColorBrush x:Key="light-red" Color="#c50b17" Opacity="1" />
-                        </Rectangle.Resources>
-                        <Rectangle.Fill>
-                            <DrawingBrush Stretch="None">
-                                <DrawingBrush.Drawing>
-                                    <DrawingGroup>
-                                        <DrawingGroup x:Name="canvas4">
-                                            <GeometryDrawing Brush="{DynamicResource canvas}" Geometry="F1M16,16H0V0H16Z" />
-                                            <GeometryDrawing Brush="{DynamicResource canvas}" Geometry="F1M16,16H0V0H16Z" />
-                                            <GeometryDrawing Brush="{DynamicResource canvas}" Geometry="F1M16,16H0V0H16Z" />
-                                            <GeometryDrawing Brush="{DynamicResource canvas}" Geometry="F1M16,16H0V0H16Z" />
-                                        </DrawingGroup>
-                                        <DrawingGroup x:Name="level_15">
-                                            <GeometryDrawing Brush="{DynamicResource light-red}" Geometry="F1M9.25,13A1.25,1.25,0,1,1,8,11.75,1.25,1.25,0,0,1,9.25,13ZM9,2v8H7V2Z" />
-                                        </DrawingGroup>
-                                    </DrawingGroup>
-                                </DrawingBrush.Drawing>
-                            </DrawingBrush>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </Viewbox>-->
-
-
 
                 <!-- Icons II -->
                 <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  
@@ -195,29 +161,6 @@
                         </Rectangle>
                     </Viewbox>
                     </Button>
-                    <!--<Viewbox Width="50 " Height="50" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
-                    <Rectangle Width="30 " Height="30">
-                        <Rectangle.Resources>
-                            <SolidColorBrush x:Key="canvas" Opacity="0" />
-                            <SolidColorBrush x:Key="light-blue" Color="#005dba" Opacity="1" />
-                        </Rectangle.Resources>
-                        <Rectangle.Fill>
-                            <DrawingBrush Stretch="None">
-                                <DrawingBrush.Drawing>
-                                    <DrawingGroup>
-                                        <DrawingGroup x:Name="canvas23">
-                                            --><!--<GeometryDrawing Brush="{DynamicResource canvas}" Geometry="F1M16,16H0V0H16Z" />
-                                            <GeometryDrawing Brush="{DynamicResource canvas}" Geometry="F1M16,16H0V0H16Z" />--><!--
-                                        </DrawingGroup>
-                                        <DrawingGroup x:Name="level_2">
-                                            <GeometryDrawing Brush="{DynamicResource light-blue}" Geometry="F1M13.854,5.146v.708l-3.5,3.5-.708-.708L12.293,6H5.5a3.5,3.5,0,0,0,0,7v1a4.5,4.5,0,0,1,0-9h6.793L9.646,2.354l.708-.708Z" />
-                                        </DrawingGroup>
-                                    </DrawingGroup>
-                                </DrawingBrush.Drawing>
-                            </DrawingBrush>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </Viewbox>-->
 
             
 
@@ -388,25 +331,3 @@
 
 
 
-
-
-<!-- Icons -->
-
-
-<!--Viewbox Width="30" Height="39" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  x:Name ="PatientHealthIcon" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
-    <Rectangle Width="30" Height="30">
-        <Rectangle.Fill>
-            <DrawingBrush>
-                <DrawingBrush.Drawing>
-                    <DrawingGroup>
-                        <DrawingGroup.Children>
-                            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
-                            <GeometryDrawing Brush="DarkGreen" Geometry="F1M7.2725,15.2266C7.0565,14.9976 1.9875,9.6166 1.1755,8.7066 0.4315,7.8166 0.000499999999999723,6.5876 0.000499999999999723,5.3966 0.000499999999999723,2.8096 2.3365,0.5406 5.0005,0.5406 5.8685,0.5406 7.0015,0.8476 8.0005,2.1006 8.9995,0.8476 10.1315,0.5406 11.0005,0.5406 13.6635,0.5406 16.0005,2.8096 16.0005,5.3966 16.0005,6.5876 15.5675,7.8166 14.8425,8.6826 14.0095,9.6166 8.9435,14.9976 8.7285,15.2266L8.0005,15.9996z" />
-                            <GeometryDrawing Brush="Green" Geometry="F1M15,5.3965C15,6.3695 14.645,7.3615 14.076,8.0415 13.264,8.9515 8,14.5415 8,14.5415 8,14.5415 2.733,8.9515 1.922,8.0415 1.354,7.3615 1,6.3695 1,5.3965 1,3.2675 2.963,1.5415 5,1.5415 6.475,1.5415 7.409,2.7335 8,4.0415 8.591,2.7335 9.523,1.5415 11,1.5415 13.039,1.5415 15,3.2675 15,5.3965" />
-                        </DrawingGroup.Children>
-                    </DrawingGroup>
-                </DrawingBrush.Drawing>
-            </DrawingBrush>
-        </Rectangle.Fill>
-    </Rectangle>
-    </Viewbox> -->
