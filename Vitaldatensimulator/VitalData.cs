@@ -5,11 +5,11 @@ namespace Vitaldatensimulator
     public class VitalData
     {
         public string MonitorID { get; set; }
-        public int HeartRate { get;  set; }
-        public double RespirationRate { get;  set; }
-        public double OxygenLevel { get;  set; }
-        public int BloodPressureSystolic { get;  set; }
-        public int BloodPressureDiastolic { get;  set; }
+        public int HeartRate { get; set; }
+        public double RespirationRate { get; set; }
+        public double OxygenLevel { get; set; }
+        public int BloodPressureSystolic { get; set; }
+        public int BloodPressureDiastolic { get; set; }
         public double Temperature { get; set; }
         public int Alive { get; set; }
         public string UUID { get; set; }

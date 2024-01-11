@@ -107,13 +107,24 @@ namespace MediTrack.View.RemoteView
         {
             if (int.TryParse(textBox.Text, out int value))
             {
+                // Erlaube Werte innerhalb des Bereichs von minThreshold bis maxThreshold
                 if (value >= minThreshold && value <= maxThreshold)
                 {
                     variable = value;
                 }
                 else
                 {
-                    //MessageBox.Show("Der eingegebene Wert liegt außerhalb des gültigen Bereichs.");
+                    // Setze den Wert auf den näheren Schwellenwert.
+                    if (value < minThreshold)
+                    {
+                        variable = minThreshold;
+                        textBox.Text = minThreshold.ToString();  // Aktualisiere auch die Textbox-Anzeige.
+                    }
+                    else
+                    {
+                        variable = maxThreshold;
+                        textBox.Text = maxThreshold.ToString();  // Aktualisiere auch die Textbox-Anzeige.
+                    }
                 }
             }
         }
@@ -166,67 +177,6 @@ namespace MediTrack.View.RemoteView
         {
             this.Close();
         }
-
-        public double GetRespirationRateMin()
-        {
-            return respirationRateMin;
-        }
-
-        public double GetRespirationRateMax()
-        {
-            return respirationRateMax;
-        }
-
-        public double GetOxygenLevelMin()
-        {
-            return oxygenLevelMin;
-        }
-
-        public double GetOxygenLevelMax()
-        {
-            return oxygenLevelMax;
-        }
-
-        public double GetTemperatureMin()
-        {
-            return temperatureMin;
-        }
-
-        public double GetTemperatureMax()
-        {
-            return temperatureMax;
-        }
-
-        public int GetHeartRateMin()
-        {
-            return heartRateMin;
-        }
-
-        public int GetHeartRateMax()
-        {
-            return heartRateMax;
-        }
-
-        public int GetSystolicBloodPressureMin()
-        {
-            return systolicBloodPressureMin;
-        }
-
-        public int GetSystolicBloodPressureMax()
-        {
-            return systolicBloodPressureMax;
-        }
-
-        public int GetDiastolicBloodPressureMin()
-        {
-            return diastolicBloodPressureMin;
-        }
-
-        public int GetDiastolicBloodPressureMax()
-        {
-            return diastolicBloodPressureMax;
-        }
-
  
     }
 }
