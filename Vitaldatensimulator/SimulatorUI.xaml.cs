@@ -350,7 +350,14 @@ namespace Vitaldatensimulator
             return newMonitor;
         }
 
-        //Generiere eine UUID
+        //Aktualisiere die versendeten Vitaldaten nach der Änderung
+        private void UpdateVitalData()
+        {
+            VitalData updatedMonitor = CreateMonitorData();
+            _mySimulatorTimer.StartSimulator(updatedMonitor);
+        }
+
+        //Generiere eine UUID zur eindeutigen Identifizierung des
         private string GenerateUUID()
         {
             _identifier = Guid.NewGuid();
@@ -391,15 +398,6 @@ namespace Vitaldatensimulator
             await Task.Delay(300);
             _mySimulatorTimer.StopTimer();
             Application.Current.Shutdown();
-        }
-
-
-
-        //Aktualisiere die versendeten Vitaldaten nach der Änderung
-        private void UpdateVitalData()
-        {
-            VitalData updatedMonitor = CreateMonitorData();
-            _mySimulatorTimer.StartSimulator(updatedMonitor);
         }
 
         // Schicke als letzte Nachricht noch Alive = 0
