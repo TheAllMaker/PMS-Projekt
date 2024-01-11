@@ -23,14 +23,11 @@ namespace MediTrack.Model.RemoteModel
             if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKey))
             {
                 Patient PatientIDKey = MonitorIDToPatientIDDictionary[MonitorIDKey];
-                Console.WriteLine($"Ausgewählter Patient: {PatientIDKey}");
                 return PatientIDKey;
             }
 
             else
             {
-                Console.WriteLine("Ausgewählter Patient nicht gefunden.");
-                Console.WriteLine("DataBase wird nach Patienten mit der DatenMonitorID angefragt:");
                 return null;
             }
 
@@ -39,7 +36,6 @@ namespace MediTrack.Model.RemoteModel
         public static void DictionaryRemover(object MonitorIDKey)
         {
             MonitorIDToPatientIDDictionary.Remove(MonitorIDKey);
-            Console.WriteLine($"Dictionary Key Entry {MonitorIDKey} deleted");
         }
 
         public static void DictionaryInput(object MonitorIDKey, Patient PatientIDKey)
@@ -48,11 +44,10 @@ namespace MediTrack.Model.RemoteModel
             try
             {
                 MonitorIDToPatientIDDictionary.Add(MonitorIDKey, PatientIDKey);
-                Console.WriteLine($"Dictionary Entry successful for {MonitorIDKey} with the patient id {PatientIDKey}");
             }
             catch (ArgumentException)
             {
-                Console.WriteLine($"An element with Key {MonitorIDKey} already exists.");
+
             }
         }
 
@@ -61,13 +56,11 @@ namespace MediTrack.Model.RemoteModel
             if (MonitorIDKey == null) return false;
             if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKey))
             {
-                Console.WriteLine("Selected patient found.");
                 return true;
             }
 
             else
             {
-                Console.WriteLine("Selected patient not found.");
                 return false;
             }
 

@@ -48,7 +48,7 @@ namespace MediTrack.Model.RemoteModel
             {
             
                     dynamic parsedObject = JsonConvert.DeserializeObject(MQTTQueue.Dequeue());
-                    Console.WriteLine(parsedObject.ToString());
+                    //Console.WriteLine(parsedObject.ToString());
 
                     object[] MQTTMessageContainer =
                     {

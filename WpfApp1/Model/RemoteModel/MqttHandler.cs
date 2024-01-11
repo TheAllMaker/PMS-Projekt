@@ -60,21 +60,21 @@ namespace MediTrack.Model.RemoteModel
             const string topic = "23pms01/test";
             var msgId = client.Subscribe(new string[] { topic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
 
-            Debug.WriteLine($"{StringContainer.MQTTSubScribeTopic}{topic}");
-            Debug.WriteLine($"{StringContainer.MQTTSubScribeSucc}{msgId}");
+            //Debug.WriteLine($"{StringContainer.MQTTSubScribeTopic}{topic}");
+            //Debug.WriteLine($"{StringContainer.MQTTSubScribeSucc}{msgId}");
         }
 
         private void OnMqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
         {
-            Debug.WriteLine("MediTrack Subscribed for id = " + e.MessageId);
+            //Debug.WriteLine("MediTrack Subscribed for id = " + e.MessageId);
         }
 
         private void OnMqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             var topic = e.Topic;
             var message = Encoding.UTF8.GetString(e.Message);
-            Console.WriteLine($"{topic}");
-            Console.WriteLine($"{message}");
+            //Console.WriteLine($"{topic}");
+            //Console.WriteLine($"{message}");
             MqttMessageQueue.Enqueue(message);
         }
 
