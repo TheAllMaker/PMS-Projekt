@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Threading;
 
 namespace MediTrack.Model.RemoteModel
@@ -35,6 +36,8 @@ namespace MediTrack.Model.RemoteModel
         private bool _isBlinking;
 
         private DispatcherTimer updateTimer;
+
+        public Action StopBlinkingAction { get; set; }
 
         public DispatcherTimer UpdateTimer
         {

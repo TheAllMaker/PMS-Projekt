@@ -229,6 +229,14 @@ namespace MediTrack
                             if (patientenDictionary.ContainsKey(id))
                             {
                                 Patient patientInstance = (Patient)patientenDictionary[id].Content;
+                                if (patientInstance.StopBlinkingAction != null)
+                                {
+                                    patientInstance.StopBlinkingAction.Invoke();
+                                }
+                            }
+                                if (patientenDictionary.ContainsKey(id))
+                            {
+                                Patient patientInstance = (Patient)patientenDictionary[id].Content;
 
                                 if (patientInstance.UpdateTimer != null)
                                 {
@@ -244,8 +252,13 @@ namespace MediTrack
                                 {
                                     // Hier wird der Button blinken ausgelöst
                                     patientInstance.IsBlinking = true;
+                                };
 
-                                    // Stoppe den Timer
+                                Action stopBlinking = () =>
+                                {
+                                    patientInstance.IsBlinking = false;
+
+                                    // Wenn neue Daten eintreffen, stoppe den Timer
                                     timer.Stop();
                                 };
 
@@ -254,6 +267,7 @@ namespace MediTrack
 
                                 // Setze den Timer in der Patienteninstanz
                                 patientInstance.UpdateTimer = timer;
+                                patientInstance.StopBlinkingAction = stopBlinking;
                             }
 
                                 // timer = timer(5000)
