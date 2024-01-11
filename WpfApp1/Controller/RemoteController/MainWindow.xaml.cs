@@ -175,11 +175,6 @@ namespace MediTrack
                         if (string.Equals(value1, value2))
                         {
 
-                            //// hier muss eine ThresholdGuard Funktion rein die alle Werte mal einliest oder ähnliches und sie im ThresholdGuard vergleicht
-
-
-                            ////////////////////////////////
-
                             existingPatient.HeartRate = mqttMessageQueueArray[1];
                             existingPatient.OxygenLevel = mqttMessageQueueArray[3];
                             existingPatient.BloodPressureDiastolic = mqttMessageQueueArray[5];
@@ -187,17 +182,16 @@ namespace MediTrack
                             existingPatient.BloodPressureSystolic = mqttMessageQueueArray[4];
                             existingPatient.Temperature = mqttMessageQueueArray[6];
 
-                            // Rufe ThresholdCheck auf und übergebe die Liste
                             int id = Convert.ToInt32(mqttMessageQueueArray[0]);
                             threshold = Threshold.GetThresholdByMonitorID(Convert.ToInt32(mqttMessageQueueArray[0]));
 
                             if (threshold != null)
                             {
                                 bool isHeartRateWithinThreshold = threshold.CheckHeartRate(Convert.ToInt32(mqttMessageQueueArray[1]));
-                                bool isOxygenLevelWithinThreshold = threshold.CheckOxygenLevel(Convert.ToInt32(mqttMessageQueueArray[3]));
-                                bool isBloodPressureDiastolicWithinThreshold = threshold.CheckBloodPressureDiastolic(Convert.ToInt32(mqttMessageQueueArray[5]));
                                 bool isRespirationRateWithinThreshold = threshold.CheckRespirationRate(Convert.ToInt32(mqttMessageQueueArray[2]));
+                                bool isOxygenLevelWithinThreshold = threshold.CheckOxygenLevel(Convert.ToInt32(mqttMessageQueueArray[3]));
                                 bool isBloodPressureSystolicWithinThreshold = threshold.CheckBloodPressureSystolic(Convert.ToInt32(mqttMessageQueueArray[4]));
+                                bool isBloodPressureDiastolicWithinThreshold = threshold.CheckBloodPressureDiastolic(Convert.ToInt32(mqttMessageQueueArray[5]));
                                 bool isTemperatureWithinThreshold = threshold.CheckTemperature(Convert.ToInt32(mqttMessageQueueArray[6]));
 
                                 if (patientenDictionary.ContainsKey(id))
@@ -212,21 +206,30 @@ namespace MediTrack
                                     patientInstance.IsTemperatureOutOfRange = !isTemperatureWithinThreshold;
                                 }
                             }
+
+                            //if (patientenDictionary.ContainsKey(id))
+                            //{
+                            //    Patient patientInstance = (Patient)patientenDictionary[id].Content;
+                            //    if (patientInstance.IsBlinking == true)
+                            //    {
+                            //        patientInstance.IsBlinking = false;
+                            //    }
+                            //}
+
                             if (patientenDictionary.ContainsKey(id))
-                            {
-                                Patient patientInstance = (Patient)patientenDictionary[id].Content;
-                                if (patientInstance.StopBlinkingAction != null)
-                                {
-                                    patientInstance.StopBlinkingAction.Invoke();
-                                }
-                            }
-                                if (patientenDictionary.ContainsKey(id))
                             {
                                 Patient patientInstance = (Patient)patientenDictionary[id].Content;
 
                                 if (patientInstance.UpdateTimer != null)
                                 {
                                     patientInstance.UpdateTimer.Stop();
+                                }
+
+
+                                if (patientInstance.IsBlinking == true)
+                                {
+                                    patientInstance.IsBlinking = false;
+                                    
                                 }
 
                                 // Erstelle einen neuen Timer
@@ -238,31 +241,22 @@ namespace MediTrack
                                 {
                                     // Hier wird der Button blinken ausgelöst
                                     patientInstance.IsBlinking = true;
-                                };
-
-                                Action stopBlinking = () =>
-                                {
-                                    patientInstance.IsBlinking = false;
-
-                                    // Wenn neue Daten eintreffen, stoppe den Timer
                                     timer.Stop();
                                 };
+
+
 
                                 // Starte den Timer
                                 timer.Start();
 
                                 // Setze den Timer in der Patienteninstanz
                                 patientInstance.UpdateTimer = timer;
-                                patientInstance.StopBlinkingAction = stopBlinking;
+                                //patientInstance.StopBlinkingAction = stopBlinking;
                             }
 
-                                // timer = timer(5000)
-                                // if (mqttMessageQueueArray[0]) keine neuen Daten
-                                // => trigger event für Netzwerk Icon
 
 
-
-                                existingPatient.OnPropertyChanged(nameof(existingPatient.HeartRate));
+                            existingPatient.OnPropertyChanged(nameof(existingPatient.HeartRate));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.OxygenLevel));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.BloodPressureDiastolic));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.RespirationRate));

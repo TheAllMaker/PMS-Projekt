@@ -85,7 +85,7 @@
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsBlinking}" Value="True">
                                     <DataTrigger.EnterActions>
-                                        <BeginStoryboard>
+                                        <BeginStoryboard Name="BlinkStoryboard">
                                             <Storyboard>
                                                 <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:0.5" AutoReverse="True" RepeatBehavior="Forever"/>
                                             </Storyboard>

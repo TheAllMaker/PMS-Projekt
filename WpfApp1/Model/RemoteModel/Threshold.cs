@@ -68,10 +68,6 @@ namespace MediTrack.Model.RemoteModel
             {
                 thresholdDictionary.Remove(monitorID);
             }
-            else
-            {
-                throw new ArgumentException("Threshold für die gegebene monitorID wurde nicht gefunden.");
-            }
         }
         public bool CheckVitalDataAgainstThreshold(int heartRateValue, int oxygenLevelValue, int bloodPressureDiastolicValue,
                                           int respirationRateValue, int bloodPressureSystolicValue, int temperatureValue)
