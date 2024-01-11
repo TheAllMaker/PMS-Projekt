@@ -94,11 +94,7 @@
             <TextBox Foreground="LimeGreen" Name="RespirationRateTextBoxMin" BorderThickness="2" BorderBrush="#CFDBD5"
                  HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176"  FontSize="36"/>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Foreground="#f2f2f2" Name="RespirationRateTextBoxCurrMin"
-           HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-              <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" /> <!--hier muss Selcuk Code jeweils eingebunden werden--> 
-            </TextBlock>
+     
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="RR MIN" Foreground="LimeGreen"
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="10,0,0,0"
@@ -111,11 +107,7 @@
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="10,0,0,0"
             />
 
-            <TextBlock Grid.Row="0" Grid.Column="1" Foreground="#f2f2f2" Name="RespirationRateTextBoxCurrMax"
-                HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-                <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" /><!--hier muss Selcuk Code jeweils eingebunden werden-->
-             </TextBlock>
+           
 
             
             <!-- Temperature ........................................................................-->
@@ -127,21 +119,13 @@
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="10,128,0,0" Grid.RowSpan="2"
             />
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Foreground="#f2f2f2" Name="TemperatureTextBoxCurrMin"
-                HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-                <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" /> <!--siehe oben ...-->
-            </TextBlock>
+          
 
             <TextBox Grid.Row="1" Grid.Column="1" Foreground="Orange" Name="TemperatureTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
                  HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" >
             </TextBox>
 
-            <TextBlock Grid.Row="1" Grid.Column="1" Foreground="#f2f2f2" Name="TemperatureTextBoxCurrMax"
-                HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-                <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" />
-            </TextBlock>
+           
 
             <TextBlock Grid.Column="1" Text="T MAX" Foreground="Orange" 
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="10,128,0,0" Grid.RowSpan="2"
@@ -158,11 +142,7 @@
                  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.RowSpan="2"
             />
 
-            <TextBlock Grid.Row="1" Grid.Column="2" Foreground="#f2f2f2" Name="HeartRateTextBoxCurrMin"
-                HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-                <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" />
-            </TextBlock>
+          
 
             <TextBox Grid.Row="1" Grid.Column="3" Foreground="Yellow" Name="HeartRateTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
                  HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" Grid.ColumnSpan="2" >
@@ -172,101 +152,70 @@
                 HorizontalAlignment="left" VerticalAlignment="Top" FontSize="16" Grid.RowSpan="2"
                 />
 
-            <TextBlock Grid.Row="1" Grid.Column="4" Foreground="#f2f2f2" Name="HeartRateTextBoxCurrMax"
-                HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-                <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" />
-            </TextBlock>
+          
 
 
             <!-- OxygenLevel ........................................................................-->
 
-            <TextBox Grid.Column="2" Foreground="RoyalBlue" Name="OxygenLevelTextBoxMin" BorderThickness="2" BorderBrush="#CFDBD5"
+            <TextBox Grid.Column="2" Foreground="BlueViolet" Name="OxygenLevelTextBoxMin" BorderThickness="2" BorderBrush="#CFDBD5"
                 HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" />
 
-            <TextBlock Grid.Row="0" Grid.Column="2" Text="OS MIN" Foreground="RoyalBlue" Margin="10,0,0,0"
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Spo2 MIN" Foreground="BlueViolet" Margin="10,0,0,0"
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"
             />
 
-            <TextBlock Grid.Row="0" Grid.Column="2" Foreground="#f2f2f2" Name="OxygenLevelTextBoxCurrMin"
-                HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-                <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" />
-            </TextBlock>
+          
 
-            <TextBox Grid.Column="3" Foreground="RoyalBlue" Name="OxygenLevelTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
+            <TextBox Grid.Column="3" Foreground="BlueViolet" Name="OxygenLevelTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
                 HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" Grid.ColumnSpan="2" />
 
-            <TextBlock Grid.Row="0" Grid.Column="3" Text="OS MAX" Foreground="RoyalBlue" Margin="10,0,0,0"
+            <TextBlock Grid.Row="0" Grid.Column="3" Text="SPo2 MAX" Foreground="BlueViolet" Margin="10,0,0,0"
                 HorizontalAlignment="left" VerticalAlignment="Top" FontSize="16"
             />
 
-            <TextBlock Grid.Row="0" Grid.Column="3" Foreground="#f2f2f2" Name="OxygenLevelTextBoxCurrMax"
-                HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-                <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" />
-            </TextBlock>
-
+           
 
             <!-- Systolic Blood Pressure ........................................................................-->
 
-            <TextBox Grid.Row="2" Foreground="Tomato" Name="SystolicBloodPressureTextBoxMin" BorderThickness="2" BorderBrush="#CFDBD5"
+            <TextBox Grid.Column="2" Grid.Row="2" Foreground="DodgerBlue" Name="SystolicBloodPressureTextBoxMin" BorderThickness="2" BorderBrush="#CFDBD5"
                 HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" />
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="S BP MIN" Foreground="Tomato" Margin="10,128,0,0"
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="S BP MIN" Foreground="DodgerBlue" Margin="10,128,0,0"
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.RowSpan="2"
             />
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Foreground="#f2f2f2" Name="SystolicBloodPressureTextBoxCurrMin"
-                HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-                <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" />
-            </TextBlock>
+          
             
-            <TextBox Grid.Row="2" Grid.Column="1" Foreground="Tomato" Name="SystolicBloodPressureTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
+            <TextBox Grid.Row="2" Grid.Column="3" Foreground="DodgerBlue" Name="SystolicBloodPressureTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
                 HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" >
             </TextBox>
 
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="S BP MAX" Foreground="Tomato" Margin="10,128,0,0"
+            <TextBlock Grid.Row="1" Grid.Column="3" Text="S BP MAX" Foreground="DodgerBlue" Margin="10,128,0,0"
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.RowSpan="2"
             />
 
-            <TextBlock Grid.Row="2" Grid.Column="1" Foreground="#f2f2f2" Name="SystolicBloodPressureTextBoxCurrMax"
-                HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-                <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" />
-            </TextBlock>
-            
+          
             
             <!-- Diastolic Blood Pressure ........................................................................-->
 
-            <TextBox Grid.Row="2" Grid.Column="2" Foreground="Tomato" Name="DiastolicBloodPressureTextBoxMin" BorderThickness="2" BorderBrush="#CFDBD5"
+            <TextBox Grid.Row="2" Grid.Column="0" Foreground="Cyan" Name="DiastolicBloodPressureTextBoxMin" BorderThickness="2" BorderBrush="#CFDBD5"
                  HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" >
             </TextBox>
 
-            <TextBlock Grid.Row="1" Grid.Column="2" Text="D BP MIN" Foreground="Tomato" Margin="10,128,0,0"
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="D BP MIN" Foreground="Cyan" Margin="10,128,0,0"
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.RowSpan="2"
             />
 
-            <TextBlock Grid.Row="2" Grid.Column="2" Foreground="#f2f2f2" Name="DiastolicBloodPressureTextBoxCurrMin"
-                HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-                <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" />
-            </TextBlock>   
-            
-            <TextBox Grid.Row="2" Grid.Column="3" Foreground="Tomato" Name="DiastolicBloodPressureTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
-                HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" Grid.ColumnSpan="2" >
+           
+            <TextBox Grid.Row="2" Grid.Column="1" Foreground="Cyan" Name="DiastolicBloodPressureTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
+                HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" >
             </TextBox>
 
-            <TextBlock Grid.Row="1" Grid.Column="3" Text="D BP MAX" Foreground="Tomato" Margin="10,128,0,0"
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="D BP MAX" Foreground="Cyan" Margin="10,128,0,0"
                  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2" Grid.RowSpan="2"
             />
 
-            <TextBlock Grid.Row="2" Grid.Column="3" Foreground="#f2f2f2" Name="DiastolicBloodPressureTextBoxCurrMax"
-                HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Margin="0,0,10,0">
-                <Run Text="Curr: " /> 
-                <Run Text="{Binding DynamicText}" />
-            </TextBlock>            
+                   
           
 
         </Grid>
