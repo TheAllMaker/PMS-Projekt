@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace Patientenverwaltung
 {
-    public partial class PowerWindow : Window
+    public partial class PowerWindow
     {
         private bool UserConfirmed { get; set; }
 

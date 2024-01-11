@@ -4,13 +4,8 @@ using System.Windows;
 
 namespace Patientenverwaltung
 {
-    public class Monitor
-    {
-        public string Manufacturer { get; set; }
-        public string Serialnumber { get; set; }
-    }
 
-    public partial class NewMonitorWindow : Window
+    public partial class NewMonitorWindow
     {
         private static string connString = "Host=db.inftech.hs-mannheim.de;Username=pms1;Password=pms1;Database=pms1";
 
