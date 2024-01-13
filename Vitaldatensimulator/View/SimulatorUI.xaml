@@ -153,7 +153,7 @@
         </Button>
 
         <Button x:Name="CloseButton" Click="Button_Click_Close" Width="75" Height="50" Margin="790,0,-317,-150" Background="#08080F" VerticalAlignment="Bottom" BorderBrush="Transparent" HorizontalAlignment="Center" Grid.Column="1">
-            <Image Source="poweroff.png"/>
+            <Image Source="../poweroff.png"/>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>

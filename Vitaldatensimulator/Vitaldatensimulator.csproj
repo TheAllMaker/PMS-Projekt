@@ -119,22 +119,15 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="MainMenuGenerator.xaml.cs">
-      <DependentUpon>MainMenuGenerator.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PowerWindow.xaml.cs">
-      <DependentUpon>PowerWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SimulatorTimer.cs" />
-    <Compile Include="SimulatorUI.xaml.cs">
-      <DependentUpon>SimulatorUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VitalData.cs" />
-    <Compile Include="MqttPublisher.cs" />
-    <Compile Include="VitalDataGenerator.cs" />
-    <Compile Include="VitalSimulator.cs" />
+    <Compile Include="Model\PowerWindow.cs" />
+    <Compile Include="Model\SimulatorUI.cs" />
+    <Compile Include="Model\SimulatorTimer.cs" />
+    <Compile Include="Model\VitalData.cs" />
+    <Compile Include="Model\MqttPublisher.cs" />
+    <Compile Include="Model\VitalDataGenerator.cs" />
+    <Compile Include="Model\VitalSimulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -163,15 +156,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="PowerWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\PowerWindow.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SimulatorUI.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainMenuGenerator.xaml">
+    <Page Include="View\SimulatorUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

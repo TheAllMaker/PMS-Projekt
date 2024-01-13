@@ -7,7 +7,7 @@ namespace Vitaldatensimulator
     public class SimulatorTimer
     {
         private Timer _timer;
-        private const int _timerIntervalMilliseconds = 500;
+        private const int _timerIntervalMilliseconds = 750;
         private VitalData _currentMonitor;
         private readonly MqttPublisher _mqttPublisher = MqttPublisher.GetInstance();
 

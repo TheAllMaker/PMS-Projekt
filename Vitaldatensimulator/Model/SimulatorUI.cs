@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Vitaldatensimulator
@@ -147,11 +145,6 @@ namespace Vitaldatensimulator
             UpdateSliderAndTextBox(HeartRateBox, HeartRateSlider);
         }
 
-        private void HeartRateBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsTextAllowed(e.Text);
-        }
-
         private void RespirationRateSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             UpdateSliderAndTextBox(RespirationRateBox, RespirationRateSlider);
@@ -161,12 +154,6 @@ namespace Vitaldatensimulator
         {
             UpdateSliderAndTextBox(RespirationRateBox, RespirationRateSlider);
         }
-
-        private void RespirationRateBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsTextAllowed(e.Text);
-        }
-
         private void OxygenLevelSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             UpdateSliderAndTextBox(OxygenLevelBox, OxygenLevelSlider);
@@ -175,11 +162,6 @@ namespace Vitaldatensimulator
         private void OxygenLevelBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateSliderAndTextBox(OxygenLevelBox, OxygenLevelSlider);
-        }
-
-        private void OxygenLevelBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsTextAllowed(e.Text);
         }
 
         private void BloodPressureSystolicSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -192,11 +174,6 @@ namespace Vitaldatensimulator
             UpdateSliderAndTextBox(BloodPressureSystolicBox, BloodPressureSystolicSlider);
         }
 
-        private void BloodPressureSystolicBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsTextAllowed(e.Text);
-        }
-
         private void BloodPressureDiastolicSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             UpdateSliderAndTextBox(BloodPressureDiastolicBox, BloodPressureDiastolicSlider);
@@ -205,11 +182,6 @@ namespace Vitaldatensimulator
         private void BloodPressureDiastolicBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateSliderAndTextBox(BloodPressureDiastolicBox, BloodPressureDiastolicSlider);
-        }
-
-        private void BloodPressureDiastolicBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsTextAllowed(e.Text);
         }
 
         private void TemperatureSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -222,18 +194,6 @@ namespace Vitaldatensimulator
             UpdateSliderAndTextBox(TemperatureBox, TemperatureSlider);
         }
 
-        private void TemperatureBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsTextAllowed(e.Text);
-        }
-
-        //Kontrolle, dass nur Zahlen eingefügt werden können
-        private static bool IsTextAllowed(string text)
-        {
-            Regex regex = new Regex("[^0-9]+"); // Erlaubt nur Zahlen
-            return !regex.IsMatch(text);
-        }
-
         //Methode zum Wechseln zwischen den einzelnen Zuständen
         private void Button_Click_StartStop(object sender, RoutedEventArgs e)
         {
@@ -244,14 +204,14 @@ namespace Vitaldatensimulator
                     break;
                 case SimulationState.Running:
                     StopSimulation();
-                    StartStopButton.Content = "Continue"; // Änderung des Button-Texts auf "Continue"
-                    _currentState = SimulationState.Paused; // Zustand auf "Paused" setzen
+                    StartStopButton.Content = "Continue";
+                    _currentState = SimulationState.Paused;
                     StartStopButton.Background = (Brush)new BrushConverter().ConvertFromString("#FF16FF06");
                     break;
                 case SimulationState.Paused:
                     ContinueSimulation();
-                    StartStopButton.Content = "Stop"; // Änderung des Button-Texts auf "Stop"
-                    _currentState = SimulationState.Running; // Zustand auf "Running" setzen
+                    StartStopButton.Content = "Stop";
+                    _currentState = SimulationState.Running;
                     StartStopButton.Background = new SolidColorBrush(Colors.Yellow);
                     break;
             }

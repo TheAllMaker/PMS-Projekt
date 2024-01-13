@@ -16,15 +16,15 @@
         <TextBlock Text="Do you really want to turn off the simulator ?" HorizontalAlignment="Center" 
                    VerticalAlignment="Center" Margin="0,0,0,20" FontSize="20" Foreground="White"/>
 
-        
-            <Viewbox Width="50" Height="50" Grid.Row="1" >
-                <Image Source="poweroff.png"  Width="200" Height="200"/>
-            </Viewbox>
+
+        <Viewbox Width="50" Height="50" Grid.Row="1" >
+            <Image Source="../poweroff.png"  Width="200" Height="200"/>
+        </Viewbox>
 
 
         <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Margin="250,0,0,0"
         Background="Black" BorderBrush="Transparent" Foreground="Black" x:Name="ConfirmButton" Click="Button_Click_Confirm">
-            <Viewbox Width="50" Height="30">
+            <Viewbox Width="50" Height="35">
                 <Rectangle Width="30" Height="30">
                     <Rectangle.Fill>
                         <DrawingBrush>
@@ -61,7 +61,7 @@
 
         <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,250,0"
                 Background="Black" BorderBrush="Transparent" Foreground="Black" x:Name="CancelButton" Click ="Button_Click_Cancel">
-            <Viewbox Width="50" Height="30">
+            <Viewbox Width="50" Height="35">
                 <Rectangle Width="30" Height="30">
                     <Rectangle.Fill>
                         <DrawingBrush>
