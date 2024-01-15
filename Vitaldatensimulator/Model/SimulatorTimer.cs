@@ -2,7 +2,7 @@
 using System.Timers;
 
 
-namespace Vitaldatensimulator
+namespace VitaldataSimulator
 {
     public class SimulatorTimer
     {

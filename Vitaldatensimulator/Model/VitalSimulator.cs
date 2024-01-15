@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
 
-namespace Vitaldatensimulator
+namespace VitaldataSimulator
 {
-    class VitaldatenSimulator
+    class VitaldataRunSimulator
     {
         [STAThread]
         static void Main()

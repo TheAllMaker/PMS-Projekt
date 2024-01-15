@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vitaldatensimulator
+namespace VitaldataSimulator
 {
     internal class VitalDataGenerator
     {
