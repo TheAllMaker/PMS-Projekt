@@ -112,18 +112,27 @@ namespace MediTrack.Model.DataBaseModelConnection
 
             using (NpgsqlCommand SelectPatientIDThroughMonitorID = new NpgsqlCommand(SelectString, DataBaseConnector))
             {
-                SelectPatientIDThroughMonitorID.Parameters.AddWithValue("MonitorIDSearchKey", MonitorIDSearchKey);
-
-                NpgsqlDataReader PIDSearcher = SelectPatientIDThroughMonitorID.ExecuteReader();
-
-                if (PIDSearcher.Read())
+                try
                 {
-                    
-                    return (int?)PIDSearcher["pid"];
+                    SelectPatientIDThroughMonitorID.Parameters.AddWithValue("MonitorIDSearchKey", MonitorIDSearchKey);
+
+                    NpgsqlDataReader PIDSearcher = SelectPatientIDThroughMonitorID.ExecuteReader();
+
+                    if (PIDSearcher.Read())
+                    {
+
+                        return (int?)PIDSearcher["pid"];
+                    }
+
+
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else
+                catch
                 {
-                    return null;
+                    throw new ArgumentException("Connection to Database failed");
                 }
             }
         }
