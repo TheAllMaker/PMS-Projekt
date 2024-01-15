@@ -1,11 +1,10 @@
-﻿//using System;
-using System.Collections.Generic;
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MediTrack.Model.RemoteModel;
+//using System.Windows.Forms;
 
 namespace MediTrack.View.RemoteView
 {
@@ -24,27 +23,30 @@ namespace MediTrack.View.RemoteView
         private int diastolicBloodPressureMin;
         private int diastolicBloodPressureMax;
 
-        private int heartRateMinThreshold = 40;
-        private int heartRateMaxThreshold = 200;
-        private int systolicBloodPressureMinThreshold = 90;
-        private int systolicBloodPressureMaxThreshold = 220;
-        private int diastolicBloodPressureMinThreshold = 60;
-        private int diastolicBloodPressureMaxThreshold = 80;
         private double temperatureMinThreshold = 35;
         private double temperatureMaxThreshold = 39;
         private double oxygenLevelMinThreshold = 91;
         private double oxygenLevelMaxThreshold = 96;
         private double respirationRateMinThreshold = 8;
         private double respirationRateMaxThreshold = 25;
+        private int heartRateMinThreshold = 40;
+        private int heartRateMaxThreshold = 200;
+        private int systolicBloodPressureMinThreshold = 90;
+        private int systolicBloodPressureMaxThreshold = 220;
+        private int diastolicBloodPressureMinThreshold = 60;
+        private int diastolicBloodPressureMaxThreshold = 80;
 
-        private int iD;
+
+        private int _monitorId;
 
         private Threshold threshold;
 
-        public DetailedWindow(int ID)
+        bool _hasError;
+
+        public DetailedWindow(int monitorID)
         {
             InitializeComponent();
-            iD = ID;
+            _monitorId = monitorID;
 
             RespirationRateTextBoxMin.PreviewTextInput += ValidateTextInput;
             RespirationRateTextBoxMax.PreviewTextInput += ValidateTextInput;
@@ -64,7 +66,7 @@ namespace MediTrack.View.RemoteView
             DataObject.AddPastingHandler(HeartRateTextBoxMin, OnPaste);
             DataObject.AddPastingHandler(HeartRateTextBoxMax, OnPaste);
 
-            threshold = Threshold.GetThresholdByMonitorID(iD);
+            threshold = Threshold.GetThresholdByMonitorID(_monitorId);
             if (threshold != null)
             {
                 RespirationRateTextBoxMin.Text = threshold.GetRespirationRateMin().ToString();
@@ -103,130 +105,104 @@ namespace MediTrack.View.RemoteView
             }
         }
 
-        private void UpdateVariableFromTextbox(TextBox textBox, ref int variable, int minThreshold, int maxThreshold)
-        {
-            if (int.TryParse(textBox.Text, out int value))
-            {
-                if (value >= minThreshold && value <= maxThreshold)
-                {
-                    variable = value;
-                }
-                else
-                {
-                    //MessageBox.Show("Der eingegebene Wert liegt außerhalb des gültigen Bereichs.");
-                }
-            }
-        }
-
-        private void UpdateVariableFromTextbox(TextBox textBox, ref double variable, double minThreshold, double maxThreshold)
-        {
-            if (double.TryParse(textBox.Text, out double value))
-            {
-                if (value >= minThreshold && value <= maxThreshold)
-                {
-                    variable = value;
-                }
-                else
-                {
-                    //MessageBox.Show("Der eingegebene Wert liegt außerhalb des gültigen Bereichs.");
-                }
-            }
-        }
-
-
         private void Button_Click_SelectionConfirmed(object sender, RoutedEventArgs e)
         {
-            UpdateVariableFromTextbox(RespirationRateTextBoxMin, ref respirationRateMin, respirationRateMinThreshold, respirationRateMaxThreshold);
-            UpdateVariableFromTextbox(RespirationRateTextBoxMax, ref respirationRateMax, respirationRateMinThreshold, respirationRateMaxThreshold);
+            _hasError = false;
+            UpdateVitalSigns("Respiration", ref respirationRateMin, ref respirationRateMax, respirationRateMinThreshold, respirationRateMaxThreshold, RespirationRateTextBoxMin, RespirationRateTextBoxMax);
+            UpdateVitalSigns("Oxygen Level", ref oxygenLevelMin,ref  oxygenLevelMax, oxygenLevelMinThreshold, oxygenLevelMaxThreshold, OxygenLevelTextBoxMin, OxygenLevelTextBoxMax);
+            UpdateVitalSigns("Temperature", ref temperatureMin, ref temperatureMax, temperatureMinThreshold, temperatureMaxThreshold, TemperatureTextBoxMin, TemperatureTextBoxMax);
+            UpdateVitalSigns("Heart Rate", ref heartRateMin, ref heartRateMax, heartRateMinThreshold, heartRateMaxThreshold, HeartRateTextBoxMin, HeartRateTextBoxMax);
+            UpdateVitalSigns("Systolic Blood Pressure", ref systolicBloodPressureMin, ref systolicBloodPressureMax, systolicBloodPressureMinThreshold, systolicBloodPressureMaxThreshold, SystolicBloodPressureTextBoxMin, SystolicBloodPressureTextBoxMax);
+            UpdateVitalSigns("Diastolic Blood Pressure", ref diastolicBloodPressureMin,ref  diastolicBloodPressureMax, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold, DiastolicBloodPressureTextBoxMin, DiastolicBloodPressureTextBoxMax);
 
-            UpdateVariableFromTextbox(OxygenLevelTextBoxMin, ref oxygenLevelMin, oxygenLevelMinThreshold, oxygenLevelMaxThreshold);
-            UpdateVariableFromTextbox(OxygenLevelTextBoxMax, ref oxygenLevelMax, oxygenLevelMinThreshold, oxygenLevelMaxThreshold);
+            if (!_hasError)
+            {
+                threshold = new Threshold(_monitorId, heartRateMin, heartRateMax, respirationRateMin, respirationRateMax,
+                    oxygenLevelMin, oxygenLevelMax, temperatureMin, temperatureMax, systolicBloodPressureMin, systolicBloodPressureMax,
+                    diastolicBloodPressureMin, diastolicBloodPressureMax);
 
-            UpdateVariableFromTextbox(TemperatureTextBoxMin, ref temperatureMin, temperatureMinThreshold, temperatureMaxThreshold);
-            UpdateVariableFromTextbox(TemperatureTextBoxMax, ref temperatureMax, temperatureMinThreshold, temperatureMaxThreshold);
-
-            UpdateVariableFromTextbox(HeartRateTextBoxMin, ref heartRateMin, heartRateMinThreshold, heartRateMaxThreshold);
-            UpdateVariableFromTextbox(HeartRateTextBoxMax, ref heartRateMax, heartRateMinThreshold, heartRateMaxThreshold);
-
-            UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMin, ref systolicBloodPressureMin, systolicBloodPressureMinThreshold, systolicBloodPressureMaxThreshold);
-            UpdateVariableFromTextbox(SystolicBloodPressureTextBoxMax, ref systolicBloodPressureMax, systolicBloodPressureMinThreshold, systolicBloodPressureMaxThreshold);
-
-            UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMin, ref diastolicBloodPressureMin, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold);
-            UpdateVariableFromTextbox(DiastolicBloodPressureTextBoxMax, ref diastolicBloodPressureMax, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold);
-
-            threshold = new Threshold(iD, heartRateMin,heartRateMax, respirationRateMin, respirationRateMax, 
-                oxygenLevelMin, oxygenLevelMax, temperatureMin, temperatureMax, systolicBloodPressureMin, systolicBloodPressureMax,
-                diastolicBloodPressureMin, diastolicBloodPressureMax);
-
-            this.Close();
+                this.Close();
+            }
         }
+
+        private void UpdateVitalSigns(string vitalSignName, ref double minValue, ref double maxValue, double minThreshold, double maxThreshold, TextBox minTextBox, TextBox maxTextBox)
+        {
+            if (!string.IsNullOrWhiteSpace(minTextBox.Text) && !string.IsNullOrWhiteSpace(maxTextBox.Text) && double.Parse(minTextBox.Text) != 0 && double.Parse(maxTextBox.Text) != 0)
+            {
+                minValue = double.Parse(minTextBox.Text);
+                maxValue = double.Parse(maxTextBox.Text);
+
+                if (minValue > maxValue)
+                {
+                    _hasError = true;
+                    MessageBox.Show($"{vitalSignName} min value is smaller than max value", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    UpdateVariableFromTextbox(ref minValue, minThreshold, maxThreshold, minTextBox);
+                    UpdateVariableFromTextbox(ref maxValue, minThreshold, maxThreshold, maxTextBox);
+                }
+            }
+        }
+
+        private void UpdateVitalSigns(string vitalSignName, ref int minValue, ref int maxValue, int minThreshold, int maxThreshold, TextBox minTextBox, TextBox maxTextBox)
+        {
+            if (!string.IsNullOrWhiteSpace(minTextBox.Text) && !string.IsNullOrWhiteSpace(maxTextBox.Text) && int.Parse(minTextBox.Text) != 0 && int.Parse(maxTextBox.Text) != 0)
+            {
+                minValue = int.Parse(minTextBox.Text);
+                maxValue = int.Parse(maxTextBox.Text);
+
+                if (minValue > maxValue)
+                {
+                    _hasError = true;
+                    MessageBox.Show($"{vitalSignName} min value is smaller than max value", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    UpdateVariableFromTextbox(ref minValue, minThreshold, maxThreshold, minTextBox);
+                    UpdateVariableFromTextbox(ref maxValue, minThreshold, maxThreshold, maxTextBox);
+                }
+            }
+        }
+
+        private void UpdateVariableFromTextbox(ref double variable, double minThreshold, double maxThreshold, TextBox textBox)
+        {
+            // Erlaube Werte innerhalb des Bereichs von minThreshold bis maxThreshold
+            if (variable < minThreshold)
+            {
+                variable = minThreshold;
+            }
+            else if (variable > maxThreshold)
+            {
+                variable = maxThreshold;
+            }
+
+            // Setze den TextBox-Wert auf den aktualisierten Wert.
+            textBox.Text = variable.ToString();
+        }
+
+        private void UpdateVariableFromTextbox(ref int variable, int minThreshold, int maxThreshold, TextBox textBox)
+        {
+            // Erlaube Werte innerhalb des Bereichs von minThreshold bis maxThreshold
+            if (variable < minThreshold)
+            {
+                variable = minThreshold;
+            }
+            else if (variable > maxThreshold)
+            {
+                variable = maxThreshold;
+            }
+
+            // Setze den TextBox-Wert auf den aktualisierten Wert.
+            textBox.Text = variable.ToString();
+        }
+
 
 
         private void Button_Click_SelectionClosed(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-        public double GetRespirationRateMin()
-        {
-            return respirationRateMin;
-        }
-
-        public double GetRespirationRateMax()
-        {
-            return respirationRateMax;
-        }
-
-        public double GetOxygenLevelMin()
-        {
-            return oxygenLevelMin;
-        }
-
-        public double GetOxygenLevelMax()
-        {
-            return oxygenLevelMax;
-        }
-
-        public double GetTemperatureMin()
-        {
-            return temperatureMin;
-        }
-
-        public double GetTemperatureMax()
-        {
-            return temperatureMax;
-        }
-
-        public int GetHeartRateMin()
-        {
-            return heartRateMin;
-        }
-
-        public int GetHeartRateMax()
-        {
-            return heartRateMax;
-        }
-
-        public int GetSystolicBloodPressureMin()
-        {
-            return systolicBloodPressureMin;
-        }
-
-        public int GetSystolicBloodPressureMax()
-        {
-            return systolicBloodPressureMax;
-        }
-
-        public int GetDiastolicBloodPressureMin()
-        {
-            return diastolicBloodPressureMin;
-        }
-
-        public int GetDiastolicBloodPressureMax()
-        {
-            return diastolicBloodPressureMax;
-        }
-
  
     }
 }
