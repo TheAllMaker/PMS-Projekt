@@ -2,6 +2,35 @@
 using System.Collections.Generic;
 
 
+/*
+ * Overview:
+ * The Threshold class represents a set of threshold values for vital health parameters associated with a monitor. It allows defining the acceptable range of values for various vital signs, such as Heart Rate, Respiration Rate, Oxygen Level, Blood Pressure (Systolic and Diastolic), and Temperature. Threshold instances are stored and managed in a dictionary for easy retrieval.
+ * 
+ * Functionality:
+ * - Threshold(int MonitorID, int HeartRateMin, int HeartRateMax, double RespirationRateMin, double RespirationRateMax, 
+ *              double OxygenLevelMin, double OxygenLevelMax, double TemperatureMin, double TemperatureMax, 
+ *              int SystolicBloodPressureMin, int SystolicBloodPressureMax, int DiastolicBloodPressureMin, 
+ *              int DiastolicBloodPressureMax): Constructor to create a new Threshold instance and associate it with a MonitorID. If an instance with the same MonitorID exists, it updates the existing instance.
+ * - GetThresholdByMonitorID(int monitorID): Retrieves a Threshold instance based on the provided monitorID.
+ * - RemoveThresholdByMonitorID(int monitorID): Removes the Threshold instance associated with the provided monitorID.
+ * - CheckVitalDataAgainstThreshold(...): Checks if vital sign values are within the defined threshold ranges.
+ * - CheckHeartRate(int heartRate): Checks if a Heart Rate value is within the defined range.
+ * - CheckOxygenLevel(int oxygenLevel): Checks if an Oxygen Level value is within the defined range.
+ * - CheckBloodPressureDiastolic(int bloodPressureDiastolic): Checks if a Diastolic Blood Pressure value is within the defined range.
+ * - CheckRespirationRate(int respirationRate): Checks if a Respiration Rate value is within the defined range.
+ * - CheckBloodPressureSystolic(int bloodPressureSystolic): Checks if a Systolic Blood Pressure value is within the defined range.
+ * - CheckTemperature(int temperature): Checks if a Temperature value is within the defined range.
+ * - Various getter methods to retrieve the threshold values for specific vital signs.
+ * 
+ * Usage:
+ * - Create Threshold instances using the constructor, e.g., `new Threshold(MonitorID, HeartRateMin, HeartRateMax, ...)`.
+ * - Retrieve a Threshold instance associated with a monitorID using `GetThresholdByMonitorID(monitorID)`.
+ * - Remove a Threshold instance associated with a monitorID using `RemoveThresholdByMonitorID(monitorID)`.
+ * - Use the provided methods to check if vital sign values are within the defined threshold ranges.
+ */
+
+
+
 namespace MediTrack.Model.RemoteModel
 {
     public class Threshold
