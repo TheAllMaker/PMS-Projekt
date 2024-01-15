@@ -2,7 +2,7 @@
 using System.Text;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt;
-using System.Diagnostics;
+
 
 /*
  * MqttHandler Class in MediTrack.Model.RemoteModel Namespace
