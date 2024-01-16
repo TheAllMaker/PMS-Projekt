@@ -57,7 +57,6 @@ namespace MediTrack.Model.RemoteModel
 
         public static void DictionaryInput(object MonitorIDKey, Patient PatientIDKey)
         {
-            
             try
             {
                 MonitorIDToPatientIDDictionary.Add(MonitorIDKey, PatientIDKey);
@@ -80,7 +79,6 @@ namespace MediTrack.Model.RemoteModel
             {
                 return false;
             }
-
         }
     }
 }

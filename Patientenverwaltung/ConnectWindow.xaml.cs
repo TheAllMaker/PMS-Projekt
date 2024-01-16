@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Patientenverwaltung
 {
@@ -196,7 +197,10 @@ namespace Patientenverwaltung
                                 insertCommand.Parameters.AddWithValue("@PatientId", patientId);
                                 insertCommand.ExecuteNonQuery();
 
-                                MessageBox.Show("Verbindung erfolgreich erstellt.");
+                                // Show the status (checkmark) with fade-out animation
+                                DisconnectStatus.Visibility = Visibility.Visible;
+                                DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1.8)); // x seconds fade-out
+                                DisconnectStatus.BeginAnimation(TextBlock.OpacityProperty, animation);
                             }
                         }
 
