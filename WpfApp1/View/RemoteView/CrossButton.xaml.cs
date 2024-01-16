@@ -7,6 +7,7 @@ using System.Windows.Controls.Primitives;
 using MediTrack.Model.RemoteModel;
 
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 
 
@@ -50,17 +51,43 @@ namespace MediTrack.View.RemoteView
         {
             var listBox = sender as ListBox;
 
+            //if (listBox != null && listBox.SelectedItem != null)
+            //{
+            //    var selectedValue = listBox.SelectedItem.ToString();
+
+            //    if (int.TryParse(selectedValue, out int intValue))
+            //    {
+            //        ActiveMonitorIDManager.InsertActiveMonitor(intValue);
+            //    }
+            //    else
+            //    {
+            //        Console.Write("Test");
+            //    }
+            //}
+
             if (listBox != null && listBox.SelectedItem != null)
             {
                 var selectedValue = listBox.SelectedItem.ToString();
 
-                if (int.TryParse(selectedValue, out int intValue))
+                // Regex verwenden, um die Zahl vor dem Doppelpunkt zu extrahieren
+                var match = Regex.Match(selectedValue, @"^(\d+):");
+                if (match.Success)
                 {
-                    ActiveMonitorIDManager.InsertActiveMonitor(intValue);
+                    // Die gefundene Zahl ist im ersten Gruppen-Capture
+                    var numberString = match.Groups[1].Value;
+
+                    if (int.TryParse(numberString, out int intValue))
+                    {
+                        ActiveMonitorIDManager.InsertActiveMonitor(intValue);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Die Zahl konnte nicht in einen Integer umgewandelt werden.");
+                    }
                 }
                 else
                 {
-                    Console.Write("Test");
+                    Console.WriteLine("Keine Zahl vor dem Doppelpunkt gefunden.");
                 }
             }
         }
