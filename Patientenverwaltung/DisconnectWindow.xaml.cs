@@ -93,7 +93,7 @@ namespace Patientenverwaltung
                                 {
                                     // Show the status (checkmark) with fade-out animation
                                     DisconnectStatus.Visibility = Visibility.Visible;
-                                    DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1.5)); // 1.5 seconds fade-out
+                                    DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1.8)); // x seconds fade-out
                                     DisconnectStatus.BeginAnimation(TextBlock.OpacityProperty, animation);
 
                                     // Remove the item from the ComboBox

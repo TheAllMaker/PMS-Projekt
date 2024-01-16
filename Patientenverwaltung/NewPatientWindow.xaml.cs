@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using Npgsql;
 
 namespace Patientenverwaltung
@@ -61,7 +63,10 @@ namespace Patientenverwaltung
                                 }
                             }
 
-                            MessageBox.Show("Daten erfolgreich in die Datenbank eingefügt.");
+                            // Show the status (checkmark) with fade-out animation
+                            DisconnectStatus.Visibility = Visibility.Visible;
+                            DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1.8)); // x seconds fade-out
+                            DisconnectStatus.BeginAnimation(TextBlock.OpacityProperty, animation); 
                             cmbSex.SelectedItem = null;
                             txtVorname.Text = null;
                             txtNachname.Text = null;

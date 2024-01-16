@@ -1,6 +1,8 @@
 ﻿using Npgsql;
 using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace Patientenverwaltung
 {
@@ -54,7 +56,10 @@ namespace Patientenverwaltung
                             // Ausführen der SQL-Abfrage
                             command.ExecuteNonQuery();
 
-                            MessageBox.Show("Monitor wurde erfolgreich angelegt.");
+                            // Show the status (checkmark) with fade-out animation
+                            DisconnectStatus.Visibility = Visibility.Visible;
+                            DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1.8)); // x seconds fade-out
+                            DisconnectStatus.BeginAnimation(TextBlock.OpacityProperty, animation);
                             // Zurücksetzen der Auswahl in den ComboBoxen
                             cmbManu.SelectedItem = null;
                             txtSeriennummer.Text = null;
