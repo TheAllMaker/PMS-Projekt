@@ -51,6 +51,20 @@ namespace MediTrack.View.RemoteView
         {
             var listBox = sender as ListBox;
 
+            //if (listBox != null && listBox.SelectedItem != null)
+            //{
+            //    var selectedValue = listBox.SelectedItem.ToString();
+
+            //    if (int.TryParse(selectedValue, out int intValue))
+            //    {
+            //        ActiveMonitorIDManager.InsertActiveMonitor(intValue);
+            //    }
+            //    else
+            //    {
+            //        Console.Write("Test");
+            //    }
+            //}
+
             if (listBox != null && listBox.SelectedItem != null)
             {
                 var selectedValue = listBox.SelectedItem.ToString();

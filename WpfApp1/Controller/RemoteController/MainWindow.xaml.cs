@@ -81,8 +81,8 @@ namespace MediTrack
             {
                 ContentTemplate = crossButtonTemplate
             };
-            contentControl.Tag = "FirstCrossButtonIdentifier";
-            contentControl.Name = "FirstCrossButtonIdentifier";
+            contentControl.Tag = "Killme";
+            contentControl.Name = "Killme";
             PatientenMonitorDynGrid.Children.Add(contentControl);
         }
 
@@ -90,7 +90,7 @@ namespace MediTrack
         {
             foreach (var child in PatientenMonitorDynGrid.Children)
             {
-                if (child is FrameworkElement element && element.Tag as string == "FirstCrossButtonIdentifier")
+                if (child is FrameworkElement element && element.Tag as string == "Killme")
                 {
                     PatientenMonitorDynGrid.Children.Remove(child as UIElement);
                     break;
@@ -109,7 +109,7 @@ namespace MediTrack
             {
                 ContentTemplate = crossButtonTemplate
             };
-            contentControl.Tag = "FirstCrossButtonIdentifier";
+            contentControl.Tag = "Killme";
             PatientenMonitorDynGrid.Children.Add(contentControl);
         }
 
@@ -148,10 +148,6 @@ namespace MediTrack
                                 object[] patientDataString = DataBaseRemoteConnection.CallForPatientThroughID(mqttDataString);
                                 string AssociatedEntireValue = $"{mqttMessageQueueArray[0]}: {patientDataString[0]}, {patientDataString[1]}";
                                 OptionsData.OptionsPop(AssociatedEntireValue);
-                                //Threshold.RemoveThresholdByMonitorID(mqttMessageQueueArray[0]);
-                                PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
-                                UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
-                                ActiveMonitorIDManager.DeactivateMonitor(mqttMessageQueueArray[0]);
                             }
                         }
                     });
