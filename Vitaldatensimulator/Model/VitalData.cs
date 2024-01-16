@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VitaldataSimulator
+namespace VitaldataSimulator.Model
 {
     public class VitalData
     {
@@ -14,7 +14,7 @@ namespace VitaldataSimulator
         public int Alive { get; set; }
         public string UUID { get; set; }
 
-        private readonly VitalDataGenerator generator;
+        private readonly VitalDataGenerator _generator;
 
         public VitalData(string monitorId, int heartRate, double respirationRate, double oxygenLevel, int bloodPressureSystolic, int bloodPressureDiastolic, double temperature, string uuid, int alive = 1)
         {
@@ -28,7 +28,7 @@ namespace VitaldataSimulator
             this.Alive = alive;
             this.UUID = uuid;
 
-            generator = new VitalDataGenerator();
+            _generator = new VitalDataGenerator();
         }
 
         public string GetVitalData()
@@ -51,12 +51,12 @@ namespace VitaldataSimulator
 
         public void GenerateAllVitaldata()
         {
-            this.HeartRate = generator.GenerateHeartRate(HeartRate);
-            this.RespirationRate = generator.GenerateRespirationRate(RespirationRate);
-            this.OxygenLevel = generator.GenerateOxygenLevel(OxygenLevel);
-            this.BloodPressureSystolic = generator.GenerateSystolicBloodPressure(BloodPressureSystolic);
-            this.BloodPressureDiastolic = generator.GenerateDiastolicBloodPressure(BloodPressureDiastolic);
-            this.Temperature = generator.GenerateTemperature(Temperature);
+            this.HeartRate = _generator.GenerateHeartRate(HeartRate);
+            this.RespirationRate = _generator.GenerateRespirationRate(RespirationRate);
+            this.OxygenLevel = _generator.GenerateOxygenLevel(OxygenLevel);
+            this.BloodPressureSystolic = _generator.GenerateSystolicBloodPressure(BloodPressureSystolic);
+            this.BloodPressureDiastolic = _generator.GenerateDiastolicBloodPressure(BloodPressureDiastolic);
+            this.Temperature = _generator.GenerateTemperature(Temperature);
         }
     }
 }

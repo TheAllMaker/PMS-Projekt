@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace VitaldataSimulator
+namespace VitaldataSimulator.Model
 {
     class VitaldataRunSimulator
     {

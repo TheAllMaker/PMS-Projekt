@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,43 +9,43 @@ namespace MediTrack.View.RemoteView
 {
     public partial class DetailedWindow : Window
     {
-        private double respirationRateMin;
-        private double respirationRateMax;
-        private double oxygenLevelMin;
-        private double oxygenLevelMax;
-        private double temperatureMin;
-        private double temperatureMax;
-        private int heartRateMin;
-        private int heartRateMax;
-        private int systolicBloodPressureMin;
-        private int systolicBloodPressureMax;
-        private int diastolicBloodPressureMin;
-        private int diastolicBloodPressureMax;
+        private double _respirationRateMin;
+        private double _respirationRateMax;
+        private double _oxygenLevelMin;
+        private double _oxygenLevelMax;
+        private double _temperatureMin;
+        private double _temperatureMax;
+        private int _heartRateMin;
+        private int _heartRateMax;
+        private int _systolicBloodPressureMin;
+        private int _systolicBloodPressureMax;
+        private int _diastolicBloodPressureMin;
+        private int _diastolicBloodPressureMax;
 
-        private double temperatureMinThreshold = 35;
-        private double temperatureMaxThreshold = 39;
-        private double oxygenLevelMinThreshold = 91;
-        private double oxygenLevelMaxThreshold = 96;
-        private double respirationRateMinThreshold = 8;
-        private double respirationRateMaxThreshold = 25;
-        private int heartRateMinThreshold = 40;
-        private int heartRateMaxThreshold = 200;
-        private int systolicBloodPressureMinThreshold = 90;
-        private int systolicBloodPressureMaxThreshold = 220;
-        private int diastolicBloodPressureMinThreshold = 60;
-        private int diastolicBloodPressureMaxThreshold = 80;
+        private double _temperatureMinThreshold = 35;
+        private double _temperatureMaxThreshold = 39;
+        private double _oxygenLevelMinThreshold = 91;
+        private double _oxygenLevelMaxThreshold = 96;
+        private double _respirationRateMinThreshold = 8;
+        private double _respirationRateMaxThreshold = 25;
+        private int _heartRateMinThreshold = 40;
+        private int _heartRateMaxThreshold = 200;
+        private int _systolicBloodPressureMinThreshold = 90;
+        private int _systolicBloodPressureMaxThreshold = 220;
+        private int _diastolicBloodPressureMinThreshold = 60;
+        private int _diastolicBloodPressureMaxThreshold = 80;
 
 
         private int _monitorId;
 
-        private Threshold threshold;
+        private Threshold _threshold;
 
         bool _hasError;
 
-        public DetailedWindow(int monitorID)
+        public DetailedWindow(int monitorId)
         {
             InitializeComponent();
-            _monitorId = monitorID;
+            _monitorId = monitorId;
 
             RespirationRateTextBoxMin.PreviewTextInput += ValidateTextInput;
             RespirationRateTextBoxMax.PreviewTextInput += ValidateTextInput;
@@ -66,21 +65,21 @@ namespace MediTrack.View.RemoteView
             DataObject.AddPastingHandler(HeartRateTextBoxMin, OnPaste);
             DataObject.AddPastingHandler(HeartRateTextBoxMax, OnPaste);
 
-            threshold = Threshold.GetThresholdByMonitorID(_monitorId);
-            if (threshold != null)
+            _threshold = Threshold.GetThresholdByMonitorID(_monitorId);
+            if (_threshold != null)
             {
-                RespirationRateTextBoxMin.Text = threshold.GetRespirationRateMin().ToString();
-                RespirationRateTextBoxMax.Text = threshold.GetRespirationRateMax().ToString();
-                OxygenLevelTextBoxMin.Text = threshold.GetOxygenLevelMin().ToString();
-                OxygenLevelTextBoxMax.Text = threshold.GetOxygenLevelMax().ToString();
-                TemperatureTextBoxMin.Text = threshold.GetTemperatureMin().ToString();
-                TemperatureTextBoxMax.Text = threshold.GetTemperatureMax().ToString();
-                HeartRateTextBoxMin.Text = threshold.GetHeartRateMin().ToString();
-                HeartRateTextBoxMax.Text = threshold.GetHeartRateMax().ToString();
-                SystolicBloodPressureTextBoxMin.Text = threshold.GetSystolicBloodPressureMin().ToString();
-                SystolicBloodPressureTextBoxMax.Text = threshold.GetSystolicBloodPressureMax().ToString();
-                DiastolicBloodPressureTextBoxMin.Text = threshold.GetDiastolicBloodPressureMin().ToString();
-                DiastolicBloodPressureTextBoxMax.Text = threshold.GetDiastolicBloodPressureMax().ToString();
+                RespirationRateTextBoxMin.Text = _threshold.GetRespirationRateMin().ToString();
+                RespirationRateTextBoxMax.Text = _threshold.GetRespirationRateMax().ToString();
+                OxygenLevelTextBoxMin.Text = _threshold.GetOxygenLevelMin().ToString();
+                OxygenLevelTextBoxMax.Text = _threshold.GetOxygenLevelMax().ToString();
+                TemperatureTextBoxMin.Text = _threshold.GetTemperatureMin().ToString();
+                TemperatureTextBoxMax.Text = _threshold.GetTemperatureMax().ToString();
+                HeartRateTextBoxMin.Text = _threshold.GetHeartRateMin().ToString();
+                HeartRateTextBoxMax.Text = _threshold.GetHeartRateMax().ToString();
+                SystolicBloodPressureTextBoxMin.Text = _threshold.GetSystolicBloodPressureMin().ToString();
+                SystolicBloodPressureTextBoxMax.Text = _threshold.GetSystolicBloodPressureMax().ToString();
+                DiastolicBloodPressureTextBoxMin.Text = _threshold.GetDiastolicBloodPressureMin().ToString();
+                DiastolicBloodPressureTextBoxMax.Text = _threshold.GetDiastolicBloodPressureMax().ToString();
             }
         }
 
@@ -108,18 +107,18 @@ namespace MediTrack.View.RemoteView
         private void Button_Click_SelectionConfirmed(object sender, RoutedEventArgs e)
         {
             _hasError = false;
-            UpdateVitalSigns("Respiration", ref respirationRateMin, ref respirationRateMax, respirationRateMinThreshold, respirationRateMaxThreshold, RespirationRateTextBoxMin, RespirationRateTextBoxMax);
-            UpdateVitalSigns("Oxygen Level", ref oxygenLevelMin,ref  oxygenLevelMax, oxygenLevelMinThreshold, oxygenLevelMaxThreshold, OxygenLevelTextBoxMin, OxygenLevelTextBoxMax);
-            UpdateVitalSigns("Temperature", ref temperatureMin, ref temperatureMax, temperatureMinThreshold, temperatureMaxThreshold, TemperatureTextBoxMin, TemperatureTextBoxMax);
-            UpdateVitalSigns("Heart Rate", ref heartRateMin, ref heartRateMax, heartRateMinThreshold, heartRateMaxThreshold, HeartRateTextBoxMin, HeartRateTextBoxMax);
-            UpdateVitalSigns("Systolic Blood Pressure", ref systolicBloodPressureMin, ref systolicBloodPressureMax, systolicBloodPressureMinThreshold, systolicBloodPressureMaxThreshold, SystolicBloodPressureTextBoxMin, SystolicBloodPressureTextBoxMax);
-            UpdateVitalSigns("Diastolic Blood Pressure", ref diastolicBloodPressureMin,ref  diastolicBloodPressureMax, diastolicBloodPressureMinThreshold, diastolicBloodPressureMaxThreshold, DiastolicBloodPressureTextBoxMin, DiastolicBloodPressureTextBoxMax);
+            UpdateVitalSigns("Respiration", ref _respirationRateMin, ref _respirationRateMax, _respirationRateMinThreshold, _respirationRateMaxThreshold, RespirationRateTextBoxMin, RespirationRateTextBoxMax);
+            UpdateVitalSigns("Oxygen Level", ref _oxygenLevelMin,ref  _oxygenLevelMax, _oxygenLevelMinThreshold, _oxygenLevelMaxThreshold, OxygenLevelTextBoxMin, OxygenLevelTextBoxMax);
+            UpdateVitalSigns("Temperature", ref _temperatureMin, ref _temperatureMax, _temperatureMinThreshold, _temperatureMaxThreshold, TemperatureTextBoxMin, TemperatureTextBoxMax);
+            UpdateVitalSigns("Heart Rate", ref _heartRateMin, ref _heartRateMax, _heartRateMinThreshold, _heartRateMaxThreshold, HeartRateTextBoxMin, HeartRateTextBoxMax);
+            UpdateVitalSigns("Systolic Blood Pressure", ref _systolicBloodPressureMin, ref _systolicBloodPressureMax, _systolicBloodPressureMinThreshold, _systolicBloodPressureMaxThreshold, SystolicBloodPressureTextBoxMin, SystolicBloodPressureTextBoxMax);
+            UpdateVitalSigns("Diastolic Blood Pressure", ref _diastolicBloodPressureMin,ref  _diastolicBloodPressureMax, _diastolicBloodPressureMinThreshold, _diastolicBloodPressureMaxThreshold, DiastolicBloodPressureTextBoxMin, DiastolicBloodPressureTextBoxMax);
 
             if (!_hasError)
             {
-                threshold = new Threshold(_monitorId, heartRateMin, heartRateMax, respirationRateMin, respirationRateMax,
-                    oxygenLevelMin, oxygenLevelMax, temperatureMin, temperatureMax, systolicBloodPressureMin, systolicBloodPressureMax,
-                    diastolicBloodPressureMin, diastolicBloodPressureMax);
+                _threshold = new Threshold(_monitorId, _heartRateMin, _heartRateMax, _respirationRateMin, _respirationRateMax,
+                    _oxygenLevelMin, _oxygenLevelMax, _temperatureMin, _temperatureMax, _systolicBloodPressureMin, _systolicBloodPressureMax,
+                    _diastolicBloodPressureMin, _diastolicBloodPressureMax);
 
                 this.Close();
             }

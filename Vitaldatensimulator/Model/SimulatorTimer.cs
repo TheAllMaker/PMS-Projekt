@@ -2,16 +2,16 @@
 using System.Timers;
 
 
-namespace VitaldataSimulator
+namespace VitaldataSimulator.Model
 {
     public class SimulatorTimer
     {
         private Timer _timer;
-        private const int _timerIntervalMilliseconds = 750;
+        private const int TimerIntervalMilliseconds = 750;
         private VitalData _currentMonitor;
         private readonly MqttPublisher _mqttPublisher = MqttPublisher.GetInstance();
 
-        public void StartSimulator(VitalData monitor)
+        public void StartSimulatorTimer(VitalData monitor)
         {
             if (_timer == null)
             {
@@ -19,13 +19,13 @@ namespace VitaldataSimulator
             }
 
             _currentMonitor = monitor;
-            //Kann eingebaut werden wenn man die Daten direkt beim Start senden will
+            //Kann eingebaut werden, wenn man die Daten direkt beim Start senden will
             //_mqttPublisher.SendVitalData(_singleMonitor);
         }
 
         public void StartTimer()
         {
-            _timer = new Timer(_timerIntervalMilliseconds);
+            _timer = new Timer(TimerIntervalMilliseconds);
             _timer.Elapsed += OnTimedEvent;
             _timer.AutoReset = true;
             _timer.Enabled = true;
@@ -43,7 +43,7 @@ namespace VitaldataSimulator
             if (_timer == null) return;
             _timer.Stop();
             _timer.Dispose();
-            _timer = new Timer(_timerIntervalMilliseconds);
+            _timer = new Timer(TimerIntervalMilliseconds);
             _timer.Elapsed += OnTimedEvent;
             _timer.AutoReset = true;
             _timer.Enabled = true;

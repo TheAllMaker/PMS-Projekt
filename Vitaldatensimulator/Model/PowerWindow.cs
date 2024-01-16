@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Windows;
 
-namespace VitaldataSimulator
+namespace VitaldataSimulator.Model
 {
-    public partial class PowerWindow : Window
+    public partial class PowerWindow
     {
         public event EventHandler ConfirmClicked;
-        private bool _isAlreadyClosing;
 
         public PowerWindow()
         {
@@ -15,13 +14,11 @@ namespace VitaldataSimulator
 
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {
-            _isAlreadyClosing = true;
             ConfirmClicked?.Invoke(this, EventArgs.Empty);
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
-            _isAlreadyClosing = true;
             Close();
         }
     }

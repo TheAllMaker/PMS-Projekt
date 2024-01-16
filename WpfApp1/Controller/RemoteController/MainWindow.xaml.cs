@@ -152,11 +152,6 @@ namespace MediTrack
                 }
 
 
-
-
-
-
-
                 // wenn Queue mit Inhalt sowie Patient gefunden date patient up
                 else if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]) && (mqttMessageQueueArray[0] is int intValue02) && (ActiveMonitorIDManager.IsThisAnActiveMonitor(intValue02)))
                 //if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
@@ -207,36 +202,24 @@ namespace MediTrack
                                 }
                             }
 
-                            //if (patientenDictionary.ContainsKey(id))
-                            //{
-                            //    Patient patientInstance = (Patient)patientenDictionary[id].Content;
-                            //    if (patientInstance.IsBlinking == true)
-                            //    {
-                            //        patientInstance.IsBlinking = false;
-                            //    }
-                            //}
-
                             if (patientenDictionary.ContainsKey(id))
                             {
                                 Patient patientInstance = (Patient)patientenDictionary[id].Content;
 
-                                if (patientInstance.UpdateTimer != null)
-                                {
-                                    patientInstance.UpdateTimer.Stop();
-                                }
+                                patientInstance.UpdateTimer?.Stop();
 
 
-                                if (patientInstance.IsBlinking == true)
+                                if (patientInstance.IsBlinking)
                                 {
                                     patientInstance.IsBlinking = false;
                                     
                                 }
 
-                                // Erstelle einen neuen Timer
-                                DispatcherTimer timer = new DispatcherTimer();
-                                timer.Interval = TimeSpan.FromSeconds(5);
+                                DispatcherTimer timer = new DispatcherTimer
+                                {
+                                    Interval = TimeSpan.FromSeconds(5)
+                                };
 
-                                // Setze die Aktion, die bei Timeout aufgerufen wird
                                 timer.Tick += (sender, e) =>
                                 {
                                     // Hier wird der Button blinken ausgelöst
@@ -244,17 +227,10 @@ namespace MediTrack
                                     timer.Stop();
                                 };
 
-
-
-                                // Starte den Timer
                                 timer.Start();
 
-                                // Setze den Timer in der Patienteninstanz
                                 patientInstance.UpdateTimer = timer;
-                                //patientInstance.StopBlinkingAction = stopBlinking;
                             }
-
-
 
                             existingPatient.OnPropertyChanged(nameof(existingPatient.HeartRate));
                             existingPatient.OnPropertyChanged(nameof(existingPatient.OxygenLevel));
@@ -300,8 +276,8 @@ namespace MediTrack
                             Temperature = mqttMessageQueueArray[6],
 
                         };
-                        int id2 = Convert.ToInt32(mqttMessageQueueArray[0]);
-                        patientenListe.Add(id2,PatientenInstanz);
+                        int id = Convert.ToInt32(mqttMessageQueueArray[0]);
+                        patientenListe.Add(id,PatientenInstanz);
 
                         RemoveCrossButton();
                         if (RemoteWindowCounter <= 15)
@@ -314,15 +290,10 @@ namespace MediTrack
                                     Content = PatientenInstanz,
                                     Margin = new Thickness(5),
                                     Tag = mqttMessageQueueArray[0],
-                                    //Tag = PatientenInstanz,
                                 };
-                                //patientenListe.Add(PatientTemplateContentAddition);
                                 patientenDictionary.Add(Convert.ToInt32(mqttMessageQueueArray[0]), PatientTemplateContentAddition);
-
-                                //(PatientTemplateContentAddition.Content as PatientTemplate).MqttMessageQueueItem = mqttMessageQueueArray[0];
                                 PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
                                 RemoteWindowCounter += 1;
-                                //CreateAndManageDetailedWindow(patientTemplateContentAddition.Tag);
                             });
 
 
@@ -346,12 +317,6 @@ namespace MediTrack
                     OptionsData.Options.Add(mqttMessageQueueArray[0]);
                 }
             }
-        }
-
-
-        public Patient GetPatient()
-        {
-            return PatientenInstanz;
         }
 
 

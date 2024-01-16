@@ -3,7 +3,7 @@ using System.Text;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
-namespace VitaldataSimulator
+namespace VitaldataSimulator.Model
 {
     public class MqttPublisher
     {
@@ -15,7 +15,7 @@ namespace VitaldataSimulator
 
         private static MqttClient _client;
         private static MqttPublisher _instance;
-        public static event EventHandler<VitalData> VitalDataUpdated;
+        public static event EventHandler<VitalData> UpdateSendVitaldata;
         public static bool IsSendingData = true;
 
         public MqttPublisher()
@@ -41,11 +41,11 @@ namespace VitaldataSimulator
             {
                 PublishVitaldataJson(vitaldaten);
                 IsSendingData = false;
-                _client.Disconnect();
+                _instance.Disconnect();
             }
             else
             {
-                VitalDataUpdated?.Invoke(null, singleMonitor);
+                UpdateSendVitaldata?.Invoke(null, singleMonitor);
                 PublishVitaldataJson(vitaldaten);
             }
         }

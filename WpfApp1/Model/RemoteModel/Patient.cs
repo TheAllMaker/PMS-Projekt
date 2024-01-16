@@ -37,8 +37,6 @@ namespace MediTrack.Model.RemoteModel
 
         private DispatcherTimer updateTimer;
 
-        public Action StopBlinkingAction { get; set; }
-
         public DispatcherTimer UpdateTimer
         {
             get { return updateTimer; }

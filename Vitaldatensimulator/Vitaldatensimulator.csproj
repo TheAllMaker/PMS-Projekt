@@ -42,7 +42,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>VitaldataSimulator.VitaldataRunSimulator</StartupObject>
+    <StartupObject>VitaldataSimulator.Model.VitaldataRunSimulator</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">

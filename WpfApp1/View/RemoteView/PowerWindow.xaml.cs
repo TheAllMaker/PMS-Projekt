@@ -1,8 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using VitaldataSimulator;
 
 namespace MediTrack.View.RemoteView
 {

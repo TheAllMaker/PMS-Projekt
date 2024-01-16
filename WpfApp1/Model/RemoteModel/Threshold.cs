@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 
 /*
@@ -35,49 +34,48 @@ namespace MediTrack.Model.RemoteModel
 {
     public class Threshold
     {
-        private int monitorID;
-        private int heartRateMin;
-        private int heartRateMax;
-        private double respirationRateMin;
-        private double respirationRateMax;
-        private double oxygenLevelMin;
-        private double oxygenLevelMax;
-        private double temperatureMin;
-        private double temperatureMax;
-        private int systolicBloodPressureMin;
-        private int systolicBloodPressureMax;
-        private int diastolicBloodPressureMin;
-        private int diastolicBloodPressureMax;
+        private int _heartRateMin;
+        private int _heartRateMax;
+        private double _respirationRateMin;
+        private double _respirationRateMax;
+        private double _oxygenLevelMin;
+        private double _oxygenLevelMax;
+        private double _temperatureMin;
+        private double _temperatureMax;
+        private int _systolicBloodPressureMin;
+        private int _systolicBloodPressureMax;
+        private int _diastolicBloodPressureMin;
+        private int _diastolicBloodPressureMax;
 
 
         private static Dictionary<int, Threshold> thresholdDictionary = new Dictionary<int, Threshold>();
 
-        public Threshold(int MonitorID, int HeartRateMin, int HeartRateMax, double RespirationRateMin, double RespirationRateMax, double OxygenLevelMin, double OxygenLevelMax,
-                         double TemperatureMin, double TemperatureMax, int SystolicBloodPressureMin, int SystolicBloodPressureMax,
-                         int DiastolicBloodPressureMin, int DiastolicBloodPressureMax)
+        public Threshold(int monitorId, int heartRateMin, int heartRateMax, double respirationRateMin, double respirationRateMax, double oxygenLevelMin, double oxygenLevelMax,
+                         double temperatureMin, double temperatureMax, int systolicBloodPressureMin, int systolicBloodPressureMax,
+                         int diastolicBloodPressureMin, int diastolicBloodPressureMax)
         {
-            monitorID = MonitorID;
-            heartRateMin = HeartRateMin;
-            heartRateMax = HeartRateMax;
-            oxygenLevelMin = OxygenLevelMin;
-            oxygenLevelMax = OxygenLevelMax;
-            temperatureMin = TemperatureMin;
-            temperatureMax = TemperatureMax;
-            systolicBloodPressureMin = SystolicBloodPressureMin;
-            systolicBloodPressureMax = SystolicBloodPressureMax;
-            diastolicBloodPressureMin = DiastolicBloodPressureMin;
-            diastolicBloodPressureMax = DiastolicBloodPressureMax;
-            respirationRateMin = RespirationRateMin;
-            respirationRateMax = RespirationRateMax;
+            var monitorId1 = monitorId;
+            _heartRateMin = heartRateMin;
+            _heartRateMax = heartRateMax;
+            _oxygenLevelMin = oxygenLevelMin;
+            _oxygenLevelMax = oxygenLevelMax;
+            _temperatureMin = temperatureMin;
+            _temperatureMax = temperatureMax;
+            _systolicBloodPressureMin = systolicBloodPressureMin;
+            _systolicBloodPressureMax = systolicBloodPressureMax;
+            _diastolicBloodPressureMin = diastolicBloodPressureMin;
+            _diastolicBloodPressureMax = diastolicBloodPressureMax;
+            _respirationRateMin = respirationRateMin;
+            _respirationRateMax = respirationRateMax;
 
-            if (thresholdDictionary.ContainsKey(monitorID))
+            if (thresholdDictionary.ContainsKey(monitorId1))
             {
                 // Update existing instance instead of adding a new one
-                thresholdDictionary[monitorID] = this;
+                thresholdDictionary[monitorId1] = this;
             }
             else
             {
-                thresholdDictionary.Add(monitorID, this);
+                thresholdDictionary.Add(monitorId1, this);
             }
         }
 
@@ -101,65 +99,65 @@ namespace MediTrack.Model.RemoteModel
         public bool CheckVitalDataAgainstThreshold(int heartRateValue, int oxygenLevelValue, int bloodPressureDiastolicValue,
                                           int respirationRateValue, int bloodPressureSystolicValue, int temperatureValue)
         {
-            bool isWithinThreshold = heartRateValue >= heartRateMin && heartRateValue <= heartRateMax &&
-                                      oxygenLevelValue >= oxygenLevelMin && oxygenLevelValue <= oxygenLevelMax &&
-                                      bloodPressureDiastolicValue >= diastolicBloodPressureMin && bloodPressureDiastolicValue <= diastolicBloodPressureMax &&
-                                      respirationRateValue >= respirationRateMin && respirationRateValue <= respirationRateMax &&
-                                      bloodPressureSystolicValue >= systolicBloodPressureMin && bloodPressureSystolicValue <= systolicBloodPressureMax &&
-                                      temperatureValue >= temperatureMin && temperatureValue <= temperatureMax;
+            bool isWithinThreshold = heartRateValue >= _heartRateMin && heartRateValue <= _heartRateMax &&
+                                      oxygenLevelValue >= _oxygenLevelMin && oxygenLevelValue <= _oxygenLevelMax &&
+                                      bloodPressureDiastolicValue >= _diastolicBloodPressureMin && bloodPressureDiastolicValue <= _diastolicBloodPressureMax &&
+                                      respirationRateValue >= _respirationRateMin && respirationRateValue <= _respirationRateMax &&
+                                      bloodPressureSystolicValue >= _systolicBloodPressureMin && bloodPressureSystolicValue <= _systolicBloodPressureMax &&
+                                      temperatureValue >= _temperatureMin && temperatureValue <= _temperatureMax;
 
             return isWithinThreshold;
         }
         public bool CheckHeartRate(int heartRate)
         {
-            if (heartRateMin != 0 || heartRateMax != 0)
+            if (_heartRateMin != 0 || _heartRateMax != 0)
             {
-                return heartRate >= heartRateMin && heartRate <= heartRateMax;
+                return heartRate >= _heartRateMin && heartRate <= _heartRateMax;
             }
             return true;
         }
 
         public bool CheckOxygenLevel(int oxygenLevel)
         {
-            if(oxygenLevelMin != 0 || oxygenLevelMax != 0)
+            if(_oxygenLevelMin != 0 || _oxygenLevelMax != 0)
             {
-                return oxygenLevel >= oxygenLevelMin && oxygenLevel <= oxygenLevelMax;
+                return oxygenLevel >= _oxygenLevelMin && oxygenLevel <= _oxygenLevelMax;
             }
             return true;
         }
 
         public bool CheckBloodPressureDiastolic(int bloodPressureDiastolic)
         {
-            if (diastolicBloodPressureMin != 0 || diastolicBloodPressureMax != 0)
+            if (_diastolicBloodPressureMin != 0 || _diastolicBloodPressureMax != 0)
             {
-                return bloodPressureDiastolic >= diastolicBloodPressureMin && bloodPressureDiastolic <= diastolicBloodPressureMax;
+                return bloodPressureDiastolic >= _diastolicBloodPressureMin && bloodPressureDiastolic <= _diastolicBloodPressureMax;
             }
             return true;
         }
 
         public bool CheckRespirationRate(int respirationRate)
         {
-            if (respirationRateMin != 0 || respirationRateMax != 0)
+            if (_respirationRateMin != 0 || _respirationRateMax != 0)
             {
-                return respirationRate >= respirationRateMin && respirationRate <= respirationRateMax;
+                return respirationRate >= _respirationRateMin && respirationRate <= _respirationRateMax;
             }
             return true;
         }
 
         public bool CheckBloodPressureSystolic(int bloodPressureSystolic)
         {
-            if (systolicBloodPressureMin != 0 || systolicBloodPressureMax != 0)
+            if (_systolicBloodPressureMin != 0 || _systolicBloodPressureMax != 0)
             {
-                return bloodPressureSystolic >= systolicBloodPressureMin && bloodPressureSystolic <= systolicBloodPressureMax;
+                return bloodPressureSystolic >= _systolicBloodPressureMin && bloodPressureSystolic <= _systolicBloodPressureMax;
             }
             return true;
         }
 
         public bool CheckTemperature(int temperature)
         {
-            if (temperatureMin != 0 || temperatureMax != 0)
+            if (_temperatureMin != 0 || _temperatureMax != 0)
             {
-                return temperature >= temperatureMin && temperature <= temperatureMax;
+                return temperature >= _temperatureMin && temperature <= _temperatureMax;
             }
             return true;
         }
@@ -167,62 +165,62 @@ namespace MediTrack.Model.RemoteModel
 
         public int GetHeartRateMin()
         {
-            return heartRateMin;
+            return _heartRateMin;
         }
 
         public int GetHeartRateMax()
         {
-            return heartRateMax;
+            return _heartRateMax;
         }
 
         public double GetRespirationRateMin()
         {
-            return respirationRateMin;
+            return _respirationRateMin;
         }
 
         public double GetRespirationRateMax()
         {
-            return respirationRateMax;
+            return _respirationRateMax;
         }
 
         public double GetOxygenLevelMin()
         {
-            return oxygenLevelMin;
+            return _oxygenLevelMin;
         }
 
         public double GetOxygenLevelMax()
         {
-            return oxygenLevelMax;
+            return _oxygenLevelMax;
         }
 
         public double GetTemperatureMin()
         {
-            return temperatureMin;
+            return _temperatureMin;
         }
 
         public double GetTemperatureMax()
         {
-            return temperatureMax;
+            return _temperatureMax;
         }
 
         public int GetSystolicBloodPressureMin()
         {
-            return systolicBloodPressureMin;
+            return _systolicBloodPressureMin;
         }
 
         public int GetSystolicBloodPressureMax()
         {
-            return systolicBloodPressureMax;
+            return _systolicBloodPressureMax;
         }
 
         public int GetDiastolicBloodPressureMin()
         {
-            return diastolicBloodPressureMin;
+            return _diastolicBloodPressureMin;
         }
 
         public int GetDiastolicBloodPressureMax()
         {
-            return diastolicBloodPressureMax;
+            return _diastolicBloodPressureMax;
         }
 
     }

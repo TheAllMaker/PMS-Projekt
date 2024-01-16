@@ -1,4 +1,4 @@
-﻿<Window x:Class="VitaldataSimulator.SimulatorUI"
+﻿<Window x:Class="VitaldataSimulator.Model.SimulatorUI"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Vitaldata Simulator" Height="720" Width="1280"

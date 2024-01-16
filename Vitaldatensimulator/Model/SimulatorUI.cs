@@ -5,9 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace VitaldataSimulator
+namespace VitaldataSimulator.Model
 {
-    public partial class SimulatorUI : Window
+    public partial class SimulatorUI
     {
         private enum SimulationState
         {
@@ -31,7 +31,7 @@ namespace VitaldataSimulator
             Loaded += SimulatorUI_Loaded;
             //AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
             this.Closing += SimulatorUI_Closing;
-            MqttPublisher.VitalDataUpdated += VitaldatenSimulator_VitalDataUpdated;
+            MqttPublisher.UpdateSendVitaldata += UpdateSendVitaldata_UI;
             _mySimulatorTimer = new SimulatorTimer();
         }
 
@@ -43,18 +43,18 @@ namespace VitaldataSimulator
         }
 
         //Updaten der Anzeige der aktuell versendeten Vitalwerte
-        private void VitaldatenSimulator_VitalDataUpdated(object sender, VitalData MonitorVitalDaten)
+        private void UpdateSendVitaldata_UI(object sender, VitalData monitorVitalDaten)
         {
-            if (MonitorVitalDaten != null)
+            if (monitorVitalDaten != null)
             {
                 Dispatcher.Invoke(() =>
                 {
-                    HeartRateValueTextBlock.Text = MonitorVitalDaten.HeartRate.ToString();
-                    RespirationRateValueTextBlock.Text = Math.Round(MonitorVitalDaten.RespirationRate, MidpointRounding.AwayFromZero).ToString();
-                    OxygenLevelValueTextBlock.Text = Math.Round(MonitorVitalDaten.OxygenLevel, MidpointRounding.AwayFromZero).ToString();
-                    BloodPressureSystolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureSystolic.ToString();
-                    BloodPressureDiastolicValueTextBlock.Text = MonitorVitalDaten.BloodPressureDiastolic.ToString();
-                    TemperatureValueTextBlock.Text = Math.Round(MonitorVitalDaten.Temperature, 1).ToString("0.0");
+                    HeartRateValueTextBlock.Text = monitorVitalDaten.HeartRate.ToString();
+                    RespirationRateValueTextBlock.Text = Math.Round(monitorVitalDaten.RespirationRate, MidpointRounding.AwayFromZero).ToString();
+                    OxygenLevelValueTextBlock.Text = Math.Round(monitorVitalDaten.OxygenLevel, MidpointRounding.AwayFromZero).ToString();
+                    BloodPressureSystolicValueTextBlock.Text = monitorVitalDaten.BloodPressureSystolic.ToString();
+                    BloodPressureDiastolicValueTextBlock.Text = monitorVitalDaten.BloodPressureDiastolic.ToString();
+                    TemperatureValueTextBlock.Text = Math.Round(monitorVitalDaten.Temperature, 1).ToString("0.0");
                 });
             }
         }
@@ -91,8 +91,7 @@ namespace VitaldataSimulator
         //Kontrolle ob Slider geändert wurden für den Änderungs button
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Slider slider = sender as Slider;
-            if (slider != null && _currentState != SimulationState.Stopped && _originalSliderValues.ContainsKey(slider) && slider.Value != _originalSliderValues[slider])
+            if (sender is Slider slider && _currentState != SimulationState.Stopped && _originalSliderValues.ContainsKey(slider) && slider.Value != _originalSliderValues[slider])
             {
                 double previousValue = _originalSliderValues[slider];
                 double currentValue = slider.Value;
@@ -101,7 +100,6 @@ namespace VitaldataSimulator
                 {
                     _originalSliderValues[slider] = currentValue;
                     _isValueChanged = true;
-                    // Aktiviere den Bestätigen-Button
                     ConfirmChangesButton.IsEnabled = true;
                 }
             }
@@ -254,7 +252,7 @@ namespace VitaldataSimulator
             if (!ValidateMonitorID()) return;
 
             VitalData newMonitor = CreateMonitorData();
-            _mySimulatorTimer.StartSimulator(newMonitor);
+            _mySimulatorTimer.StartSimulatorTimer(newMonitor);
 
             MonitorIdBox.IsEnabled = false;
 
@@ -314,7 +312,7 @@ namespace VitaldataSimulator
         private void UpdateVitalData()
         {
             VitalData updatedMonitor = CreateMonitorData();
-            _mySimulatorTimer.StartSimulator(updatedMonitor);
+            _mySimulatorTimer.StartSimulatorTimer(updatedMonitor);
         }
 
         //Generiere eine UUID zur eindeutigen Identifizierung des
@@ -363,8 +361,8 @@ namespace VitaldataSimulator
         // Schicke als letzte Nachricht noch Alive = 0
         public void SetAliveStatusToZero()
         {
-            VitalData KillMonitor = new VitalData(MonitorIdBox.Text, 0, 0, 0, 0, 0, 0, _uuid, 0);
-            _mySimulatorTimer.StartSimulator(KillMonitor);
+            VitalData killMonitor = new VitalData(MonitorIdBox.Text, 0, 0, 0, 0, 0, 0, _uuid, 0);
+            _mySimulatorTimer.StartSimulatorTimer(killMonitor);
         }
     }
 }

@@ -20,7 +20,7 @@ using System.Windows;
 [assembly: ComVisible(false)]
 
 //Um mit dem Erstellen lokalisierbarer Anwendungen zu beginnen, legen Sie
-//<UICulture>ImCodeVerwendeteKultur</UICulture> in der .csproj-Datei
+//<UICulture>ImCodeVerwendeteKultur</UICulture> in der.csproj-Datei
 //in einer <PropertyGroup> fest. Wenn Sie in den Quelldateien beispielsweise Deutsch
 //(Deutschland) verwenden, legen Sie <UICulture> auf \"de-DE\" fest. Heben Sie dann die Auskommentierung
 //des nachstehenden NeutralResourceLanguage-Attributs auf. Aktualisieren Sie "en-US" in der nachstehenden Zeile,
