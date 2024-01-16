@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MediTrack.App" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Controller\RemoteController\App.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MediTrack.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAYAAAAAAGAACACAAAAABAAAAISAAAgAAAAAAAAQ=</HashCode>
+      <FileName>Controller\RemoteController\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MediTrack.StringContainer" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgQAgCAUAAQAAAAAAABUAAACQoAAiEAhAAAAAIAAKA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Controller.RemoteController.PatientTemplate" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAEQCBAAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controller\RemoteController\PatientTemplate.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MediTrack.Model.DataBaseModelConnection.DataBaseRemoteConnection" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhAAAgAAAIAAAAAAAAAEAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Model\DataBaseConnection\DataBaseRemoteConnection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Model.RemoteModel.ActiveMonitorIDManager" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIBAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Model\RemoteModel\ActiveMonitorIDManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Model.RemoteModel.MonitorIDToNameDictionary" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAIAAgAAAAAAAAAAAAABAAAAAAAEAAA=</HashCode>
+      <FileName>Model\RemoteModel\MonitorIDToNameDictionary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Model.RemoteModel.MqttHandler" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAAAAAAAAAAAAAAAAAAAAAQCAAAAAAAIBAAAAAA=</HashCode>
+      <FileName>Model\RemoteModel\MqttHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Model.RemoteModel.MqttMessageQueue" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAgABAAAAAAAQAAAQAAAAABAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Model\RemoteModel\MqttMessageQueue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Model.RemoteModel.OptionsData" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Model\RemoteModel\OptionsData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Model.RemoteModel.Patient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAEFAEQDEAMwACAAMDEAYEAggIAAggQgBA0hKAAFSBg=</HashCode>
+      <FileName>Model\RemoteModel\Patient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MediTrack.Model.RemoteModel.PatientDictionary" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAACAAAAAAAAgAAAAAAAAAAAAABAAAAAAAEAAA=</HashCode>
+      <FileName>Model\RemoteModel\PatientDictionary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Model.RemoteModel.PatientViewModel" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\RemoteModel\PatientViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Model.RemoteModel.Threshold" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBCBQIAAACCAgRgAAgABWAiAQAAAAYAACAAxEAAkALA=</HashCode>
+      <FileName>Model\RemoteModel\Threshold.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Model.RemoteModel.UuidDictionary" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIgAAAAAAAAAAAQABAAAAAAAEAAA=</HashCode>
+      <FileName>Model\RemoteModel\UuidDictionary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Properties.Resources" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.Properties.Settings" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediTrack.View.RemoteView.CrossButton" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAQAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>View\RemoteView\CrossButton.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MediTrack.View.RemoteView.DetailedWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBAAUAIAAABAAggACAAABBCIQAAABaAACAwAEAQkQJA=</HashCode>
+      <FileName>View\RemoteView\DetailedWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MediTrack.View.RemoteView.PowerWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAACAAAAAECAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\RemoteView\PowerWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
