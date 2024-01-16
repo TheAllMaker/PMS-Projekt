@@ -22,12 +22,12 @@ namespace MediTrack.Model.RemoteModel
     {
         public static HashSet<object> Options = new HashSet<object>();
        
-        public static void OptionsInput(object UID)
+        public static void OptionsInput(int UID)
         {
             OptionsData.Options.Add(UID);          
         }
 
-        public static void OptionsPop(object UID)
+        public static void OptionsPop(int UID)
         {
             OptionsData.Options.Remove(UID);
         }

@@ -144,10 +144,7 @@ namespace MediTrack
                             RemoteWindowCounter -= 1;
                             if (mqttMessageQueueArray[0] is int intValue)
                             {
-                                object mqttDataString = DataBaseRemoteConnection.CallMonitorIDtoPatientID(mqttMessageQueueArray[0]);
-                                object[] patientDataString = DataBaseRemoteConnection.CallForPatientThroughID(mqttDataString);
-                                string AssociatedEntireValue = $"{mqttMessageQueueArray[0]}: {patientDataString[0]}, {patientDataString[1]}";
-                                OptionsData.OptionsPop(AssociatedEntireValue);
+                                OptionsData.OptionsPop(intValue);
                             }
                         }
                     });
@@ -317,10 +314,7 @@ namespace MediTrack
 
                 else if (mqttMessageQueueArray.Length != 0)
                 {
-                    object mqttDataString = DataBaseRemoteConnection.CallMonitorIDtoPatientID(mqttMessageQueueArray[0]);
-                    object[] patientDataString = DataBaseRemoteConnection.CallForPatientThroughID(mqttDataString);
-                    string AssociatedEntireValue = $"{mqttMessageQueueArray[0]}: {patientDataString[0]}, {patientDataString[1]}";
-                    OptionsData.Options.Add(AssociatedEntireValue);
+                    OptionsData.Options.Add(mqttMessageQueueArray[0]);
                 }
             }
         }
