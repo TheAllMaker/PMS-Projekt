@@ -131,7 +131,7 @@ namespace Patientenverwaltung
                                     Content = $"{moid}: {mf}, {sn}",
                                     Tag = moid
                                 };
-                               
+
 
                                 // Set ComboBoxItem properties based on connection status
                                 if (isConnected)
@@ -143,7 +143,7 @@ namespace Patientenverwaltung
                                 cmbMonitor.Items.Add(comboBoxItem);
                             }
 
-                            
+
                         }
                     }
                 }
