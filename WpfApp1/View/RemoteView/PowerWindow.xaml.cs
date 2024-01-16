@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using Vitaldatensimulator;
+using VitaldataSimulator;
 
 namespace MediTrack.View.RemoteView
 {

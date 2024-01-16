@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace Vitaldatensimulator
+namespace VitaldataSimulator
 {
     public partial class PowerWindow : Window
     {

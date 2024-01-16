@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vitaldatensimulator
+namespace VitaldataSimulator
 {
     public class VitalData
     {
