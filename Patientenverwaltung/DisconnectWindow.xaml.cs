@@ -1,8 +1,10 @@
 ﻿using Npgsql;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 
 namespace Patientenverwaltung
@@ -70,33 +72,47 @@ namespace Patientenverwaltung
                     string selectedItemText = CmbConnection.SelectedItem.ToString();
 
                     // Parse the selected item text to extract pid and moid
-                    int pid = int.Parse(selectedItemText.Split(':')[0].Trim());
-                    int moid = int.Parse(selectedItemText.Split('-')[1].Split(':')[0].Trim());
-
-                    // Perform the deletion in the belegung table
-                    using (NpgsqlConnection connection = new NpgsqlConnection(connString))
+                    int pid, moid;
+                    if (TryParseIdsFromComboBoxItem(selectedItemText, out pid, out moid))
                     {
-                        connection.Open();
-
-                        string deleteQuery = "DELETE FROM belegung WHERE pid = @pid AND moid = @moid";
-
-                        using (NpgsqlCommand command = new NpgsqlCommand(deleteQuery, connection))
+                        // Perform the deletion in the belegung table
+                        using (NpgsqlConnection connection = new NpgsqlConnection(connString))
                         {
-                            command.Parameters.AddWithValue("@pid", pid);
-                            command.Parameters.AddWithValue("@moid", moid);
+                            connection.Open();
 
-                            int rowsAffected = command.ExecuteNonQuery();
+                            string deleteQuery = "DELETE FROM belegung WHERE pid = @pid AND moid = @moid";
 
-                            if (rowsAffected > 0)
+                            using (NpgsqlCommand command = new NpgsqlCommand(deleteQuery, connection))
                             {
-                                MessageBox.Show("Verbindung erfolgreich getrennt.");
-                                // You may want to refresh the ComboBox or take other actions after successful deletion.
-                            }
-                            else
-                            {
-                                MessageBox.Show("Verbindung konnte nicht getrennt werden.");
+                                command.Parameters.AddWithValue("@pid", pid);
+                                command.Parameters.AddWithValue("@moid", moid);
+
+                                int rowsAffected = command.ExecuteNonQuery();
+
+                                if (rowsAffected > 0)
+                                {
+                                    // Show the status (checkmark) with fade-out animation
+                                    DisconnectStatus.Visibility = Visibility.Visible;
+                                    DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1.5)); // 1.5 seconds fade-out
+                                    DisconnectStatus.BeginAnimation(TextBlock.OpacityProperty, animation);
+
+                                    // Remove the item from the ComboBox
+                                    CmbConnection.Items.Remove(selectedItemText);
+
+                                    // You may also need to refresh the ComboBox if you have a data source
+                                    // CmbConnection.ItemsSource = GetUpdatedDataSource(); // Update this line with your actual data source method
+                                }
+
+                                else
+                                {
+                                    MessageBox.Show("Verbindung konnte nicht getrennt werden.");
+                                }
                             }
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fehler beim Parsen von pid und moid.");
                     }
                 }
                 else
@@ -109,6 +125,40 @@ namespace Patientenverwaltung
                 MessageBox.Show($"Fehler beim Trennen der Verbindung: {ex.Message}");
             }
         }
+
+
+
+
+        private bool TryParseIdsFromComboBoxItem(string itemText, out int pid, out int moid)
+        {
+            pid = moid = 0; // Set default values
+
+            try
+            {
+                // Use regular expressions to extract numeric values
+                var matches = Regex.Matches(itemText, @"\d+");
+
+                if (matches.Count >= 2)
+                {
+                    pid = int.Parse(matches[0].Value);
+                    moid = int.Parse(matches[1].Value);
+
+                    return true; // Parsing successful
+                }
+                else
+                {
+                    return false; // Unexpected format
+                }
+            }
+            catch (Exception)
+            {
+                return false; // Parsing failed
+            }
+        }
+
+
+
+
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
