@@ -13,6 +13,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <TextBlock Text="Database Administration Window"  HorizontalAlignment="Center" VerticalAlignment="Top" 
@@ -84,8 +85,30 @@
             </Button.Template>
         </Button>
 
+        <!-- Button 4 - Unterster Bereich -->
+        <Button Grid.Row="4" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" 
+                BorderBrush="White" BorderThickness="2" Background="White" Foreground="Black" 
+                Name="DisconnectPM" Click="Button_Click_DisconnectPM" Content="Disconnect Patient with Monitor" Padding="10" Width="308" Height="38" Margin="0,18,0,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Opacity" Value="0.4" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
         <!-- Power-Off Button - Unten rechts -->
-        <Button Grid.Row="4" Grid.Column="1" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="550,0,0,10"
+        <Button Grid.Row="5" Grid.Column="1" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="550,0,0,10"
         BorderBrush="Transparent" Background="Black" Foreground="White" Name="PowerOff" Click="Button_Click_PowerOff">
             <Image Source="power.png" Width="30" Height="30"/>
             <Button.Template>

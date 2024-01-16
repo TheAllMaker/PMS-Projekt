@@ -59,6 +59,20 @@ namespace Patientenverwaltung
 
         }
 
+        private void Button_Click_DisconnectPM(object sender, RoutedEventArgs e)
+        {
+            // Öffne ConnectPatientMonitor
+            Window DisconnectWindow = new DisconnectWindow
+            {
+                Title = "Connect Patient with Monitor",
+                Width = 800,
+                Height = 450,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+            DisconnectWindow.ShowDialog();
+
+        }
+
         private void Button_Click_PowerOff(object sender, RoutedEventArgs e)
         {
             // Hier wird eine Instanz von PowerWindow erstellt
