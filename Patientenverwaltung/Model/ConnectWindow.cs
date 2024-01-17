@@ -35,6 +35,7 @@ namespace Patientenverwaltung
                 }
             }
         }
+
         private static bool IsMonitorConnected(int mid)
         {
             // Check if the patient is connected to a mid in the belegung table
@@ -51,6 +52,15 @@ namespace Patientenverwaltung
                 }
             }
         }
+
+
+       
+
+
+
+
+
+
         private void FillPatientsComboBox()
         {
             try
@@ -154,8 +164,30 @@ namespace Patientenverwaltung
             }
         }
 
-        private void Verbinden_Click(object sender, RoutedEventArgs e)
+        private static bool IsAlreadyConnected(int mid, int pid)
         {
+            // Check if the combination of mid and pid exists in the belegung table
+            using (NpgsqlConnection connection = new NpgsqlConnection(connString))
+            {
+                connection.Open();
+
+                string query = $"SELECT COUNT(*) FROM belegung WHERE moid = {mid} AND pid = {pid}";
+
+                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                {
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+                    return count > 0;
+                }
+            }
+            
+        }
+
+            
+        
+
+
+        private void Verbinden_Click(object sender, RoutedEventArgs e)
+        {   
             try
             {
                 if (cmbPatient.SelectedItem != null && cmbMonitor.SelectedItem != null)
@@ -169,50 +201,56 @@ namespace Patientenverwaltung
 
                         // Check if the patient is connected to a monitor
                         bool isPatientConnected = IsPatientConnected(patientId);
-
-                        // Überprüfen, ob die Verbindung bereits existiert
-                        if (isPatientConnected)
+                        if (IsAlreadyConnected(patientId, monitorId))
                         {
-                            // Update durchführen, wenn der Patient bereits in der belegung existiert
-                            string updateQuery = "DELETE FROM belegung WHERE moid = @MonitorId; " +
-                                                 "UPDATE belegung SET moid = @MonitorId WHERE pid = @PatientId";
-
-                            using (NpgsqlCommand updateCommand = new NpgsqlCommand(updateQuery, connection))
-                            {
-                                updateCommand.Parameters.AddWithValue("@MonitorId", monitorId);
-                                updateCommand.Parameters.AddWithValue("@PatientId", patientId);
-                                updateCommand.ExecuteNonQuery();
-
-                                MessageBox.Show("Connection successfully updated");
-                            }
+                            MessageBox.Show("!IsAlreadyConnected");
                         }
-                        else
-                        {
-                            // Insert durchführen, wenn der Patient noch nicht in der belegung existiert
-                            string insertQuery = "INSERT INTO belegung (moid, pid) VALUES (@MonitorId, @PatientId)";
-
-                            using (NpgsqlCommand insertCommand = new NpgsqlCommand(insertQuery, connection))
+                        else{
+                            // Überprüfen, ob die Verbindung bereits existiert
+                            if (isPatientConnected)
                             {
-                                insertCommand.Parameters.AddWithValue("@MonitorId", monitorId);
-                                insertCommand.Parameters.AddWithValue("@PatientId", patientId);
-                                insertCommand.ExecuteNonQuery();
+                                // Update durchführen, wenn der Patient bereits in der belegung existiert
+                                string updateQuery = "DELETE FROM belegung WHERE moid = @MonitorId; " +
+                                                     "UPDATE belegung SET moid = @MonitorId WHERE pid = @PatientId";
 
-                                // Show the status (checkmark) with fade-out animation
-                                DisconnectStatus.Visibility = Visibility.Visible;
-                                DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1.8)); // x seconds fade-out
-                                DisconnectStatus.BeginAnimation(TextBlock.OpacityProperty, animation);
+                                using (NpgsqlCommand updateCommand = new NpgsqlCommand(updateQuery, connection))
+                                {
+                                    updateCommand.Parameters.AddWithValue("@MonitorId", monitorId);
+                                    updateCommand.Parameters.AddWithValue("@PatientId", patientId);
+                                    updateCommand.ExecuteNonQuery();
+
+                                    MessageBox.Show("Connection successfully updated");
+                                }
                             }
+                            else
+                            {
+                                // Insert durchführen, wenn der Patient noch nicht in der belegung existiert
+                                string insertQuery = "INSERT INTO belegung (moid, pid) VALUES (@MonitorId, @PatientId)";
+
+                                using (NpgsqlCommand insertCommand = new NpgsqlCommand(insertQuery, connection))
+                                {
+                                    insertCommand.Parameters.AddWithValue("@MonitorId", monitorId);
+                                    insertCommand.Parameters.AddWithValue("@PatientId", patientId);
+                                    insertCommand.ExecuteNonQuery();
+
+                                    // Show the status (checkmark) with fade-out animation
+                                    DisconnectStatus.Visibility = Visibility.Visible;
+                                    DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1.8)); // x seconds fade-out
+                                    DisconnectStatus.BeginAnimation(TextBlock.OpacityProperty, animation);
+                                }
+                            }
+                            // Change the background color of the selected items to LightGray
+                            ChangeSelectedItemBackground(cmbPatient, Brushes.LightGray);
+                            ChangeSelectedItemBackground(cmbMonitor, Brushes.LightGray);
+
+                            cmbPatient.SelectedItem = null;
+                            cmbMonitor.SelectedItem = null;
+
+                            // Force a visual update
+                            InvalidateVisual();
                         }
 
-                        // Change the background color of the selected items to LightGray
-                        ChangeSelectedItemBackground(cmbPatient, Brushes.LightGray);
-                        ChangeSelectedItemBackground(cmbMonitor, Brushes.LightGray);
-
-                        cmbPatient.SelectedItem = null;
-                        cmbMonitor.SelectedItem = null;
-
-                        // Force a visual update
-                        InvalidateVisual();
+                        
                     }
                 }
                 else
