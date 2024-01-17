@@ -41,7 +41,7 @@ namespace Patientenverwaltung
 
                             if (count > 0)
                             {
-                                MessageBox.Show("Die Serialnummer existiert bereits in der Datenbank.");
+                                MessageBox.Show("The serial number already exists in the database");
                                 return; // Beenden, wenn die Serialnummer bereits vorhanden ist
                             }
                         }
@@ -70,7 +70,7 @@ namespace Patientenverwaltung
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Fehler beim Einfügen der Daten: {ex.Message}");
+                    MessageBox.Show($"The data insertion failed: {ex.Message}");
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace Patientenverwaltung
         {
             if (serial.Length < 3)
             {
-                MessageBox.Show("Seriennummer muss mindestens drei Zeichen enthalten.");
+                MessageBox.Show("The serial number must contain at least three characters.");
                 return false;
             }
             // Hier können Sie zusätzliche Validierungen hinzufügen
