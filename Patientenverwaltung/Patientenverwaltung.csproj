@@ -107,57 +107,43 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="View\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ConnectWindow.xaml">
+    <Page Include="View\ConnectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DisconnectWindow.xaml">
+    <Page Include="View\DisconnectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DisconnectWindow.xaml.cs">
-      <DependentUpon>DisconnectWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="NewMonitorWindow.xaml">
+    <Page Include="View\NewMonitorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NewPatientWindow.xaml">
+    <Page Include="View\NewPatientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PowerWindow.xaml">
+    <Page Include="View\PowerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\App.cs" />
+    <Compile Include="Model\PowerWindow.cs" />
+    <Compile Include="Model\NewPatientWindow.cs" />
+    <Compile Include="Model\NewMonitorWindow.cs" />
+    <Compile Include="Model\DisconnectWindow.cs" />
+    <Compile Include="Model\MainWindow.cs" />
     <Compile Include="Model\ConnectWindow.cs" />
-    <Compile Include="NewMonitorWindow.xaml.cs">
-      <DependentUpon>NewMonitorWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NewPatientWindow.xaml.cs">
-      <DependentUpon>NewPatientWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PowerWindow.xaml.cs">
-      <DependentUpon>PowerWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -196,10 +182,10 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.3.2\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="power.png" />
+    <Resource Include="PNGs\power.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="poweroff.png" />
+    <Resource Include="PNGs\poweroff.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

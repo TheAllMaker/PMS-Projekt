@@ -99,7 +99,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Patient.cs" />
     <Compile Include="SQLqueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
