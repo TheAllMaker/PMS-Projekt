@@ -154,19 +154,19 @@
 
             <!-- OxygenLevel ........................................................................-->
 
-            <TextBox Grid.Column="2" Foreground="BlueViolet" Name="OxygenLevelTextBoxMin" BorderThickness="2" BorderBrush="#CFDBD5"
+            <TextBox Grid.Column="2" Foreground="Cyan" Name="OxygenLevelTextBoxMin" BorderThickness="2" BorderBrush="#CFDBD5"
                 HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" />
 
-            <TextBlock Grid.Row="0" Grid.Column="2" Text="Spo2 MIN" Foreground="BlueViolet" Margin="10,0,0,0"
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Spo2 MIN" Foreground="Cyan" Margin="10,0,0,0"
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"
             />
 
           
 
-            <TextBox Grid.Column="3" Foreground="BlueViolet" Name="OxygenLevelTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
+            <TextBox Grid.Column="3" Foreground="Cyan" Name="OxygenLevelTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
                 HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" Grid.ColumnSpan="2" />
 
-            <TextBlock Grid.Row="0" Grid.Column="3" Text="SPo2 MAX" Foreground="BlueViolet" Margin="10,0,0,0"
+            <TextBlock Grid.Row="0" Grid.Column="3" Text="SPo2 MAX" Foreground="Cyan" Margin="10,0,0,0"
                 HorizontalAlignment="left" VerticalAlignment="Top" FontSize="16"
             />
 
@@ -195,20 +195,20 @@
             
             <!-- Diastolic Blood Pressure ........................................................................-->
 
-            <TextBox Grid.Row="2" Grid.Column="0" Foreground="Cyan" Name="DiastolicBloodPressureTextBoxMin" BorderThickness="2" BorderBrush="#CFDBD5"
+            <TextBox Grid.Row="2" Grid.Column="0" Foreground="BlueViolet" Name="DiastolicBloodPressureTextBoxMin" BorderThickness="2" BorderBrush="#CFDBD5"
                  HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" >
             </TextBox>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="D BP MIN" Foreground="Cyan" Margin="10,128,0,0"
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="D BP MIN" Foreground="BlueViolet" Margin="10,128,0,0"
                 HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.RowSpan="2"
             />
 
            
-            <TextBox Grid.Row="2" Grid.Column="1" Foreground="Cyan" Name="DiastolicBloodPressureTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
+            <TextBox Grid.Row="2" Grid.Column="1" Foreground="BlueViolet" Name="DiastolicBloodPressureTextBoxMax" BorderThickness="2" BorderBrush="#CFDBD5"
                 HorizontalAlignment="Center" Background="#111622" VerticalAlignment="Center" Width="176" FontSize="36" >
             </TextBox>
 
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="D BP MAX" Foreground="Cyan" Margin="10,128,0,0"
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="D BP MAX" Foreground="BlueViolet" Margin="10,128,0,0"
                  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2" Grid.RowSpan="2"
             />
 
