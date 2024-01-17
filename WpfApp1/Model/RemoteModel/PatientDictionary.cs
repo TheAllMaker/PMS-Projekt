@@ -76,7 +76,7 @@ namespace MediTrack.Model.RemoteModel
 
         public static bool DictionaryContainer(object MonitorIDKey)
         {
-            if (MonitorIDKey == null) return false;
+           
             if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKey))
             {
                 return true;
