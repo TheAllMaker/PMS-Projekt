@@ -80,7 +80,7 @@ namespace Patientenverwaltung
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Fehler beim Einfügen der Daten: {ex.Message}");
+                        MessageBox.Show($"Error while inserting data: {ex.Message}");
                     }
                     
 
@@ -92,10 +92,16 @@ namespace Patientenverwaltung
 
         private static bool AreFieldsFilled(string vorname, string nachname, string sex, DateTime geburtsdatum, string room, string bed)
         {
+            if (geburtsdatum > DateTime.Now)
+            {
+                MessageBox.Show("The birthdate must not be in the future.");
+                return false;
+            }
             if (string.IsNullOrEmpty(vorname) || string.IsNullOrEmpty(nachname) || string.IsNullOrEmpty(sex) ||
                 geburtsdatum == DateTime.MinValue || string.IsNullOrEmpty(room) || string.IsNullOrEmpty(bed))
             {
-                MessageBox.Show("Bitte füllen Sie alle erforderlichen Felder aus.");
+                MessageBox.Show("Please fill in all required fields.");
+                
                 return false;
             }
 
@@ -107,14 +113,14 @@ namespace Patientenverwaltung
         {
             if (vorname.Length < 3 || nachname.Length < 3)
             {
-                MessageBox.Show("Name und Vorname müssen mindestens drei Buchstaben enthalten.");
+                MessageBox.Show("Last name and first name must contain at least three letters.");
                 return false;
             }
 
             // Überprüfen, ob Vorname und Nachname nur Buchstaben enthalten
             if (!IsOnlyLetters(vorname) || !IsOnlyLetters(nachname))
             {
-                MessageBox.Show("Name und Vorname dürfen nur Buchstaben enthalten.");
+                MessageBox.Show("Last name and first name may only contain letters.");
                 return false;
             }
 
@@ -134,14 +140,14 @@ namespace Patientenverwaltung
             // Überprüfen, ob room und bed positive Zahlen sind
             if (!int.TryParse(room, out roomValue) || !int.TryParse(bed, out bedValue) || roomValue <= 0 || bedValue <= 0)
             {
-                MessageBox.Show("Room und Bed müssen positive Zahlen sein.");
+                MessageBox.Show("Room and bed must be positive numbers.");
                 return false;
             }
 
             // Überprüfen, ob room und bed nicht größer als 4-stellig sind
             if (roomValue > 9999 || bedValue > 9999)
             {
-                MessageBox.Show("Room und Bed dürfen nicht größer als 4-stellig sein.");
+                MessageBox.Show("Room and bed must not be larger than 4 digits");
                 return false;
             }
 

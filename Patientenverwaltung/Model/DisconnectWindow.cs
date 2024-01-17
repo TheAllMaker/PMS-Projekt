@@ -73,7 +73,7 @@ namespace Patientenverwaltung
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Laden der Patienten und Monitore: {ex.Message}");
+                MessageBox.Show($"Error loading patients and monitors: {ex.Message}");
             }
         }
 
@@ -120,24 +120,24 @@ namespace Patientenverwaltung
 
                                 else
                                 {
-                                    MessageBox.Show("Verbindung konnte nicht getrennt werden.");
+                                    MessageBox.Show("Disconnect failed.");
                                 }
                             }
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Fehler beim Parsen von pid und moid.");
+                        MessageBox.Show("Error when parsing pid and moid.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Bitte wählen Sie einen Eintrag aus der ComboBox aus.");
+                    MessageBox.Show("Please select an entry from the ComboBox.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Trennen der Verbindung: {ex.Message}");
+                MessageBox.Show($"Disconnect failed: {ex.Message}");
             }
         }
 
