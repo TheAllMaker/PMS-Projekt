@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
+using System.Net.Mime;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using Npgsql;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Patientenverwaltung
 {
@@ -25,17 +28,16 @@ namespace Patientenverwaltung
             string vorname = txtVorname.Text;
             string nachname = txtNachname.Text;
             string sex = cmbSex.Text;
-
             DateTime geburtsdatum = dpGeburtstag.SelectedDate ?? DateTime.MinValue;
-
-            // Überprüfen, ob das Room-Feld eine gültige Ganzzahl ist
-            if (int.TryParse(txtRoom.Text, out int room) && int.TryParse(txtBed.Text, out int bed))
+            string room = txtRoom.Text;
+            string bed = txtBed.Text;
+            if (AreFieldsFilled(vorname, nachname, sex, geburtsdatum, room, bed))
             {
-                // Überprüfen, ob das Bed-Feld eine gültige Ganzzahl ist
-
-                // Überprüfen der Eingabe
-                if (IsValidInput(vorname, nachname, sex, geburtsdatum))
+                // Überprüfen, ob das Room-Feld eine gültige Ganzzahl ist und ob das Bed-Feld eine gültige Ganzzahl ist
+                if (IsValidInput(vorname, nachname, sex, geburtsdatum) && IsValidInput2(room, bed, out int roomValue, out int bedValue))
                 {
+                    
+
                     // Verbindungszeichenfolge zur Datenbank
                     string connectionString = connString;
 
@@ -47,7 +49,8 @@ namespace Patientenverwaltung
                             connection.Open();
 
                             // SQL-Abfrage zum Einfügen von Daten
-                            string insertQuery = "INSERT INTO patients (name, vorname, sex, bd, rn, bn) VALUES (@Nachname, @Vorname, @Sex, @Birthdate, @Room, @Bed)";
+                            string insertQuery =
+                                "INSERT INTO patients (name, vorname, sex, bd, rn, bn) VALUES (@Nachname, @Vorname, @Sex, @Birthdate, @Room, @Bed)";
 
                             using (NpgsqlCommand command = new NpgsqlCommand(insertQuery, connection))
                             {
@@ -56,8 +59,8 @@ namespace Patientenverwaltung
                                 command.Parameters.AddWithValue("@Nachname", nachname);
                                 command.Parameters.AddWithValue("@Sex", sex);
                                 command.Parameters.AddWithValue("@Birthdate", geburtsdatum);
-                                command.Parameters.AddWithValue("@Room", room);
-                                command.Parameters.AddWithValue("@Bed", bed);
+                                command.Parameters.AddWithValue("@Room", roomValue);
+                                command.Parameters.AddWithValue("@Bed", bedValue);
                                 // Ausführen der SQL-Abfrage
                                 command.ExecuteNonQuery();
                             }
@@ -65,7 +68,8 @@ namespace Patientenverwaltung
 
                         // Show the status (checkmark) with fade-out animation
                         DisconnectStatus.Visibility = Visibility.Visible;
-                        DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1.8)); // x seconds fade-out
+                        DoubleAnimation
+                            animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1.8)); // x seconds fade-out
                         DisconnectStatus.BeginAnimation(TextBlock.OpacityProperty, animation);
                         cmbSex.SelectedItem = null;
                         txtVorname.Text = null;
@@ -78,19 +82,26 @@ namespace Patientenverwaltung
                     {
                         MessageBox.Show($"Fehler beim Einfügen der Daten: {ex.Message}");
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Ungültige Eingabe. Stellen Sie sicher, dass alle Felder ausgefüllt sind.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Ungültige Eingabe. Bitte geben Sie eine gültige Ganzzahl ein für Bed und Room ein.");
-            }
+                    
 
+                }
+
+            }
 
         }
+
+        private static bool AreFieldsFilled(string vorname, string nachname, string sex, DateTime geburtsdatum, string room, string bed)
+        {
+            if (string.IsNullOrEmpty(vorname) || string.IsNullOrEmpty(nachname) || string.IsNullOrEmpty(sex) ||
+                geburtsdatum == DateTime.MinValue || string.IsNullOrEmpty(room) || string.IsNullOrEmpty(bed))
+            {
+                MessageBox.Show("Bitte füllen Sie alle erforderlichen Felder aus.");
+                return false;
+            }
+
+            return true;
+        }
+
 
         private bool IsValidInput(string vorname, string nachname, string sex, DateTime geburtsdatum)
         {
@@ -99,12 +110,53 @@ namespace Patientenverwaltung
                 MessageBox.Show("Name und Vorname müssen mindestens drei Buchstaben enthalten.");
                 return false;
             }
+
+            // Überprüfen, ob Vorname und Nachname nur Buchstaben enthalten
+            if (!IsOnlyLetters(vorname) || !IsOnlyLetters(nachname))
+            {
+                MessageBox.Show("Name und Vorname dürfen nur Buchstaben enthalten.");
+                return false;
+            }
+
             // Hier können Sie zusätzliche Validierungen hinzufügen
             return !string.IsNullOrEmpty(vorname) &&
                    !string.IsNullOrEmpty(nachname) &&
                    !string.IsNullOrEmpty(sex) &&
                    geburtsdatum != DateTime.MinValue;
         }
+
+        private static bool IsValidInput2(string room, string bed, out int roomValue, out int bedValue)
+        {
+            // Initialize out parameters
+            roomValue = 0;
+            bedValue = 0;
+
+            // Überprüfen, ob room und bed positive Zahlen sind
+            if (!int.TryParse(room, out roomValue) || !int.TryParse(bed, out bedValue) || roomValue <= 0 || bedValue <= 0)
+            {
+                MessageBox.Show("Room und Bed müssen positive Zahlen sein.");
+                return false;
+            }
+
+            // Überprüfen, ob room und bed nicht größer als 4-stellig sind
+            if (roomValue > 9999 || bedValue > 9999)
+            {
+                MessageBox.Show("Room und Bed dürfen nicht größer als 4-stellig sein.");
+                return false;
+            }
+
+            // Hier können Sie zusätzliche Validierungen hinzufügen
+            return true;
+        }
+
+
+
+
+        private bool IsOnlyLetters(string value)
+        {
+            return !string.IsNullOrEmpty(value) && value.All(char.IsLetter);
+        }
+
 
         private void Abbruch_Click(object sender, RoutedEventArgs e)
         {
