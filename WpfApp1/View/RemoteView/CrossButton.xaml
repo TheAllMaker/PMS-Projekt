@@ -75,7 +75,7 @@
                 </Viewbox>
 
 
-                <Popup Name="CrossButtonOptionsPopUp" Placement="Bottom" PlacementTarget="{Binding ElementName=PatientNetworkIcon}" StaysOpen="False">
+                <Popup Name="CrossButtonOptionsPopUp" Placement="Bottom" StaysOpen="False">
                     <Border BorderBrush="Gray" BorderThickness="1" Background="White" CornerRadius="5">
                         <ListBox Name="CrossButtonListBox" SelectionChanged="CrossButtonSelectionChanged" 
                                  ItemsSource="{Binding Source={x:Static local:OptionsData.Options}}">
