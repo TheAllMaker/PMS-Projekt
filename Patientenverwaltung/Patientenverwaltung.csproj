@@ -107,11 +107,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="View\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ConnectWindow.xaml">
+    <Page Include="View\ConnectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,20 +119,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DisconnectWindow.xaml.cs">
       <DependentUpon>DisconnectWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Page Include="NewMonitorWindow.xaml">
       <SubType>Designer</SubType>
@@ -148,6 +140,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\App.cs" />
+    <Compile Include="Model\MainWindow.cs" />
     <Compile Include="Model\ConnectWindow.cs" />
     <Compile Include="NewMonitorWindow.xaml.cs">
       <DependentUpon>NewMonitorWindow.xaml</DependentUpon>
@@ -196,10 +190,10 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.3.2\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="power.png" />
+    <Resource Include="PNGs\power.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="poweroff.png" />
+    <Resource Include="PNGs\poweroff.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
