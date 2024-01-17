@@ -115,7 +115,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DisconnectWindow.xaml">
+    <Page Include="View\DisconnectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,35 +123,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="DisconnectWindow.xaml.cs">
-      <DependentUpon>DisconnectWindow.xaml</DependentUpon>
-    </Compile>
-    <Page Include="NewMonitorWindow.xaml">
+    <Page Include="View\NewMonitorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NewPatientWindow.xaml">
+    <Page Include="View\NewPatientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PowerWindow.xaml">
+    <Page Include="View\PowerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\App.cs" />
+    <Compile Include="Model\PowerWindow.cs" />
+    <Compile Include="Model\NewPatientWindow.cs" />
+    <Compile Include="Model\NewMonitorWindow.cs" />
+    <Compile Include="Model\DisconnectWindow.cs" />
     <Compile Include="Model\MainWindow.cs" />
     <Compile Include="Model\ConnectWindow.cs" />
-    <Compile Include="NewMonitorWindow.xaml.cs">
-      <DependentUpon>NewMonitorWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NewPatientWindow.xaml.cs">
-      <DependentUpon>NewPatientWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PowerWindow.xaml.cs">
-      <DependentUpon>PowerWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

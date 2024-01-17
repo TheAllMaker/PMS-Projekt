@@ -21,7 +21,8 @@ namespace Patientenverwaltung
             string manu = cmbManu.Text;
             string serial = txtSeriennummer.Text;
 
-            if (IsValidInput(serial)) {
+            if (IsValidInput(serial))
+            {
                 try
                 {
                     // Verbindung zur Datenbank öffnen
@@ -65,7 +66,7 @@ namespace Patientenverwaltung
                             txtSeriennummer.Text = null;
                         }
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -75,13 +76,13 @@ namespace Patientenverwaltung
         }
         private bool IsValidInput(string serial)
         {
-            if ( serial.Length < 3)
+            if (serial.Length < 3)
             {
                 MessageBox.Show("Seriennummer muss mindestens drei Zeichen enthalten.");
                 return false;
             }
             // Hier können Sie zusätzliche Validierungen hinzufügen
-            return !string.IsNullOrEmpty(serial);                   
+            return !string.IsNullOrEmpty(serial);
         }
 
 

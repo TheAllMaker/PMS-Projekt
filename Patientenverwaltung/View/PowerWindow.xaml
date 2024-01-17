@@ -14,13 +14,13 @@
 
 
 
-        <TextBlock Text="Do you really want to turn off the Administration?" HorizontalAlignment="Center" 
+        <TextBlock Text="Do you really want to turn off Administration?" HorizontalAlignment="Center" 
                VerticalAlignment="Center" Margin="0,0,0,20" FontSize="20" Foreground="White"/>
 
 
 
         <Viewbox Width="50" Height="50" Grid.Row="1" >
-            <Image Source="PNGs/power.png"  Width="200" Height="200"/>
+            <Image Source="/PNGs/power.png"  Width="200" Height="200"/>
         </Viewbox>
 
 
