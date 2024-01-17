@@ -41,7 +41,7 @@ namespace MediTrack.Model.RemoteModel
             
             else
             {
-                //Console.WriteLine(StringContainer.UUIDDictionaryFai);
+                Console.WriteLine(StringContainer.UUIDDictionaryFai);
                 return null; 
             }
 
@@ -57,7 +57,7 @@ namespace MediTrack.Model.RemoteModel
             
             catch (ArgumentException)
             {
-                //Console.WriteLine(StringContainer.UUIDDictionaryRemovedFai + MonitorIdentifierKey);
+                Console.WriteLine(StringContainer.UUIDDictionaryRemovedFai + MonitorIdentifierKey);
             }
 
         }
@@ -72,7 +72,7 @@ namespace MediTrack.Model.RemoteModel
 
             catch (ArgumentException)
             {
-                //Console.WriteLine(StringContainer.UUIDDictionaryInsertFai);
+                Console.WriteLine(StringContainer.UUIDDictionaryInsertFai);
             }
         }
 
@@ -87,7 +87,7 @@ namespace MediTrack.Model.RemoteModel
 
             else
             {
-                //Console.WriteLine(StringContainer.UUIDDictionaryContainFai);
+                Console.WriteLine(StringContainer.UUIDDictionaryContainFai);
                 return false;
             }
 

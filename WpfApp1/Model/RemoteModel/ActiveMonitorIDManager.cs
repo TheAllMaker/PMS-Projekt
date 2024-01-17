@@ -25,19 +25,19 @@ namespace MediTrack.Model.RemoteModel
 {
     public static class ActiveMonitorIDManager
     {
-     private static HashSet<int> MonitorHashSet = new HashSet<int>();
+     private static HashSet<object> MonitorHashSet = new HashSet<object>();
          
-        public static bool InsertActiveMonitor (int MonitorKey)
+        public static bool InsertActiveMonitor (object MonitorKey)
         {
          return MonitorHashSet.Add(MonitorKey);
         }
 
-        public static bool DeactivateMonitor (int MonitorKey)
+        public static bool DeactivateMonitor (object MonitorKey)
         {
           return MonitorHashSet.Remove(MonitorKey);
         }
 
-        public static bool IsThisAnActiveMonitor (int MonitorKey)
+        public static bool IsThisAnActiveMonitor (object MonitorKey)
         {
            return MonitorHashSet.Contains(MonitorKey);
         }

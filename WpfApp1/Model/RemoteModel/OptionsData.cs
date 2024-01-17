@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 /*
  * Overview:
@@ -22,14 +23,33 @@ namespace MediTrack.Model.RemoteModel
     {
         public static HashSet<object> Options = new HashSet<object>();
        
-        public static void OptionsInput(int UID)
+        public static void OptionsInput(object UID)
         {
-            OptionsData.Options.Add(UID);          
+            try
+            {
+                OptionsData.Options.Add(UID);
+            }
+            catch 
+            {
+                Console.WriteLine("ggzzzgz");
+                throw;
+            }
+                     
         }
 
-        public static void OptionsPop(int UID)
+        public static void OptionsPop(object UID)
         {
-            OptionsData.Options.Remove(UID);
+            try
+            {
+                OptionsData.Options.Remove(UID);
+                Console.WriteLine("Succes");
+            }
+            catch
+            {
+                Console.WriteLine("Ggzzgz");
+                throw;
+            }
+            
         }
 
     }

@@ -52,7 +52,14 @@ namespace MediTrack.Model.RemoteModel
 
         public static void DictionaryRemover(object MonitorIDKey)
         {
-            MonitorIDToPatientIDDictionary.Remove(MonitorIDKey);
+            try
+            {
+                MonitorIDToPatientIDDictionary.Remove(MonitorIDKey);
+            }
+            catch
+            {
+                Console.WriteLine("dkendkjenidn");
+            }
         }
 
         public static void DictionaryInput(object MonitorIDKey, Patient PatientIDKey)
