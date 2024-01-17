@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MediTrack.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MediTrack" Height="1080" Width="1920">
+        Title="Remote-Monitor" Height="1080" Width="1920">
 
     <Window.Resources>
         <ResourceDictionary>
