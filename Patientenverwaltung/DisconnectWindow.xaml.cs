@@ -1,5 +1,7 @@
 ﻿using Npgsql;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,6 +40,9 @@ namespace Patientenverwaltung
                     {
                         using (NpgsqlDataReader reader = command.ExecuteReader())
                         {
+                            // Erstelle eine Liste für die sortierten Einträge
+                            var sortedEntries = new List<string>();
+
                             while (reader.Read())
                             {
                                 int pid = reader.GetInt32(0);
@@ -46,11 +51,21 @@ namespace Patientenverwaltung
                                 int moid = reader.GetInt32(3);
                                 string mf = reader.GetString(4);
 
-                                // Create a string representation of the item
+                                // Erstelle eine string-Repräsentation des Eintrags
                                 string comboBoxItemText = $"{pid}: {name}, {vorname} - Monitor {moid}: {mf}";
 
-                                // Add the string to the ComboBox
-                                CmbConnection.Items.Add(comboBoxItemText);
+                                // Füge den Eintrag zur sortierten Liste hinzu
+                                sortedEntries.Add(comboBoxItemText);
+                            }
+
+                            // Sortiere die Liste nach der PID
+                            sortedEntries = sortedEntries.OrderBy(entry =>
+                                int.Parse(Regex.Match(entry, @"\d+").Value)).ToList();
+
+                            // Füge die sortierten Einträge zur ComboBox hinzu
+                            foreach (var sortedEntry in sortedEntries)
+                            {
+                                CmbConnection.Items.Add(sortedEntry);
                             }
                         }
                     }

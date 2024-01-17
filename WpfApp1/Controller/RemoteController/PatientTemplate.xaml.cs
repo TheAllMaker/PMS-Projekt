@@ -3,11 +3,13 @@ using MediTrack.View.RemoteView;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace MediTrack.Controller.RemoteController
@@ -90,9 +92,32 @@ namespace MediTrack.Controller.RemoteController
             ActiveMonitorIDManager.DeactivateMonitor(monitorID);
         }
 
+        
+
+
+
         public void oxygenred()
         {
 
         }
+
     }
+    public class ScaleConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            double parentSize = (double)values[0];
+            const double baseSize = 300; // Die Basisgröße, bei der der Text normal dargestellt wird
+
+            double scale = Math.Min(1.0, parentSize / baseSize);
+
+            return scale;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }

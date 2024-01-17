@@ -22,16 +22,18 @@
 
 
             <!-- Name und Co. I -->
-                <Border BorderBrush="Black" Grid.Column="1">
-                    <TextBlock Background="Black"  HorizontalAlignment="Center"
-                        VerticalAlignment="Center" Foreground="White" Grid.ColumnSpan="2">  
-                       <Run Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13"/>
-                       <Run Text=" "/>
-                       <Run Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18"/>
-                    </TextBlock>
-                </Border>
-                
-                <!-- Name und Co. II -->
+            <Border BorderBrush="Black" Grid.Column="1">
+                <TextBlock Background="Black" HorizontalAlignment="Center"
+                           VerticalAlignment="Center" Foreground="White" Grid.ColumnSpan="2"
+                           TextTrimming="CharacterEllipsis">
+                    <Run Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="18"/>
+                    <Run Text=" "/>
+                    <Run Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="13"/>
+                </TextBlock>
+            </Border>
+
+
+            <!-- Name und Co. II -->
 
 
                 <TextBlock Background="Black"  FontSize="20" Grid.Column="2" HorizontalAlignment="Center" 
