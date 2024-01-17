@@ -124,12 +124,13 @@ namespace MediTrack.View.RemoteView
             }
         }
 
-        private void UpdateVitalSigns(string vitalSignName, ref double minValue, ref double maxValue, double minThreshold, double maxThreshold, TextBox minTextBox, TextBox maxTextBox)
+        private void UpdateVitalSigns(string vitalSignName, ref double minValue, ref double maxValue, double minThreshold, 
+            double maxThreshold, TextBox minTextBox, TextBox maxTextBox)
         {
-            if (!string.IsNullOrWhiteSpace(minTextBox.Text) && !string.IsNullOrWhiteSpace(maxTextBox.Text) && double.Parse(minTextBox.Text) != 0 && double.Parse(maxTextBox.Text) != 0)
+            if (!string.IsNullOrWhiteSpace(minTextBox.Text) && !string.IsNullOrWhiteSpace(maxTextBox.Text) && double.TryParse(minTextBox.Text, out minValue) && minValue > 0 && double.TryParse(maxTextBox.Text, out maxValue) && maxValue > 0)
             {
-                minValue = double.Parse(minTextBox.Text);
-                maxValue = double.Parse(maxTextBox.Text);
+                //minValue = double.Parse(minTextBox.Text);
+                //maxValue = double.Parse(maxTextBox.Text);
 
                 if (minValue > maxValue)
                 {
@@ -144,23 +145,34 @@ namespace MediTrack.View.RemoteView
             }
         }
 
-        private void UpdateVitalSigns(string vitalSignName, ref int minValue, ref int maxValue, int minThreshold, int maxThreshold, TextBox minTextBox, TextBox maxTextBox)
+        private void UpdateVitalSigns(string vitalSignName, ref int minValue, ref int maxValue, int minThreshold,
+            int maxThreshold, TextBox minTextBox, TextBox maxTextBox)
         {
-            if (!string.IsNullOrWhiteSpace(minTextBox.Text) && !string.IsNullOrWhiteSpace(maxTextBox.Text) && int.Parse(minTextBox.Text) != 0 && int.Parse(maxTextBox.Text) != 0)
+
+            //if (!string.IsNullOrWhiteSpace(minTextBox.Text) && !string.IsNullOrWhiteSpace(maxTextBox.Text) && int.Parse(minTextBox.Text) != 0 && int.Parse(maxTextBox.Text) != 0)
+            //{
+            if (!string.IsNullOrWhiteSpace(minTextBox.Text) && int.TryParse(minTextBox.Text, out minValue) && minValue > 0)
             {
-                minValue = int.Parse(minTextBox.Text);
+                //minValue = int.Parse(minTextBox.Text);
                 maxValue = int.Parse(maxTextBox.Text);
 
-                if (minValue > maxValue)
+                if (minValue > maxValue && maxValue != 0)
                 {
                     _hasError = true;
-                    MessageBox.Show($"{vitalSignName} min value is smaller than max value", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"{vitalSignName} min value is smaller than max value", "Error",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
                     UpdateVariableFromTextbox(ref minValue, minThreshold, maxThreshold, minTextBox);
-                    UpdateVariableFromTextbox(ref maxValue, minThreshold, maxThreshold, maxTextBox);
+                    //UpdateVariableFromTextbox(ref maxValue, minThreshold, maxThreshold, maxTextBox);
                 }
+            }
+
+            if (!string.IsNullOrWhiteSpace(maxTextBox.Text) && double.Parse(maxTextBox.Text) != 0)
+            {
+                maxValue = int.Parse(maxTextBox.Text);
+                UpdateVariableFromTextbox(ref maxValue, minThreshold, maxThreshold, maxTextBox);
             }
         }
 
