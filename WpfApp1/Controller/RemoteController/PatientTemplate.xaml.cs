@@ -1,4 +1,5 @@
-﻿using MediTrack.Model.RemoteModel;
+﻿using MediTrack.Model.DataBaseModelConnection;
+using MediTrack.Model.RemoteModel;
 using MediTrack.View.RemoteView;
 using System;
 using System.Collections.Generic;
@@ -85,11 +86,16 @@ namespace MediTrack.Controller.RemoteController
                  MainWindow.RemoteWindowCounter -= 1;
                 _mainWindow.StartCrossButton();
             }
-            int monitorID = Convert.ToInt32(contentControl.Tag);
 
+            int monitorID = Convert.ToInt32(contentControl.Tag);
             Threshold.RemoveThresholdByMonitorID(monitorID);
-            OptionsData.OptionsPop(monitorID);
             ActiveMonitorIDManager.DeactivateMonitor(monitorID);
+            PatientDictionary.DictionaryRemover(monitorID);
+            object mqttDataString = DataBaseRemoteConnection.CallMonitorIDtoPatientID(monitorID);
+            object[] patientDataString = DataBaseRemoteConnection.CallForPatientThroughID(mqttDataString);
+            string associatedEntireValue = $"{monitorID}: {patientDataString[0]}, {patientDataString[1]}";
+            OptionsData.OptionsPop(associatedEntireValue);
+            UuidDictionary.DictionaryRemover(monitorID);
         }
 
         
