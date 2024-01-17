@@ -97,7 +97,7 @@ namespace Patientenverwaltung
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Laden der Patienten: {ex.Message}");
+                MessageBox.Show($"Error loading patients: {ex.Message}");
             }
         }
 
@@ -150,7 +150,7 @@ namespace Patientenverwaltung
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Laden der Monitore: {ex.Message}");
+                MessageBox.Show($"Error loading monitors: {ex.Message}");
             }
         }
 
@@ -183,7 +183,7 @@ namespace Patientenverwaltung
                                 updateCommand.Parameters.AddWithValue("@PatientId", patientId);
                                 updateCommand.ExecuteNonQuery();
 
-                                MessageBox.Show("Verbindung erfolgreich aktualisiert.");
+                                MessageBox.Show("Connection successfully updated");
                             }
                         }
                         else
@@ -217,12 +217,12 @@ namespace Patientenverwaltung
                 }
                 else
                 {
-                    MessageBox.Show("Bitte wählen Sie Patient und Monitor aus, um eine Verbindung herzustellen.");
+                    MessageBox.Show("Please select patient and monitor to establishing the connection.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Erstellen der Verbindung: {ex.Message}");
+                MessageBox.Show($"Error establishing the connection: {ex.Message}");
             }
         }
 
