@@ -1,23 +1,16 @@
 ﻿using MediTrack.Model.RemoteModel;
 using MediTrack.View.RemoteView;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 
 namespace MediTrack.Controller.RemoteController
 {
     public partial class PatientTemplate : ResourceDictionary
     {
-        DetailedWindow detailedWindow;
-        MainWindow _mainWindow = Application.Current.MainWindow as MainWindow;
+        private DetailedWindow _detailedWindow;
+        private readonly MainWindow _mainWindow = Application.Current.MainWindow as MainWindow;
 
         public PatientTemplate()
         {
@@ -25,9 +18,9 @@ namespace MediTrack.Controller.RemoteController
 
         }
 
-        private void DetailedWindowConstructor(int MonitorID)
+        private void DetailedWindowConstructor(int monitorId)
         {
-            detailedWindow = new DetailedWindow(MonitorID)
+            _detailedWindow = new DetailedWindow(monitorId)
             {
                 Title = "Threshold Editor",
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
@@ -35,7 +28,7 @@ namespace MediTrack.Controller.RemoteController
 
         }
 
-        private void PatientZoomButton_Click(object sender, RoutedEventArgs e)
+        private void ThresholdSettings_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as FrameworkElement;
             if (button == null) return;
@@ -53,9 +46,9 @@ namespace MediTrack.Controller.RemoteController
             if (WindowCounter.OpenWindows < 1)
             {
                 DetailedWindowConstructor(monitorID);
-                detailedWindow.Show();
+                _detailedWindow.Show();
                 WindowCounter.OpenWindows++;
-                detailedWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
+                _detailedWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
             }
         }
 
@@ -92,32 +85,5 @@ namespace MediTrack.Controller.RemoteController
             ActiveMonitorIDManager.DeactivateMonitor(monitorID);
         }
 
-        
-
-
-
-        public void oxygenred()
-        {
-
-        }
-
     }
-    public class ScaleConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            double parentSize = (double)values[0];
-            const double baseSize = 300; // Die Basisgröße, bei der der Text normal dargestellt wird
-
-            double scale = Math.Min(1.0, parentSize / baseSize);
-
-            return scale;
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
 }
