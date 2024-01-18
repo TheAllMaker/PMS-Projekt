@@ -212,9 +212,6 @@
                  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2" Grid.RowSpan="2"
             />
 
-                   
-          
-
         </Grid>
 
     </DockPanel>

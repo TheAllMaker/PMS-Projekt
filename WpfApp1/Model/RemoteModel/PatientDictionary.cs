@@ -22,17 +22,11 @@ using System.Collections.Generic;
  * 
  */
 
-
-
 namespace MediTrack.Model.RemoteModel
 {
-
     public static class PatientDictionary
     {
-
-
         static Dictionary<object, Patient> MonitorIDToPatientIDDictionary = new Dictionary<object, Patient>();
-
 
         public static Patient DictionaryCaller(object MonitorIDKey)
         {
@@ -76,7 +70,6 @@ namespace MediTrack.Model.RemoteModel
 
         public static bool DictionaryContainer(object MonitorIDKey)
         {
-           
             if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKey))
             {
                 return true;

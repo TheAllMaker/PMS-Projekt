@@ -1,5 +1,4 @@
-﻿using MediTrack.Model.DataBaseModelConnection;
-using MediTrack.Model.RemoteModel;
+﻿using MediTrack.Model.RemoteModel;
 using MediTrack.View.RemoteView;
 using System;
 using System.Collections.Generic;
@@ -9,24 +8,17 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using MediTrack.Model.DataBaseConnection;
 
 namespace MediTrack
 {
-
-
     /*
      *MainWindow Class in MediTrack.Model.RemoteModel Namespace
      *
      * Overview:
      * The MainWindow class is the colletive main logic class designed to handle all incoming MQTT messages and
      * distribute them through the entire RemoteWindow
-     *
-     * Usage:
-     *
-     * Details:
      */
-
-
 
     public partial class MainWindow : Window
     {
@@ -37,6 +29,9 @@ namespace MediTrack
         public Dictionary<int, Patient> patientenListe = new Dictionary<int, Patient>();
         public Dictionary<int, ContentControl> patientenDictionary = new Dictionary<int, ContentControl>();
         public List<object> mainList = new List<object>();
+
+
+/// //////////////////////////
 
         public MainWindow()
         {
@@ -119,39 +114,6 @@ namespace MediTrack
                     (mqttMessageQueueArray[0] is int intValue01) &&
                     (ActiveMonitorIDManager.IsThisAnActiveMonitor(intValue01)))
                 {
-
-
-                    //Dispatcher.Invoke(() =>
-                    //{
-                    //    var itemToRemove = PatientenMonitorDynGrid.Children
-                    //        .OfType<ContentControl>()
-                    //        .FirstOrDefault(cc => cc.Tag.Equals(mqttMessageQueueArray[0]));
-
-                    //    if (itemToRemove != null)
-                    //    {
-                    //        RemoveCrossButton();
-                    //        PatientenMonitorDynGrid.Children.Remove(itemToRemove);
-                    //        StartCrossButton();
-                    //        RemoteWindowCounter -= 1;
-                    //        if (mqttMessageQueueArray[0] is int intValue)
-                    //        {
-
-                    //            Patient existingPatient = PatientDictionary.DictionaryCaller(intValue);
-                    //            var varLastName = existingPatient.LastName;
-                    //            var varFirstName = existingPatient.FirstName;
-                    //            string AssociatedEntireValue = $"{intValue}: {varLastName}, {varFirstName}";
-                    //            OptionsData.OptionsPop(AssociatedEntireValue);
-                    //        }
-                    //    }
-                    //});
-                    //PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
-                    //ActiveMonitorIDManager.DeactivateMonitor(mqttMessageQueueArray[0]);
-                    //UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
-                    //mainList.Remove(mqttMessageQueueArray[0]);
-                    //int id = Convert.ToInt32(mqttMessageQueueArray[0]);
-                    //patientenDictionary.Remove(id);
-                    //patientenListe.Remove(id);
-                    //Threshold.RemoveThresholdByMonitorID(id);
                 }
 
 
@@ -177,12 +139,8 @@ namespace MediTrack
                             existingPatient.RespirationRate = mqttMessageQueueArray[2];
                             existingPatient.BloodPressureSystolic = mqttMessageQueueArray[4];
                             existingPatient.Temperature = mqttMessageQueueArray[6];
-                            //existingPatient.FirstName = patientDataString[0];
-                            //existingPatient.LastName = ;
-                            //existingPatient.PatientNumber
-                        
 
-                        int id = Convert.ToInt32(mqttMessageQueueArray[0]);
+                            int id = Convert.ToInt32(mqttMessageQueueArray[0]);
                             threshold = Threshold.GetThresholdByMonitorID(Convert.ToInt32(mqttMessageQueueArray[0]));
 
                             if (threshold != null)
@@ -255,8 +213,6 @@ namespace MediTrack
                     }
                     catch (Exception ex)
                     {
-
-                        //Überlegt euch was ihr da haben wollt 
                     }
                 }
 
@@ -324,7 +280,6 @@ namespace MediTrack
                     }
                     catch
                     {
-
                     }
                 }
 
@@ -350,15 +305,6 @@ namespace MediTrack
 
                     }
                 }
-                //else
-                //{
-                //    Patient existingPatient = PatientDictionary.DictionaryCaller(mqttMessageQueueArray[0]);
-                //    var varLastName = existingPatient.LastName;
-                //    var varFirstName = existingPatient.FirstName;
-                //    string AssociatedEntireValue = $"{mqttMessageQueueArray[0]}: {varLastName}, {varFirstName}";
-                //    OptionsData.Options.Add(AssociatedEntireValue);
-                //}
-
             }
         }
     

@@ -1,5 +1,4 @@
 ﻿using System;
-
 using System.Windows;
 
 namespace MediTrack
@@ -7,6 +6,7 @@ namespace MediTrack
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+    /// 
     public partial class App : Application
     {
         [STAThread]

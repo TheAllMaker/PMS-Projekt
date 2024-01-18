@@ -22,16 +22,8 @@
                                             <Setter.Value>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                                     <GradientStop Offset="0" Color="#222222" />
-                                                    <!-- Nearly black -->
                                                     <GradientStop Offset="1" Color="#333333" />
-                                                    <!-- Dark gray -->
                                                 </LinearGradientBrush>
-
-
-
-
-
-
                                             </Setter.Value>
                                         </Setter>
                                     </Trigger>
@@ -43,7 +35,6 @@
             </Button.Style>
 
             <StackPanel>
-                <!-- Your existing Viewbox and Popup code here -->
                 <Viewbox Width="100" Height="100" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Resources>
@@ -73,8 +64,6 @@
                         </Rectangle.Fill>
                     </Rectangle>
                 </Viewbox>
-
-
                 <Popup Name="CrossButtonOptionsPopUp" Placement="Bottom" StaysOpen="False">
                     <Border BorderBrush="Gray" BorderThickness="1" Background="White" CornerRadius="5">
                         <ListBox Name="CrossButtonListBox" SelectionChanged="CrossButtonSelectionChanged" 
@@ -84,10 +73,6 @@
                 </Popup>
             </StackPanel>
         </Button>
-
-
-
-
     </DataTemplate>
 
 </ResourceDictionary>

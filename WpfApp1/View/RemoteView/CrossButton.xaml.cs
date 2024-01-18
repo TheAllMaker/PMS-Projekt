@@ -8,7 +8,6 @@ using MediTrack.Model.RemoteModel;
 
 using System.ComponentModel;
 using System.Text.RegularExpressions;
-using MediTrack.Model.DataBaseModelConnection;
 using System.Windows.Data;
 
 
