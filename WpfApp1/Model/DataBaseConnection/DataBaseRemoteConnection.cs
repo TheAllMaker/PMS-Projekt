@@ -35,6 +35,150 @@ using Npgsql;
 
 
 
+//namespace MediTrack.Model.DataBaseModelConnection
+//{
+//    public static class DataBaseRemoteConnection
+//    {
+//        static string ConnectionDatabaseInformation = "Host=db.inftech.hs-mannheim.de;Username=pms1;Password=pms1;Database=pms1";
+//         private static NpgsqlConnection _databaseConnector = null;
+//         public static List<int> DataBaseEntries = new List<int>();
+//         private static readonly object _lock = new object();
+
+
+//        private static NpgsqlConnection DataBaseConnectionCall()
+//        {
+//            try
+//            {
+//                var ConnectionCallToDataBase = new NpgsqlConnection(ConnectionDatabaseInformation);
+//                ConnectionCallToDataBase.Open();
+//                return ConnectionCallToDataBase;
+//            }
+
+//            catch (Exception ex)
+//            {
+//                //Console.WriteLine("Error when connecting to the database:  " + ex.Message);
+//                return null;
+//            }
+//        }
+
+//        public static void InitializeDatabaseConnection()
+//        {
+//            if (_databaseConnector == null)
+//            {
+//                lock (_lock)
+//                {
+//                    if (_databaseConnector == null)
+//                    {
+//                        _databaseConnector = DataBaseConnectionCall();
+//                    }
+//                }
+//            }
+//        }
+
+
+
+//        public static void DataBaseEntireEntryCall()
+//        {
+//            //var DataBaseConnector = DataBaseConnectionCall();
+//            InitializeDatabaseConnection();
+//            string SelectEntireTable = "SELECT pid FROM public.patients";
+
+//            using (NpgsqlCommand SelectAllTableEntries = new NpgsqlCommand(SelectEntireTable, _databaseConnector))
+//            {
+//                NpgsqlDataReader EntryReader = SelectAllTableEntries.ExecuteReader();
+
+//                while (EntryReader.Read())
+//                {
+//                    int pid = EntryReader.GetInt32(0);
+//                    DataBaseEntries.Add(pid);
+//                }
+
+//                _databaseConnector.Close();
+
+//            }
+//        }
+
+
+
+//        public static int? CallMonitorIDtoPatientID(object MonitorIDSearchKey)
+//        {
+//            if (MonitorIDSearchKey == null)
+//            {
+//                return null;
+//            }
+
+//            //var DataBaseConnector = DataBaseConnectionCall();
+//            InitializeDatabaseConnection();
+//            string SelectString = "SELECT pid FROM public.belegung WHERE moid = @MonitorIDSearchKey";
+
+//            using (NpgsqlCommand SelectPatientIDThroughMonitorID = new NpgsqlCommand(SelectString, _databaseConnector))
+//            {
+//                try
+//                {
+//                    SelectPatientIDThroughMonitorID.Parameters.AddWithValue("MonitorIDSearchKey", MonitorIDSearchKey);
+//                    NpgsqlDataReader PIDSearcher = SelectPatientIDThroughMonitorID.ExecuteReader();
+
+//                    if (PIDSearcher.Read())
+//                    {
+
+//                        var lorena = (int?)PIDSearcher["pid"];
+//                        _databaseConnector.Close();
+
+//                        return lorena;
+//                    }
+
+//                    else
+//                    {
+//                        _databaseConnector.Close();
+
+//                        return null;
+//                    }
+//                }
+//                catch
+//                {
+//                    throw new ArgumentException("Connection to Database failed");
+//                }
+//            }
+//        }
+
+//        public static string[] CallForPatientThroughID(object patientIdentifier)
+//        {
+//            if (patientIdentifier == null)
+//            {
+//                return null;
+//            }
+
+//            var DataBaseConnector = DataBaseConnectionCall();
+//            string SelectPatientThroughPIDString = "SELECT Name, Vorname, Rn, Bn FROM public.patients WHERE pid = @PatientID";
+//            NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand(SelectPatientThroughPIDString, _databaseConnector);
+//            SelectPatientThroughPIDCommand.Parameters.AddWithValue("@PatientID", patientIdentifier);
+
+//            NpgsqlDataReader PIDReader = SelectPatientThroughPIDCommand.ExecuteReader();
+
+//            if (PIDReader.Read())
+//            {
+//                string[] sresult = new string[4];
+//                sresult[0] = PIDReader["Name"].ToString();
+//                sresult[1] = PIDReader["Vorname"].ToString();
+//                sresult[2] = PIDReader["Rn"].ToString();
+//                sresult[3] = PIDReader["Bn"].ToString();
+
+//                _databaseConnector.Close();
+
+//                return sresult;
+//            }
+//            else
+//            {
+//                _databaseConnector.Close();
+
+//                return null;
+//            }
+//        }
+//    }
+//}
+
+
+
 namespace MediTrack.Model.DataBaseModelConnection
 {
     public static class DataBaseRemoteConnection
@@ -58,11 +202,11 @@ namespace MediTrack.Model.DataBaseModelConnection
             }
         }
 
-       public static void DataBaseEntireEntryCall()
+        public static void DataBaseEntireEntryCall()
         {
             var DataBaseConnector = DataBaseConnectionCall();
             string SelectEntireTable = "SELECT pid FROM public.patients";
-            
+
             using (NpgsqlCommand SelectAllTableEntries = new NpgsqlCommand(SelectEntireTable, DataBaseConnector))
             {
                 NpgsqlDataReader EntryReader = SelectAllTableEntries.ExecuteReader();
@@ -121,8 +265,7 @@ namespace MediTrack.Model.DataBaseModelConnection
                 return null;
             }
             var DataBaseConnector = DataBaseConnectionCall();
-            string SelectPatientThroughPIDString = "SELECT Name, Vorname, Rn, Bn FROM public.patients WHERE pid = @PatientID";
-            NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand(SelectPatientThroughPIDString, DataBaseConnector);
+            string SelectPatientThroughPIDString = "SELECT Name, Vorname, Rn, Bn FROM public.patients WHERE pid = @PatientID"; NpgsqlCommand SelectPatientThroughPIDCommand = new NpgsqlCommand(SelectPatientThroughPIDString, DataBaseConnector);
             SelectPatientThroughPIDCommand.Parameters.AddWithValue("@PatientID", patientIdentifier);
             NpgsqlDataReader PIDReader = SelectPatientThroughPIDCommand.ExecuteReader();
 
@@ -146,9 +289,5 @@ namespace MediTrack.Model.DataBaseModelConnection
     }
 }
 
-
-
-    
-    
 
 

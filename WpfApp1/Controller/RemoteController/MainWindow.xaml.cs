@@ -31,28 +31,23 @@ namespace MediTrack
     public partial class MainWindow : Window
     {
         private CancellationTokenSource _cancellationTokenSource;
-
         public Patient PatientenInstanz;
         public static int RemoteWindowCounter;
         Threshold threshold;
-        Dictionary<int, Patient> patientenListe = new Dictionary<int, Patient>();
-        Dictionary<int, ContentControl> patientenDictionary = new Dictionary<int, ContentControl>();
-
+        public Dictionary<int, Patient> patientenListe = new Dictionary<int, Patient>();
+        public Dictionary<int, ContentControl> patientenDictionary = new Dictionary<int, ContentControl>();
+        public List<object> mainList = new List<object>();
 
         public MainWindow()
         {
             // UI Constructor/Intializer -> constructs the entire UI elements
             InitializeComponent();
-
             // Binding of the EventHandler -> after a successfull InitializeComponent we're calling 
             // for our defined fucntions inside it -> Logic Constrcutor in a nutshell
             Loaded += InitializeComponents;
-
             //PatientTest.TestPatientCall2();
-
             _cancellationTokenSource = new CancellationTokenSource();
             Loaded += async (sender, args) => await ProcessMQTTMessages(_cancellationTokenSource.Token);
-
         }
 
         private void InitializeComponents(object sender, RoutedEventArgs e)
@@ -69,14 +64,9 @@ namespace MediTrack
             Console.WriteLine(StringContainer.HandlerIntializer);
         }
 
-
-
-
         public void StartCrossButton()
         {
             DataTemplate crossButtonTemplate = (DataTemplate)Resources["CrossButton"];
-
-
             ContentControl contentControl = new ContentControl
             {
                 ContentTemplate = crossButtonTemplate
@@ -98,8 +88,6 @@ namespace MediTrack
             }
         }
 
-
-
         private void NewCrossButton()
         {
 
@@ -120,10 +108,7 @@ namespace MediTrack
             while (!cancellationToken.IsCancellationRequested)
             {
                 await Task.Delay(50);
-
                 object[] mqttMessageQueueArray = MqttMessageQueue.Dequeue();
-
-
 
                 // 1)  if MQTTMessages != null + 2) if UUID known + 3) IsAlive == null -> kill the patient and remove him of the dictionaries
                 if ((mqttMessageQueueArray.Length != 0) && (PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0])) && (mqttMessageQueueArray[8] is int value && value == 0) && (mqttMessageQueueArray[0] is int intValue01) && (ActiveMonitorIDManager.IsThisAnActiveMonitor(intValue01)))
@@ -144,36 +129,35 @@ namespace MediTrack
                             RemoteWindowCounter -= 1;
                             if (mqttMessageQueueArray[0] is int intValue)
                             {
-                                OptionsData.OptionsPop(intValue);
+
+                                Patient existingPatient = PatientDictionary.DictionaryCaller(intValue);
+                                var varLastName = existingPatient.LastName;
+                                var varFirstName = existingPatient.FirstName;
+                                string AssociatedEntireValue = $"{intValue}: {varLastName}, {varFirstName}";
+                                OptionsData.OptionsPop(AssociatedEntireValue);
                             }
                         }
                     });
-                    //PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
-
                     PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
-                    UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
+                    //UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
                     ActiveMonitorIDManager.DeactivateMonitor(mqttMessageQueueArray[0]);
+                    mainList.Remove(mqttMessageQueueArray[0]);
                 }
 
 
                 // wenn Queue mit Inhalt sowie Patient gefunden date patient up
                 else if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]) && (mqttMessageQueueArray[0] is int intValue02) && (ActiveMonitorIDManager.IsThisAnActiveMonitor(intValue02)))
-                //if ((mqttMessageQueueArray.Length != 0) && PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
+                
                 {
-
-                    
                     try
                     {
                         Patient existingPatient = PatientDictionary.DictionaryCaller(mqttMessageQueueArray[0]);
                         object comparevalue = UuidDictionary.UUIDDictionaryCaller(mqttMessageQueueArray[0]);
-
-
                         string value1 = mqttMessageQueueArray[7]?.ToString();
                         string value2 = comparevalue?.ToString();
 
                         if (string.Equals(value1, value2))
                         {
-
                             existingPatient.HeartRate = mqttMessageQueueArray[1];
                             existingPatient.OxygenLevel = mqttMessageQueueArray[3];
                             existingPatient.BloodPressureDiastolic = mqttMessageQueueArray[5];
@@ -209,7 +193,6 @@ namespace MediTrack
                             if (patientenDictionary.ContainsKey(id))
                             {
                                 Patient patientInstance = (Patient)patientenDictionary[id].Content;
-
                                 patientInstance.UpdateTimer?.Stop();
 
 
@@ -257,6 +240,7 @@ namespace MediTrack
 
                     object mqttDataString = DataBaseRemoteConnection.CallMonitorIDtoPatientID(mqttMessageQueueArray[0]);
                     object[] patientDataString = DataBaseRemoteConnection.CallForPatientThroughID(mqttDataString);
+
                     try
                     {
                         PatientenInstanz = new Patient()
@@ -266,11 +250,7 @@ namespace MediTrack
                             FirstName = patientDataString[1],
                             RoomNumber = patientDataString[2],
                             BedNumber = patientDataString[3],
-
                             PatientNumber = mqttDataString,
-
-
-
                             PatientMonitor = mqttMessageQueueArray[0],
                             HeartRate = mqttMessageQueueArray[1],
                             RespirationRate = mqttMessageQueueArray[2],
@@ -284,6 +264,9 @@ namespace MediTrack
                         patientenListe.Add(id,PatientenInstanz);
                         PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
                         UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
+                        string AssociatedEntireValue = $"{mqttMessageQueueArray[0]}: {patientDataString[0]}, {patientDataString[1]}";
+
+                        OptionsData.Options.Remove(AssociatedEntireValue);
                         RemoveCrossButton();
                         if (RemoteWindowCounter <= 15)
                         {
@@ -296,13 +279,14 @@ namespace MediTrack
                                     Margin = new Thickness(5),
                                     Tag = mqttMessageQueueArray[0],
                                 };
+                                // ? 
                                 patientenDictionary.Add(Convert.ToInt32(mqttMessageQueueArray[0]), PatientTemplateContentAddition);
                                 PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
                                 RemoteWindowCounter += 1;
                             });
 
 
-                            // do it only 16 Times 
+                            
                             if (RemoteWindowCounter <= 15)
                             {
                                 NewCrossButton();
@@ -318,24 +302,24 @@ namespace MediTrack
 
                 else if (mqttMessageQueueArray.Length != 0)
                 {
-                    if ( !PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]))
+                    if  (!PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]) && !mainList.Contains(mqttMessageQueueArray[0]))
                     {
-                        object mqttDataString = DataBaseRemoteConnection.CallMonitorIDtoPatientID(mqttMessageQueueArray[0]);
+                        object mqttDataString =
+                            DataBaseRemoteConnection.CallMonitorIDtoPatientID(mqttMessageQueueArray[0]);
                         object[] patientDataString = DataBaseRemoteConnection.CallForPatientThroughID(mqttDataString);
-                        string AssociatedEntireValue = $"{mqttMessageQueueArray[0]}: {patientDataString[0]}, {patientDataString[1]}";
+                        string AssociatedEntireValue =
+                            $"{mqttMessageQueueArray[0]}: {patientDataString[0]}, {patientDataString[1]}";
                         OptionsData.Options.Add(AssociatedEntireValue);
+                        mainList.Add(mqttMessageQueueArray[0]);
                     }
-
-                    else
-                    {
-                      
-
-                        Patient existingPatient = PatientDictionary.DictionaryCaller(mqttMessageQueueArray[0]);
-                        var varLastName = existingPatient.LastName;
-                        var varFirstName = existingPatient.FirstName;
-                        string AssociatedEntireValue = $"{mqttMessageQueueArray[0]}: {varLastName}, {varFirstName}";
-                        OptionsData.Options.Add(AssociatedEntireValue);
-                    }
+                    //else
+                    //{
+                    //    Patient existingPatient = PatientDictionary.DictionaryCaller(mqttMessageQueueArray[0]);
+                    //    var varLastName = existingPatient.LastName;
+                    //    var varFirstName = existingPatient.FirstName;
+                    //    string AssociatedEntireValue = $"{mqttMessageQueueArray[0]}: {varLastName}, {varFirstName}";
+                    //    OptionsData.Options.Add(AssociatedEntireValue);
+                    //}
                     
                 }
             }

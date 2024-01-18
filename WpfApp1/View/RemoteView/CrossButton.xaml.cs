@@ -8,6 +8,8 @@ using MediTrack.Model.RemoteModel;
 
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using MediTrack.Model.DataBaseModelConnection;
+using System.Windows.Data;
 
 
 
@@ -17,7 +19,7 @@ namespace MediTrack.View.RemoteView
     public partial class CrossButton : ResourceDictionary 
     {
         MainWindow _mainWindow = Application.Current.MainWindow as MainWindow;
-
+        
         public CrossButton()
         {
             InitializeComponent();
@@ -36,6 +38,8 @@ namespace MediTrack.View.RemoteView
                         popup.IsOpen = true;
                     }
                 }
+
+
             }
             catch (Exception ex)
             {
@@ -43,9 +47,6 @@ namespace MediTrack.View.RemoteView
                 Debug.WriteLine("Fehler beim Anzeigen der Optionen: " + ex.Message);
             }
         }
-
-
-
 
         private void CrossButtonSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -62,6 +63,7 @@ namespace MediTrack.View.RemoteView
                     if (int.TryParse(numberString, out int intValue))
                     {
                         ActiveMonitorIDManager.InsertActiveMonitor(intValue);
+
                     }
                     else
                     {

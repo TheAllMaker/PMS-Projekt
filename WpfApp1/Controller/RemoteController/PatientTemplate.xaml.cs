@@ -16,7 +16,6 @@ namespace MediTrack.Controller.RemoteController
         public PatientTemplate()
         {
             InitializeComponent();
-
         }
 
         private void DetailedWindowConstructor(int monitorId)
@@ -53,7 +52,6 @@ namespace MediTrack.Controller.RemoteController
             }
         }
 
-
         private static class WindowCounter
         {
             public static int OpenWindows = 0;
@@ -89,6 +87,10 @@ namespace MediTrack.Controller.RemoteController
             string associatedEntireValue = $"{monitorID}: {patientDataString[0]}, {patientDataString[1]}";
             OptionsData.OptionsPop(associatedEntireValue);
             UuidDictionary.DictionaryRemover(monitorID);
+            _mainWindow.mainList.Remove(monitorID);
+            object monitorIDAsObject = monitorID;
+            _mainWindow.patientenListe.Remove(monitorID);
+            _mainWindow.patientenDictionary.Remove(monitorID);
         }
 
     }
