@@ -6,7 +6,7 @@ namespace MediTrack.View.RemoteView
 {
     public partial class PowerWindow : Window
     {
-        private bool UserConfirmed = false;
+        private bool UserConfirmed;
 
         public PowerWindow()
         {
@@ -30,13 +30,11 @@ namespace MediTrack.View.RemoteView
 
         private void Button_Click_Confirm(object sender, RoutedEventArgs e)
         {
-            UserConfirmed = true;
             Application.Current.Shutdown();
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
-            UserConfirmed = false;
             Close();
         }
     }

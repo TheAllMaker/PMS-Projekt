@@ -25,10 +25,10 @@ namespace MediTrack
         private CancellationTokenSource _cancellationTokenSource;
         public Patient PatientenInstanz;
         public static int RemoteWindowCounter;
-        Threshold threshold;
-        public Dictionary<int, Patient> patientenListe = new Dictionary<int, Patient>();
-        public Dictionary<int, ContentControl> patientenDictionary = new Dictionary<int, ContentControl>();
-        public List<object> mainList = new List<object>();
+        private Threshold _threshold;
+        public Dictionary<int, Patient> PatientenListe = new Dictionary<int, Patient>();
+        public Dictionary<int, ContentControl> PatientenDictionary = new Dictionary<int, ContentControl>();
+        public List<object> MainList = new List<object>();
 
 
 /// //////////////////////////
@@ -127,7 +127,7 @@ namespace MediTrack
                     try
                     {
                         Patient existingPatient = PatientDictionary.DictionaryCaller(mqttMessageQueueArray[0]);
-                        object comparevalue = UuidDictionary.UUIDDictionaryCaller(mqttMessageQueueArray[0]);
+                        object comparevalue = UuidDictionary.UuidDictionaryCaller(mqttMessageQueueArray[0]);
                         string value1 = mqttMessageQueueArray[7]?.ToString();
                         string value2 = comparevalue?.ToString();
 
@@ -141,26 +141,26 @@ namespace MediTrack
                             existingPatient.Temperature = mqttMessageQueueArray[6];
 
                             int id = Convert.ToInt32(mqttMessageQueueArray[0]);
-                            threshold = Threshold.GetThresholdByMonitorID(Convert.ToInt32(mqttMessageQueueArray[0]));
+                            _threshold = Threshold.GetThresholdByMonitorID(Convert.ToInt32(mqttMessageQueueArray[0]));
 
-                            if (threshold != null)
+                            if (_threshold != null)
                             {
                                 bool isHeartRateWithinThreshold =
-                                    threshold.CheckHeartRate(Convert.ToInt32(mqttMessageQueueArray[1]));
+                                    _threshold.CheckHeartRate(Convert.ToInt32(mqttMessageQueueArray[1]));
                                 bool isRespirationRateWithinThreshold =
-                                    threshold.CheckRespirationRate(Convert.ToInt32(mqttMessageQueueArray[2]));
+                                    _threshold.CheckRespirationRate(Convert.ToInt32(mqttMessageQueueArray[2]));
                                 bool isOxygenLevelWithinThreshold =
-                                    threshold.CheckOxygenLevel(Convert.ToInt32(mqttMessageQueueArray[3]));
+                                    _threshold.CheckOxygenLevel(Convert.ToInt32(mqttMessageQueueArray[3]));
                                 bool isBloodPressureSystolicWithinThreshold =
-                                    threshold.CheckBloodPressureSystolic(Convert.ToInt32(mqttMessageQueueArray[4]));
+                                    _threshold.CheckBloodPressureSystolic(Convert.ToInt32(mqttMessageQueueArray[4]));
                                 bool isBloodPressureDiastolicWithinThreshold =
-                                    threshold.CheckBloodPressureDiastolic(Convert.ToInt32(mqttMessageQueueArray[5]));
+                                    _threshold.CheckBloodPressureDiastolic(Convert.ToInt32(mqttMessageQueueArray[5]));
                                 bool isTemperatureWithinThreshold =
-                                    threshold.CheckTemperature(Convert.ToInt32(mqttMessageQueueArray[6]));
+                                    _threshold.CheckTemperature(Convert.ToInt32(mqttMessageQueueArray[6]));
 
-                                if (patientenDictionary.ContainsKey(id))
+                                if (PatientenDictionary.ContainsKey(id))
                                 {
-                                    Patient patientInstance = (Patient)patientenDictionary[id].Content;
+                                    Patient patientInstance = (Patient)PatientenDictionary[id].Content;
 
                                     patientInstance.IsHeartRateOutOfRange = !isHeartRateWithinThreshold;
                                     patientInstance.IsRespirationRateOutOfRange = !isRespirationRateWithinThreshold;
@@ -173,9 +173,9 @@ namespace MediTrack
                                 }
                             }
 
-                            if (patientenDictionary.ContainsKey(id))
+                            if (PatientenDictionary.ContainsKey(id))
                             {
-                                Patient patientInstance = (Patient)patientenDictionary[id].Content;
+                                Patient patientInstance = (Patient)PatientenDictionary[id].Content;
                                 patientInstance.UpdateTimer?.Stop();
 
 
@@ -243,7 +243,7 @@ namespace MediTrack
 
                         };
                         int id = Convert.ToInt32(mqttMessageQueueArray[0]);
-                        patientenListe.Add(id, PatientenInstanz);
+                        PatientenListe.Add(id, PatientenInstanz);
                         PatientDictionary.DictionaryInput(mqttMessageQueueArray[0], PatientenInstanz);
                         UuidDictionary.DictionaryInput(mqttMessageQueueArray[0], mqttMessageQueueArray[7]);
                         string AssociatedEntireValue =
@@ -263,7 +263,7 @@ namespace MediTrack
                                     Tag = mqttMessageQueueArray[0],
                                 };
                                 // ? 
-                                patientenDictionary.Add(Convert.ToInt32(mqttMessageQueueArray[0]),
+                                PatientenDictionary.Add(Convert.ToInt32(mqttMessageQueueArray[0]),
                                     PatientTemplateContentAddition);
                                 PatientenMonitorDynGrid.Children.Add(PatientTemplateContentAddition);
                                 RemoteWindowCounter += 1;
@@ -286,7 +286,7 @@ namespace MediTrack
                     try
                     {
                         if (!PatientDictionary.DictionaryContainer(mqttMessageQueueArray[0]) &&
-                            !mainList.Contains(mqttMessageQueueArray[0]))
+                            !MainList.Contains(mqttMessageQueueArray[0]))
                         {
                             object mqttDataString =
                                 DataBaseRemoteConnection.CallMonitorIDtoPatientID(mqttMessageQueueArray[0]);
@@ -295,7 +295,7 @@ namespace MediTrack
                             string AssociatedEntireValue =
                                 $"{mqttMessageQueueArray[0]}: {patientDataString[0]}, {patientDataString[1]}";
                             OptionsData.Options.Add(AssociatedEntireValue);
-                            mainList.Add(mqttMessageQueueArray[0]);
+                            MainList.Add(mqttMessageQueueArray[0]);
                         }
                     }
                     catch (Exception ex)
@@ -319,17 +319,17 @@ private static class WindowCounter
             if (WindowCounter.OpenWindows < 1)
             {
 
-                Window PowerWindow = new PowerWindow
+                Window powerWindow = new PowerWindow
                 {
                     Title = "Power Window",
                     Width = 800,
                     Height = 450,
                     WindowStartupLocation = WindowStartupLocation.CenterScreen
                 };
-                PowerWindow.Show();
-                PowerWindow.Owner = this;
+                powerWindow.Show();
+                powerWindow.Owner = this;
                 WindowCounter.OpenWindows++;
-                PowerWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
+                powerWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
             }
         }
 
@@ -339,17 +339,17 @@ private static class WindowCounter
             if (WindowCounter.OpenWindows < 1)
             {
                 e.Cancel = true;
-                Window PowerWindow = new PowerWindow
+                Window powerWindow = new PowerWindow
                 {
                     Title = "Power Window",
                     Width = 800,
                     Height = 450,
                     WindowStartupLocation = WindowStartupLocation.CenterScreen
                 };
-                PowerWindow.Show();
-                PowerWindow.Owner = this;
+                powerWindow.Show();
+                powerWindow.Owner = this;
                 WindowCounter.OpenWindows++;
-                PowerWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
+                powerWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
             }
         }
 

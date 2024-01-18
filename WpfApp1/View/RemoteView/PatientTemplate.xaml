@@ -64,7 +64,7 @@
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
-                    <Viewbox Width="40" Height="40" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
+                    <Viewbox Width="40" Height="40">
                         <Rectangle Width="16" Height="16" Stroke="Transparent">
                             <Rectangle.Resources>
                                 <SolidColorBrush x:Key="canvas" Opacity="0" />
@@ -97,7 +97,7 @@
                 <!-- ThresholdSettingsButton -->
             <Button FontSize="20" Grid.Row="2"  Name ="ThresholdSettings"  BorderThickness="0"
                  VerticalAlignment="Center"  HorizontalAlignment="Center" Background="Black" Click="ThresholdSettings_Click">
-                    <Viewbox Width="40 " Height="49" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
+                    <Viewbox Width="40 " Height="49" xmlns:System="clr-namespace:System;assembly=mscorlib">
                         <Rectangle Width="16 " Height="16">
                             <Rectangle.Resources>
                                 <SolidColorBrush x:Key="canvas" Opacity="0" />
@@ -136,7 +136,7 @@
 
                 <Button FontSize="20" Grid.Row="3"  Name ="PatientMinusButton"  BorderThickness="0"
                         VerticalAlignment="Center"  HorizontalAlignment="Center" Background="Black" Click="MinusButton">
-                        <Viewbox Width="40 " Height="40" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
+                        <Viewbox Width="40 " Height="40">
                         <Rectangle Width="16 " Height="16">
                             <Rectangle.Resources>
                                 <SolidColorBrush x:Key="canv9as" Opacity="0" />

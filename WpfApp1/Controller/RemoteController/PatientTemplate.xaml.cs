@@ -93,10 +93,9 @@ namespace MediTrack.Controller.RemoteController
             OptionsData.OptionsPop(associatedEntireValue);
 
             
-            _mainWindow.mainList.Remove(monitorID);
-            object monitorIDAsObject = monitorID;
-            _mainWindow.patientenListe.Remove(monitorID);
-            _mainWindow.patientenDictionary.Remove(monitorID);
+            _mainWindow.MainList.Remove(monitorID);
+            _mainWindow.PatientenListe.Remove(monitorID);
+            _mainWindow.PatientenDictionary.Remove(monitorID);
         }
 
     }

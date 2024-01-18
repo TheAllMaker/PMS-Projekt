@@ -17,7 +17,7 @@
         Background="#08080F"  BorderBrush="Transparent" Foreground="White" Name ="SelectionConfirmedButton" Click="Button_Click_SelectionConfirmed" 
             
             >
-                <Viewbox Width="30" Height="30" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <Viewbox Width="30" Height="30">
                     <Rectangle Width="30" Height="30">
                         <Rectangle.Fill>
                             <DrawingBrush>
@@ -39,7 +39,7 @@
             <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2"
         Background="#08080F" BorderBrush="Transparent" Foreground="White" Name ="SelectionClosedButton" Click="Button_Click_SelectionClosed"  
            >
-                <Viewbox Width="30" Height="30" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <Viewbox Width="30" Height="30">
                     <Rectangle Width="30" Height="30">
                         <Rectangle.Fill>
                             <DrawingBrush>

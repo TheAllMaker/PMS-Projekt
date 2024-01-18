@@ -27,14 +27,14 @@ namespace MediTrack.Model.RemoteModel
 {
     public static class UuidDictionary
     {
-       private static Dictionary<object, object> MonitorIdentifierTOUUID = new Dictionary<object, object>();
+       private static Dictionary<object, object> _monitorIdentifierTouuid = new Dictionary<object, object>();
 
-        public static object UUIDDictionaryCaller(object MonitorIdentifierKey)
+        public static object UuidDictionaryCaller(object monitorIdentifierKey)
         {
-            if(MonitorIdentifierTOUUID.ContainsKey(MonitorIdentifierKey))
+            if(_monitorIdentifierTouuid.ContainsKey(monitorIdentifierKey))
             {
-                object UUID = MonitorIdentifierTOUUID[MonitorIdentifierKey];
-                string uuidString = UUID.ToString();
+                object uuid = _monitorIdentifierTouuid[monitorIdentifierKey];
+                string uuidString = uuid.ToString();
                 return uuidString;
             }
             
@@ -46,26 +46,26 @@ namespace MediTrack.Model.RemoteModel
 
         }
 
-        public static void DictionaryRemover(object MonitorIdentifierKey) 
+        public static void DictionaryRemover(object monitorIdentifierKey) 
         {
             try
             {
-                MonitorIdentifierTOUUID.Remove(MonitorIdentifierKey);
-                Console.WriteLine(StringContainer.UUIDDictionaryRemovedSuc + MonitorIdentifierKey);
+                _monitorIdentifierTouuid.Remove(monitorIdentifierKey);
+                Console.WriteLine(StringContainer.UUIDDictionaryRemovedSuc + monitorIdentifierKey);
             }
             
             catch (ArgumentException)
             {
-                Console.WriteLine(StringContainer.UUIDDictionaryRemovedFai + MonitorIdentifierKey);
+                Console.WriteLine(StringContainer.UUIDDictionaryRemovedFai + monitorIdentifierKey);
             }
 
         }
 
-        public static void DictionaryInput(object MonitorIdentifierKey, object UUIDKey)
+        public static void DictionaryInput(object monitorIdentifierKey, object uuidKey)
         {
             try
             {
-                MonitorIdentifierTOUUID.Add(MonitorIdentifierKey, UUIDKey);
+                _monitorIdentifierTouuid.Add(monitorIdentifierKey, uuidKey);
                 //Console.WriteLine(StringContainer.UUIDDictionaryInsertSuc);
             }
 
@@ -75,10 +75,10 @@ namespace MediTrack.Model.RemoteModel
             }
         }
 
-        public static bool DictionaryContainer(object MonitorIdentifierKey)
+        public static bool DictionaryContainer(object monitorIdentifierKey)
         {
-            if (MonitorIdentifierKey == null) return false;
-            if (MonitorIdentifierTOUUID.ContainsKey(MonitorIdentifierKey))
+            if (monitorIdentifierKey == null) return false;
+            if (_monitorIdentifierTouuid.ContainsKey(monitorIdentifierKey))
             {
                 //Console.WriteLine(StringContainer.UUIDDictionaryContainSuc);
                 return true;

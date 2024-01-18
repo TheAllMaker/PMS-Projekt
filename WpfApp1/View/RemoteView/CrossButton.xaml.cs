@@ -17,7 +17,7 @@ namespace MediTrack.View.RemoteView
 
     public partial class CrossButton : ResourceDictionary 
     {
-        MainWindow _mainWindow = Application.Current.MainWindow as MainWindow;
+
         
         public CrossButton()
         {

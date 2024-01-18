@@ -26,15 +26,15 @@ namespace MediTrack.Model.RemoteModel
 {
     public static class PatientDictionary
     {
-        static Dictionary<object, Patient> MonitorIDToPatientIDDictionary = new Dictionary<object, Patient>();
+        static Dictionary<object, Patient> _monitorIdToPatientIdDictionary = new Dictionary<object, Patient>();
 
-        public static Patient DictionaryCaller(object MonitorIDKey)
+        public static Patient DictionaryCaller(object monitorIdKey)
         {
 
-            if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKey))
+            if (_monitorIdToPatientIdDictionary.ContainsKey(monitorIdKey))
             {
-                Patient PatientIDKey = MonitorIDToPatientIDDictionary[MonitorIDKey];
-                return PatientIDKey;
+                Patient patientIdKey = _monitorIdToPatientIdDictionary[monitorIdKey];
+                return patientIdKey;
             }
 
             else
@@ -44,22 +44,22 @@ namespace MediTrack.Model.RemoteModel
 
         }
 
-        public static void DictionaryRemover(object MonitorIDKey)
+        public static void DictionaryRemover(object monitorIdKey)
         {
             try
             {
-                MonitorIDToPatientIDDictionary.Remove(MonitorIDKey);
+                _monitorIdToPatientIdDictionary.Remove(monitorIdKey);
             }
             catch
             {
             }
         }
 
-        public static void DictionaryInput(object MonitorIDKey, Patient PatientIDKey)
+        public static void DictionaryInput(object monitorIdKey, Patient patientIdKey)
         {
             try
             {
-                MonitorIDToPatientIDDictionary.Add(MonitorIDKey, PatientIDKey);
+                _monitorIdToPatientIdDictionary.Add(monitorIdKey, patientIdKey);
             }
             catch (ArgumentException)
             {
@@ -67,9 +67,9 @@ namespace MediTrack.Model.RemoteModel
             }
         }
 
-        public static bool DictionaryContainer(object MonitorIDKey)
+        public static bool DictionaryContainer(object monitorIdKey)
         {
-            if (MonitorIDToPatientIDDictionary.ContainsKey(MonitorIDKey))
+            if (_monitorIdToPatientIdDictionary.ContainsKey(monitorIdKey))
             {
                 return true;
             }
