@@ -269,8 +269,6 @@ namespace MediTrack
                                 RemoteWindowCounter += 1;
                             });
 
-
-
                             if (RemoteWindowCounter <= 15)
                             {
                                 NewCrossButton();

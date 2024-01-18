@@ -52,7 +52,6 @@ namespace MediTrack.Model.RemoteModel
             }
             catch
             {
-                Console.WriteLine("dkendkjenidn");
             }
         }
 

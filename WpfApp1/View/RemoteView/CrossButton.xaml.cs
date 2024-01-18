@@ -42,8 +42,6 @@ namespace MediTrack.View.RemoteView
             }
             catch (Exception ex)
             {
-                // Fehlerbehandlung hier
-                Debug.WriteLine("Fehler beim Anzeigen der Optionen: " + ex.Message);
             }
         }
 
@@ -66,14 +64,14 @@ namespace MediTrack.View.RemoteView
                     }
                     else
                     {
-                        Console.WriteLine("Die Zahl konnte nicht in einen Integer umgewandelt werden.");
+
                     }
 
 
                 }
                 else
                 {
-                    Console.Write("Test");
+
                 }
             }
         }
