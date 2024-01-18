@@ -335,7 +335,7 @@ namespace VitaldataSimulator.Model
 
 
         //Falls das fenster über "x" Knopf geschlossen wird soll trotzdem das PowerWindow gestartet werden
-        public void SimulatorUI_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void SimulatorUI_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (_powerWindow == null || !_powerWindow.IsVisible)
             {

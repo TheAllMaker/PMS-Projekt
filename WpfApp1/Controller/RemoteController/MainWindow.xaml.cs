@@ -48,6 +48,7 @@ namespace MediTrack
             //PatientTest.TestPatientCall2();
             _cancellationTokenSource = new CancellationTokenSource();
             Loaded += async (sender, args) => await ProcessMQTTMessages(_cancellationTokenSource.Token);
+            this.Closing += RemoteMonitorUI_Closing;
         }
 
         private void InitializeComponents(object sender, RoutedEventArgs e)
@@ -120,37 +121,37 @@ namespace MediTrack
                 {
 
 
-                    Dispatcher.Invoke(() =>
-                    {
-                        var itemToRemove = PatientenMonitorDynGrid.Children
-                            .OfType<ContentControl>()
-                            .FirstOrDefault(cc => cc.Tag.Equals(mqttMessageQueueArray[0]));
+                    //Dispatcher.Invoke(() =>
+                    //{
+                    //    var itemToRemove = PatientenMonitorDynGrid.Children
+                    //        .OfType<ContentControl>()
+                    //        .FirstOrDefault(cc => cc.Tag.Equals(mqttMessageQueueArray[0]));
 
-                        if (itemToRemove != null)
-                        {
-                            RemoveCrossButton();
-                            PatientenMonitorDynGrid.Children.Remove(itemToRemove);
-                            StartCrossButton();
-                            RemoteWindowCounter -= 1;
-                            if (mqttMessageQueueArray[0] is int intValue)
-                            {
+                    //    if (itemToRemove != null)
+                    //    {
+                    //        RemoveCrossButton();
+                    //        PatientenMonitorDynGrid.Children.Remove(itemToRemove);
+                    //        StartCrossButton();
+                    //        RemoteWindowCounter -= 1;
+                    //        if (mqttMessageQueueArray[0] is int intValue)
+                    //        {
 
-                                Patient existingPatient = PatientDictionary.DictionaryCaller(intValue);
-                                var varLastName = existingPatient.LastName;
-                                var varFirstName = existingPatient.FirstName;
-                                string AssociatedEntireValue = $"{intValue}: {varLastName}, {varFirstName}";
-                                OptionsData.OptionsPop(AssociatedEntireValue);
-                            }
-                        }
-                    });
-                    PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
-                    ActiveMonitorIDManager.DeactivateMonitor(mqttMessageQueueArray[0]);
-                    UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
-                    mainList.Remove(mqttMessageQueueArray[0]);
-                    int id = Convert.ToInt32(mqttMessageQueueArray[0]);
-                    patientenDictionary.Remove(id);
-                    patientenListe.Remove(id);
-                    Threshold.RemoveThresholdByMonitorID(id);
+                    //            Patient existingPatient = PatientDictionary.DictionaryCaller(intValue);
+                    //            var varLastName = existingPatient.LastName;
+                    //            var varFirstName = existingPatient.FirstName;
+                    //            string AssociatedEntireValue = $"{intValue}: {varLastName}, {varFirstName}";
+                    //            OptionsData.OptionsPop(AssociatedEntireValue);
+                    //        }
+                    //    }
+                    //});
+                    //PatientDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
+                    //ActiveMonitorIDManager.DeactivateMonitor(mqttMessageQueueArray[0]);
+                    //UuidDictionary.DictionaryRemover(mqttMessageQueueArray[0]);
+                    //mainList.Remove(mqttMessageQueueArray[0]);
+                    //int id = Convert.ToInt32(mqttMessageQueueArray[0]);
+                    //patientenDictionary.Remove(id);
+                    //patientenListe.Remove(id);
+                    //Threshold.RemoveThresholdByMonitorID(id);
                 }
 
 
@@ -176,8 +177,12 @@ namespace MediTrack
                             existingPatient.RespirationRate = mqttMessageQueueArray[2];
                             existingPatient.BloodPressureSystolic = mqttMessageQueueArray[4];
                             existingPatient.Temperature = mqttMessageQueueArray[6];
+                            //existingPatient.FirstName = patientDataString[0];
+                            //existingPatient.LastName = ;
+                            //existingPatient.PatientNumber
+                        
 
-                            int id = Convert.ToInt32(mqttMessageQueueArray[0]);
+                        int id = Convert.ToInt32(mqttMessageQueueArray[0]);
                             threshold = Threshold.GetThresholdByMonitorID(Convert.ToInt32(mqttMessageQueueArray[0]));
 
                             if (threshold != null)
@@ -370,6 +375,26 @@ private static class WindowCounter
             if (WindowCounter.OpenWindows < 1)
             {
 
+                Window PowerWindow = new PowerWindow
+                {
+                    Title = "Power Window",
+                    Width = 800,
+                    Height = 450,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen
+                };
+                PowerWindow.Show();
+                PowerWindow.Owner = this;
+                WindowCounter.OpenWindows++;
+                PowerWindow.Closed += (s, args) => WindowCounter.OpenWindows--;
+            }
+        }
+
+       
+        public void RemoteMonitorUI_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (WindowCounter.OpenWindows < 1)
+            {
+                e.Cancel = true;
                 Window PowerWindow = new PowerWindow
                 {
                     Title = "Power Window",
