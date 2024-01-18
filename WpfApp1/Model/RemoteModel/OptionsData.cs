@@ -31,7 +31,6 @@ namespace MediTrack.Model.RemoteModel
             }
             catch 
             {
-                Console.WriteLine("ggzzzgz");
                 throw;
             }
                      
@@ -42,11 +41,9 @@ namespace MediTrack.Model.RemoteModel
             try
             {
                 OptionsData.Options.Remove(UID);
-                Console.WriteLine("Succes");
             }
             catch
             {
-                Console.WriteLine("Ggzzgz");
                 throw;
             }
             

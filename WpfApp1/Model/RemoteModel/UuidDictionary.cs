@@ -34,7 +34,6 @@ namespace MediTrack.Model.RemoteModel
             if(MonitorIdentifierTOUUID.ContainsKey(MonitorIdentifierKey))
             {
                 object UUID = MonitorIdentifierTOUUID[MonitorIdentifierKey];
-                //Console.WriteLine(StringContainer.UUIDDictionarySuc + UUID);
                 string uuidString = UUID.ToString();
                 return uuidString;
             }
@@ -52,7 +51,7 @@ namespace MediTrack.Model.RemoteModel
             try
             {
                 MonitorIdentifierTOUUID.Remove(MonitorIdentifierKey);
-                //Console.WriteLine(StringContainer.UUIDDictionaryRemovedSuc + MonitorIdentifierKey);
+                Console.WriteLine(StringContainer.UUIDDictionaryRemovedSuc + MonitorIdentifierKey);
             }
             
             catch (ArgumentException)

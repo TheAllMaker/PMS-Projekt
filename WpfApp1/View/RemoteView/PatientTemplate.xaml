@@ -70,10 +70,10 @@
                         <Rectangle Width="16" Height="16" Stroke="Transparent">
                             <Rectangle.Resources>
                                 <SolidColorBrush x:Key="canvas" Opacity="0" />
-                                <SolidColorBrush x:Key="light-lightblue-10" Color="Green" Opacity="0.1" />
-                                <SolidColorBrush x:Key="light-teal-10" Color="Green" Opacity="0.1" />
-                                <SolidColorBrush x:Key="light-teal" Color="Green" Opacity="1" />
-                                <SolidColorBrush x:Key="light-lightblue" Color="Green" Opacity="1" />
+                                <SolidColorBrush x:Key="light-lightblue-10" Color="Goldenrod" Opacity="0.1" />
+                                <SolidColorBrush x:Key="light-teal-10" Color="Goldenrod" Opacity="0.1" />
+                                <SolidColorBrush x:Key="light-teal" Color="Goldenrod" Opacity="1" />
+                                <SolidColorBrush x:Key="light-lightblue" Color="Goldenrod" Opacity="1" />
                             </Rectangle.Resources>
                             <Rectangle.Fill>
                                 <DrawingBrush Stretch="None">

@@ -10,11 +10,11 @@ namespace MediTrack.Model.RemoteModel
     {
         public static Dictionary<int,string> MonitorIDToName = new Dictionary<int,string>();
 
-        public static string DictionaryCaller(int MonitorIDKey)
+        public static string DictionaryCaller(int MonitorIdentifierKey)
         {
-            if(MonitorIDToName.ContainsKey(MonitorIDKey))
+            if(MonitorIDToName.ContainsKey(MonitorIdentifierKey))
             {
-                string PatientName = MonitorIDToName[MonitorIDKey];
+                string PatientName = MonitorIDToName[MonitorIdentifierKey];
                 return PatientName;
             }
 
@@ -24,16 +24,16 @@ namespace MediTrack.Model.RemoteModel
             }
         }
 
-        public static void DictionaryRemover( int MonitorIDKey)
+        public static void DictionaryRemover( int MonitorIdentifierKey)
         {
-            MonitorIDToName.Remove(MonitorIDKey);
+            MonitorIDToName.Remove(MonitorIdentifierKey);
         }
 
-        public static void DictionaryInput(int MonitorIDKey, string PatientName)
+        public static void DictionaryInput(int MonitorIdentifierKey, string PatientName)
         {
             try
             {
-                MonitorIDToName.Add(MonitorIDKey, PatientName);
+                MonitorIDToName.Add(MonitorIdentifierKey, PatientName);
             }
             catch (ArgumentException)
             {
@@ -41,9 +41,9 @@ namespace MediTrack.Model.RemoteModel
             }
         }
 
-        public static bool DictionaryContainer(int MonitorIDKey)
+        public static bool DictionaryContainer(int MonitorIdentifierKey)
         {
-            if (MonitorIDToName.ContainsKey(MonitorIDKey))
+            if (MonitorIDToName.ContainsKey(MonitorIdentifierKey))
             {
                 return true;
             }
