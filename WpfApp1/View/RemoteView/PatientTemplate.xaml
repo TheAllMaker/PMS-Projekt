@@ -34,8 +34,6 @@
 
 
             <!-- Name und Co. II -->
-
-
                 <TextBlock Background="Black"  FontSize="20" Grid.Column="2" HorizontalAlignment="Center" 
                     VerticalAlignment="Center"  Foreground="White" Grid.ColumnSpan="2" Name ="LastNameTextBlock">
                         <Run Text="Bed:" FontSize="13"/>
@@ -47,7 +45,7 @@
 
                 <!-- Icons II -->
                 <Button FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  
-                    Background="Black" Name="PatientNetworkIcon" BorderBrush="Transparent">
+                    Background="Black" Name="PatientNetworkIcon" BorderBrush="Transparent" IsHitTestVisible="False">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Style.Triggers>
