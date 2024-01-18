@@ -77,10 +77,5 @@ namespace MediTrack.Model.RemoteModel
             //Console.WriteLine($"{message}");
             MqttMessageQueue.Enqueue(message);
         }
-
-        public void Disconnect()
-        {
-            client.Disconnect();
-        }
     }
 }
