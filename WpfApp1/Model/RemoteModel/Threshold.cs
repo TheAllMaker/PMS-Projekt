@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-
-
 /*
  * Overview:
  * The Threshold class represents a set of threshold values for vital health parameters associated with a monitor. It allows defining the acceptable range of values for various vital signs, such as Heart Rate, Respiration Rate, Oxygen Level, Blood Pressure (Systolic and Diastolic), and Temperature. Threshold instances are stored and managed in a dictionary for easy retrieval.

@@ -1,6 +1,4 @@
-﻿
-
-namespace MediTrack.Model.RemoteModel
+﻿namespace MediTrack.Model.RemoteModel
 {
     public class PatientViewModel
     {

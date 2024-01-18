@@ -1,10 +1,10 @@
-﻿using MediTrack.Model.DataBaseModelConnection;
-using MediTrack.Model.RemoteModel;
+﻿using MediTrack.Model.RemoteModel;
 using MediTrack.View.RemoteView;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using MediTrack.Model.DataBaseConnection;
 
 namespace MediTrack.Controller.RemoteController
 {
@@ -16,7 +16,6 @@ namespace MediTrack.Controller.RemoteController
         public PatientTemplate()
         {
             InitializeComponent();
-
         }
 
         private void DetailedWindowConstructor(int monitorId)
@@ -53,12 +52,13 @@ namespace MediTrack.Controller.RemoteController
             }
         }
 
-
+        // avoids multiple windows
         private static class WindowCounter
         {
             public static int OpenWindows = 0;
         }
 
+        //Removing the current displayed Patient
         private void MinusButton(object sender, RoutedEventArgs e)
         {
             var button = sender as FrameworkElement;
@@ -81,14 +81,22 @@ namespace MediTrack.Controller.RemoteController
             }
 
             int monitorID = Convert.ToInt32(contentControl.Tag);
+
             Threshold.RemoveThresholdByMonitorID(monitorID);
             ActiveMonitorIDManager.DeactivateMonitor(monitorID);
             PatientDictionary.DictionaryRemover(monitorID);
+            UuidDictionary.DictionaryRemover(monitorID);
+
             object mqttDataString = DataBaseRemoteConnection.CallMonitorIDtoPatientID(monitorID);
             object[] patientDataString = DataBaseRemoteConnection.CallForPatientThroughID(mqttDataString);
             string associatedEntireValue = $"{monitorID}: {patientDataString[0]}, {patientDataString[1]}";
             OptionsData.OptionsPop(associatedEntireValue);
-            UuidDictionary.DictionaryRemover(monitorID);
+
+            
+            _mainWindow.mainList.Remove(monitorID);
+            object monitorIDAsObject = monitorID;
+            _mainWindow.patientenListe.Remove(monitorID);
+            _mainWindow.patientenDictionary.Remove(monitorID);
         }
 
     }

@@ -203,6 +203,7 @@
     <EmbeddedResource Include="StringContainer.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StringContainer.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="ClassDiagramMeditrack.cd" />
     <None Include="packages.config" />

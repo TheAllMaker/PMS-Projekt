@@ -6,7 +6,6 @@ namespace MediTrack.View.RemoteView
 {
     public partial class PowerWindow : Window
     {
-        public event EventHandler ConfirmClicked;
         private bool UserConfirmed = false;
 
         public PowerWindow()
